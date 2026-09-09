@@ -1,0 +1,17 @@
+{
+  "title": "Components",
+  "description": "One page per released component or family: purpose, API, states, accessibility, motion, tokens, examples, and testing.",
+  "pages": [
+    "button",
+    "badge",
+    "card",
+    "separator",
+    "text-fields",
+    "selection-controls",
+    "select",
+    "dialog",
+    "tooltip",
+    "popover",
+    "tabs"
+  ]
+}
