@@ -89,7 +89,7 @@ Two consumer paths, both documented in `README.md`: import the precompiled `styl
 
 ## Git
 
-The working directory is still not a Git repository. There is no history, no remote, and no branch. Do not run `git init` or create a remote without being asked.
+The repository is `https://github.com/iroshandezilva/spartan`, public, with `main` as the production branch. A ruleset on `main` blocks direct pushes, force pushes, and deletion, requires a pull request with linear history, and requires the `validate` job to pass on an up-to-date branch. Every change reaches `main` through a pull request. The specification is `.github/BRANCH_PROTECTION.md`; the release path is `.github/RELEASE.md`.
 
 ## Work intake
 
