@@ -1,0 +1,22 @@
+/*
+ * Consumer stylesheet.
+ *
+ * This example takes the Tailwind path: it runs its own Tailwind so it can use
+ * utilities for page layout, and imports Spartant's theme entry point so the
+ * semantic roles are available as utilities too.
+ *
+ * The @source line is required and deliberately explicit. Tailwind only
+ * generates utilities it can see used, so it must be told where Spartant's
+ * compiled components live. Nothing here relies on implicit scanning.
+ *
+ * A published consumer outside this repository would instead write:
+ *   @source "../node_modules/@iroshandezilva/spartant/dist";
+ *
+ * A consumer who does not use Tailwind skips all of this and imports the
+ * precompiled "@iroshandezilva/spartant/styles.css" on its own.
+ */
+
+@import "tailwindcss";
+@import "@iroshandezilva/spartant/theme.css";
+
+@source "../../../packages/spartant/dist";

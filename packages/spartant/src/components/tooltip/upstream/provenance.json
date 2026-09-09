@@ -1,0 +1,14 @@
+{
+  "$comment": "Provenance for the shadcn source Tooltip was reviewed against, per ADOPTING-SHADCN.md. tooltip.tsx.txt is the upstream text exactly as fetched, kept so the owned component can be diffed against its origin. Never import it; it is evidence, not code. Same shape as src/experiments/shadcn/upstream/provenance.json so scripts/check-upstream.mjs can read it once it globs component provenance files.",
+  "entries": {
+    "tooltip": {
+      "source": "https://ui.shadcn.com/r/styles/new-york/tooltip.json",
+      "style": "new-york",
+      "fetchedOn": "2026-09-09",
+      "upstreamPath": "ui/tooltip.tsx",
+      "declaredDependencies": ["@radix-ui/react-tooltip"],
+      "registryDependencies": [],
+      "sha256": "ce6afa34fb9dae51053a863b4c3f7c6e55f3da23b00149f31a8e4402bc963be0"
+    }
+  }
+}

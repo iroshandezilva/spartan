@@ -1,0 +1,61 @@
+{
+  "name": "@iroshandezilva/spartant",
+  "version": "0.0.0",
+  "description": "Code-first React design system for building consistent product prototypes.",
+  "keywords": [
+    "design-system",
+    "react",
+    "tailwindcss",
+    "design-tokens",
+    "oklch",
+    "accessibility",
+    "components"
+  ],
+  "license": "MIT",
+  "author": "Iroshan de Zilva",
+  "type": "module",
+  "sideEffects": false,
+  "engines": {
+    "node": ">=20.19.0"
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./package.json": "./package.json",
+    "./styles.css": "./dist/styles/index.css",
+    "./theme.css": "./dist/styles/theme.css",
+    "./tokens.json": "./dist/tokens/generated/tokens.json"
+  },
+  "files": [
+    "dist"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "tsc -b && pnpm build:styles",
+    "build:styles": "node scripts/build-styles.mjs",
+    "clean": "tsc -b --clean",
+    "dev": "tsc -b --watch"
+  },
+  "peerDependencies": {
+    "react": "^19.0.0"
+  },
+  "devDependencies": {
+    "@tailwindcss/cli": "catalog:",
+    "@types/react": "catalog:",
+    "@types/react-dom": "catalog:",
+    "react": "catalog:",
+    "react-dom": "catalog:",
+    "tailwindcss": "catalog:",
+    "typescript": "catalog:"
+  },
+  "dependencies": {
+    "clsx": "catalog:",
+    "tailwind-merge": "catalog:"
+  }
+}

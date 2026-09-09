@@ -1,0 +1,61 @@
+{
+  "$comment": "Provenance for the shadcn source this component was audited against in HAUX-69. The .tsx.txt files are the upstream text exactly as fetched, kept so the comparison can be re-run and so `pnpm check:upstream` can tell when upstream has moved. Never import these; they are evidence, not code. The audit findings are the HAUX-69 comment linked from the README beside this folder.",
+  "entries": {
+    "label": {
+      "source": "https://ui.shadcn.com/r/styles/new-york/label.json",
+      "style": "new-york",
+      "fetchedOn": "2026-09-09",
+      "upstreamPath": "ui/label.tsx",
+      "declaredDependencies": ["@radix-ui/react-label"],
+      "registryDependencies": [],
+      "sha256": "2eac8fbb04002c42b0fbc4062d20d131e421796eaf65c37d2049e29e42ecbc5a",
+      "note": "Compared for HAUX-69. Decision: keep."
+    },
+    "input": {
+      "source": "https://ui.shadcn.com/r/styles/new-york/input.json",
+      "style": "new-york",
+      "fetchedOn": "2026-09-09",
+      "upstreamPath": "ui/input.tsx",
+      "declaredDependencies": [],
+      "registryDependencies": [],
+      "sha256": "6299a6a387dc55e528aec4342deaea0b83f1ea3a365c135a31a18ee55334f441",
+      "note": "Compared for HAUX-69. Decision: keep."
+    },
+    "textarea": {
+      "source": "https://ui.shadcn.com/r/styles/new-york/textarea.json",
+      "style": "new-york",
+      "fetchedOn": "2026-09-09",
+      "upstreamPath": "ui/textarea.tsx",
+      "declaredDependencies": [],
+      "registryDependencies": [],
+      "sha256": "ec7c92aaed80f6923a7caa4bfe4eead395b50a7001504fd7fbb0b9381804dae9",
+      "note": "Compared for HAUX-69. Decision: refactor, one raw spacing utility replaced by the semantic role it duplicated."
+    },
+    "form": {
+      "source": "https://ui.shadcn.com/r/styles/new-york/form.json",
+      "style": "new-york",
+      "fetchedOn": "2026-09-09",
+      "upstreamPath": "ui/form.tsx",
+      "declaredDependencies": [
+        "@radix-ui/react-label",
+        "@radix-ui/react-slot",
+        "@hookform/resolvers",
+        "zod",
+        "react-hook-form"
+      ],
+      "registryDependencies": ["button", "label"],
+      "sha256": "52cc646284c2732f62a732b42fc98352ad6d5657a4e6c64d800bf85888ce5bac",
+      "note": "Association pattern only; Spartant has no react-hook-form binding. Compared for HAUX-69. Decision: keep."
+    },
+    "field": {
+      "source": "https://ui.shadcn.com/r/styles/new-york/field.json",
+      "style": "new-york",
+      "fetchedOn": "2026-09-09",
+      "upstreamPath": "ui/field.tsx",
+      "declaredDependencies": [],
+      "registryDependencies": ["label", "separator"],
+      "sha256": "6479c92eace3dcdb520e2fe37944d4bdb1cc7dc220cd0741f7551d006f3a0a1d",
+      "note": "Association pattern only. Compared for HAUX-69. Decision: keep."
+    }
+  }
+}

@@ -1,0 +1,171 @@
+---
+title: Quick start
+description: A small screen built from the released components, with a theme, a form, and a confirmation dialog.
+keywords:
+  - quick start
+  - example
+  - tutorial
+  - first screen
+  - Button
+  - Field
+  - Input
+  - Label
+  - FieldMessage
+  - Dialog
+  - Badge
+  - Switch
+  - Separator
+  - ThemeProvider
+---
+
+This page assumes the package is installed and one styling path is imported;
+see [Installation](./installation.mdx). Everything below uses only released
+exports, imported from the package root.
+
+## The screen
+
+A settings form with a name field, a setting, a status, and a destructive
+action behind a confirmation. It is deliberately small; it exists to show how
+the parts fit rather than to be copied whole.
+
+```tsx title="src/App.tsx"
+import {
+  Badge,
+  Button,
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogTitle,
+  Field,
+  FieldMessage,
+  Input,
+  Label,
+  Separator,
+  Switch,
+  ThemeProvider,
+} from "@iroshandezilva/spartant";
+import { useState } from "react";
+
+export function App() {
+  return (
+    <ThemeProvider>
+      <WorkspaceSettings />
+    </ThemeProvider>
+  );
+}
+
+function WorkspaceSettings() {
+  const [name, setName] = useState("Haux Studio");
+  const [confirming, setConfirming] = useState(false);
+  const invalid = name.trim().length === 0;
+
+  return (
+    <main className="mx-auto grid max-w-md gap-stack p-surface">
+      <div className="flex items-center gap-control-gap">
+        <h1 className="text-heading font-semibold tracking-heading text-foreground">
+          Workspace
+        </h1>
+        <Badge variant="success">Active</Badge>
+      </div>
+
+      <Field invalid={invalid} required>
+        <Label>Workspace name</Label>
+        <Input value={name} onChange={(event) => setName(event.target.value)} />
+        {invalid ? (
+          <FieldMessage tone="error">Enter a name. It appears in every invite.</FieldMessage>
+        ) : (
+          <FieldMessage>Shown to everyone you invite.</FieldMessage>
+        )}
+      </Field>
+
+      <Field>
+        <Label>Weekly digest</Label>
+        <Switch defaultChecked onCheckedChange={(checked) => console.log("digest", checked)} />
+        <FieldMessage>Takes effect immediately. Nothing to save.</FieldMessage>
+      </Field>
+
+      <Separator />
+
+      <div className="flex justify-end gap-control-gap">
+        <Button variant="secondary">Cancel</Button>
+        <Button variant="danger" onClick={() => setConfirming(true)}>
+          Delete workspace
+        </Button>
+      </div>
+
+      <Dialog open={confirming} onOpenChange={setConfirming}>
+        <DialogContent>
+          <DialogTitle>Delete this workspace?</DialogTitle>
+          <DialogDescription>Everything in it goes with it. This cannot be undone.</DialogDescription>
+          <div className="flex justify-end gap-control-gap">
+            <DialogClose className="text-body underline">Keep it</DialogClose>
+            <Button variant="danger" onClick={() => setConfirming(false)}>
+              Delete workspace
+            </Button>
+          </div>
+        </DialogContent>
+      </Dialog>
+    </main>
+  );
+}
+```
+
+The utilities in `className` (`gap-stack`, `p-surface`, `text-heading`,
+`gap-control-gap`) are Spartant's spacing and type roles exposed through
+Tailwind. On the precompiled path they are not available to your own markup;
+use the `--spartant-*` custom properties there, or plain CSS.
+
+## What each part does
+
+- **`ThemeProvider`** applies light, dark, or system on the root element and
+  remembers the choice. It renders no wrapper. See [Theming](./theming.mdx).
+- **`Field`** generates ids and wires `Label`, the control, and every
+  `FieldMessage` together, so the input's accessible name and
+  `aria-describedby` cannot disagree with the screen. `invalid` and `required`
+  on the field reach the control and the label automatically. An error message
+  is announced when it appears.
+- **`Switch`** is a native checkbox with `role="switch"`. Use it for a setting
+  that takes effect on flip; use `Checkbox` for a value you submit.
+- **`Badge`** is a `surface` and `text` pair of one colour family, never mixed,
+  so every variant has been contrast-checked in both themes.
+- **`Separator`** is decorative by default and announced only when you pass
+  `decorative={false}`.
+- **`Dialog`** is the native `dialog` element opened with `showModal()`: focus
+  trap, top layer, `Escape`, backdrop dismissal, and focus restoration come
+  from the platform. `DialogTitle` is required, because a modal without a name
+  is announced as "dialog" and nothing else. Here it is controlled through
+  `open` and `onOpenChange` so the trigger can be a `Button`; an uncontrolled
+  `DialogTrigger` also exists.
+- **`Button`** presses with a small scale on pointer and touch, is immediate
+  on keyboard, and has a `loading` prop that keeps focus rather than disabling.
+
+## Try it with a keyboard
+
+Tab through the form. Every control shows the same focus ring. Press Space on
+the switch and it flips on the keypress. Open the dialog with Enter, press
+Escape, and focus returns to the button that opened it, without waiting for
+any animation.
+
+## Try it in both themes
+
+Set the operating system to dark, or call `setTheme("dark")` from `useTheme`.
+Every colour changes at once, no component's markup changes, and the form
+remains legible because every pairing it uses is checked in both themes.
+
+## Where next
+
+- [Theming](./theming.mdx) for server rendering without a flash and for
+  overriding a role.
+- [Foundations](../foundations/design-principles.mdx) for why the values are
+  what they are.
+- Storybook for every state of every component; run `pnpm dev:storybook` from
+  the repository.
+
+## Known gaps
+
+- There is no component page for any of the parts used above yet. Their props
+  are documented in the exported `*Props` types and in Storybook.
+- Card, Tabs, Select, Tooltip, and Popover are being built in their own issues
+  at the time of writing and are not used here. Until each one's issue is Done,
+  a settings screen that needs a select uses a native `select`.

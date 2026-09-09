@@ -1,0 +1,206 @@
+---
+title: Theming
+description: Light, dark, and system through one attribute, a provider, a blocking script, and a documented override point.
+keywords:
+  - theme
+  - theming
+  - dark mode
+  - light mode
+  - system theme
+  - data-theme
+  - ThemeProvider
+  - useTheme
+  - themeScript
+  - THEME_ATTRIBUTE
+  - THEME_STORAGE_KEY
+  - prefers-color-scheme
+  - flash of wrong theme
+  - hydration
+  - override
+  - custom properties
+---
+
+## The switch is one attribute
+
+Spartant's stylesheet keys off `data-theme` on the root element. The DOM is the
+source of truth, not React state, which is what lets a blocking script set the
+theme before the first paint and what lets any framework, or no framework,
+drive it.
+
+| `data-theme` | Result |
+| --- | --- |
+| absent | Follow the browser's `prefers-color-scheme` |
+| `light` | Light, regardless of the browser preference |
+| `dark` | Dark, regardless of the browser preference |
+
+`system` is expressed by removing the attribute rather than writing a resolved
+value. Writing `dark` for a system preference would freeze the choice, and the
+page would stop following the browser when the user changes their setting
+mid-session.
+
+Because the semantic roles are mapped with Tailwind's `@theme inline`, the
+generated utilities reference the custom property rather than a copied value.
+Changing the attribute retypes the page at runtime with no rebuild and no
+markup change. Light and dark are not two palettes: one OKLCH scale serves
+both, and a theme only changes which step each role points at. See
+[Color](../foundations/color.mdx).
+
+## In a client-rendered application
+
+```tsx title="src/main.tsx"
+import { ThemeProvider } from "@iroshandezilva/spartant";
+
+<ThemeProvider defaultTheme="system">
+  <App />
+</ThemeProvider>;
+```
+
+The provider renders no wrapper element. It writes the attribute on the
+document root, so themes apply without any component's markup changing.
+`defaultTheme` is used until a stored preference is found and defaults to
+`system`.
+
+```tsx
+import { useTheme } from "@iroshandezilva/spartant";
+
+function ThemeMenu() {
+  const { theme, resolvedTheme, setTheme } = useTheme();
+  // theme: what the user chose, including "system"
+  // resolvedTheme: what is on screen, always "light" or "dark"
+  return (
+    <button type="button" aria-pressed={theme === "dark"} onClick={() => setTheme("dark")}>
+      Dark
+    </button>
+  );
+}
+```
+
+`useTheme` throws outside a `ThemeProvider`, on purpose, so a switcher rendered
+in the wrong place fails loudly rather than silently doing nothing.
+
+Spartant does not ship a switcher component. Theme choice belongs to the
+application's own navigation, and a real `<button>` with `aria-pressed` is
+keyboard operable and announced without any help.
+
+## In a server-rendered application
+
+The provider alone cannot prevent a flash of the wrong theme: it runs once
+React has hydrated, which is after first paint. Inline the blocking script in
+`<head>`, before any stylesheet:
+
+```tsx title="app/layout.tsx"
+import { ThemeProvider, themeScript } from "@iroshandezilva/spartant";
+
+export default function RootLayout({ children }) {
+  return (
+    <html lang="en" suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeScript() }} />
+      </head>
+      <body>
+        <ThemeProvider>{children}</ThemeProvider>
+      </body>
+    </html>
+  );
+}
+```
+
+The script reads the stored preference and sets the attribute before the
+browser paints. It touches only an attribute on `<html>`, which React does not
+hydrate, so it cannot disagree with the markup. `suppressHydrationWarning` on
+the root element is required for the same reason: the server markup and the
+first client render legitimately differ on that attribute.
+
+This does not cause a hydration mismatch inside the provider either. The
+system preference is read through `useSyncExternalStore` with a server
+snapshot fixed at `light`, and the stored preference is read in an effect, so
+the first client render matches the server exactly and the real values arrive
+after hydration. Both paths are covered by tests in the package.
+
+## Storage
+
+The choice is kept in `localStorage` under the key exported as
+`THEME_STORAGE_KEY`, currently `spartant-theme`. Every read and write tolerates
+failure: private mode, blocked storage, and a full quota all throw, and none of
+them are worth taking a page down for. The theme still applies for that page
+view; it just is not remembered. Pass `storageKey` to `ThemeProvider` and
+`themeScript(storageKey)` together if the default collides with something in
+your application.
+
+## Without React
+
+`applyTheme`, `readAppliedTheme`, `getSystemTheme`, and `THEME_ATTRIBUTE` are
+exported for code that needs the same behaviour outside a provider, for
+example a test harness or a non-React shell. `applyTheme("system")` removes the
+attribute; `applyTheme("dark")` sets it.
+
+## Overriding a role
+
+Overriding a `--spartant-*` custom property is the documented, stable way to
+retheme. Every utility built on that role follows, in both themes, with no
+rebuild:
+
+```css
+:root {
+  --spartant-color-primary: oklch(60% 0.2 150);
+}
+
+:root[data-theme="dark"] {
+  --spartant-color-primary: oklch(75% 0.15 150);
+}
+```
+
+Override the role, not a palette step: primitives are deliberately not emitted
+as custom properties. If you change `primary`, change `primary-hover`,
+`primary-active`, `primary-foreground`, and `focus-ring` with it, and check the
+pairings on [Color](../foundations/color.mdx#required-pairings) still pass. The
+package cannot check an override for you.
+
+What the system does not promise to keep stable: which primitive a role
+happens to alias today, the component tokens, and the primitive values in the
+JSON export. See [Tokens](../foundations/tokens.mdx#what-is-stable).
+
+## Theme changes do not animate
+
+Switching theme repaints every colour at once. The package sets no transition
+on colour roles at the root, and you should not either: transitioning every
+colour on a theme switch produces a slow wash across the page rather than a
+clean change. Individual controls still transition their own state colours.
+
+## On this site
+
+This site does not use `ThemeProvider`. Fumadocs already owns a theme control,
+and running two of them would mean two sources of truth for one attribute.
+Instead the Fumadocs provider is asked to write both attributes at once:
+
+```tsx title="app/layout.tsx"
+<RootProvider
+  theme={{
+    attribute: ["class", "data-theme"],
+    defaultTheme: "system",
+    enableSystem: true,
+  }}
+>
+  {children}
+</RootProvider>
+```
+
+Fumadocs UI keys its dark styles off the `.dark` class; Spartant keys off
+`data-theme`. Writing both from one control means the whole page switches
+together, and neither system needs a copy of the other's palette. The colours
+themselves are aliased once, where every Fumadocs `--color-fd-*` role points at
+the Spartant semantic role that means the same thing. There is no second set
+of dark values in this site.
+
+<Callout type="warn">
+  Roles are matched by meaning, not by name. Fumadocs `secondary` and `accent`
+  are quiet surfaces behind sidebar and hover states, so they map to Spartant
+  surface roles. Spartant's own `secondary` is a button treatment and would be
+  wrong there.
+</Callout>
+
+## Limits
+
+Light, dark, and system. More themes are deliberately out of scope: the
+semantic layer supports any number of them, but shipping a third would mean a
+decision about what it is for.

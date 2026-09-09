@@ -1,0 +1,16 @@
+{
+  "$schema": "../schema/spartant-tokens.schema.json",
+  "$description": "COMPONENT tokens for Popover. The width is here for the same reason dialog.max-width is: a floating surface needs a stated width or its content decides, and a form inside a fit-content box is sized by its longest label. The inset is here because space.surface-padding is sized for a card or a dialog at 32rem; at a popover's 18rem it consumes a sixth of the box on each side and leaves 192px for content. Everything else Popover needs (radius.surface, elevation.overlay, color.surface.elevated, color.border, every motion role) is semantic and stays semantic.",
+  "popover": {
+    "width": {
+      "$type": "dimension",
+      "$value": "18rem",
+      "$description": "288px. Wide enough for a short form row or a paragraph, narrow enough to sit beside its trigger on a tablet. Override with className for a wider surface; the max-width clamp to the viewport still applies."
+    },
+    "padding": {
+      "$type": "dimension",
+      "$value": "1rem",
+      "$description": "16px. Two thirds of space.surface-padding, which is the ratio at which a 288px surface still reads as a surface rather than as a frame around its content."
+    }
+  }
+}

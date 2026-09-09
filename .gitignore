@@ -1,0 +1,23 @@
+node_modules/
+
+# Build output and caches
+dist/
+.dist/
+*.tsbuildinfo
+.artifacts/
+coverage/
+storybook-static/
+.next/
+out/
+*.tgz
+
+# pnpm is the only supported package manager for this repository.
+package-lock.json
+yarn.lock
+bun.lockb
+
+.DS_Store
+*.log
+.env
+.env.*
+!.env.example

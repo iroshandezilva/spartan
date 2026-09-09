@@ -1,0 +1,126 @@
+---
+title: Design principles
+description: The decisions behind every foundation, and the machine checks that hold them in place.
+keywords:
+  - principles
+  - philosophy
+  - semantic tokens
+  - owned source
+  - native elements
+  - accessibility
+  - motion
+  - scales
+  - drift
+  - agents
+---
+
+Spartant exists to make consistent product prototypes fast without giving up
+ownership of the source, the theme, the accessibility, or the documentation.
+Every foundation page after this one is an application of the principles
+below. Where a principle is enforced by a check, the check is named, because a
+principle nobody can fail is a preference.
+
+## 1. Own the source
+
+Every component is owned code in the package. Some began as shadcn source, and
+each of those was adopted through a checklist that replaces the upstream
+tokens, removes unused dependencies, and takes responsibility for the API,
+styling, accessibility, motion, tests, stories, and documentation. Nothing is
+a runtime wrapper around another library, and no primitive library's API is
+exposed through public props.
+
+## 2. Semantic roles are the boundary
+
+Components consume roles with product meaning, such as `primary`,
+`foreground-muted`, `radius.control`, and `duration.press-feedback`. They never
+consume a raw value or a palette step. The roles are CSS custom properties, so
+a theme or a consumer can retype the whole system at runtime by redefining
+them.
+
+Enforced: primitives are not emitted as custom properties, so reaching past a
+role is impossible rather than merely discouraged. A semantic token that holds
+a literal, or a primitive that holds an alias, fails `pnpm check:tokens`. See
+[Tokens](./tokens.mdx).
+
+## 3. One source, generated outputs
+
+Tokens are W3C Design Tokens JSON. CSS, JSON, and TypeScript are generated from
+it, and a drift check fails the build when a committed output is stale. This
+site reads the generated JSON at build time, so the tables and specimens here
+cannot disagree with the package.
+
+## 4. Native first
+
+A `button` is a `button`, a label is a `label`, a dialog is a `dialog` opened
+with `showModal()`. The platform's keyboard behaviour, form participation,
+focus trapping, and disabled semantics are better tested than anything a
+component library can rebuild. ARIA is added only where the platform has no
+element for the meaning.
+
+## 5. Accessible by default, with numbers
+
+Accessibility is stated as floors, not intentions:
+
+- Every text pairing that ships meets 4.5:1, every state boundary and focus
+  ring meets 3:1, in both themes. Enforced by `pnpm check:colors`.
+- Every actionable control offers a 44px hit area on a coarse pointer, carried
+  by the `size.min-target` role.
+- One focus treatment on every focusable component, checked against the page,
+  a card, and a raised surface.
+- Every story is audited with axe on every test run.
+
+See [Accessibility](./accessibility.mdx).
+
+## 6. Motion has a purpose or does not happen
+
+Every component records a motion purpose or an explicit no-motion rationale.
+Motion explains location, continuity, state, or feedback; it is never
+decoration on a frequently used control. Keyboard activation is immediate.
+Focus, announcements, validation, and state never wait for an animation.
+Reduced motion is handled once, globally, by collapsing the motion tokens,
+so no component can forget it.
+
+Enforced by tests: product motion stays at or below 300ms, exit is faster than
+entry, no easing is an ease-in, no surface enters below scale 0.9. See
+[Motion](./motion.mdx).
+
+## 7. Short scales, real decisions
+
+Every scale is deliberately short. Eight type sizes, twelve spacing steps, six
+radii, four elevations, five durations. A scale with an option for every
+situation stops being a decision and becomes a menu, and a menu is where
+inconsistency comes from.
+
+## 8. Light and dark from one palette
+
+There is one OKLCH scale with fixed lightness per step. Dark is not a second
+palette; it is a different mapping of roles onto the same steps. One set of
+values to review, one set to keep in gamut, and no way for the two themes to
+drift apart as separate artefacts. See [Color](./color.mdx).
+
+## 9. Small, explicit public surface
+
+Every export passes through one entry point. The `exports` map has no
+wildcard, `files` ships only `dist`, and a test asserts that experiments never
+reach the entry. What is public is written down in `VERSIONING.md`, with the
+version rules and the deprecation path that follow from it.
+
+## 10. Predictable for coding agents
+
+Conventions, commands, constraints, and verification are documented where an
+agent will find them, and the token grammar is mechanical so a name can be
+derived without a lookup table. A rule that only a person could apply is not
+finished. See [Using with a coding agent](../start/coding-agents.mdx).
+
+## 11. Say what is missing
+
+Every page on this site states its known gaps. Provisional values are marked
+provisional. An unfinished thing that looks finished is worse than an honest
+gap, because it gets built on.
+
+## Known gaps
+
+- These principles are drawn from the project brief, the architecture
+  decisions, the token specification, and the motion standard. There is no
+  single approved principles document in Linear; if one is written, this page
+  should be regenerated from it.

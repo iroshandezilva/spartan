@@ -1,0 +1,75 @@
+---
+title: Radius and elevation
+description: Three radius roles, four elevation roles, and the rule that a shadow is never used alone.
+keywords:
+  - radius
+  - border radius
+  - rounded
+  - pill
+  - elevation
+  - shadow
+  - box-shadow
+  - border
+  - border width
+  - surface
+  - overlay
+  - modal
+  - rounded-control
+  - shadow-overlay
+---
+
+## Radius
+
+<RadiusSamples />
+
+<TokenTable prefix="radius" px />
+
+| Role | Use | Utility |
+| --- | --- | --- |
+| `radius.control` | Buttons, inputs, selects | `rounded-control` |
+| `radius.surface` | Cards, dialogs, popovers | `rounded-surface` |
+| `radius.pill` | Badges, tags, avatars | `rounded-pill` |
+
+Containers are rounder than the controls inside them. The reverse reads as a
+mistake: a sharp control inside a round card looks like it escaped. The
+primitive scale also holds `none`, `sm`, and `xl`, which no role uses yet.
+
+## Elevation
+
+<ElevationSamples />
+
+<TokenTable prefix="elevation" />
+
+| Role | Paired with | Utility |
+| --- | --- | --- |
+| `elevation.flat` | `border` on `surface` | `shadow-flat` |
+| `elevation.surface` | `border.subtle` on `surface` | `shadow-surface` |
+| `elevation.overlay` | `border` on `surface.elevated` | `shadow-overlay` |
+| `elevation.modal` | `border` on `surface.elevated` | `shadow-modal` |
+
+**Elevation is always paired with a border and a background, never used
+alone.** In dark, a shadow against a dark surface is nearly invisible, so a
+raised element that relies only on shadow disappears. In light, `surface` is
+already pure white and `surface.elevated` cannot be lighter, so the shadow is
+what does the separating. Each theme leans on a different cue, and using both
+means neither has to work alone. Switch this page's theme and watch the
+samples above: the shadow does the work in light, the fill does it in dark.
+
+Shadow colour is the neutral ink at low alpha, not black. Black shadows grey
+out the hue underneath them.
+
+## Border width
+
+<TokenTable prefix="border-width" />
+
+`default` is every ordinary boundary. `emphasis` is a boundary that carries
+state, such as a selected card or the invalid ring on a field, and it pairs
+with `border.strong` or a status colour that meets 3:1. See
+[Color](./color.mdx#borders-and-focus).
+
+## Known gaps
+
+- No inset shadow, and no elevation role for a pressed or sunken state. The
+  released components express pressed state through colour and scale instead.
+- The elevation samples are painted on the page background; the exact shadow
+  read depends on what the consumer paints beneath a surface.

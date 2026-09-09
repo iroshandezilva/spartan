@@ -1,0 +1,35 @@
+{
+  "$comment": "Provenance for the shadcn source this component was audited against in HAUX-69. The .tsx.txt files are the upstream text exactly as fetched, kept so the comparison can be re-run and so `pnpm check:upstream` can tell when upstream has moved. Never import these; they are evidence, not code. The audit findings are the HAUX-69 comment linked from the README beside this folder.",
+  "entries": {
+    "checkbox": {
+      "source": "https://ui.shadcn.com/r/styles/new-york/checkbox.json",
+      "style": "new-york",
+      "fetchedOn": "2026-09-09",
+      "upstreamPath": "ui/checkbox.tsx",
+      "declaredDependencies": ["@radix-ui/react-checkbox"],
+      "registryDependencies": [],
+      "sha256": "c9e19d480a43172f9504ac9b22f4a9c149de1d916162f24c62395533b7be19f6",
+      "note": "Compared for HAUX-69. Decision: keep."
+    },
+    "radio-group": {
+      "source": "https://ui.shadcn.com/r/styles/new-york/radio-group.json",
+      "style": "new-york",
+      "fetchedOn": "2026-09-09",
+      "upstreamPath": "ui/radio-group.tsx",
+      "declaredDependencies": ["@radix-ui/react-radio-group"],
+      "registryDependencies": [],
+      "sha256": "30c8d8ea431d9480180d47689b5863fc89e649329aa102766db30a2af5fe4ae8",
+      "note": "Compared for HAUX-69. Decision: keep."
+    },
+    "switch": {
+      "source": "https://ui.shadcn.com/r/styles/new-york/switch.json",
+      "style": "new-york",
+      "fetchedOn": "2026-09-09",
+      "upstreamPath": "ui/switch.tsx",
+      "declaredDependencies": ["@radix-ui/react-switch"],
+      "registryDependencies": [],
+      "sha256": "ab2d009e0fa7366f47ae1a6e0ca35d0aac55c6264c5f61718e12366c196163b4",
+      "note": "Compared for HAUX-69. Decision: keep."
+    }
+  }
+}

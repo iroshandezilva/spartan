@@ -1,0 +1,32 @@
+{
+  "name": "spartant-docs",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "next build",
+    "clean": "rm -rf .next .source out next-env.d.ts tsconfig.tsbuildinfo",
+    "dev": "next dev --port 3100",
+    "start": "next start --port 3100",
+    "typecheck": "tsc -b"
+  },
+  "dependencies": {
+    "@iroshandezilva/spartant": "workspace:*",
+    "fumadocs-core": "catalog:",
+    "fumadocs-mdx": "catalog:",
+    "fumadocs-ui": "catalog:",
+    "next": "catalog:",
+    "react": "catalog:",
+    "react-dom": "catalog:"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "catalog:",
+    "@types/mdx": "catalog:",
+    "@types/node": "catalog:",
+    "@types/react": "catalog:",
+    "@types/react-dom": "catalog:",
+    "postcss": "catalog:",
+    "tailwindcss": "catalog:",
+    "typescript": "catalog:"
+  }
+}

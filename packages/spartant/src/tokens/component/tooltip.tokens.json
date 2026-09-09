@@ -1,0 +1,21 @@
+{
+  "$schema": "../schema/spartant-tokens.schema.json",
+  "$description": "COMPONENT tokens for Tooltip. A tooltip is a caption-scale surface that sits beside a control, and nothing in the semantic layer means that: space.control-padding-x and space.control-padding-y size the box a finger presses, and applying them to a single line of body-small text produces a lozenge larger than the button it describes. space.surface-padding is sized for cards and dialogs. The inset here is the same argument Badge made for its own, at the next size up. Everything else Tooltip needs (radius.control, elevation.overlay, font.size.body-small, color.foreground as the surface and color.foreground.inverse as the ink, every motion role) is semantic and stays semantic.",
+  "tooltip": {
+    "padding-x": {
+      "$type": "dimension",
+      "$value": "0.5rem",
+      "$description": "8px. Half of space.control-padding-x, which keeps the tooltip reading as a caption beside the control rather than as a second control."
+    },
+    "padding-y": {
+      "$type": "dimension",
+      "$value": "0.25rem",
+      "$description": "4px. Body-small type at the body line height is 21px, so 4px above and below makes a 29px surface: taller than a Badge because a tooltip is not inline and does not have to fit a line box, shorter than a control because it is not one."
+    },
+    "max-width": {
+      "$type": "dimension",
+      "$value": "18rem",
+      "$description": "288px. A tooltip that wraps past this is a paragraph, and a paragraph belongs in a Popover or on the page. The limit also keeps a long tooltip inside the viewport region anchor positioning gives it."
+    }
+  }
+}

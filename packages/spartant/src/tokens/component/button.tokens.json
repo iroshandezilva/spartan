@@ -1,0 +1,36 @@
+{
+  "$schema": "../schema/spartant-tokens.schema.json",
+  "$description": "COMPONENT tokens, a worked example of the exception rather than the rule. A component token is only justified when a stable requirement cannot be expressed semantically. Control height is that case (the touch-target floor itself is now the semantic role size.min-target): it is a fixed accessibility floor, not a spacing role, and no semantic token means 'the minimum touch target'. Anything expressible with a semantic role must use the semantic role.",
+  "button": {
+    "height": {
+      "$type": "dimension",
+      "sm": {
+        "$value": "2rem",
+        "$description": "32px. Deliberately below the touch floor, for dense toolbars and table rows. The 44px target is restored as a centred hit area on coarse pointers, so the target is met without the layout paying for it."
+      },
+      "md": {
+        "$value": "2.75rem",
+        "$description": "44px, the minimum touch target from the motion and accessibility standard. Deliberately not derived from the spacing scale, so a spacing change cannot silently break the accessibility floor."
+      },
+      "lg": {
+        "$value": "3.25rem",
+        "$description": "52px, for a primary action that should be the obvious target on a small screen."
+      }
+    },
+    "padding-x": {
+      "$type": "dimension",
+      "sm": {
+        "$value": "0.75rem",
+        "$description": "Horizontal padding at the small size."
+      },
+      "md": {
+        "$value": "1rem",
+        "$description": "Horizontal padding at the default size. Matches space.control-padding-x, and is repeated here so the size scale reads as one table rather than one role plus two exceptions."
+      },
+      "lg": {
+        "$value": "1.5rem",
+        "$description": "Horizontal padding at the large size."
+      }
+    }
+  }
+}

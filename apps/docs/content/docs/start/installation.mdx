@@ -1,0 +1,145 @@
+---
+title: Installation
+description: Add the package, pick one of the two supported styling paths, and check that it renders.
+keywords:
+  - install
+  - installation
+  - pnpm add
+  - npm install
+  - styles.css
+  - theme.css
+  - "@source"
+  - tailwind
+  - peer dependency
+  - react 19
+  - next.js
+  - use client
+  - setup
+---
+
+## Requirements
+
+| Requirement | Value | Why |
+| --- | --- | --- |
+| React | `^19.0.0`, a peer dependency | `ref` as a prop and `use()` are load-bearing in the shipped source |
+| A DOM renderer | `react-dom` or equivalent | The components render DOM elements. `react-dom` is not declared as a peer, because the package never imports it |
+| Tailwind CSS | Optional | Only the second styling path below needs it |
+| Node.js | Any version your bundler supports | The package's own `engines` floor, `>=20.19.0`, applies to building it, not to using it |
+
+Any package manager works for a consumer. The repository itself requires pnpm,
+but that is a repository rule, not a package rule.
+
+## Install
+
+```bash
+pnpm add @iroshandezilva/spartant
+```
+
+React is a peer dependency. Install it if the project does not already have it:
+
+```bash
+pnpm add react react-dom
+```
+
+<Callout type="warn">
+  The package is not yet on the npm registry. Its version is `0.0.0`, and
+  publishing is a separate issue that configures trusted publishing from CI.
+  Until then the command above describes the intended path, and the only way
+  to consume the package is from this repository's workspace. The rest of this
+  page is unchanged by that.
+</Callout>
+
+## Choose a styling path
+
+There are exactly two supported ways to get the styles, and they are mutually
+exclusive. Picking one is the only styling decision a consumer has to make.
+Both are explicit; neither relies on Tailwind scanning something by accident.
+
+### Without Tailwind
+
+Import the precompiled stylesheet once, at the entry point of the application.
+It already contains the tokens, both themes, the reduced-motion rule, and every
+utility the package's own components use, so no configuration is needed.
+
+```ts title="src/main.tsx"
+import "@iroshandezilva/spartant/styles.css";
+```
+
+Take this path when the project does not run Tailwind, or when you want zero
+styling configuration. Its cost is that the semantic roles are not available to
+your own markup as utilities; use the `--spartant-*` custom properties directly
+instead, which are documented on [Tokens](../foundations/tokens.mdx).
+
+### With Tailwind
+
+If the project already runs Tailwind CSS v4, import the theme instead. It brings
+the semantic roles in as Tailwind namespaces, so `bg-primary`,
+`text-foreground-muted`, `rounded-control`, and the rest work beside your own
+utilities, without a second copy of Tailwind's base layer.
+
+```css title="src/app.css"
+@import "tailwindcss";
+@import "@iroshandezilva/spartant/theme.css";
+@source "../node_modules/@iroshandezilva/spartant/dist";
+```
+
+The `@source` line is required. Tailwind only generates utilities it can see
+used, and it cannot see inside a dependency unless told to look. The path is
+relative to the CSS file, so adjust it to where your stylesheet lives.
+
+The roles are mapped with `@theme inline`, which is what lets a theme change or
+a custom property override retype the page at runtime. Do not copy the mapping
+into a plain `@theme` block; that would bake the light values into every
+utility and break dark mode.
+
+## Use a component
+
+```tsx title="src/App.tsx"
+import { Button } from "@iroshandezilva/spartant";
+
+export function App() {
+  return <Button variant="primary">Save changes</Button>;
+}
+```
+
+Every public export comes from the package root. There are no deep imports into
+`dist`, and the `exports` map has no wildcard, so an internal file cannot be
+imported by accident.
+
+## Check that it worked
+
+Render the button above. It should be 44px tall, filled with the primary
+colour, with white text and 8px corners. Press and hold it with a pointer and
+it scales down slightly; release and it springs back. If it renders as an
+unstyled browser button, the stylesheet import is missing or the `@source`
+path is wrong.
+
+## Server components
+
+The package ships without `"use client"` directives, because it targets any
+React 19 renderer rather than the Next.js App Router specifically. From a
+server component, import Spartant components through a small client wrapper of
+your own:
+
+```tsx title="components/SaveButton.tsx"
+"use client";
+
+import { Button } from "@iroshandezilva/spartant";
+
+export function SaveButton() {
+  return <Button variant="primary">Save changes</Button>;
+}
+```
+
+This site does exactly that for its live examples.
+
+<Callout type="info">
+  This documentation site is built the Tailwind way, against the package's
+  published export paths rather than a source alias. It can only use what a
+  consumer can use, which is the point.
+</Callout>
+
+## Next
+
+[Quick start](./quick-start.mdx) builds a small screen with the released
+components. [Theming](./theming.mdx) covers light, dark, and system.

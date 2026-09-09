@@ -1,0 +1,21 @@
+{
+  "$comment": "Provenance for adapted shadcn source. The .tsx.txt files are the upstream text exactly as fetched, kept so an adaptation can be diffed against its origin and so `pnpm check:upstream` can tell when upstream has moved. Never import these; they are evidence, not code.",
+  "entries": {
+    "badge": {
+      "source": "https://ui.shadcn.com/r/styles/new-york/badge.json",
+      "style": "new-york",
+      "fetchedOn": "2026-09-08",
+      "upstreamPath": "ui/badge.tsx",
+      "declaredDependencies": ["@radix-ui/react-slot"],
+      "sha256": "dab689d836ad3292b41e7f4986b4e68e5d45c6903e4aeaae8972a82d4aebec29"
+    },
+    "switch": {
+      "source": "https://ui.shadcn.com/r/styles/new-york/switch.json",
+      "style": "new-york",
+      "fetchedOn": "2026-09-08",
+      "upstreamPath": "ui/switch.tsx",
+      "declaredDependencies": ["@radix-ui/react-switch"],
+      "sha256": "ab2d009e0fa7366f47ae1a6e0ca35d0aac55c6264c5f61718e12366c196163b4"
+    }
+  }
+}

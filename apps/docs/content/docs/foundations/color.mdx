@@ -1,0 +1,235 @@
+---
+title: Color
+description: One OKLCH scale, the semantic roles mapped onto it in light and dark, and the contrast pairings that are checked on every build.
+keywords:
+  - color
+  - colour
+  - oklch
+  - palette
+  - scale
+  - primary
+  - secondary
+  - accent
+  - success
+  - warning
+  - danger
+  - information
+  - neutral
+  - background
+  - surface
+  - foreground
+  - border
+  - focus ring
+  - contrast
+  - WCAG
+  - pairings
+  - dark mode
+  - gamut
+  - bg-primary
+  - text-foreground-muted
+---
+
+## Why OKLCH
+
+Lightness in OKLCH is perceptual. A ramp built on evenly spaced OKLCH lightness
+looks evenly spaced, which is not true of HSL, where two hues at the same
+nominal lightness can differ by roughly 15:1 in measured luminance. Every rule
+on this page depends on lightness meaning something.
+
+## The scale
+
+Seven families, thirteen steps each. Lightness at a step is **fixed across
+families**, so `danger.700` and `primary.700` carry the same weight and a theme
+can swap one family for another without re-deriving every contrast pairing.
+Chroma peaks at step 500 and falls toward both ends, so a near-white step reads
+as a tint rather than as a colour cast.
+
+<ColorScale />
+
+| Step | 0 | 50 | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | 950 | 1000 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| Lightness | 100% | 98% | 95% | 91% | 84% | 74% | 62% | 54% | 45% | 35% | 25% | 19% | 12% |
+
+The light end is dense on purpose. Surfaces, hovers, subtle borders, and
+selected backgrounds all live between steps 0 and 200 and need to be
+distinguishable while all reading as nearly white. Measured on the rendered
+ramps, the usable range is the same for every family: body text on a light
+surface sits at **step 600 or darker**, body text on a dark surface at **step
+500 or lighter**.
+
+Primitives are shown here to explain the mapping. They are deliberately not
+emitted as custom properties, so nothing above can be used in a component.
+
+### Gamut
+
+Colours that fall outside sRGB are brought in by **reducing chroma while
+holding lightness and hue**, bisected to a fixed tolerance so the result is
+deterministic. Lightness carries the contrast guarantee and hue carries the
+family's identity; chroma is the only axis that can give way without breaking
+a promise. Clipping RGB channels would shift both, so it is not used. The
+`warning` family clamps at most steps, because sRGB has no dark, saturated
+yellow; the policy resolves that predictably rather than hiding it.
+
+## Roles
+
+Every role is shown with its light and dark value from the published token
+JSON, so the two themes sit side by side whatever theme this page is currently
+in. The hex beside each swatch is derived from the same value.
+
+### Background and surfaces
+
+The whole system rests on surfaces separating from each other. In dark
+especially, four near-blacks that measure almost the same are the fastest way
+to make a selected row invisible.
+
+<ColorRoles group="background" />
+<ColorRoles group="surface" />
+
+| Role | Reads as | Utility |
+| --- | --- | --- |
+| `background` | The page | `bg-background` |
+| `surface` | A card on the page | `bg-surface` |
+| `surface.elevated` | A popover above the card | `bg-surface-elevated` |
+| `surface.muted` | A recessed panel | `bg-surface-muted` |
+| `surface.disabled` | An inert control | `bg-surface-disabled` |
+| `surface.selected` | A chosen row, tinted **and** moved so it does not rely on colour alone | `bg-surface-selected` |
+
+In dark, `surface.elevated` is a lighter step than `surface` because there is
+headroom above it. In light, `surface` is already pure white and
+`surface.elevated` is the **same value**: nothing is lighter than white, so
+elevation in light is carried by shadow and border instead. Both facts are
+asserted by test. See [Radius and elevation](./radius-and-elevation.mdx).
+
+### Text
+
+<ColorRoles group="foreground" />
+
+| Role | Use | Utility |
+| --- | --- | --- |
+| `foreground` | Body copy | `text-foreground` |
+| `foreground.muted` | Secondary text. Still text, still checked at 4.5:1; "muted" describes emphasis, not permission to be hard to read | `text-foreground-muted` |
+| `foreground.inverse` | Text on an inverted surface | `text-foreground-inverse` |
+| `foreground.disabled` | Disabled text. Exempt from a minimum, measured anyway | `text-foreground-disabled` |
+
+### Borders and focus
+
+<ColorRoles group="border" />
+<ColorRoles group="focus-ring" />
+
+`border` and `border.subtle` are decorative and carry no minimum. `border.strong`
+carries state, so it meets 3:1 against the page and a card. The focus ring is
+checked against **three** surfaces in both themes: the page, a card, and a
+raised surface. A ring that is visible on the page and vanishes inside a dialog
+is the failure keyboard users actually hit. Utilities: `border-border`,
+`border-border-strong`, `outline-focus-ring`.
+
+### Actions
+
+<ColorRoles group="primary" />
+<ColorRoles group="secondary" />
+<ColorRoles group="accent" />
+
+Hover and active move **away** from the page in light and **toward** it in
+dark, which is what keeps a pressed control looking pressed in both. Every
+state is checked to differ from its resting state by at least 0.02 in OKLCH
+lightness, and every filled role carries its own `foreground`, checked against
+the fill at rest, on hover, and while active. Utilities: `bg-primary`,
+`hover:bg-primary-hover`, `active:bg-primary-active`, `text-primary-foreground`.
+
+`secondary` is a quiet button treatment, not a second brand colour. `accent`
+is the emphasis colour for non-action highlights.
+
+### Status
+
+<ColorRoles group="success" />
+<ColorRoles group="warning" />
+<ColorRoles group="danger" />
+<ColorRoles group="information" />
+
+Each status family has three distinct jobs, and they are three roles because
+they are three contrast requirements:
+
+| Role | Job | Checked against | Utility |
+| --- | --- | --- | --- |
+| `<family>` | A solid fill | Its own `foreground` | `bg-danger` |
+| `<family>.foreground` | The label **on** the fill | The fill, including hover and active where they exist | `text-danger-foreground` |
+| `<family>.text` | The colour used **as** text on the page | The page, a card, and the family's own `surface` | `text-danger-text` |
+| `<family>.surface` | A soft tint, which is what a badge or a callout background is | Carries `<family>.text` | `bg-danger-surface` |
+
+A status colour used as text is a different requirement from the same colour
+used as a fill, and it is the one that gets skipped in systems that provide
+only a fill. `Badge` is built entirely from `surface` and `text` pairs of one
+family and never mixes families, so there is no combination a caller can
+reach that has not been measured.
+
+Mapping a product's own statuses onto these families is the product's job.
+Spartant ships tones, not a status vocabulary.
+
+## Light and dark
+
+Light is the base. The dark theme restates only the roles that differ, so a
+role added to light cannot be silently missing from dark: it inherits until
+someone overrides it. The mapping never mentions a colour name; `color.primary`
+aliases a step of the `primary` family in each theme, and nothing in the
+semantic layer says "blue".
+
+Body text sits at step 900 on a step-50 page in light, and at step 50 on a
+step-1000 page in dark. Filled actions sit at 600 in light and 400 in dark,
+which is the usable-range rule above applied in each direction. The tables on
+this page are the authority for the current mapping; this paragraph describes
+the pattern.
+
+## Contrast policy
+
+WCAG 2.2 AA, evaluated against **intended pairings** rather than every
+possible combination. A role is only required to work where it is used.
+
+| Use | Minimum | Applies to |
+| --- | --- | --- |
+| Body text | 4.5:1 | Text below 24px, or below 18.66px bold |
+| Large text | 3:1 | 24px and above, or 18.66px bold and above |
+| Non-text | 3:1 | Focus rings, and any boundary that carries state |
+| Disabled | Exempt | Measured for legibility, never blocking |
+
+Disabled being exempt is WCAG's rule, not a shortcut, and it exists because a
+disabled control that meets full contrast reads as enabled. Disabled state is
+never carried by colour alone: the `disabled` attribute carries it for
+assistive technology.
+
+### Required pairings
+
+Every pairing below is checked in **both themes** by `pnpm check:colors` on
+every build, and a failing pairing blocks release. The figures here are
+computed at build time from the committed token values with the same WCAG
+arithmetic the audit uses.
+
+<ContrastMatrix />
+
+### When a pairing fails
+
+In order of preference: change the mapping to a darker or lighter step, change
+the family's seed if no step can serve the role, or record a reviewed exception
+as data with the accepted ratio, the reason, and the approving issue. An
+exception without an approving issue is not an exception; it is a failure that
+someone edited around. There are currently no exceptions.
+
+## Overriding a colour
+
+Redefine the role's custom property, in both themes if the value should
+differ. If you change `primary`, change `primary-hover`, `primary-active`,
+`primary-foreground`, `primary-text`, `primary-surface`, and `focus-ring` with
+it, and check the pairings above still pass; the package cannot audit an
+override for you. See [Theming](../start/theming.mdx#overriding-a-role).
+
+## Known gaps
+
+- The pairing list on this page is a copy of the enforced list in the
+  package's tooling, because that tooling is not a package export. If the two
+  ever disagree, the tooling is right. The summary in the package's
+  `THEMES.md` predates the status text roles and the switch pairings and
+  quotes a smaller count than the enforced list.
+- There is no exported API for computing contrast at runtime; the audit is
+  build-time tooling. A consumer who overrides a role has to measure it
+  themselves.
+- The colour scale visualiser lives in a separate workspace app
+  (`pnpm dev:color-tool`) and is not embedded here.

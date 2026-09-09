@@ -1,0 +1,15 @@
+{
+  "$comment": "Provenance for the shadcn source this component was audited against in HAUX-69. The .tsx.txt files are the upstream text exactly as fetched, kept so the comparison can be re-run and so `pnpm check:upstream` can tell when upstream has moved. Never import these; they are evidence, not code. The audit findings are the HAUX-69 comment linked from the README beside this folder.",
+  "entries": {
+    "separator": {
+      "source": "https://ui.shadcn.com/r/styles/new-york/separator.json",
+      "style": "new-york",
+      "fetchedOn": "2026-09-09",
+      "upstreamPath": "ui/separator.tsx",
+      "declaredDependencies": ["@radix-ui/react-separator"],
+      "registryDependencies": [],
+      "sha256": "995c54f1c5c688f712a675fe35d55bcada2b31dba561dcc71553a1ad601e59ec",
+      "note": "Compared for HAUX-69. Decision: keep."
+    }
+  }
+}

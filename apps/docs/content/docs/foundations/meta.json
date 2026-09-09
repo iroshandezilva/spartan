@@ -1,0 +1,14 @@
+{
+  "title": "Foundations",
+  "description": "The tokens, scales, and decisions every component is built from.",
+  "pages": [
+    "design-principles",
+    "tokens",
+    "color",
+    "typography",
+    "spacing",
+    "radius-and-elevation",
+    "motion",
+    "accessibility"
+  ]
+}

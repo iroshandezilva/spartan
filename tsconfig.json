@@ -1,0 +1,14 @@
+{
+  "files": [],
+  "references": [
+    {
+      "path": "packages/spartant"
+    },
+    {
+      "path": "apps/docs"
+    },
+    {
+      "path": "examples/consumer"
+    }
+  ]
+}

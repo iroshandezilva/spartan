@@ -1,0 +1,86 @@
+/*
+ * Fumadocs styled by Spartant.
+ *
+ * Fumadocs UI reads its own `--color-fd-*` roles. Its stock colour files
+ * hardcode a light palette and repeat it under `.dark`. This file replaces
+ * that file: every `--color-fd-*` role is aliased to the Spartant semantic
+ * role that means the same thing, so the documentation site is painted by the
+ * system it documents rather than by a lookalike palette that can drift.
+ *
+ * `@theme inline` matters here. It makes the generated utilities reference
+ * `var(--spartant-*)` rather than copying a resolved value, so one theme
+ * switch retypes the whole site with no second set of dark declarations. The
+ * dark values live in the package's tokens, which is the only place they
+ * should live.
+ *
+ * Roles are matched by meaning, not by name. Fumadocs `secondary` and `accent`
+ * are quiet surfaces behind sidebar and hover states, not brand colours, so
+ * they map to Spartant surface roles. Spartant's own `secondary` is a button
+ * treatment and would be wrong here.
+ */
+
+@theme inline {
+  --color-fd-background: var(--spartant-color-background);
+  --color-fd-foreground: var(--spartant-color-foreground);
+
+  --color-fd-muted: var(--spartant-color-surface-muted);
+  --color-fd-muted-foreground: var(--spartant-color-foreground-muted);
+
+  --color-fd-card: var(--spartant-color-surface);
+  --color-fd-card-foreground: var(--spartant-color-foreground);
+
+  --color-fd-popover: var(--spartant-color-surface-elevated);
+  --color-fd-popover-foreground: var(--spartant-color-foreground);
+
+  --color-fd-border: var(--spartant-color-border);
+
+  --color-fd-primary: var(--spartant-color-primary);
+  --color-fd-primary-foreground: var(--spartant-color-primary-foreground);
+
+  --color-fd-secondary: var(--spartant-color-surface-muted);
+  --color-fd-secondary-foreground: var(--spartant-color-foreground);
+
+  --color-fd-accent: var(--spartant-color-surface-selected);
+  --color-fd-accent-foreground: var(--spartant-color-foreground);
+
+  --color-fd-ring: var(--spartant-color-focus-ring);
+
+  /*
+   * The dialog backdrop is the one role Spartant expresses as a component
+   * token rather than a semantic one, because a scrim has no other use. It is
+   * reused here so the search dialog and the component dialogs dim the page by
+   * the same amount.
+   */
+  --color-fd-overlay: var(--spartant-dialog-backdrop);
+
+  /*
+   * Callout and admonition colours. These sit on the page as text and icons
+   * rather than as fills, so they use the `-text` roles, which are the ones
+   * contrast-checked against the page background.
+   */
+  --color-fd-info: var(--spartant-color-information-text);
+  --color-fd-warning: var(--spartant-color-warning-text);
+  --color-fd-error: var(--spartant-color-danger-text);
+  --color-fd-success: var(--spartant-color-success-text);
+  --color-fd-idea: var(--spartant-color-accent-text);
+
+  --color-fd-diff-add: var(--spartant-color-success-surface);
+  --color-fd-diff-add-symbol: var(--spartant-color-success-text);
+  --color-fd-diff-remove: var(--spartant-color-danger-surface);
+  --color-fd-diff-remove-symbol: var(--spartant-color-danger-text);
+}
+
+/*
+ * Typography and shape come from the same source.
+ *
+ * Fumadocs reads Tailwind's own `--font-sans`, `--font-mono` and `--radius-*`
+ * namespaces, which the package's theme.css already points at Spartant
+ * tokens, so nothing further is needed for those. The body rule below is what
+ * makes the default font actually apply to the document rather than only to
+ * elements that opt in with a utility.
+ */
+body {
+  font-family: var(--spartant-font-family-body);
+  color: var(--spartant-color-foreground);
+  background-color: var(--spartant-color-background);
+}

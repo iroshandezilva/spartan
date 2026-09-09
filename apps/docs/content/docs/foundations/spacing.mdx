@@ -1,0 +1,71 @@
+---
+title: Spacing
+description: A 4px scale with the odd steps left out, and six roles that cover the component set.
+keywords:
+  - spacing
+  - space
+  - padding
+  - gap
+  - margin
+  - 4px grid
+  - control padding
+  - surface padding
+  - stack gap
+  - section gap
+  - p-surface
+  - gap-control-gap
+---
+
+## The scale
+
+A 4px base, with the steps a design system never reaches for left out.
+Twelve steps is enough to build every released component, and every step
+missing from the list is a step nobody has to argue about.
+
+<SpacingPrimitives />
+
+Primitives are steps, not meanings, and they are not emitted as custom
+properties. Components use the roles below.
+
+## The roles
+
+<SpacingRoles />
+
+<TokenTable prefix="space" px />
+
+These cover the released set: a button is `control-padding`, a card is
+`surface-padding`, a form is `stack-gap`, a page is `section-gap`. When a new
+component needs a value none of these express, the answer is usually one of
+these after all, and occasionally a new role with a name that more than one
+component would use.
+
+## In component code
+
+Tailwind's spacing namespace carries the roles, so any spacing utility accepts
+them:
+
+| Role | Utility examples |
+| --- | --- |
+| `space.control-padding-x` | `px-control-x` |
+| `space.control-padding-y` | `py-control-y` |
+| `space.control-gap` | `gap-control-gap` |
+| `space.surface-padding` | `p-surface` |
+| `space.stack-gap` | `gap-stack`, `space-y-stack` |
+| `space.section-gap` | `gap-section`, `mt-section` |
+
+Tailwind's numeric spacing utilities such as `p-4` still work in a consumer
+that runs Tailwind, and they resolve to the same 4px base. Prefer the roles in
+component source, because a role can be retuned in one place.
+
+## Control heights are not spacing
+
+Button and field heights come from component tokens rather than from this
+scale, because `md` carries the 44px accessibility floor and a spacing change
+must not be able to shrink it. See [Tokens](./tokens.mdx#when-a-component-token-is-justified)
+and [Accessibility](./accessibility.mdx#touch-targets).
+
+## Known gaps
+
+- There is no layout or grid system, and no container width scale. Prototypes
+  compose with Tailwind's own flex and grid utilities.
+- No responsive spacing roles. A role is one value at every viewport.

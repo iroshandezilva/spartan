@@ -1,0 +1,134 @@
+name: Validate
+
+# Runs on every pull request into the production branch, and on the production
+# branch itself so a direct push is never trusted blindly.
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+
+# Least privilege. This workflow reads the repository and publishes nothing.
+# It needs no write scope, no packages scope, and no id-token.
+#
+# Release credentials must never appear here. Publishing runs in its own
+# protected workflow with its own environment. See HAUX-60.
+permissions:
+  contents: read
+
+# A newer commit on the same ref makes the older run irrelevant.
+concurrency:
+  group: validate-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    # This name is the required status check configured on the production
+    # branch. Changing it means updating branch protection. See
+    # .github/BRANCH_PROTECTION.md.
+    name: validate
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@v5
+
+      # Must run before setup-node, so that the pnpm store cache can be keyed.
+      # No version is pinned here on purpose: the action reads the
+      # packageManager field from package.json, so CI and local development
+      # cannot drift apart.
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v5
+        with:
+          node-version-file: .node-version
+          cache: pnpm
+
+      # --frozen-lockfile fails rather than silently resolving a different tree
+      # when pnpm-lock.yaml does not match the manifests. That is the point.
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      # The steps below mirror the `validate` script in package.json, split out
+      # so a failure names itself in the checks UI instead of hiding inside one
+      # opaque step. If you change `validate`, change this list in the same
+      # commit.
+      - name: Format check
+        run: pnpm format:check
+
+      - name: Lint
+        run: pnpm lint
+
+      - name: Documentation links
+        run: pnpm check:docs
+
+      - name: Token sources
+        run: pnpm check:tokens
+
+      - name: Token output drift
+        run: pnpm tokens:check
+
+      - name: Colour contrast and gamut
+        run: pnpm check:colors
+
+      - name: Type check
+        run: pnpm typecheck
+
+      - name: Tests
+        run: pnpm test
+
+      # Runs every story: renders it, awaits its play function, and audits the
+      # result with axe. Builds the package first, because stories resolve it
+      # through its published exports rather than a source alias.
+      - name: Story interaction and accessibility tests
+        run: pnpm test:stories
+
+      - name: Build package
+        run: pnpm build:package
+
+      - name: Build Storybook workspace
+        run: pnpm build:storybook
+
+      - name: Build docs workspace
+        run: pnpm build:docs
+
+      - name: Build colour tool
+        run: pnpm build:color-tool
+
+      - name: Build foundations specimens
+        run: pnpm build:foundations
+
+      - name: Build consumer example
+        run: pnpm build:example
+
+      # Packs the publishable package and fails if anything that should never
+      # ship would be included.
+      - name: Inspect package contents
+        run: pnpm inspect:package
+
+      - name: Upload package tarball
+        uses: actions/upload-artifact@v4
+        with:
+          name: package-tarball
+          path: .artifacts/*.tgz
+          if-no-files-found: error
+          retention-days: 14
+
+      # The visual-review surface for v0.1. No hosted visual-regression
+      # provider is used, so this artifact is how a reviewer sees the change.
+      # See apps/storybook/VISUAL-REVIEW.md for the decision and the workflow.
+      #
+      # `always()` so a run that failed a later check still produces something
+      # to look at. A visual regression is often what broke the check, and
+      # withholding the evidence at exactly that moment would be perverse.
+      - name: Upload Storybook build
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: storybook-static-${{ github.sha }}
+          path: apps/storybook/storybook-static
+          if-no-files-found: error
+          retention-days: 14

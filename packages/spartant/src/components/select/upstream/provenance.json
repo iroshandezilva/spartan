@@ -1,0 +1,14 @@
+{
+  "$comment": "Provenance for the shadcn source Select was reviewed against, per ADOPTING-SHADCN.md. select.tsx.txt is the upstream text exactly as fetched, kept so the decision recorded in README.md can be diffed against its origin. Never import it; it is evidence, not code. Same shape as src/experiments/shadcn/upstream/provenance.json so scripts/check-upstream.mjs can read it once it globs component provenance files. Nothing from this file was adopted: HAUX-52 decided on a styled native select, and this snapshot is the evidence the decision was made against.",
+  "entries": {
+    "select": {
+      "source": "https://ui.shadcn.com/r/styles/new-york/select.json",
+      "style": "new-york",
+      "fetchedOn": "2026-09-09",
+      "upstreamPath": "ui/select.tsx",
+      "declaredDependencies": ["@radix-ui/react-select"],
+      "registryDependencies": [],
+      "sha256": "3d93ae07a8f3fe121ba60f4439e26bd7859f247eb8bfcafcf4b4a8a069888eec"
+    }
+  }
+}

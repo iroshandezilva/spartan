@@ -1,0 +1,180 @@
+---
+title: Using with a coding agent
+description: The contract a coding agent can rely on, with source paths, exports, commands, token names, verification, and machine-readable entry points.
+keywords:
+  - agent
+  - coding agent
+  - llms.txt
+  - llms-full.txt
+  - AGENTS.md
+  - CLAUDE.md
+  - exports
+  - commands
+  - pnpm validate
+  - verification
+  - manual test
+  - Storybook
+  - source paths
+  - conventions
+---
+
+Spartant is built with coding agents as a first-class audience. This page is
+the contract: what an agent can read, what it can import, what it must not do,
+and how it proves its work. Everything here is also true for a person.
+
+## Machine-readable entry points
+
+| Path | Holds |
+| --- | --- |
+| `/llms.txt` | An index of every published page, generated from the same page tree this site renders |
+| `/llms-full.txt` | Every page as one Markdown document, for an agent that would rather read the whole system than crawl it |
+
+Both are generated at build time from the content, so neither can fall behind
+the site. Individual pages can be read as rendered Markdown through those
+routes; there is no separate hand-maintained summary to drift.
+
+## What the package exports
+
+Generated from the package at build time, so this list is the package.
+
+<PackageExports />
+
+Types are exported beside them: every component's `*Props` interface, the
+variant and size unions such as `ButtonVariant`, `ThemePreference` and
+`ResolvedTheme`, and the token types `SemanticTokenPath`,
+`SemanticTokenVariable`, `SpringToken`, and `SpringName`.
+
+Subpath exports, the only ones that exist: `./styles.css`, `./theme.css`,
+`./tokens.json`, and `./package.json`. Anything else, including anything
+under `dist/`, is internal and does not resolve.
+
+<Callout type="warn">
+  Card, Tabs, Select, Tooltip, and Popover are being built in their own issues
+  at the time of writing. A name appearing in the generated list above means
+  the entry point exports it, not that its issue is Done. Check Linear before
+  importing one of those, and do not write documentation or examples that
+  assume it until it is.
+</Callout>
+
+## Where things live in the repository
+
+| Path | Holds |
+| --- | --- |
+| `AGENTS.md` | The authoritative agent guide: source-of-truth order, boundaries, token rules, Storybook and documentation requirements, verification, the Linear workflow, the definition of done, and the completion report format |
+| `CLAUDE.md` | Repository state and day-one facts. It imports `AGENTS.md` and does not repeat it |
+| `packages/spartant/src/index.ts` | The public entry point. Every export passes through it |
+| `packages/spartant/src/components/` | Owned component source, one directory per family, with `INVENTORY.md`, `API-CONVENTIONS.md`, and `ADOPTING-SHADCN.md` beside them |
+| `packages/spartant/src/tokens/` | DTCG token sources under `primitive/`, `semantic/`, `component/`, and `theme/`, the generated outputs under `generated/`, and `README.md`, `COLOR.md`, `THEMES.md`, `FOUNDATIONS.md` |
+| `packages/spartant/src/styles/` | `tokens.css` (generated), `theme.css` (the Tailwind mapping and the reduced-motion rule), `index.css` (the precompiled entry) |
+| `packages/spartant/src/theme/` | `ThemeProvider`, `useTheme`, `themeScript`, and the attribute constants |
+| `packages/spartant/VERSIONING.md` | The public surface, version rules, and the deprecation path |
+| `.claude/skills/spartant-component-builder/SKILL.md` | The repository's own component skill: build order, the frozen motion scale, a review mode, and the traps that cost time in the first slice |
+| `MANUAL-REVIEW.md` | The manual checklist for keyboard, focus, screen reader, motion, and real-device checks |
+| `apps/storybook/` | The component workbench and the exhaustive state surface |
+| `apps/docs/` | This site |
+
+## Stable commands
+
+All run from the repository root through pnpm. Never npm or yarn; a
+`preinstall` guard fails the install if you try.
+
+| Command | Does |
+| --- | --- |
+| `pnpm validate` | The full gate: format, lint, doc links, token checks, colour checks, type check, tests, story tests, build, package inspection. Run it before claiming work is complete |
+| `pnpm typecheck` | Project references, then the test files |
+| `pnpm test` | Vitest, Node only. Builds the package first |
+| `pnpm test:stories` | Renders every story, runs its play function, audits it with axe |
+| `pnpm check:tokens` | Validates the token sources and proves emission |
+| `pnpm check:colors` | The contrast and gamut audit over both themes |
+| `pnpm build:docs` | Builds the package, then this site |
+| `pnpm dev:storybook` | The workbench on port 6006 |
+| `pnpm dev:docs` | This site on port 3100 |
+| `pnpm smoke:package` | Packs the package and installs the tarball in a throwaway project outside the workspace |
+
+## Rules an agent must follow
+
+These are the rules that most often go wrong. `AGENTS.md` is the full list.
+
+1. **Semantic roles only.** `bg-primary`, `text-foreground-muted`,
+   `border-border-strong`. Never a raw value such as `bg-[#3b5bdb]`, never a
+   palette step. Primitives are not emitted as custom properties, so reaching
+   for one is impossible by design and a sign the design is being fought.
+2. **Motion through tokens.** Durations, easings, distances, and scales come
+   from the roles on [Motion](../foundations/motion.mdx). Keyboard activation
+   is immediate. Focus, announcements, validation, and state never wait for an
+   animation.
+3. **Compose classes with `cn` and put the caller's `className` last**, so it
+   overrides.
+4. **Variants are a plain `Record<Variant, string>`** of complete class
+   strings. No variant library.
+5. **No new dependencies without an issue.** Animation libraries in particular
+   need a justification covering behaviour, bundle impact, cleanup, server
+   rendering, reduced motion, testing, and the consumer contract.
+6. **No SCSS, no StyleX, no whole-catalogue shadcn import.** Adopting a single
+   shadcn source file follows `ADOPTING-SHADCN.md`.
+7. **Never expose a primitive library's API** through public props.
+8. **Keep source, exports, stories, documentation, tests, and release notes
+   synchronized** in the same change.
+9. **No em dashes** anywhere in the repository's writing, including comments
+   and commit messages.
+
+## Token names an agent will need
+
+Every semantic token is exported as `semanticTokens`, a map from token path to
+custom property, and `tokenVar(path)` returns the `var()` reference. The path
+is stable; the property name is derived from it mechanically:
+
+```ts
+import { semanticTokens, tokenVar } from "@iroshandezilva/spartant";
+
+semanticTokens["color.foreground.muted"]; // "--spartant-color-foreground-muted"
+tokenVar("radius.control"); // "var(--spartant-radius-control)"
+```
+
+`SemanticTokenPath` is the union of every valid path, so a typo is a compile
+error. The full role tables are on [Tokens](../foundations/tokens.mdx) and
+[Color](../foundations/color.mdx).
+
+## Verification an agent must run
+
+Run the checks named in the Linear issue. At minimum, work that touches a
+component should run `pnpm validate`. Never report a check as passing when it
+was not run, and explain every omitted check that would normally apply.
+
+Manual testing is required whenever a change affects keyboard navigation,
+focus, screen readers, pointer or touch behaviour, theme appearance,
+responsive or long-content behaviour, animation, reduced motion, package
+installation, or production deployment. `MANUAL-REVIEW.md` is the checklist;
+its result block is pasted into the Linear comment and the pull request. When
+the environment supports the check, the agent performs it and records the
+evidence. When only a person can, the issue moves to `Agent Done` with
+`Human input required` and an exact checklist.
+
+## Completion report
+
+Every finished issue ends with the same structure, in the final response and
+in the Linear comment:
+
+```md
+### Completed
+### Changed
+### Automated verification
+### Manual verification
+### Risks and follow-ups
+```
+
+The headings and their expected contents are defined in `AGENTS.md`.
+
+## Known gaps
+
+- `/llms.txt` exists and is generated, but its retrieval has not yet been
+  validated by asking an agent to answer setup, component, token, and testing
+  questions from the published documentation alone. That validation is its
+  own issue.
+- `/llms-full.txt` carries each page's prose and hand-written tables, but not
+  the tables and specimens that are generated from the token JSON at build
+  time, such as the export list above, the colour role tables, and the
+  contrast matrix. An agent that needs those values should read
+  `@iroshandezilva/spartant/tokens.json` directly, which is the same source.
+- There are no component pages yet, so an agent choosing a component reads
+  `INVENTORY.md`, the component's source, and its stories.

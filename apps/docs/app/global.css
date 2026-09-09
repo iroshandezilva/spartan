@@ -1,0 +1,41 @@
+@import "tailwindcss";
+
+/*
+ * Spartant's semantic roles and Tailwind namespace mapping. This is the same
+ * entry point a real consumer uses, imported by its public export path rather
+ * than by a source alias, so this app can only rely on what ships.
+ */
+@import "@iroshandezilva/spartant/theme.css";
+
+/*
+ * Fumadocs UI's structure and component styles. The stock colour file
+ * (fumadocs-ui/css/neutral.css) is deliberately not imported: ./spartant-theme.css
+ * supplies those roles from Spartant tokens instead.
+ */
+@import "fumadocs-ui/css/preset.css";
+@import "./spartant-theme.css";
+
+/*
+ * Explicit source scanning, matching the package's documented consumer path.
+ * Tailwind only generates utilities it can see used, so the package's compiled
+ * components have to be declared.
+ *
+ * Fumadocs UI is deliberately not scanned. It ships precompiled CSS for its own
+ * components through preset.css, and pointing Tailwind at its minified bundle
+ * makes the scanner mistake fragments of that bundle for class names.
+ */
+@source "../node_modules/@iroshandezilva/spartant/dist";
+
+/*
+ * A code comment in the package's Checkbox source spells out `bg-[url(...)]`
+ * while explaining why that syntax is ambiguous. Tailwind's scanner reads
+ * comments too, so it dutifully generates a rule containing `url(...)`, which
+ * Vite tolerates and Turbopack rejects as an unresolvable module. Excluding the
+ * one class is narrower than excluding the file, which would drop the
+ * component's real utilities. Remove this once the comment is reworded upstream.
+ */
+@source not inline("bg-[url(...)]");
+
+html {
+  scrollbar-gutter: stable;
+}

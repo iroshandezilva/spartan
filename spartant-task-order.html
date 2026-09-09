@@ -1,0 +1,726 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Spartant Task Order</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #0d0e0c;
+      --panel: #151713;
+      --panel-2: #1b1e19;
+      --line: #2b2f27;
+      --text: #f2f4ed;
+      --muted: #9ca494;
+      --accent: #c8ff5c;
+      --accent-soft: #26351b;
+      --blue: #9ac7ff;
+      --blue-soft: #18283a;
+      --amber: #ffc875;
+      --amber-soft: #382918;
+      --green: #91e6a6;
+      --green-soft: #183022;
+      --radius: 18px;
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      background:
+        radial-gradient(circle at 15% 0%, rgba(200,255,92,.08), transparent 28rem),
+        var(--bg);
+      color: var(--text);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.45;
+    }
+
+    a { color: inherit; }
+
+    .shell {
+      width: min(1180px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 52px 0 80px;
+    }
+
+    .eyebrow {
+      color: var(--accent);
+      font-size: 12px;
+      font-weight: 750;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      max-width: 780px;
+      margin: 12px 0 14px;
+      font-size: clamp(40px, 7vw, 78px);
+      line-height: .96;
+      letter-spacing: -.055em;
+    }
+
+    .intro {
+      max-width: 720px;
+      margin: 0;
+      color: var(--muted);
+      font-size: 17px;
+    }
+
+    .project-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 22px;
+      color: var(--text);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .project-link:hover { color: var(--accent); }
+
+    .summary {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      margin: 38px 0 18px;
+    }
+
+    .metric {
+      min-height: 114px;
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: rgba(21,23,19,.84);
+    }
+
+    .metric strong {
+      display: block;
+      font-size: 32px;
+      letter-spacing: -.04em;
+    }
+
+    .metric span {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .now {
+      display: grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap: 16px;
+      margin: 18px 0 28px;
+      padding: 24px;
+      border: 1px solid #475d27;
+      border-radius: 24px;
+      background: linear-gradient(135deg, #1d2915, #141712 70%);
+    }
+
+    .now h2 {
+      margin: 5px 0 8px;
+      font-size: 28px;
+      letter-spacing: -.035em;
+    }
+
+    .now p { margin: 0; color: #b9c4ad; }
+
+    .now-list {
+      display: grid;
+      gap: 8px;
+      align-content: center;
+    }
+
+    .now-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 12px;
+      border-radius: 12px;
+      background: rgba(255,255,255,.04);
+      text-decoration: none;
+      font-size: 13px;
+    }
+
+    .now-item:hover { background: rgba(200,255,92,.09); }
+
+    .now-item b { color: var(--accent); }
+
+    .toolbar {
+      position: sticky;
+      top: 12px;
+      z-index: 10;
+      display: flex;
+      gap: 10px;
+      padding: 10px;
+      margin: 0 0 28px;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: rgba(15,16,14,.88);
+      backdrop-filter: blur(16px);
+    }
+
+    input[type="search"], select {
+      min-height: 42px;
+      border: 1px solid var(--line);
+      border-radius: 11px;
+      background: var(--panel);
+      color: var(--text);
+      font: inherit;
+    }
+
+    input[type="search"] {
+      flex: 1;
+      min-width: 0;
+      padding: 0 14px;
+    }
+
+    select { padding: 0 34px 0 12px; }
+
+    input:focus-visible, select:focus-visible, a:focus-visible, button:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 3px;
+    }
+
+    .wave {
+      display: grid;
+      grid-template-columns: 210px 1fr;
+      gap: 28px;
+      padding: 26px 0 38px;
+      border-top: 1px solid var(--line);
+    }
+
+    .wave-meta {
+      position: sticky;
+      top: 92px;
+      align-self: start;
+    }
+
+    .wave-number {
+      color: var(--accent);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: .13em;
+      text-transform: uppercase;
+    }
+
+    .wave h2 {
+      margin: 6px 0 8px;
+      font-size: 22px;
+      line-height: 1.1;
+      letter-spacing: -.03em;
+    }
+
+    .wave-meta p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .task-list { display: grid; gap: 9px; }
+
+    .task {
+      display: grid;
+      grid-template-columns: 42px minmax(0, 1fr) auto;
+      gap: 14px;
+      align-items: start;
+      padding: 15px;
+      border: 1px solid var(--line);
+      border-radius: 15px;
+      background: var(--panel);
+      transition: border-color 160ms ease, background 160ms ease, transform 160ms ease;
+    }
+
+    .task:hover {
+      border-color: #46513b;
+      background: var(--panel-2);
+      transform: translateY(-1px);
+    }
+
+    .task.is-hidden { display: none; }
+
+    .task.is-checked { opacity: .52; }
+
+    .check {
+      display: grid;
+      place-items: center;
+      width: 32px;
+      height: 32px;
+      margin-top: 1px;
+      border: 1px solid #394034;
+      border-radius: 10px;
+      background: #11120f;
+      cursor: pointer;
+      appearance: none;
+    }
+
+    .check:checked {
+      border-color: var(--accent);
+      background: var(--accent);
+    }
+
+    .check:checked::after {
+      content: "✓";
+      color: #11150c;
+      font-weight: 900;
+    }
+
+    .task-top {
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+    }
+
+    .sequence {
+      color: #626a5b;
+      font-size: 11px;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .issue-id {
+      color: var(--accent);
+      font-size: 12px;
+      font-weight: 800;
+      text-decoration: none;
+    }
+
+    .issue-id:hover { text-decoration: underline; }
+
+    .task h3 {
+      margin: 5px 0 7px;
+      font-size: 15px;
+      line-height: 1.3;
+      letter-spacing: -.01em;
+    }
+
+    .blockers {
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .blockers a {
+      color: #c7cec0;
+      text-decoration: none;
+    }
+
+    .blockers a:hover { color: var(--accent); }
+
+    .status {
+      white-space: nowrap;
+      padding: 5px 8px;
+      border: 1px solid transparent;
+      border-radius: 999px;
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+    }
+
+    .status.agent-done { color: var(--blue); background: var(--blue-soft); border-color: #294769; }
+    .status.backlog { color: #aab1a4; background: #20231f; border-color: #343934; }
+    .status.done { color: var(--green); background: var(--green-soft); border-color: #28583a; }
+    .status.in-progress { color: var(--amber); background: var(--amber-soft); border-color: #654822; }
+    .status.ready-to-start { color: var(--accent); background: var(--accent-soft); border-color: #4e692c; }
+
+    .task-actions {
+      display: grid;
+      justify-items: end;
+      gap: 8px;
+    }
+
+    .copy-prompt,
+    .copy-wave {
+      min-height: 32px;
+      padding: 0 10px;
+      border: 1px solid #3a4135;
+      border-radius: 9px;
+      background: #11130f;
+      color: #c8cec2;
+      font: inherit;
+      font-size: 11px;
+      font-weight: 750;
+      cursor: pointer;
+      transition: color 160ms ease, border-color 160ms ease, background 160ms ease;
+    }
+
+    .copy-wave {
+      margin-top: 14px;
+    }
+
+    .copy-prompt:hover,
+    .copy-wave:hover {
+      border-color: #65774f;
+      background: var(--accent-soft);
+      color: var(--accent);
+    }
+
+    .copy-prompt.is-copied,
+    .copy-wave.is-copied {
+      border-color: #39744b;
+      background: var(--green-soft);
+      color: var(--green);
+    }
+
+    .empty {
+      display: none;
+      padding: 50px 20px;
+      text-align: center;
+      color: var(--muted);
+    }
+
+    .legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-top: 26px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    footer {
+      margin-top: 30px;
+      padding-top: 24px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    @media (max-width: 820px) {
+      .summary { grid-template-columns: repeat(2, 1fr); }
+      .now { grid-template-columns: 1fr; }
+      .wave { grid-template-columns: 1fr; gap: 16px; }
+      .wave-meta { position: static; }
+    }
+
+    @media (max-width: 560px) {
+      .shell { width: min(100% - 20px, 1180px); padding-top: 30px; }
+      .toolbar { flex-direction: column; top: 6px; }
+      .task { grid-template-columns: 34px minmax(0, 1fr); }
+      .task-actions { grid-column: 2; justify-items: start; grid-auto-flow: column; align-items: center; }
+      .summary { gap: 7px; }
+      .metric { min-height: 98px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .task { transition: none; }
+      .task:hover { transform: none; }
+    }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <div class="eyebrow">Spartant design system</div>
+    <h1>One clear order from planning to release.</h1>
+    <p class="intro">A dependency-aware view of the current Linear plan. Work from top to bottom. Tasks inside the same wave may run in parallel only when all of their listed blockers are Done.</p>
+    <a class="project-link" href="https://linear.app/wearehaux/project/spartant-design-system-b4328c010ac8/overview" target="_blank" rel="noreferrer">Open the Linear project <span aria-hidden="true">↗</span></a>
+
+    <section class="summary" aria-label="Project summary">
+      <div class="metric"><strong>48</strong><span>Total tasks</span></div>
+      <div class="metric"><strong>5</strong><span>Ready to start</span></div>
+      <div class="metric"><strong>38</strong><span>Completed review gates</span></div>
+      <div class="metric"><strong>6</strong><span>v0.1 milestones</span></div>
+    </section>
+
+    <section class="now">
+      <div>
+        <div class="eyebrow">Ready now</div>
+        <h2>5 tasks can start.</h2>
+        <p>The foundation review gates are Done. Follow the displayed order if you are working sequentially, or run these in parallel when separate agents can work safely. Every component is built. HAUX-53 is in Agent Done for the Popover trusted-input checks (O1 to O6) and VoiceOver, and HAUX-56 waits on it. HAUX-60 is in Agent Done and needs Iroshan to create the GitHub repository, configure the npm trusted publisher, and create the npm-release environment. HAUX-69 is in Agent Done for a real mouse-wheel check over the Dialog backdrop and a VoiceOver pass. HAUX-56, 57, 58, 63 and 64 still have open blockers.</p>
+      </div>
+      <div class="now-list">
+        <a class="now-item" href="https://linear.app/wearehaux/issue/HAUX-56/create-the-component-documentation-template-and-publish-mvp-pages" target="_blank" rel="noreferrer"><b>1 · HAUX-56</b><span>Create the component documentation</span></a>
+        <a class="now-item" href="https://linear.app/wearehaux/issue/HAUX-57/validate-documentation-navigation-search-accessibility-and-production" target="_blank" rel="noreferrer"><b>2 · HAUX-57</b><span>Validate documentation navigation,</span></a>
+        <a class="now-item" href="https://linear.app/wearehaux/issue/HAUX-58/add-llmstxt-and-validate-agent-readable-documentation" target="_blank" rel="noreferrer"><b>3 · HAUX-58</b><span>Add llms.txt and validate agent-re</span></a>
+        <a class="now-item" href="https://linear.app/wearehaux/issue/HAUX-63/publish-and-verify-spartant-v01" target="_blank" rel="noreferrer"><b>4 · HAUX-63</b><span>Publish and verify Spartant v0.1</span></a>
+        <a class="now-item" href="https://linear.app/wearehaux/issue/HAUX-64/launch-production-fumadocs-on-vercel" target="_blank" rel="noreferrer"><b>5 · HAUX-64</b><span>Launch production Fumadocs on Verc</span></a>
+      </div>
+    </section>
+
+    <div class="toolbar" aria-label="Task filters">
+      <input id="search" type="search" placeholder="Search by task ID or title" aria-label="Search tasks" />
+      <select id="statusFilter" aria-label="Filter by status">
+        <option value="all">All statuses</option>
+        <option value="Agent Done">Agent Done</option>
+        <option value="Backlog">Backlog</option>
+        <option value="Done">Done</option>
+        <option value="In Progress">In Progress</option>
+        <option value="Ready to Start">Ready to Start</option>
+      </select>
+    </div>
+
+    <div id="waves"></div>
+    <div id="empty" class="empty">No tasks match this filter.</div>
+
+    <div class="legend">
+      <span>Checkboxes are saved only in this browser.</span>
+      <span>Linear remains the source of truth for status and dependencies.</span>
+      <span>Agent Done is used only when human input is required.</span>
+      <span>Snapshot: 9 September 2026.</span>
+    </div>
+
+    <footer>Recommended sequence based on the live blocker relationships in the Spartant Design System Linear project.</footer>
+  </main>
+
+  <script>
+    const tasks = [
+      { wave: 1, id: 'HAUX-26', title: 'Confirm v0.1 scope and release decisions', status: 'Done', blockers: [], url: 'https://linear.app/wearehaux/issue/HAUX-26/confirm-v01-scope-and-release-decisions' },
+      { wave: 1, id: 'HAUX-25', title: 'Initialize the React and TypeScript workspace architecture', status: 'Done', blockers: ['HAUX-26'], url: 'https://linear.app/wearehaux/issue/HAUX-25/initialize-the-react-and-typescript-workspace-architecture' },
+      { wave: 1, id: 'HAUX-27', title: 'Configure repository quality tooling and stable local commands', status: 'Done', blockers: ['HAUX-25'], url: 'https://linear.app/wearehaux/issue/HAUX-27/configure-repository-quality-tooling-and-stable-local-commands' },
+
+      { wave: 2, id: 'HAUX-24', title: 'Configure Tailwind CSS and the semantic styling entry point', status: 'Done', blockers: ['HAUX-25'], url: 'https://linear.app/wearehaux/issue/HAUX-24/configure-tailwind-css-and-the-semantic-styling-entry-point' },
+      { wave: 2, id: 'HAUX-23', title: 'Add repository agent instructions and contribution templates', status: 'Done', blockers: ['HAUX-27'], url: 'https://linear.app/wearehaux/issue/HAUX-23/add-repository-agent-instructions-and-contribution-templates' },
+      { wave: 2, id: 'HAUX-28', title: 'Define the Vercel production-only deployment policy', status: 'Done', blockers: ['HAUX-26'], url: 'https://linear.app/wearehaux/issue/HAUX-28/define-the-vercel-production-only-deployment-policy' },
+      { wave: 2, id: 'HAUX-29', title: 'Configure GitHub Actions validation and production branch protection', status: 'Done', blockers: ['HAUX-27'], url: 'https://linear.app/wearehaux/issue/HAUX-29/configure-github-actions-validation-and-production-branch-protection' },
+
+      { wave: 3, id: 'HAUX-30', title: 'Define the token taxonomy, naming, and source format', status: 'Done', blockers: ['HAUX-24'], url: 'https://linear.app/wearehaux/issue/HAUX-30/define-the-token-taxonomy-naming-and-source-format' },
+      { wave: 3, id: 'HAUX-31', title: 'Specify OKLCH scale generation, gamut handling, and contrast policy', status: 'Done', blockers: ['HAUX-24'], url: 'https://linear.app/wearehaux/issue/HAUX-31/specify-oklch-scale-generation-gamut-handling-and-contrast-policy' },
+      { wave: 3, id: 'HAUX-32', title: 'Implement the token source and CSS, JSON, and TypeScript exports', status: 'Done', blockers: ['HAUX-24', 'HAUX-30'], url: 'https://linear.app/wearehaux/issue/HAUX-32/implement-the-token-source-and-css-json-and-typescript-exports' },
+      { wave: 3, id: 'HAUX-33', title: 'Define light and dark semantic theme mappings', status: 'Done', blockers: ['HAUX-24', 'HAUX-30', 'HAUX-31'], url: 'https://linear.app/wearehaux/issue/HAUX-33/define-light-and-dark-semantic-theme-mappings' },
+      { wave: 3, id: 'HAUX-34', title: 'Define typography, spacing, radius, elevation, and motion foundations', status: 'Done', blockers: ['HAUX-24', 'HAUX-30'], url: 'https://linear.app/wearehaux/issue/HAUX-34/define-typography-spacing-radius-elevation-and-motion-foundations' },
+      { wave: 3, id: 'HAUX-65', title: 'Define the shadcn source-adoption and registry distribution workflow', status: 'Done', blockers: ['HAUX-24', 'HAUX-30'], url: 'https://linear.app/wearehaux/issue/HAUX-65/define-the-shadcn-source-adoption-and-registry-distribution-workflow' },
+      { wave: 3, id: 'HAUX-35', title: 'Implement theme application and switching', status: 'Done', blockers: ['HAUX-24', 'HAUX-32', 'HAUX-33'], url: 'https://linear.app/wearehaux/issue/HAUX-35/implement-theme-application-and-switching' },
+      { wave: 3, id: 'HAUX-36', title: 'Build the OKLCH color-scale visualizer and export tool', status: 'Done', blockers: ['HAUX-24', 'HAUX-30', 'HAUX-31', 'HAUX-32'], url: 'https://linear.app/wearehaux/issue/HAUX-36/build-the-oklch-color-scale-visualizer-and-export-tool' },
+      { wave: 3, id: 'HAUX-37', title: 'Add automated contrast, gamut, and token-drift validation', status: 'Done', blockers: ['HAUX-24', 'HAUX-31', 'HAUX-32', 'HAUX-33'], url: 'https://linear.app/wearehaux/issue/HAUX-37/add-automated-contrast-gamut-and-token-drift-validation' },
+
+      { wave: 4, id: 'HAUX-39', title: 'Set up Storybook as the component workbench', status: 'Done', blockers: ['HAUX-26', 'HAUX-27', 'HAUX-32', 'HAUX-35'], url: 'https://linear.app/wearehaux/issue/HAUX-39/set-up-storybook-as-the-component-workbench' },
+      { wave: 4, id: 'HAUX-38', title: 'Create the required Storybook story template and state matrix', status: 'Done', blockers: ['HAUX-39'], url: 'https://linear.app/wearehaux/issue/HAUX-38/create-the-required-storybook-story-template-and-state-matrix' },
+      { wave: 4, id: 'HAUX-40', title: 'Integrate Storybook interaction and automated accessibility tests', status: 'Done', blockers: ['HAUX-27', 'HAUX-39'], url: 'https://linear.app/wearehaux/issue/HAUX-40/integrate-storybook-interaction-and-automated-accessibility-tests' },
+      { wave: 4, id: 'HAUX-41', title: 'Create the manual component review checklist', status: 'Done', blockers: ['HAUX-38', 'HAUX-40'], url: 'https://linear.app/wearehaux/issue/HAUX-41/create-the-manual-component-review-checklist' },
+      { wave: 4, id: 'HAUX-42', title: 'Decide visual regression approach and retain Storybook build artifacts', status: 'Done', blockers: ['HAUX-29', 'HAUX-39'], url: 'https://linear.app/wearehaux/issue/HAUX-42/decide-visual-regression-approach-and-retain-storybook-build-artifacts' },
+
+      { wave: 5, id: 'HAUX-44', title: 'Finalize the v0.1 component inventory and API conventions', status: 'Done', blockers: ['HAUX-65', 'HAUX-33', 'HAUX-40', 'HAUX-38', 'HAUX-32', 'HAUX-34'], url: 'https://linear.app/wearehaux/issue/HAUX-44/finalize-the-v01-component-inventory-and-api-conventions' },
+      { wave: 5, id: 'HAUX-43', title: 'Build Button', status: 'Done', blockers: ['HAUX-35', 'HAUX-38', 'HAUX-40', 'HAUX-44'], url: 'https://linear.app/wearehaux/issue/HAUX-43/build-button' },
+      { wave: 5, id: 'HAUX-49', title: 'Build text-field primitives: Label, Input, Textarea, and Field Message', status: 'Done', blockers: ['HAUX-35', 'HAUX-38', 'HAUX-40', 'HAUX-44'], url: 'https://linear.app/wearehaux/issue/HAUX-49/build-text-field-primitives-label-input-textarea-and-field-message' },
+      { wave: 5, id: 'HAUX-48', title: 'Build selection controls: Checkbox, Radio Group, and Switch', status: 'Done', blockers: ['HAUX-35', 'HAUX-38', 'HAUX-40', 'HAUX-44'], url: 'https://linear.app/wearehaux/issue/HAUX-48/build-selection-controls-checkbox-radio-group-and-switch' },
+      { wave: 5, id: 'HAUX-50', title: 'Build Dialog', status: 'Done', blockers: ['HAUX-35', 'HAUX-38', 'HAUX-40', 'HAUX-44'], url: 'https://linear.app/wearehaux/issue/HAUX-50/build-dialog' },
+      { wave: 5, id: 'HAUX-68', title: 'Validate and freeze motion tokens with the first component slice', status: 'Done', blockers: ['HAUX-43', 'HAUX-49', 'HAUX-48', 'HAUX-50'], url: 'https://linear.app/wearehaux/issue/HAUX-68/validate-and-freeze-motion-tokens-with-the-first-component-slice' },
+      { wave: 5, id: 'HAUX-67', title: 'Create the Spartant component-building agent skill from validated core patterns', status: 'Done', blockers: ['HAUX-68'], url: 'https://linear.app/wearehaux/issue/HAUX-67/create-the-spartant-component-building-agent-skill-from-validated-core' },
+
+      { wave: 6, id: 'HAUX-45', title: 'Build Badge', status: 'Done', blockers: ['HAUX-35', 'HAUX-38', 'HAUX-40', 'HAUX-44'], url: 'https://linear.app/wearehaux/issue/HAUX-45/build-badge' },
+      { wave: 6, id: 'HAUX-46', title: 'Build Separator', status: 'Done', blockers: ['HAUX-35', 'HAUX-38', 'HAUX-40', 'HAUX-44'], url: 'https://linear.app/wearehaux/issue/HAUX-46/build-separator' },
+      { wave: 6, id: 'HAUX-47', title: 'Build Card', status: 'Done', blockers: ['HAUX-35', 'HAUX-38', 'HAUX-40', 'HAUX-44'], url: 'https://linear.app/wearehaux/issue/HAUX-47/build-card' },
+      { wave: 6, id: 'HAUX-51', title: 'Build Tabs', status: 'Done', blockers: ['HAUX-35', 'HAUX-38', 'HAUX-40', 'HAUX-44'], url: 'https://linear.app/wearehaux/issue/HAUX-51/build-tabs' },
+      { wave: 6, id: 'HAUX-52', title: 'Build Select', status: 'Done', blockers: ['HAUX-35', 'HAUX-38', 'HAUX-40', 'HAUX-44'], url: 'https://linear.app/wearehaux/issue/HAUX-52/build-select' },
+      { wave: 6, id: 'HAUX-53', title: 'Build Tooltip and Popover', status: 'Agent Done', blockers: ['HAUX-35', 'HAUX-38', 'HAUX-40', 'HAUX-44'], url: 'https://linear.app/wearehaux/issue/HAUX-53/build-tooltip-and-popover' },
+      { wave: 6, id: 'HAUX-69', title: 'Audit existing components against their shadcn equivalents', status: 'Agent Done', blockers: [], url: 'https://linear.app/wearehaux/issue/HAUX-69/audit-existing-components-against-their-shadcn-equivalents' },
+      { wave: 6, id: 'HAUX-70', title: 'Decide the dark-theme value of border.subtle, which currently equals surface.default', status: 'Backlog', blockers: [], url: 'https://linear.app/wearehaux/issue/HAUX-70/decide-the-dark-theme-value-of-bordersubtle-which-currently-equals' },
+
+      { wave: 7, id: 'HAUX-54', title: 'Initialize the Fumadocs documentation application', status: 'Done', blockers: ['HAUX-24', 'HAUX-25', 'HAUX-26'], url: 'https://linear.app/wearehaux/issue/HAUX-54/initialize-the-fumadocs-documentation-application' },
+      { wave: 7, id: 'HAUX-55', title: 'Publish foundation documentation', status: 'Done', blockers: ['HAUX-32', 'HAUX-33', 'HAUX-34', 'HAUX-35', 'HAUX-54'], url: 'https://linear.app/wearehaux/issue/HAUX-55/publish-foundation-documentation' },
+      { wave: 7, id: 'HAUX-56', title: 'Create the component documentation template and publish MVP pages', status: 'Ready to Start', blockers: ['HAUX-43', 'HAUX-45', 'HAUX-46', 'HAUX-47', 'HAUX-48', 'HAUX-49', 'HAUX-50', 'HAUX-51', 'HAUX-52', 'HAUX-53', 'HAUX-54'], url: 'https://linear.app/wearehaux/issue/HAUX-56/create-the-component-documentation-template-and-publish-mvp-pages' },
+      { wave: 7, id: 'HAUX-58', title: 'Add llms.txt and validate agent-readable documentation', status: 'Ready to Start', blockers: ['HAUX-55', 'HAUX-56'], url: 'https://linear.app/wearehaux/issue/HAUX-58/add-llmstxt-and-validate-agent-readable-documentation' },
+      { wave: 7, id: 'HAUX-57', title: 'Validate documentation navigation, search, accessibility, and production readiness', status: 'Ready to Start', blockers: ['HAUX-55', 'HAUX-56', 'HAUX-58'], url: 'https://linear.app/wearehaux/issue/HAUX-57/validate-documentation-navigation-search-accessibility-and-production' },
+
+      { wave: 8, id: 'HAUX-61', title: 'Define package metadata, public exports, and version policy', status: 'Done', blockers: ['HAUX-25', 'HAUX-26'], url: 'https://linear.app/wearehaux/issue/HAUX-61/define-package-metadata-public-exports-and-version-policy' },
+      { wave: 8, id: 'HAUX-62', title: 'Configure changelog and release preparation workflow', status: 'Done', blockers: ['HAUX-61'], url: 'https://linear.app/wearehaux/issue/HAUX-62/configure-changelog-and-release-preparation-workflow' },
+      { wave: 8, id: 'HAUX-59', title: 'Create the clean consumer installation and smoke-test project', status: 'Done', blockers: ['HAUX-43', 'HAUX-48', 'HAUX-49', 'HAUX-50', 'HAUX-51', 'HAUX-52', 'HAUX-53', 'HAUX-61'], url: 'https://linear.app/wearehaux/issue/HAUX-59/create-the-clean-consumer-installation-and-smoke-test-project' },
+      { wave: 8, id: 'HAUX-60', title: 'Configure npm registry trusted publishing with GitHub Actions', status: 'Agent Done', blockers: ['HAUX-29', 'HAUX-59', 'HAUX-62'], url: 'https://linear.app/wearehaux/issue/HAUX-60/configure-npm-registry-trusted-publishing-with-github-actions' },
+      { wave: 8, id: 'HAUX-64', title: 'Launch production Fumadocs on Vercel', status: 'Ready to Start', blockers: ['HAUX-28', 'HAUX-57', 'HAUX-58'], url: 'https://linear.app/wearehaux/issue/HAUX-64/launch-production-fumadocs-on-vercel' },
+      { wave: 8, id: 'HAUX-63', title: 'Publish and verify Spartant v0.1', status: 'Ready to Start', blockers: ['HAUX-56', 'HAUX-57', 'HAUX-59', 'HAUX-60', 'HAUX-64'], url: 'https://linear.app/wearehaux/issue/HAUX-63/publish-and-verify-spartant-v01' },
+
+      { wave: 9, id: 'HAUX-66', title: 'Evaluate StyleX after v0.1 using a contained experiment', status: 'Backlog', blockers: ['HAUX-63'], url: 'https://linear.app/wearehaux/issue/HAUX-66/evaluate-stylex-after-v01-using-a-contained-experiment' }
+    ];
+
+    const waveInfo = {
+      1: ['Review gates', 'Your review comes first. Complete these in order before new agent work begins.'],
+      2: ['Delivery foundation', 'These tasks can run in parallel after their individual review gates are Done.'],
+      3: ['Tokens and theming', 'Define the system language before building the component workbench.'],
+      4: ['Storybook and quality', 'Create the isolated review and testing environment for components.'],
+      5: ['Core component slice', 'Prove the system with four core families, freeze motion, then create the component skill.'],
+      6: ['Remaining components', 'Use the validated patterns and repository skill to complete the MVP set.'],
+      7: ['Fumadocs and agent access', 'Publish foundations, component guidance, and machine-readable documentation.'],
+      8: ['Package and release', 'Validate a clean consumer, configure secure publishing, and release v0.1.'],
+      9: ['After v0.1', 'Keep experiments outside the first release boundary.']
+    };
+
+    const taskById = Object.fromEntries(tasks.map(task => [task.id, task]));
+    const checked = new Set(JSON.parse(localStorage.getItem('spartant-task-checks') || '[]'));
+    const wavesRoot = document.querySelector('#waves');
+    const search = document.querySelector('#search');
+    const statusFilter = document.querySelector('#statusFilter');
+    const empty = document.querySelector('#empty');
+
+    function statusClass(status) {
+      return status.toLowerCase().replaceAll(' ', '-');
+    }
+
+    function blockerLinks(blockers) {
+      if (!blockers.length) return 'No blockers';
+      return `Blocked by ${blockers.map(id => `<a href="${taskById[id]?.url || '#'}" target="_blank" rel="noreferrer">${id}</a>`).join(', ')}`;
+    }
+
+    function buildPrompt(task) {
+      return `Start implementing Linear issue ${task.id}: ${task.title}.
+
+Read AGENTS.md, README.md when present, the complete Linear issue, and every attached document before making changes.
+
+Confirm the issue is Ready to Start and every blocker is Done. Move the Linear issue to In Progress before editing. Follow only the approved scope and run every required automated and manual verification.
+
+When implementation and agent-run verification are complete:
+
+1. Post the required completion report on the Linear issue, including changes, checks, results, manual verification, risks, and follow-ups.
+2. If no action from Iroshan is required, move the Linear issue directly to Done.
+3. Use Agent Done only when Iroshan must make a decision, provide credentials or permissions, perform an account action, or complete a manual verification that you cannot perform. In that case, add the Human input required label and state the exact request in the completion comment.
+4. Update /Users/iroshandezilva/dev/spartan/spartant-task-order.html so the task entry for ${task.id} matches the resulting Linear status. Keep its ID, title, link, and blockers synchronized with Linear. Update the dashboard summary counts and snapshot date when they change.
+5. When this issue reaches Done, inspect every downstream issue it blocked. Move each downstream issue to Ready to Start when all its blockers are Done and its Definition of Ready is satisfied. Move it to Ready for Planning when a specification or decision is still missing. Update the HTML dashboard with every verified transition.
+6. Do not change any unrelated task status unless you verified that status directly in Linear.
+7. Validate the HTML file and its inline JavaScript after updating it.
+
+Linear remains the source of truth. The HTML dashboard is a synchronized working view.`;
+    }
+
+    function buildWavePrompt(waveNumber, waveTasks) {
+      const taskList = waveTasks.map(task => `- ${task.id}: ${task.title}`).join('\n');
+
+      return `Start executing Spartant Wave ${String(waveNumber).padStart(2, '0')}: ${waveInfo[waveNumber][0]}.
+
+Tasks in this wave:
+${taskList}
+
+Read AGENTS.md, README.md when present, every listed Linear issue, and all attached documents before making changes. Linear is the source of truth. Refresh each issue's current status and blocker relationships before starting.
+
+Execute the wave using these rules:
+
+1. Skip issues already marked Done.
+2. Work in dependency order. Start an issue only when it is Ready to Start and all blockers are Done. Move it to In Progress immediately before changing files or project documents.
+3. If an issue is still in Backlog but all blockers are Done and its Definition of Ready is satisfied, move it to Ready to Start and continue. If planning or a specification is missing, move it to Ready for Planning and record the exact gap.
+4. Keep every issue independently scoped. Complete its implementation, documentation, required automated checks, manual verification, and Linear completion report before closing that issue.
+5. Use pnpm for all repository installation, scripts, builds, tests, and packing. Preserve unrelated work and follow the approved architecture.
+6. If dual work is truly independent, you may parallelize investigation or verification, but do not let multiple tasks make conflicting edits to shared files.
+7. If no action from Iroshan is required, move the completed issue directly to Done.
+8. Use Agent Done only when Iroshan must make a decision, provide credentials or permissions, perform an account action, or complete a manual verification that you cannot perform. Add the Human input required label and state the exact request. Continue with any other independent issue in the wave. Stop the wave only when no eligible work remains.
+9. Whenever an issue reaches Done, inspect all downstream issues. Move each to Ready to Start when all blockers are Done and its Definition of Ready is satisfied. Move it to Ready for Planning when a required decision or specification is missing.
+10. After every status change, update /Users/iroshandezilva/dev/spartan/spartant-task-order.html so its task data, summary counts, blockers, and snapshot date remain synchronized with Linear. Validate the HTML and inline JavaScript.
+11. At the end, report issues completed, issues still active, newly unblocked issues, human input required, verification results, and any follow-up risks.
+
+Do not treat the wave as one combined issue. Each Linear task keeps its own status, evidence, scope, and completion report.`;
+    }
+
+    async function copyText(text) {
+      if (navigator.clipboard && window.isSecureContext) {
+        await navigator.clipboard.writeText(text);
+        return;
+      }
+
+      const textarea = document.createElement('textarea');
+      textarea.value = text;
+      textarea.setAttribute('readonly', '');
+      textarea.style.position = 'fixed';
+      textarea.style.opacity = '0';
+      document.body.appendChild(textarea);
+      textarea.select();
+      document.execCommand('copy');
+      textarea.remove();
+    }
+
+    function render() {
+      const query = search.value.trim().toLowerCase();
+      const selectedStatus = statusFilter.value;
+      let visibleCount = 0;
+      let sequence = 0;
+      wavesRoot.innerHTML = '';
+
+      for (const waveNumber of Object.keys(waveInfo).map(Number)) {
+        const waveTasks = tasks.filter(task => task.wave === waveNumber);
+        const section = document.createElement('section');
+        section.className = 'wave';
+        section.innerHTML = `
+          <div class="wave-meta">
+            <div class="wave-number">Wave ${String(waveNumber).padStart(2, '0')}</div>
+            <h2>${waveInfo[waveNumber][0]}</h2>
+            <p>${waveInfo[waveNumber][1]}</p>
+            <button class="copy-wave" type="button" aria-label="Copy execution prompt for wave ${waveNumber}">Copy wave prompt</button>
+          </div>
+          <div class="task-list"></div>`;
+
+        const list = section.querySelector('.task-list');
+        let waveVisible = 0;
+
+        section.querySelector('.copy-wave').addEventListener('click', async event => {
+          const button = event.currentTarget;
+          const originalLabel = button.textContent;
+
+          try {
+            await copyText(buildWavePrompt(waveNumber, waveTasks));
+            button.textContent = 'Wave prompt copied';
+            button.classList.add('is-copied');
+          } catch {
+            button.textContent = 'Copy failed';
+          }
+
+          window.setTimeout(() => {
+            button.textContent = originalLabel;
+            button.classList.remove('is-copied');
+          }, 1800);
+        });
+
+        for (const task of waveTasks) {
+          sequence += 1;
+          const matchesSearch = `${task.id} ${task.title}`.toLowerCase().includes(query);
+          const matchesStatus = selectedStatus === 'all' || task.status === selectedStatus;
+          const isVisible = matchesSearch && matchesStatus;
+          const article = document.createElement('article');
+          article.className = `task${isVisible ? '' : ' is-hidden'}${checked.has(task.id) ? ' is-checked' : ''}`;
+          article.dataset.status = task.status;
+          article.innerHTML = `
+            <input class="check" type="checkbox" aria-label="Mark ${task.id} complete in this view" ${checked.has(task.id) ? 'checked' : ''} />
+            <div>
+              <div class="task-top">
+                <span class="sequence">${String(sequence).padStart(2, '0')}</span>
+                <a class="issue-id" href="${task.url}" target="_blank" rel="noreferrer">${task.id} ↗</a>
+              </div>
+              <h3>${task.title}</h3>
+              <div class="blockers">${blockerLinks(task.blockers)}</div>
+            </div>
+            <div class="task-actions">
+              <span class="status ${statusClass(task.status)}">${task.status}</span>
+              <button class="copy-prompt" type="button" aria-label="Copy implementation prompt for ${task.id}">Copy prompt</button>
+            </div>`;
+
+          article.querySelector('.check').addEventListener('change', event => {
+            if (event.currentTarget.checked) checked.add(task.id);
+            else checked.delete(task.id);
+            localStorage.setItem('spartant-task-checks', JSON.stringify([...checked]));
+            article.classList.toggle('is-checked', event.currentTarget.checked);
+          });
+
+          article.querySelector('.copy-prompt').addEventListener('click', async event => {
+            const button = event.currentTarget;
+            const originalLabel = button.textContent;
+
+            try {
+              await copyText(buildPrompt(task));
+              button.textContent = 'Copied';
+              button.classList.add('is-copied');
+            } catch {
+              button.textContent = 'Copy failed';
+            }
+
+            window.setTimeout(() => {
+              button.textContent = originalLabel;
+              button.classList.remove('is-copied');
+            }, 1800);
+          });
+
+          list.appendChild(article);
+          if (isVisible) {
+            visibleCount += 1;
+            waveVisible += 1;
+          }
+        }
+
+        if (waveVisible) wavesRoot.appendChild(section);
+      }
+
+      empty.style.display = visibleCount ? 'none' : 'block';
+    }
+
+    search.addEventListener('input', render);
+    statusFilter.addEventListener('change', render);
+    render();
+  </script>
+</body>
+</html>

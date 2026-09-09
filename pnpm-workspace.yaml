@@ -1,0 +1,65 @@
+# Spartant workspace definition.
+#
+# pnpm is the required package manager for this repository. See AGENTS.md and
+# the architecture document. Do not create package-lock.json or use npm for
+# normal workspace commands.
+packages:
+  - packages/*
+  - apps/*
+  - examples/*
+
+# Single source for shared dependency versions across every workspace.
+# Workspaces reference these with "catalog:" so versions cannot drift.
+catalog:
+  react: ^19.2.8
+  react-dom: ^19.2.8
+  "@types/react": ^19.2.18
+  "@types/react-dom": ^19.2.7
+  typescript: ^7.0.2
+  "@biomejs/biome": ^2.5.12
+  vitest: ^5.0.0
+  tailwindcss: ^4.3.3
+  "@tailwindcss/cli": ^4.3.3
+  "@tailwindcss/vite": ^4.3.3
+  clsx: ^2.1.1
+  tailwind-merge: ^3.6.0
+  vite: ^8.2.2
+  "@vitejs/plugin-react": ^6.1.1
+  ajv: ^8.20.0
+  "@types/node": ^26.5.0
+  happy-dom: ^20.14.0
+  storybook: ^10.6.0
+  "@storybook/react-vite": ^10.6.0
+  "@storybook/addon-themes": ^10.6.0
+  "@storybook/addon-a11y": ^10.6.0
+  "@storybook/react": ^10.6.0
+  axe-core: ^4.13.0
+  next: ^16.3.4
+  fumadocs-core: ^16.15.8
+  fumadocs-mdx: ^15.4.0
+  fumadocs-ui: ^16.15.8
+  "@types/mdx": ^2.0.14
+  "@tailwindcss/postcss": ^4.3.3
+  postcss: ^8.5.28
+
+# Dependencies allowed to run install scripts.
+#
+# pnpm blocks postinstall scripts by default, which is the behavior we want.
+# Each entry is an explicit, reviewed exception rather than a blanket allowance.
+# @parcel/watcher is a native file watcher pulled in by the Tailwind CLI and
+# needs its build step for watch mode.
+allowBuilds:
+  "@parcel/watcher": true
+  # esbuild ships prebuilt binaries and its install script selects the one
+  # for this platform. Storybook depends on it through Vite.
+  esbuild: true
+
+# Supply-chain policy exceptions.
+#
+# pnpm refuses lockfile entries published inside the minimum release age
+# window. fumadocs-ui depends on lucide-react by range, so a fresh publish of
+# that transitive dependency lands in the lockfile before the window closes.
+# The entry is a dated exception, not a standing allowance: remove it once the
+# lockfile resolves a version that is old enough on its own.
+minimumReleaseAgeExclude:
+  - lucide-react@1.43.0

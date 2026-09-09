@@ -1,0 +1,236 @@
+---
+title: Motion
+description: Purpose, duration, easing, distance, scale, the implementation hierarchy, input modality, interruption, reduced motion, and performance, with a live demo of both motion modes.
+keywords:
+  - motion
+  - animation
+  - transition
+  - duration
+  - easing
+  - cubic-bezier
+  - spring
+  - reduced motion
+  - prefers-reduced-motion
+  - press feedback
+  - scale
+  - distance
+  - keyboard
+  - interruption
+  - performance
+  - transform
+  - opacity
+  - Motion for React
+  - GSAP
+  - Web Animations API
+  - duration-press
+  - ease-state
+---
+
+Micro-interactions are part of a component's contract from the first
+component, not a finishing pass. Every component makes an explicit motion
+decision: interactive components implement purposeful feedback, and static
+components stay still unless motion communicates a real state change.
+
+## Purpose
+
+Motion is allowed when it explains **location**, **continuity**, **state**,
+**feedback**, or softens a **potentially jarring change**. It is not allowed as
+decoration on a frequently used product control, because a user meets that
+control hundreds of times and decoration becomes delay.
+
+Before implementing any interactive state, answer in order:
+
+1. Does the motion explain location, continuity, state, feedback, or a jarring
+   change?
+2. How often will the user encounter it?
+3. Was the action initiated by pointer, touch, keyboard, programmatic state,
+   or system state?
+4. Can it be interrupted or reversed?
+5. What happens under reduced motion?
+6. Can CSS express it without runtime code?
+7. Which story and test will prove it?
+
+## Live demo
+
+Both panels are the same code. The right panel sets the same custom
+properties the package's `prefers-reduced-motion` rule sets, on its own
+subtree. In both panels every readout and every `aria-*` attribute flips in
+the click handler, so nothing waits for a transition to finish. Use the
+keyboard as well: Tab to a control and press Space or Enter, and the state
+changes on the keypress.
+
+<MotionDemo />
+
+## Duration
+
+<MotionTable prefix="duration" />
+
+Product UI motion stays **at or below 300ms**, asserted by test, unless a
+deliberate hold, progress, or explanatory sequence needs more. **Exit is faster
+than entry** by roughly 20 percent, also asserted: entering is informative and
+worth watching; leaving is in the way. `duration.indicator-loop` is a duration
+role rather than a raw keyframe time so the reduced-motion collapse can stop a
+spinner without the component branching on the preference.
+
+Utilities: `duration-press`, `duration-state`, `duration-overlay-enter`,
+`duration-overlay-exit`, `duration-modal-enter`, `duration-modal-exit`.
+
+## Easing
+
+<EasingCurves />
+
+<MotionTable prefix="easing" />
+
+**No `ease-in` for product UI**, asserted by test. An ease-in start feels
+unresponsive because the first frames barely move. `enter` and `exit` share
+the same strong ease-out; `move` is an in-out for travel between two visible
+positions; `state` is a gentle standard curve for colour; `progress` is linear
+and reserved for time and constant progress. Never `transition: all`; name the
+properties.
+
+Utilities: `ease-enter`, `ease-exit`, `ease-move`, `ease-state`, `ease-progress`.
+
+## Distance and scale
+
+<MotionTable prefix="distance" />
+<MotionTable prefix="scale" />
+
+**Never enter from `scale(0)`**, asserted by test: no scale role enters below
+0.9. Growing from nothing reads as a special effect rather than as a surface
+appearing. Popovers and tooltips transform from their trigger origin; dialogs
+transform from the centre.
+
+There are no utilities for distance or scale; use the custom property, as in
+`active:scale-[var(--spartant-scale-press)]`.
+
+## Springs
+
+<SpringTable />
+
+Springs are typed values exported as `springs`, not custom properties, because
+CSS has no spring primitive and a spring in a stylesheet would be a string
+nothing reads. `state` sits at or beyond critical damping so immediate state
+does not wobble; `gesture` sits below it deliberately, because the overshoot is
+what reads as physicality after a drag. Both are asserted against their damping
+ratio by test. They are values waiting for a consumer, not a dependency:
+adopting Motion for React still needs its own justification issue.
+
+## Implementation hierarchy
+
+Use the smallest tool that satisfies the interaction:
+
+1. **CSS transitions and animations.** The default. Hover, press, focus,
+   colour, opacity, simple enter and exit. Every released component uses only
+   this.
+2. **Web Animations API.** Small imperative sequences that need playback
+   control, without a library.
+3. **Motion for React.** Interruptible state transitions, gestures, drag,
+   springs, coordinated layout, shared-layout effects. If adopted, import from
+   `motion/react` and keep it out of components that do not need it.
+4. **GSAP.** Complex multi-step timelines, advanced SVG, scroll choreography,
+   presentation experiences. Never a default dependency of the core package.
+
+Adding any animation dependency requires an issue covering behaviour, bundle
+impact, cleanup, server rendering, reduced motion, testing, and the consumer
+contract. Motion and GSAP are never both added for overlapping uses.
+
+## Input modality
+
+| Input | Behaviour |
+| --- | --- |
+| Pointer, touch | Press feedback at `scale.press` over `duration.press-feedback` |
+| Keyboard | **Immediate.** Focus and state styling only, no spatial motion |
+| Programmatic | Treated as entry motion |
+| Hover | Only inside `@media (hover: hover) and (pointer: fine)` |
+
+Keyboard activation never waits for animation. A keyboard user is usually
+moving faster than the animation, and making them wait is the clearest way to
+make an interface feel slow. Core behaviour never depends on hover or on an
+animation completing.
+
+## Interruption and rapid repeat
+
+Use **transitions rather than keyframes** for anything reversible, so a new
+state retargets the motion in flight instead of queueing behind it. A control
+clicked twice quickly must land in the right state, not play two animations.
+The state toggle in the demo above is the test: click it fast and the colour
+reverses mid-transition while the readout is already correct.
+
+Timers pause while the page is hidden. Looping animation pauses off-screen.
+**Theme changes do not animate**: transitioning every colour on a theme switch
+produces a slow wash across the entire page.
+
+## Reduced motion
+
+Under `prefers-reduced-motion: reduce`, every motion token collapses in **one
+place**, in the package stylesheet: durations to `duration.reduced`, scales to
+`scale.reduced`, distances to `0px`.
+
+```css
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --spartant-duration-press-feedback: var(--spartant-duration-reduced);
+    --spartant-scale-press: var(--spartant-scale-reduced);
+    --spartant-distance-overlay: 0px;
+    /* and every other duration, scale, and distance role */
+  }
+}
+```
+
+This is deliberately global rather than per component. A per-component branch
+is a thing a component can forget; overriding the tokens means any component
+that uses them is covered whether or not its author thought about it, and a
+component that reached for a raw value instead is visibly not covered.
+
+Colour and opacity transitions are left alone. A short non-spatial transition
+clarifies state without moving anything, which the standard allows when it
+does not delay interaction and completes within 100ms. Spatial movement,
+scaling, parallax, spring behaviour, drag momentum, and autoplay are all
+removed. A loading spinner stops turning; `aria-busy` still carries the state.
+
+## Performance
+
+- Prefer `transform` and `opacity`. Do not animate layout properties in core
+  components without a documented reason and a measurement.
+- Motion must not introduce layout shift. A button that starts loading keeps
+  its width.
+- Keep frame-by-frame pointer updates outside React render state where
+  practical.
+- Scope and clean up programmatic animations on unmount.
+- Measure before adding `will-change`; never leave it broadly applied.
+- A dependency used by one complex component must not become runtime work for
+  every component.
+
+## What each released component does
+
+| Component | Motion | Rationale |
+| --- | --- | --- |
+| Button | Pointer and touch press at `scale.press`; loading spinner on `duration.indicator-loop` | Feedback. Keyboard path has no spatial motion |
+| Input, Textarea | Focus, validation, and error colour at `duration.state-change`; no scale | State, with no layout shift |
+| Checkbox, Radio | Indicator transition at `duration.state-change` | State. Immediate under reduced motion |
+| Switch | Thumb travel at `duration.state-change` with `easing.move` | Continuity between two positions |
+| Dialog | Centred entry at `duration.modal-enter`, `easing.enter`, `scale.overlay-enter`, with a coordinated backdrop. Closes instantly | Softens a jarring change. Focus restoration never waits for motion |
+| Badge, Label, Separator, FieldMessage | None | Static content. An error message is announced, not animated |
+
+## Which values are frozen
+
+The first component slice validated the scale against Button, the text-field
+primitives, the selection controls, and Dialog, and **not one value changed**.
+Every role a component exercised is frozen and pinned by test; each table
+above says which. Nine roles have no consumer yet and remain provisional,
+because a value nothing has exercised has not been validated by anything.
+
+## Known gaps
+
+- `duration.overlay-exit`, `duration.modal-exit`, and `easing.exit` have never
+  been observed on a component. Dialog closes the instant its state goes false
+  because that is what restores focus, so nothing consumes an exit token. The
+  demo above animates an overlay's exit only because that overlay is non-modal
+  and holds no focus.
+- The distance roles are unused: no released component moves anything
+  spatially. The overlay in the demo is the only thing on this site that does.
+- `springs` are exported and consumed by nothing. Whether to keep them pending
+  a gesture-driven component or remove them is an open decision.
+- The Web Animations API, Motion for React, and GSAP tiers are documented but
+  none is in use, so their criteria have not been tested against a real
+  component.

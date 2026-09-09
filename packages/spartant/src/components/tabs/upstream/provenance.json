@@ -1,0 +1,14 @@
+{
+  "$comment": "Provenance for the adopted shadcn Tabs source. tabs.tsx.txt is the upstream text exactly as fetched, kept so the adaptation in ../Tabs.tsx can be diffed against its origin. Never import it; it is evidence, not code. Same shape as ../../../experiments/shadcn/upstream/provenance.json so scripts/check-upstream.mjs can read it once it globs component directories.",
+  "entries": {
+    "tabs": {
+      "source": "https://ui.shadcn.com/r/styles/new-york/tabs.json",
+      "style": "new-york",
+      "fetchedOn": "2026-09-09",
+      "upstreamPath": "ui/tabs.tsx",
+      "declaredDependencies": ["@radix-ui/react-tabs"],
+      "sha256": "d41aded0394298102614635e15d709369c6bdae8fe79b918b8341ef39407ee03",
+      "decision": "Adapted, not adopted as-is. @radix-ui/react-tabs dropped: AGENTS.md forbids a primitive library without a decision issue, and role=tablist, role=tab with aria-selected and aria-controls, role=tabpanel with aria-labelledby, and a roving tabindex are all owned source on native button elements. The selected pill visual was replaced by a primary underline indicator because the pill measured 1.16:1 (light) and 1.15:1 (dark) against its track in Spartant tokens and so could not carry the selected state."
+    }
+  }
+}

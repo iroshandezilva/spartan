@@ -1,0 +1,28 @@
+{
+  "$schema": "../schema/spartant-tokens.schema.json",
+  "$description": "COMPONENT tokens for the selection controls. The box and thumb sizes are here rather than in the spacing scale for the same reason button heights are: they are the size of a control, not a rhythm, and a spacing change must not resize a checkbox.",
+  "selection": {
+    "box": {
+      "$type": "dimension",
+      "default": {
+        "$value": "1.25rem",
+        "$description": "20px. The visible checkbox and radio. The 44px target is restored as a hit area on coarse pointers rather than by growing the box."
+      }
+    },
+    "switch": {
+      "$type": "dimension",
+      "width": {
+        "$value": "2.5rem",
+        "$description": "40px track."
+      },
+      "height": {
+        "$value": "1.5rem",
+        "$description": "24px track. Taller than a checkbox because the thumb has to sit inside it."
+      },
+      "thumb": {
+        "$value": "1.125rem",
+        "$description": "18px thumb, leaving 3px of track on every side."
+      }
+    }
+  }
+}

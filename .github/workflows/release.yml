@@ -1,0 +1,250 @@
+name: Release
+
+# Publishes @iroshandezilva/spartant to the npm registry through GitHub Actions
+# OIDC trusted publishing. No long-lived registry token exists anywhere in this
+# repository or its secrets, and none may be added. See .github/RELEASE.md for
+# the registry settings, the environment protection, and the runbook.
+#
+# Two triggers, both bound to the production branch:
+#
+#   - A tag `v<version>` pushed to a commit that is on `main`. This is the
+#     release path. The tag must equal `v` plus the package manifest version.
+#   - `workflow_dispatch` on `main`, which is always a rehearsal: it runs every
+#     gate and then `npm publish --dry-run`, so nothing reaches the registry.
+#
+# pnpm does every step except the last. The npm CLI appears once, for the
+# publish command that the registry's OIDC flow requires.
+on:
+  push:
+    tags: ["v*"]
+  workflow_dispatch:
+
+# Least privilege. `id-token: write` is what lets the job mint the OIDC token
+# that the registry exchanges for a short-lived publish credential. Nothing
+# here needs to write to the repository.
+permissions:
+  contents: read
+  id-token: write
+
+# Two releases must never interleave. Not cancelled, so a run that has
+# already been approved finishes before the next one starts.
+concurrency:
+  group: release
+  cancel-in-progress: false
+
+jobs:
+  release:
+    name: release
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    # The protected environment. Its required reviewer is the human approval
+    # gate for every publish, and the trusted publisher on npmjs.com names this
+    # environment, so a job outside it cannot obtain a publish credential.
+    environment:
+      name: npm-release
+      url: https://www.npmjs.com/package/@iroshandezilva/spartant
+
+    # A manual run from any branch other than main is refused before it starts.
+    if: github.event_name == 'push' || github.ref == 'refs/heads/main'
+
+    env:
+      DRY_RUN: ${{ github.event_name == 'workflow_dispatch' }}
+
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@v5
+        with:
+          # The whole history, so `origin/main` exists for the ancestry check
+          # and for `pnpm release:check --base=origin/main`.
+          fetch-depth: 0
+
+      # A tag is only a name. This proves the tagged commit is on the
+      # production branch, so a tag pushed from an unmerged branch cannot
+      # publish.
+      - name: Confirm the commit is on main
+        run: |
+          git fetch --no-tags origin main:refs/remotes/origin/main
+          if ! git merge-base --is-ancestor "$GITHUB_SHA" refs/remotes/origin/main; then
+            echo "::error::$GITHUB_SHA is not on main. Releases are cut from the production branch only."
+            exit 1
+          fi
+          echo "Commit $GITHUB_SHA is on main."
+
+      # Same setup as validate.yml, minus the dependency cache. A release build
+      # resolves everything from the lockfile and nothing from a cache.
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v5
+        with:
+          node-version-file: .node-version
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      # The version, the tag, and the release notes must agree before anything
+      # is built. The tag must be `v` plus the manifest version, and no release
+      # note may still be pending: `pnpm release:prepare` consumes them, so a
+      # leftover means a change was merged after the release was prepared.
+      - name: Confirm the version, tag, and pending notes
+        run: |
+          VERSION="$(node -p "require('./packages/spartant/package.json').version")"
+          echo "PACKAGE_VERSION=$VERSION" >> "$GITHUB_ENV"
+          echo "Package version: $VERSION"
+          if [ "$GITHUB_EVENT_NAME" = "push" ]; then
+            if [ "$GITHUB_REF_NAME" != "v$VERSION" ]; then
+              echo "::error::Tag $GITHUB_REF_NAME does not match package version $VERSION. Expected v$VERSION."
+              exit 1
+            fi
+            echo "Tag $GITHUB_REF_NAME matches."
+          else
+            echo "Rehearsal run. No tag is required."
+          fi
+          PENDING="$(find .changes -maxdepth 1 -name '*.md' ! -name README.md | sort)"
+          if [ -n "$PENDING" ]; then
+            echo "::error::Release notes are still pending. Run pnpm release:prepare and merge the release pull request first."
+            echo "$PENDING"
+            exit 1
+          fi
+          echo "No release note is pending."
+
+      # The full gate, exactly as pull requests run it.
+      - name: Validate
+        run: pnpm validate
+
+      # The changelog and documentation version references must match the
+      # manifest. --strict also fails, rather than warns, if the Git-based
+      # missing-note check cannot run.
+      - name: Release notes and version references
+        run: pnpm release:check --strict --base=origin/main
+
+      # Packs the built package and installs the tarball in a throwaway pnpm
+      # project outside the workspace. This is the consumer's view of the
+      # release, with no workspace alias.
+      - name: Consumer smoke test
+        run: pnpm smoke:package
+
+      # Packs again and fails if the tarball contains anything that should not
+      # ship, or if the packed manifest drifts from the metadata contract.
+      - name: Inspect package contents
+        run: pnpm inspect:package
+
+      # Trusted publishing needs npm 11.5.1 or later. The Node version in
+      # .node-version bundles a sufficient npm, and this step proves it rather
+      # than upgrading npm, which would be a second npm command.
+      - name: Confirm the bundled npm supports trusted publishing
+        run: |
+          NPM_VERSION="$(npm --version)"
+          node -e '
+            const [have, need] = [process.argv[1], "11.5.1"].map((v) => v.split(".").map(Number));
+            for (let i = 0; i < 3; i += 1) {
+              if (have[i] > need[i]) process.exit(0);
+              if (have[i] < need[i]) {
+                console.error(`::error::npm ${process.argv[1]} is older than 11.5.1, which trusted publishing requires. Raise .node-version.`);
+                process.exit(1);
+              }
+            }
+          ' "$NPM_VERSION"
+          echo "npm $NPM_VERSION"
+
+      # The only npm command in the repository. There is deliberately no
+      # NODE_AUTH_TOKEN, no NPM_TOKEN, and no registry-url on setup-node: any
+      # of those would write a token placeholder into .npmrc, which pnpm
+      # rejects and which would shadow the OIDC exchange. The step refuses to
+      # run if a token line exists anywhere it could be read from.
+      #
+      # A prerelease version publishes under the `next` dist-tag so a rehearsal
+      # never becomes `latest`.
+      - name: Publish to the npm registry
+        working-directory: packages/spartant
+        run: |
+          unset NODE_AUTH_TOKEN NPM_TOKEN NPM_CONFIG_TOKEN NPM_CONFIG__AUTHTOKEN
+          for file in "$HOME/.npmrc" "$GITHUB_WORKSPACE/.npmrc" .npmrc; do
+            if [ -f "$file" ] && grep -q "_authToken" "$file"; then
+              echo "::error::$file contains an _authToken line. Trusted publishing must not use a stored token."
+              exit 1
+            fi
+          done
+          if [ -z "${ACTIONS_ID_TOKEN_REQUEST_URL:-}" ]; then
+            echo "::error::No OIDC token endpoint is available. Check the id-token: write permission on this workflow."
+            exit 1
+          fi
+          set -- --provenance --access public
+          case "$PACKAGE_VERSION" in
+            *-*) set -- "$@" --tag next ;;
+          esac
+          if [ "$DRY_RUN" = "true" ]; then
+            set -- "$@" --dry-run
+            echo "Rehearsal: npm publish $*"
+          else
+            echo "Publishing $PACKAGE_VERSION: npm publish $*"
+          fi
+          npm publish "$@"
+
+      - name: Write the run summary
+        if: success()
+        run: |
+          {
+            echo "## Release $PACKAGE_VERSION"
+            echo
+            if [ "$DRY_RUN" = "true" ]; then
+              echo "Rehearsal only. Nothing was published."
+            else
+              echo "Published \`@iroshandezilva/spartant@$PACKAGE_VERSION\` from \`$GITHUB_REF_NAME\` at \`$GITHUB_SHA\`."
+              echo
+              echo "- https://www.npmjs.com/package/@iroshandezilva/spartant/v/$PACKAGE_VERSION"
+              echo "- Verify the version, the provenance badge, the install command, and the repository link. See .github/RELEASE.md."
+            fi
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      # Diagnostics for a failed run. Every value printed here is public: the
+      # ref, the commit, tool versions, whether the OIDC endpoint existed, and
+      # the npm debug log with any bearer or token value redacted before it is
+      # written. No secret exists in this job to leak, and this step is written
+      # so that would stay true even if one were added by mistake.
+      - name: Collect failure diagnostics
+        if: failure()
+        run: |
+          {
+            echo "event:            $GITHUB_EVENT_NAME"
+            echo "ref:              $GITHUB_REF"
+            echo "sha:              $GITHUB_SHA"
+            echo "package version:  ${PACKAGE_VERSION:-unknown}"
+            echo "dry run:          $DRY_RUN"
+            echo "node:             $(node --version)"
+            echo "pnpm:             $(pnpm --version)"
+            echo "npm:              $(npm --version)"
+            echo "oidc endpoint:    $([ -n "${ACTIONS_ID_TOKEN_REQUEST_URL:-}" ] && echo present || echo absent)"
+            echo "token env vars:   $(env | grep -c -E '^(NODE_AUTH_TOKEN|NPM_TOKEN|NPM_CONFIG_TOKEN)=' || true) set (must be 0)"
+          } | tee diagnostics.txt
+          mkdir -p npm-logs
+          if [ -d "$HOME/.npm/_logs" ]; then
+            for log in "$HOME"/.npm/_logs/*.log; do
+              [ -f "$log" ] || continue
+              sed -E \
+                -e 's/(Bearer )[A-Za-z0-9._~+/=-]+/\1[redacted]/g' \
+                -e 's/(_authToken=|_auth=|"token":")[^ "]+/\1[redacted]/g' \
+                -e 's/npm_[A-Za-z0-9]{36}/[redacted]/g' \
+                "$log" > "npm-logs/$(basename "$log")"
+            done
+            echo
+            echo "Last 60 lines of the newest npm log, redacted:"
+            NEWEST="$(ls -t npm-logs/*.log 2>/dev/null | head -n 1)"
+            [ -n "$NEWEST" ] && tail -n 60 "$NEWEST"
+          else
+            echo "No npm log directory. The failure happened before npm ran."
+          fi
+
+      - name: Upload failure diagnostics
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: release-diagnostics-${{ github.run_id }}
+          path: |
+            diagnostics.txt
+            npm-logs
+            .artifacts/*.tgz
+          if-no-files-found: ignore
+          retention-days: 14

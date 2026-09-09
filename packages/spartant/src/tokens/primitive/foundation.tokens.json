@@ -1,0 +1,291 @@
+{
+  "$schema": "../schema/spartant-tokens.schema.json",
+  "$description": "PRIMITIVE non-colour scales. Constrained on purpose: a scale with an option for every situation stops being a decision and becomes a menu. Motion values are provisional until HAUX-68 freezes them against real components.",
+  "space": {
+    "$type": "dimension",
+    "0": {
+      "$value": "0rem"
+    },
+    "px": {
+      "$value": "0.0625rem"
+    },
+    "1": {
+      "$value": "0.25rem"
+    },
+    "2": {
+      "$value": "0.5rem"
+    },
+    "3": {
+      "$value": "0.75rem"
+    },
+    "4": {
+      "$value": "1rem"
+    },
+    "5": {
+      "$value": "1.25rem"
+    },
+    "6": {
+      "$value": "1.5rem"
+    },
+    "8": {
+      "$value": "2rem"
+    },
+    "10": {
+      "$value": "2.5rem"
+    },
+    "12": {
+      "$value": "3rem"
+    },
+    "16": {
+      "$value": "4rem"
+    }
+  },
+  "radius": {
+    "$type": "dimension",
+    "none": {
+      "$value": "0rem"
+    },
+    "sm": {
+      "$value": "0.25rem"
+    },
+    "md": {
+      "$value": "0.5rem"
+    },
+    "lg": {
+      "$value": "0.75rem"
+    },
+    "xl": {
+      "$value": "1rem"
+    },
+    "full": {
+      "$value": "9999px"
+    }
+  },
+  "border-width": {
+    "$type": "dimension",
+    "thin": {
+      "$value": "1px"
+    },
+    "thick": {
+      "$value": "2px"
+    }
+  },
+  "font": {
+    "family": {
+      "$type": "fontFamily",
+      "sans": {
+        "$value": "ui-sans-serif, system-ui, sans-serif"
+      },
+      "mono": {
+        "$value": "ui-monospace, SFMono-Regular, Menlo, monospace"
+      }
+    },
+    "size": {
+      "$type": "dimension",
+      "xs": {
+        "$value": "0.75rem"
+      },
+      "sm": {
+        "$value": "0.875rem"
+      },
+      "md": {
+        "$value": "1rem"
+      },
+      "lg": {
+        "$value": "1.125rem"
+      },
+      "xl": {
+        "$value": "1.25rem"
+      },
+      "2xl": {
+        "$value": "1.5rem"
+      },
+      "3xl": {
+        "$value": "1.875rem"
+      },
+      "4xl": {
+        "$value": "2.25rem"
+      }
+    },
+    "weight": {
+      "$type": "fontWeight",
+      "regular": {
+        "$value": 400
+      },
+      "medium": {
+        "$value": 500
+      },
+      "semibold": {
+        "$value": 600
+      },
+      "bold": {
+        "$value": 700
+      }
+    },
+    "line-height": {
+      "$type": "number",
+      "tight": {
+        "$value": 1.2
+      },
+      "snug": {
+        "$value": 1.35
+      },
+      "normal": {
+        "$value": 1.5
+      },
+      "relaxed": {
+        "$value": 1.7
+      }
+    },
+    "tracking": {
+      "$type": "dimension",
+      "tight": {
+        "$value": "-0.02em"
+      },
+      "normal": {
+        "$value": "0em"
+      },
+      "wide": {
+        "$value": "0.02em"
+      }
+    }
+  },
+  "opacity": {
+    "$type": "number",
+    "40": {
+      "$value": 0.4
+    },
+    "50": {
+      "$value": 0.5
+    },
+    "70": {
+      "$value": 0.7
+    }
+  },
+  "elevation": {
+    "$type": "shadow",
+    "none": {
+      "$value": {
+        "color": "oklch(0% 0 0 / 0)",
+        "offsetX": "0px",
+        "offsetY": "0px",
+        "blur": "0px",
+        "spread": "0px"
+      }
+    },
+    "sm": {
+      "$value": {
+        "color": "oklch(21% 0.011 264 / 0.06)",
+        "offsetX": "0px",
+        "offsetY": "1px",
+        "blur": "2px",
+        "spread": "0px"
+      }
+    },
+    "md": {
+      "$value": {
+        "color": "oklch(21% 0.011 264 / 0.10)",
+        "offsetX": "0px",
+        "offsetY": "4px",
+        "blur": "8px",
+        "spread": "-2px"
+      }
+    },
+    "lg": {
+      "$value": {
+        "color": "oklch(21% 0.011 264 / 0.14)",
+        "offsetX": "0px",
+        "offsetY": "12px",
+        "blur": "24px",
+        "spread": "-6px"
+      }
+    }
+  },
+  "duration": {
+    "$type": "duration",
+    "instant": {
+      "$value": "0ms"
+    },
+    "press": {
+      "$value": "120ms"
+    },
+    "fast": {
+      "$value": "160ms"
+    },
+    "standard": {
+      "$value": "200ms"
+    },
+    "slow": {
+      "$value": "280ms"
+    },
+    "loop": {
+      "$value": "1000ms",
+      "$description": "One turn of a looping progress indicator. Far longer than any interaction duration, which is why it is its own step."
+    }
+  },
+  "easing": {
+    "$type": "cubicBezier",
+    "out": {
+      "$value": "cubic-bezier(0.23, 1, 0.32, 1)"
+    },
+    "in-out": {
+      "$value": "cubic-bezier(0.77, 0, 0.175, 1)"
+    },
+    "standard": {
+      "$value": "cubic-bezier(0.25, 0.1, 0.25, 1)"
+    },
+    "linear": {
+      "$value": "cubic-bezier(0, 0, 1, 1)"
+    }
+  },
+  "distance": {
+    "$type": "dimension",
+    "xs": {
+      "$value": "2px"
+    },
+    "sm": {
+      "$value": "4px"
+    },
+    "md": {
+      "$value": "8px"
+    }
+  },
+  "scale": {
+    "$type": "number",
+    "96": {
+      "$value": 0.96
+    },
+    "97": {
+      "$value": 0.97
+    },
+    "100": {
+      "$value": 1
+    }
+  },
+  "spring": {
+    "$type": "spring",
+    "responsive": {
+      "$value": {
+        "stiffness": 420,
+        "damping": 36,
+        "mass": 1
+      },
+      "$description": "Settles quickly with almost no overshoot. For state that must feel immediate."
+    },
+    "expressive": {
+      "$value": {
+        "stiffness": 260,
+        "damping": 24,
+        "mass": 1
+      },
+      "$description": "A little overshoot and a longer settle. For gestures, where the extra travel reads as physicality."
+    }
+  },
+  "size": {
+    "$type": "dimension",
+    "44": {
+      "$value": "2.75rem",
+      "$description": "44px. Named for the value, like every primitive, so the semantic role that means 'minimum touch target' can alias it without the two paths colliding."
+    }
+  }
+}

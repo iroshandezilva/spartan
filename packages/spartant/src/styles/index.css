@@ -1,0 +1,36 @@
+/*
+ * Spartant styling entry point.
+ *
+ * This is the file consumers import. It is compiled by Tailwind during the
+ * package build, so the published CSS already contains the semantic tokens,
+ * the theme mapping, and every utility the package's own components use.
+ * A consumer therefore needs one import and no Tailwind configuration.
+ *
+ *   import "@iroshandezilva/spartant/styles.css";
+ *
+ * No SCSS is involved anywhere in this pipeline, by architecture decision.
+ */
+
+@import "tailwindcss";
+@import "./theme.css";
+
+/*
+ * Explicit source scanning.
+ *
+ * Tailwind only generates utilities it can see used. These globs are declared
+ * rather than left to automatic detection, so the published CSS never depends
+ * on an implicit scanning path. Adding a new source directory to the package
+ * means adding it here.
+ */
+@source "../components/**/*.{ts,tsx}";
+@source "../lib/**/*.{ts,tsx}";
+/*
+ * The verbatim shadcn snapshots under every upstream/ folder are evidence, not
+ * source, and Tailwind must not read them. Measured before this line existed:
+ * `.focus\:bg-accent` and a `line-clamp-1` utility shipped in styles.css with
+ * no Spartant component using either. The explicit globs above do not match
+ * a .txt file, so the leak came from automatic source detection; this is the
+ * only way to switch that off for one path.
+ */
+@source not "../components/**/upstream/**";
+@source not "../experiments/**/upstream/**";

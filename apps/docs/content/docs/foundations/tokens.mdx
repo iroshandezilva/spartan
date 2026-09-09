@@ -1,0 +1,241 @@
+---
+title: Tokens
+description: The three token layers, the naming grammar, the generated outputs, and what a consumer can rely on.
+keywords:
+  - tokens
+  - design tokens
+  - DTCG
+  - primitive
+  - semantic
+  - component token
+  - custom properties
+  - "--spartant"
+  - semanticTokens
+  - tokenVar
+  - SemanticTokenPath
+  - tokens.json
+  - naming
+  - state names
+  - hover
+  - active
+  - selected
+  - disabled
+  - invalid
+  - focus
+  - deprecation
+  - override
+---
+
+## Three layers
+
+| Layer | Holds | Named after | Consumed by |
+| --- | --- | --- | --- |
+| Primitive | Literal values. Raw scales. | The value: `neutral.500`, `space.4` | Semantic tokens only |
+| Semantic | Aliases to primitives. Roles. | The meaning: `foreground.muted` | Components, themes, consumers |
+| Component | Literal or alias. Rare exceptions. | The component and property: `button.height.md` | One component |
+
+Four rules hold the layering up, and every one is machine-checked by
+`pnpm check:tokens`:
+
+- A **semantic token never holds a literal.** A literal in the semantic layer
+  is a primitive hiding in the wrong place, invisible to a theme.
+- A **primitive never holds an alias.** Primitives are where values live.
+- A **semantic path never collides with a primitive path.** When it does, an
+  alias resolves to itself and the layering silently collapses.
+- **Components consume semantic roles.** Reaching past a role to a palette
+  step is the failure the layering exists to prevent, so primitives are not
+  emitted as custom properties at all.
+
+### When a component token is justified
+
+Almost never. The test is: can this be expressed as a semantic role without
+inventing a role that only one component would use? If yes, use the role.
+
+`button.height.md` is the worked example that passes. It is 44px, an
+accessibility floor, and it is deliberately not derived from the spacing scale
+so that tightening spacing cannot shrink a touch target. A component token
+that duplicates a global role is rejected in review, and a consumer must not
+depend on one: it may be removed the moment the requirement is expressible
+semantically.
+
+## Naming grammar
+
+Names are lower-case kebab-case segments joined by dots. The CSS custom
+property is derived mechanically, with no special cases:
+
+```
+--spartant-<path with dots replaced by hyphens, trailing "default" removed>
+```
+
+`color.foreground.muted` becomes `--spartant-color-foreground-muted`.
+`color.surface.default` becomes `--spartant-color-surface`. An agent can derive
+the CSS name from the token path and back without consulting a table.
+
+### Semantic colour
+
+```
+color.<role>[.<modifier>][.<state>]
+```
+
+| Modifier | Meaning |
+| --- | --- |
+| `default` | The role itself. Omitted from the emitted name. |
+| `subtle`, `muted`, `strong` | Emphasis relative to the role. |
+| `elevated` | A raised variant of a surface. |
+| `inverse` | For use on the role's opposite. |
+| `foreground` | The colour guaranteed legible **on** that role. |
+| `text` | The role used **as** text on the page, a different requirement from a fill. |
+| `surface` | A soft tint of the role, for a badge or a callout background. |
+
+### Other categories
+
+| Category | Primitive | Semantic |
+| --- | --- | --- |
+| Colour | `color.neutral.500` | `color.foreground.muted` |
+| Spacing | `space.4` | `space.control-padding-x` |
+| Size | `size.44` | `size.min-target` |
+| Radius | `radius.md` | `radius.control` |
+| Border width | `border-width.thin` | `border-width.default` |
+| Typography | `font.size.md`, `font.weight.medium`, `font.family.sans` | `font.size.body`, `font.weight.emphasis`, `font.family.body` |
+| Elevation | `elevation.sm` | `elevation.surface` |
+| Opacity | `opacity.50` | `opacity.disabled` |
+| Motion duration | `duration.fast` | `duration.state-change` |
+| Motion easing | `easing.out` | `easing.enter` |
+| Motion distance and scale | `distance.sm`, `scale.97` | `distance.state`, `scale.press` |
+| Springs | `spring.responsive` | `spring.state` |
+
+Primitives are steps on a scale, so opacity primitives are `50` and `70`, not
+`disabled` and `muted`. Meaning is the semantic layer's job.
+
+## State names
+
+A closed set, always the **last** segment, never anywhere else:
+
+`hover` · `active` · `selected` · `disabled` · `invalid` · `focus`
+
+A state means the same thing on every component, so `color.surface.disabled`
+reads identically whether the surface is a button or a card. Two rules follow:
+
+- **`pressed` is not a state name.** Use `active`, which is what CSS calls it.
+- **A state word is never a role.** `disabled` is `color.surface.disabled` and
+  `color.foreground.disabled`, never `color.disabled`.
+
+## In component code
+
+Semantic roles reach components as Tailwind utilities, so a component says what
+a thing is rather than what it looks like:
+
+```tsx
+<div className="rounded-surface border border-border bg-surface p-surface text-foreground shadow-surface" />
+```
+
+Never a raw value, and never a palette step:
+
+```tsx
+// Wrong. This cannot follow a theme, and it is invisible to a token audit.
+<div className="bg-[#3b5bdb]" />
+```
+
+Utility names drop the category segment that the token grammar requires,
+because Tailwind's namespace already says it: `--spartant-color-primary` is
+`bg-primary`, `--spartant-radius-control` is `rounded-control`,
+`--spartant-duration-press-feedback` is `duration-press`. Each foundation page
+lists the utilities for its roles.
+
+Where a utility cannot reach, such as an inline style or a canvas, use the
+custom property or the TypeScript helper below.
+
+## Outputs
+
+CSS, JSON, and TypeScript are generated from one source by `pnpm tokens:build`,
+and `pnpm tokens:check` fails when any committed output is stale.
+
+| Output | Where | Holds |
+| --- | --- | --- |
+| CSS | `styles.css` and `theme.css` | Semantic and component custom properties, light and dark, the reduced-motion rule. No primitives. |
+| JSON | `@iroshandezilva/spartant/tokens.json` | Every layer fully resolved, plus the dark overrides. What this site reads. |
+| TypeScript | The package root | `semanticTokens`, `tokenVar`, `springs`, and their types |
+
+```ts
+import { semanticTokens, springs, tokenVar } from "@iroshandezilva/spartant";
+import tokens from "@iroshandezilva/spartant/tokens.json";
+
+semanticTokens["color.foreground.muted"]; // "--spartant-color-foreground-muted"
+tokenVar("radius.control"); // "var(--spartant-radius-control)"
+springs.state; // { stiffness: 420, damping: 36, mass: 1 }
+tokens.semantic["space.stack-gap"]; // "1rem"
+```
+
+`SemanticTokenPath` is the union of every valid path, so a misspelt token is a
+compile error rather than an empty custom property. Springs are typed values
+rather than custom properties because CSS has no spring primitive; see
+[Motion](./motion.mdx#springs).
+
+## What is stable
+
+Overriding a `--spartant-*` custom property is the documented, stable way to
+retheme, in both themes, with no rebuild:
+
+```css
+:root {
+  --spartant-color-primary: oklch(60% 0.2 150);
+}
+```
+
+Stable, and covered by the version rules in `VERSIONING.md`:
+
+- Semantic and component custom property names.
+- Token paths in `tokens.json` and `semanticTokens`.
+- Tailwind role names mapped by `theme.css`.
+
+Not stable, and not a theming API:
+
+- Which primitive a role happens to alias today.
+- Component tokens, which may be removed once the need is expressible
+  semantically.
+- The primitive values in the JSON export. They exist for tooling and the
+  colour visualiser, not for building a theme from.
+
+## Deprecation
+
+A token is never deleted in place. It is marked with `$deprecated` and a
+`replacedBy` that must resolve to a live token, keeps emitting aliased to its
+replacement until the version named in `removeIn`, and is removed in a major
+release or with an explicit migration note before 1.0. All of that is checked.
+
+## The remaining roles
+
+Colour, typography, spacing, radius, elevation, and motion each have their own
+page. The roles that belong to no other page:
+
+### Border width
+
+<TokenTable prefix="border-width" />
+
+`border-width.default` is every ordinary boundary; `border-width.emphasis` is a
+boundary that carries state, such as a selected card or an invalid field.
+
+### Size
+
+<TokenTable prefix="size" px />
+
+`size.min-target` is the hit area every actionable control guarantees on a
+coarse pointer, whatever its visual size. It is a role rather than a component
+token because Button, Checkbox, Radio, and Switch all need the same floor, and
+three copies of one number is how they drift. See
+[Accessibility](./accessibility.mdx#touch-targets).
+
+### Opacity
+
+<TokenTable prefix="opacity" />
+
+Used where a disabled state has to dim something that is not a colour role,
+such as an icon inherited from the caller.
+
+## Known gaps
+
+- The token schema and grammar are approved. Values in the colour and motion
+  layers are validated against the released components; nine motion roles have
+  no consumer yet and are marked provisional on [Motion](./motion.mdx).
+- There is no visual token browser on this site. The tables here are generated
+  from the JSON, but a searchable, filterable browser is not built.

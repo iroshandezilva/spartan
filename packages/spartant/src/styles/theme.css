@@ -1,0 +1,189 @@
+/*
+ * Spartant tokens and Tailwind theme mapping, without Tailwind itself.
+ *
+ * Import this when your app already runs Tailwind and you want Spartant's
+ * semantic roles available as utilities alongside your own:
+ *
+ *   @import "tailwindcss";
+ *   @import "@iroshandezilva/spartant/theme.css";
+ *   @source "../node_modules/@iroshandezilva/spartant/dist";
+ *
+ * The @source line is required and deliberately explicit. Tailwind only
+ * generates utilities it can see used, so it must be told where the package's
+ * compiled components live. Nothing here depends on implicit scanning.
+ *
+ * If you do not use Tailwind, import "@iroshandezilva/spartant/styles.css"
+ * instead. That file is precompiled and needs no configuration.
+ *
+ * The `--spartant-*` properties this maps from are generated. See
+ * ../tokens/README.md for the naming grammar and ./tokens.css for the values.
+ */
+
+@import "./tokens.css";
+
+/*
+ * Semantic tokens mapped into Tailwind's theme namespaces.
+ *
+ * `@theme inline` makes the generated utilities reference the custom property
+ * rather than copying its value, which is what allows a theme change or a
+ * consumer override of `--spartant-*` to retype the system at runtime with no
+ * rebuild and no markup change.
+ *
+ * Names here drop the category segment that the token grammar requires, so
+ * `--spartant-color-primary` becomes the `bg-primary` utility rather than
+ * `bg-color-primary`. Tailwind's namespace already says it is a colour.
+ */
+@theme inline {
+  --color-background: var(--spartant-color-background);
+  --color-surface: var(--spartant-color-surface);
+  --color-surface-elevated: var(--spartant-color-surface-elevated);
+  --color-surface-muted: var(--spartant-color-surface-muted);
+  --color-surface-disabled: var(--spartant-color-surface-disabled);
+  --color-surface-selected: var(--spartant-color-surface-selected);
+
+  --color-foreground: var(--spartant-color-foreground);
+  --color-foreground-muted: var(--spartant-color-foreground-muted);
+  --color-foreground-inverse: var(--spartant-color-foreground-inverse);
+  --color-foreground-disabled: var(--spartant-color-foreground-disabled);
+
+  --color-border: var(--spartant-color-border);
+  --color-border-subtle: var(--spartant-color-border-subtle);
+  --color-border-strong: var(--spartant-color-border-strong);
+
+  --color-primary: var(--spartant-color-primary);
+  --color-primary-hover: var(--spartant-color-primary-hover);
+  --color-primary-active: var(--spartant-color-primary-active);
+  --color-primary-foreground: var(--spartant-color-primary-foreground);
+
+  --color-secondary: var(--spartant-color-secondary);
+  --color-secondary-hover: var(--spartant-color-secondary-hover);
+  --color-secondary-active: var(--spartant-color-secondary-active);
+  --color-secondary-foreground: var(--spartant-color-secondary-foreground);
+
+  --color-accent: var(--spartant-color-accent);
+  --color-accent-foreground: var(--spartant-color-accent-foreground);
+
+  --color-success: var(--spartant-color-success);
+  --color-success-foreground: var(--spartant-color-success-foreground);
+  --color-warning: var(--spartant-color-warning);
+  --color-warning-foreground: var(--spartant-color-warning-foreground);
+  --color-danger: var(--spartant-color-danger);
+  --color-danger-foreground: var(--spartant-color-danger-foreground);
+  --color-information: var(--spartant-color-information);
+  --color-information-foreground: var(--spartant-color-information-foreground);
+
+  /*
+   * Status colours used as text, which is a different requirement from the
+   * same colour used as a fill. A fill is chosen to carry a legible label on
+   * top of it; text has to be legible on the page. See ../tokens/COLOR.md.
+   */
+  --color-primary-text: var(--spartant-color-primary-text);
+  --color-accent-text: var(--spartant-color-accent-text);
+  --color-success-text: var(--spartant-color-success-text);
+  --color-warning-text: var(--spartant-color-warning-text);
+  --color-danger-text: var(--spartant-color-danger-text);
+  --color-information-text: var(--spartant-color-information-text);
+
+  --color-primary-surface: var(--spartant-color-primary-surface);
+  --color-accent-surface: var(--spartant-color-accent-surface);
+  --color-success-surface: var(--spartant-color-success-surface);
+  --color-warning-surface: var(--spartant-color-warning-surface);
+  --color-danger-surface: var(--spartant-color-danger-surface);
+  --color-information-surface: var(--spartant-color-information-surface);
+
+  --color-danger-hover: var(--spartant-color-danger-hover);
+  --color-danger-active: var(--spartant-color-danger-active);
+
+  --color-focus-ring: var(--spartant-color-focus-ring);
+
+  --radius-control: var(--spartant-radius-control);
+  --radius-surface: var(--spartant-radius-surface);
+  --radius-pill: var(--spartant-radius-pill);
+
+  --font-sans: var(--spartant-font-family-body);
+  --font-mono: var(--spartant-font-family-code);
+
+  --text-caption: var(--spartant-font-size-caption);
+  --text-body-small: var(--spartant-font-size-body-small);
+  --text-body: var(--spartant-font-size-body);
+  --text-body-large: var(--spartant-font-size-body-large);
+  --text-heading-small: var(--spartant-font-size-heading-small);
+  --text-heading: var(--spartant-font-size-heading);
+  --text-heading-large: var(--spartant-font-size-heading-large);
+  --text-display: var(--spartant-font-size-display);
+
+  --font-weight-body: var(--spartant-font-weight-body);
+  --font-weight-emphasis: var(--spartant-font-weight-emphasis);
+  --font-weight-heading: var(--spartant-font-weight-heading);
+
+  --leading-body: var(--spartant-font-line-height-body);
+  --leading-heading: var(--spartant-font-line-height-heading);
+  --leading-caption: var(--spartant-font-line-height-caption);
+
+  --tracking-body: var(--spartant-font-tracking-body);
+  --tracking-heading: var(--spartant-font-tracking-heading);
+
+  --spacing-control-x: var(--spartant-space-control-padding-x);
+  --spacing-control-y: var(--spartant-space-control-padding-y);
+  --spacing-control-gap: var(--spartant-space-control-gap);
+  --spacing-surface: var(--spartant-space-surface-padding);
+  --spacing-stack: var(--spartant-space-stack-gap);
+  --spacing-section: var(--spartant-space-section-gap);
+
+  --shadow-flat: var(--spartant-elevation-flat);
+  --shadow-surface: var(--spartant-elevation-surface);
+  --shadow-overlay: var(--spartant-elevation-overlay);
+  --shadow-modal: var(--spartant-elevation-modal);
+
+  --ease-enter: var(--spartant-easing-enter);
+  --ease-exit: var(--spartant-easing-exit);
+  --ease-move: var(--spartant-easing-move);
+  --ease-state: var(--spartant-easing-state);
+  --ease-progress: var(--spartant-easing-progress);
+
+  /*
+   * Tailwind resolves `duration-*` from the `--transition-duration-*`
+   * namespace, not `--duration-*`. Named wrongly, these produced no utility at
+   * all and `duration-press` silently fell back to Tailwind's default 150ms,
+   * which is close enough to the real 120ms to pass a glance and wrong enough
+   * to make the token a lie.
+   */
+  --transition-duration-press: var(--spartant-duration-press-feedback);
+  --transition-duration-state: var(--spartant-duration-state-change);
+  --transition-duration-overlay-enter: var(--spartant-duration-overlay-enter);
+  --transition-duration-overlay-exit: var(--spartant-duration-overlay-exit);
+  --transition-duration-modal-enter: var(--spartant-duration-modal-enter);
+  --transition-duration-modal-exit: var(--spartant-duration-modal-exit);
+}
+
+/*
+ * Reduced motion is a global collapse, not a per-component branch.
+ *
+ * Every component that animates uses the duration and scale tokens above, so
+ * overriding them here removes spatial motion everywhere at once. A component
+ * cannot forget to handle it, because it never read a raw value.
+ *
+ * Colour and opacity transitions are left alone: they clarify state without
+ * moving anything, which is what the standard allows.
+ */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --spartant-duration-press-feedback: var(--spartant-duration-reduced);
+    /*
+     * A looping indicator collapses to 0ms, which stops it turning rather than
+     * spinning it instantly. Rotation is spatial and autoplaying, so the
+     * standard removes it; `aria-busy` still carries the state.
+     */
+    --spartant-duration-indicator-loop: var(--spartant-duration-reduced);
+    --spartant-duration-state-change: var(--spartant-duration-reduced);
+    --spartant-duration-overlay-enter: var(--spartant-duration-reduced);
+    --spartant-duration-overlay-exit: var(--spartant-duration-reduced);
+    --spartant-duration-modal-enter: var(--spartant-duration-reduced);
+    --spartant-duration-modal-exit: var(--spartant-duration-reduced);
+    --spartant-scale-press: var(--spartant-scale-reduced);
+    --spartant-scale-overlay-enter: var(--spartant-scale-reduced);
+    --spartant-distance-indicator: 0px;
+    --spartant-distance-state: 0px;
+    --spartant-distance-overlay: 0px;
+  }
+}

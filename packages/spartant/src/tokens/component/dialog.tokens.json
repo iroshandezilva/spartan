@@ -1,0 +1,20 @@
+{
+  "$schema": "../schema/spartant-tokens.schema.json",
+  "$description": "COMPONENT tokens for Dialog. The backdrop tint is here rather than in the colour roles because it is the only place in the system that needs a translucent colour: everything else is opaque so its contrast can be asserted against a single number. A backdrop has nothing behind it worth asserting against, which is the exception that proves the rule.",
+  "dialog": {
+    "backdrop": {
+      "$type": "color",
+      "default": {
+        "$value": "oklch(25% 0.0064 264 / 0.5)",
+        "$description": "The page dimmed behind a modal. Translucent on purpose, and the one documented exception to the opaque-colour rule in COLOR.md."
+      }
+    },
+    "max-width": {
+      "$type": "dimension",
+      "default": {
+        "$value": "32rem",
+        "$description": "512px. Wide enough for a paragraph and a form row, narrow enough that a line of text stays readable."
+      }
+    }
+  }
+}

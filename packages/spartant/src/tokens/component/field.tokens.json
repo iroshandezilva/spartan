@@ -1,0 +1,27 @@
+{
+  "$schema": "../schema/spartant-tokens.schema.json",
+  "$description": "COMPONENT tokens for the text-field family. Height is here for the same reason Button's is: it carries the touch floor, and deriving it from the spacing scale would let a spacing change shrink a control below the minimum. The value deliberately equals button.height.md so a field and a button line up in a row; if a shared control-height role ever appears, both should move to it together.",
+  "field": {
+    "height": {
+      "$type": "dimension",
+      "md": {
+        "$value": "2.75rem",
+        "$description": "44px. Matches the default button so a field and a button align on one line."
+      }
+    },
+    "padding-x": {
+      "$type": "dimension",
+      "default": {
+        "$value": "0.75rem",
+        "$description": "Horizontal padding inside a text control. Tighter than a button's, because text starts at the edge of the box rather than being centred in it."
+      }
+    },
+    "textarea-min-height": {
+      "$type": "dimension",
+      "default": {
+        "$value": "5.5rem",
+        "$description": "88px, two field heights. A textarea that starts one line tall reads as a broken input."
+      }
+    }
+  }
+}

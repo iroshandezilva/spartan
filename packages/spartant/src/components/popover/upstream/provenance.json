@@ -1,0 +1,14 @@
+{
+  "$comment": "Provenance for the shadcn source Popover was reviewed against, per ADOPTING-SHADCN.md. popover.tsx.txt is the upstream text exactly as fetched, kept so the owned component can be diffed against its origin. Never import it; it is evidence, not code. Same shape as src/experiments/shadcn/upstream/provenance.json so scripts/check-upstream.mjs can read it once it globs component provenance files.",
+  "entries": {
+    "popover": {
+      "source": "https://ui.shadcn.com/r/styles/new-york/popover.json",
+      "style": "new-york",
+      "fetchedOn": "2026-09-09",
+      "upstreamPath": "ui/popover.tsx",
+      "declaredDependencies": ["@radix-ui/react-popover"],
+      "registryDependencies": [],
+      "sha256": "69f74cdd76588a1249522ff8009e044eee6080ad8cf26cb08d7a5fc3281f0255"
+    }
+  }
+}

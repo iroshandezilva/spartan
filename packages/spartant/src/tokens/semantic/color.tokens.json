@@ -1,0 +1,216 @@
+{
+  "$schema": "../schema/spartant-tokens.schema.json",
+  "$description": "SEMANTIC colour roles, light theme. Every value aliases a primitive; a literal here would be a primitive hiding in the wrong layer. Step choices follow the usable-range rule in COLOR.md: body text sits at step 600 or darker on a light surface. Provisional until HAUX-33 validates the full contrast matrix.",
+  "color": {
+    "$type": "color",
+    "background": {
+      "default": {
+        "$value": "{color.neutral.50}"
+      }
+    },
+    "surface": {
+      "default": {
+        "$value": "{color.neutral.0}"
+      },
+      "elevated": {
+        "$value": "{color.neutral.0}"
+      },
+      "muted": {
+        "$value": "{color.neutral.100}"
+      },
+      "disabled": {
+        "$value": "{color.neutral.100}"
+      },
+      "selected": {
+        "$value": "{color.primary.100}"
+      }
+    },
+    "foreground": {
+      "default": {
+        "$value": "{color.neutral.900}"
+      },
+      "muted": {
+        "$value": "{color.neutral.700}"
+      },
+      "inverse": {
+        "$value": "{color.neutral.50}"
+      },
+      "disabled": {
+        "$value": "{color.neutral.500}"
+      }
+    },
+    "border": {
+      "default": {
+        "$value": "{color.neutral.200}"
+      },
+      "subtle": {
+        "$value": "{color.neutral.100}"
+      },
+      "strong": {
+        "$value": "{color.neutral.500}"
+      }
+    },
+    "focus-ring": {
+      "default": {
+        "$value": "{color.primary.600}"
+      }
+    },
+    "primary": {
+      "default": {
+        "$value": "{color.primary.600}"
+      },
+      "text": {
+        "$value": "{color.primary.700}",
+        "$description": "The primary role used as text on a page or surface, not as a fill. A fill is chosen to carry a legible label on top of it, which is a different requirement and a different number."
+      },
+      "surface": {
+        "$value": "{color.primary.100}",
+        "$description": "A quiet tint for a chip or a callout. Opaque, never an alpha: an alpha tint measures differently on a page than inside a card, so it has no single contrast figure to assert against."
+      },
+      "hover": {
+        "$value": "{color.primary.700}"
+      },
+      "active": {
+        "$value": "{color.primary.800}"
+      },
+      "foreground": {
+        "$value": "{color.neutral.0}",
+        "$extensions": {
+          "com.spartant": {
+            "pairsWith": "color.primary.default"
+          }
+        }
+      }
+    },
+    "secondary": {
+      "default": {
+        "$value": "{color.secondary.100}"
+      },
+      "hover": {
+        "$value": "{color.secondary.200}"
+      },
+      "active": {
+        "$value": "{color.secondary.300}"
+      },
+      "foreground": {
+        "$value": "{color.neutral.900}",
+        "$extensions": {
+          "com.spartant": {
+            "pairsWith": "color.secondary.default"
+          }
+        }
+      }
+    },
+    "accent": {
+      "default": {
+        "$value": "{color.secondary.600}"
+      },
+      "text": {
+        "$value": "{color.secondary.700}",
+        "$description": "The accent role used as text on a page or surface, not as a fill. A fill is chosen to carry a legible label on top of it, which is a different requirement and a different number."
+      },
+      "surface": {
+        "$value": "{color.secondary.100}",
+        "$description": "A quiet tint for a chip or a callout. Opaque, never an alpha: an alpha tint measures differently on a page than inside a card, so it has no single contrast figure to assert against."
+      },
+      "foreground": {
+        "$value": "{color.neutral.0}",
+        "$extensions": {
+          "com.spartant": {
+            "pairsWith": "color.accent.default"
+          }
+        }
+      }
+    },
+    "success": {
+      "default": {
+        "$value": "{color.success.600}"
+      },
+      "text": {
+        "$value": "{color.success.700}",
+        "$description": "The success role used as text on a page or surface, not as a fill. A fill is chosen to carry a legible label on top of it, which is a different requirement and a different number."
+      },
+      "surface": {
+        "$value": "{color.success.100}",
+        "$description": "A quiet tint for a chip or a callout. Opaque, never an alpha: an alpha tint measures differently on a page than inside a card, so it has no single contrast figure to assert against."
+      },
+      "foreground": {
+        "$value": "{color.neutral.0}",
+        "$extensions": {
+          "com.spartant": {
+            "pairsWith": "color.success.default"
+          }
+        }
+      }
+    },
+    "warning": {
+      "default": {
+        "$value": "{color.warning.600}"
+      },
+      "text": {
+        "$value": "{color.warning.700}",
+        "$description": "The warning role used as text on a page or surface, not as a fill. A fill is chosen to carry a legible label on top of it, which is a different requirement and a different number."
+      },
+      "surface": {
+        "$value": "{color.warning.100}",
+        "$description": "A quiet tint for a chip or a callout. Opaque, never an alpha: an alpha tint measures differently on a page than inside a card, so it has no single contrast figure to assert against."
+      },
+      "foreground": {
+        "$value": "{color.neutral.0}",
+        "$extensions": {
+          "com.spartant": {
+            "pairsWith": "color.warning.default"
+          }
+        }
+      }
+    },
+    "danger": {
+      "default": {
+        "$value": "{color.danger.600}"
+      },
+      "text": {
+        "$value": "{color.danger.700}",
+        "$description": "The danger role used as text on a page or surface, not as a fill. A fill is chosen to carry a legible label on top of it, which is a different requirement and a different number."
+      },
+      "surface": {
+        "$value": "{color.danger.100}",
+        "$description": "A quiet tint for a chip or a callout. Opaque, never an alpha: an alpha tint measures differently on a page than inside a card, so it has no single contrast figure to assert against."
+      },
+      "hover": {
+        "$value": "{color.danger.700}"
+      },
+      "active": {
+        "$value": "{color.danger.800}"
+      },
+      "foreground": {
+        "$value": "{color.neutral.0}",
+        "$extensions": {
+          "com.spartant": {
+            "pairsWith": "color.danger.default"
+          }
+        }
+      }
+    },
+    "information": {
+      "default": {
+        "$value": "{color.information.600}"
+      },
+      "text": {
+        "$value": "{color.information.700}",
+        "$description": "The information role used as text on a page or surface, not as a fill. A fill is chosen to carry a legible label on top of it, which is a different requirement and a different number."
+      },
+      "surface": {
+        "$value": "{color.information.100}",
+        "$description": "A quiet tint for a chip or a callout. Opaque, never an alpha: an alpha tint measures differently on a page than inside a card, so it has no single contrast figure to assert against."
+      },
+      "foreground": {
+        "$value": "{color.neutral.0}",
+        "$extensions": {
+          "com.spartant": {
+            "pairsWith": "color.information.default"
+          }
+        }
+      }
+    }
+  }
+}

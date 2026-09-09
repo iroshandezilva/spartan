@@ -1,0 +1,91 @@
+---
+title: Typography
+description: Eight type roles at real size, with the line height, weight, and tracking each one carries.
+keywords:
+  - typography
+  - type scale
+  - font size
+  - font family
+  - line height
+  - leading
+  - tracking
+  - letter spacing
+  - font weight
+  - heading
+  - body
+  - caption
+  - display
+  - text-body
+  - text-heading
+  - font-sans
+  - font-mono
+---
+
+## Specimens
+
+Every role at real size, set with the same custom properties a component uses,
+so what is on screen is what the package renders. Switch the site's theme to
+see them on both grounds.
+
+<TypeSpecimens />
+
+## The roles
+
+Primitives are a modular scale; roles are what components use. The pixel
+column assumes the browser default of 16px, because sizes are in `rem` so they
+follow a user who has changed that default.
+
+<TypeTable />
+
+16px is the body size and is not negotiable downward. It is the browser
+default, and shrinking it to fit more in is the most common way an interface
+becomes tiring to read.
+
+## Line height and tracking
+
+<TokenTable prefix="font.line-height" />
+<TokenTable prefix="font.tracking" />
+
+Line height moves **down** as size goes up. Body text at 1.5 is comfortable for
+multi-line reading; headings are short, and at 1.5 they look disconnected from
+themselves. Tracking moves down with size for the same reason: both defaults
+are tuned for body copy and both look loose at 30px.
+
+## Weight
+
+<TokenTable prefix="font.weight" />
+
+`body` for reading, `emphasis` for emphasis within UI such as a button label
+or a selected tab, `heading` for headings. The primitive `bold` 700 exists but
+has no semantic role yet, because nothing has needed it and an unused role
+invites arbitrary use.
+
+## Families
+
+<TokenTable prefix="font.family" />
+
+Both are system stacks. No font file ships with the package and none is loaded
+by this site, so there is nothing to preload and no layout shift on load.
+
+## In component code
+
+| Role | Utility |
+| --- | --- |
+| `font.size.body` | `text-body`, and `text-caption`, `text-body-small`, `text-body-large`, `text-heading-small`, `text-heading`, `text-heading-large`, `text-display` |
+| `font.line-height.body` | `leading-body`, `leading-heading`, `leading-caption` |
+| `font.tracking.heading` | `tracking-heading`, `tracking-body` |
+| `font.weight.emphasis` | `font-weight-emphasis`; Tailwind's `font-medium` and `font-semibold` resolve to the same numbers |
+| `font.family.body` | `font-sans` |
+| `font.family.code` | `font-mono` |
+
+A heading in a component is `text-heading font-semibold tracking-heading`;
+a caption is `text-caption leading-caption text-foreground-muted`.
+
+## Known gaps
+
+- No display face. The `display` role uses the same system stack at 36px.
+  Brand-specific display typography is outside v0.1.
+- Fluid type is not used; sizes are fixed `rem` values at every viewport.
+- The rendered specimens above depend on the visitor's system font, so the
+  exact glyph shapes differ between macOS, Windows, and Linux. The metrics do
+  not.

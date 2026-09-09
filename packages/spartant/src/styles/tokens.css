@@ -1,0 +1,244 @@
+/*
+ * GENERATED FILE. Do not edit.
+ *
+ * Produced from packages/spartant/src/tokens/ by
+ * packages/spartant/tooling/tokens/generate.ts. Run `pnpm tokens:build`.
+ * `pnpm tokens:check` fails when this file drifts from the source.
+ */
+
+:root {
+  color-scheme: light;
+
+  --spartant-badge-gap: 0.25rem;
+  --spartant-badge-padding-x: 0.5rem;
+  --spartant-badge-padding-y: 0.125rem;
+  --spartant-border-width: 1px;
+  --spartant-border-width-emphasis: 2px;
+  --spartant-button-height-lg: 3.25rem;
+  --spartant-button-height-md: 2.75rem;
+  --spartant-button-height-sm: 2rem;
+  --spartant-button-padding-x-lg: 1.5rem;
+  --spartant-button-padding-x-md: 1rem;
+  --spartant-button-padding-x-sm: 0.75rem;
+  --spartant-color-accent: oklch(54% 0.0882 300);
+  --spartant-color-accent-foreground: oklch(100% 0 264);
+  --spartant-color-accent-surface: oklch(95% 0.0108 300);
+  --spartant-color-accent-text: oklch(45% 0.0774 300);
+  --spartant-color-background: oklch(98% 0.0008 264);
+  --spartant-color-border: oklch(91% 0.0034 264);
+  --spartant-color-border-strong: oklch(62% 0.014 264);
+  --spartant-color-border-subtle: oklch(95% 0.0017 264);
+  --spartant-color-danger-active: oklch(35% 0.132 27);
+  --spartant-color-danger: oklch(54% 0.196 27);
+  --spartant-color-danger-foreground: oklch(100% 0 264);
+  --spartant-color-danger-hover: oklch(45% 0.172 27);
+  --spartant-color-danger-surface: oklch(95% 0.024 27);
+  --spartant-color-danger-text: oklch(45% 0.172 27);
+  --spartant-color-focus-ring: oklch(54% 0.1862 264);
+  --spartant-color-foreground: oklch(25% 0.0064 264);
+  --spartant-color-foreground-disabled: oklch(62% 0.014 264);
+  --spartant-color-foreground-inverse: oklch(98% 0.0008 264);
+  --spartant-color-foreground-muted: oklch(45% 0.012 264);
+  --spartant-color-information: oklch(54% 0.1236 240);
+  --spartant-color-information-foreground: oklch(100% 0 264);
+  --spartant-color-information-surface: oklch(95% 0.0168 240);
+  --spartant-color-information-text: oklch(45% 0.103 240);
+  --spartant-color-primary-active: oklch(35% 0.1254 264);
+  --spartant-color-primary: oklch(54% 0.1862 264);
+  --spartant-color-primary-foreground: oklch(100% 0 264);
+  --spartant-color-primary-hover: oklch(45% 0.1634 264);
+  --spartant-color-primary-surface: oklch(95% 0.0228 264);
+  --spartant-color-primary-text: oklch(45% 0.1634 264);
+  --spartant-color-secondary-active: oklch(84% 0.0396 300);
+  --spartant-color-secondary: oklch(95% 0.0108 300);
+  --spartant-color-secondary-foreground: oklch(25% 0.0064 264);
+  --spartant-color-secondary-hover: oklch(91% 0.0216 300);
+  --spartant-color-success: oklch(54% 0.147 150);
+  --spartant-color-success-foreground: oklch(100% 0 264);
+  --spartant-color-success-surface: oklch(95% 0.018 150);
+  --spartant-color-success-text: oklch(45% 0.1239 150);
+  --spartant-color-surface: oklch(100% 0 264);
+  --spartant-color-surface-disabled: oklch(95% 0.0017 264);
+  --spartant-color-surface-elevated: oklch(100% 0 264);
+  --spartant-color-surface-muted: oklch(95% 0.0017 264);
+  --spartant-color-surface-selected: oklch(95% 0.0228 264);
+  --spartant-color-warning: oklch(54% 0.1139 75);
+  --spartant-color-warning-foreground: oklch(100% 0 264);
+  --spartant-color-warning-surface: oklch(95% 0.0204 75);
+  --spartant-color-warning-text: oklch(45% 0.0949 75);
+  --spartant-dialog-backdrop: oklch(25% 0.0064 264 / 0.5);
+  --spartant-dialog-max-width: 32rem;
+  --spartant-distance-indicator: 2px;
+  --spartant-distance-overlay: 8px;
+  --spartant-distance-state: 4px;
+  --spartant-duration-indicator-loop: 1000ms;
+  --spartant-duration-modal-enter: 280ms;
+  --spartant-duration-modal-exit: 200ms;
+  --spartant-duration-overlay-enter: 200ms;
+  --spartant-duration-overlay-exit: 160ms;
+  --spartant-duration-press-feedback: 120ms;
+  --spartant-duration-reduced: 0ms;
+  --spartant-duration-state-change: 160ms;
+  --spartant-easing-enter: cubic-bezier(0.23, 1, 0.32, 1);
+  --spartant-easing-exit: cubic-bezier(0.23, 1, 0.32, 1);
+  --spartant-easing-move: cubic-bezier(0.77, 0, 0.175, 1);
+  --spartant-easing-progress: cubic-bezier(0, 0, 1, 1);
+  --spartant-easing-state: cubic-bezier(0.25, 0.1, 0.25, 1);
+  --spartant-elevation-flat: 0px 0px 0px 0px oklch(0% 0 0 / 0);
+  --spartant-elevation-modal: 0px 12px 24px -6px oklch(21% 0.011 264 / 0.14);
+  --spartant-elevation-overlay: 0px 4px 8px -2px oklch(21% 0.011 264 / 0.10);
+  --spartant-elevation-surface: 0px 1px 2px 0px oklch(21% 0.011 264 / 0.06);
+  --spartant-field-height-md: 2.75rem;
+  --spartant-field-padding-x: 0.75rem;
+  --spartant-field-textarea-min-height: 5.5rem;
+  --spartant-font-family-body: ui-sans-serif, system-ui, sans-serif;
+  --spartant-font-family-code: ui-monospace, SFMono-Regular, Menlo, monospace;
+  --spartant-font-line-height-body: 1.5;
+  --spartant-font-line-height-caption: 1.35;
+  --spartant-font-line-height-heading: 1.2;
+  --spartant-font-size-body: 1rem;
+  --spartant-font-size-body-large: 1.125rem;
+  --spartant-font-size-body-small: 0.875rem;
+  --spartant-font-size-caption: 0.75rem;
+  --spartant-font-size-display: 2.25rem;
+  --spartant-font-size-heading: 1.5rem;
+  --spartant-font-size-heading-large: 1.875rem;
+  --spartant-font-size-heading-small: 1.25rem;
+  --spartant-font-tracking-body: 0em;
+  --spartant-font-tracking-heading: -0.02em;
+  --spartant-font-weight-body: 400;
+  --spartant-font-weight-emphasis: 500;
+  --spartant-font-weight-heading: 600;
+  --spartant-opacity-disabled: 0.5;
+  --spartant-popover-padding: 1rem;
+  --spartant-popover-width: 18rem;
+  --spartant-radius-control: 0.5rem;
+  --spartant-radius-pill: 9999px;
+  --spartant-radius-surface: 0.75rem;
+  --spartant-scale-overlay-enter: 0.96;
+  --spartant-scale-press: 0.97;
+  --spartant-scale-reduced: 1;
+  --spartant-selection-box: 1.25rem;
+  --spartant-selection-switch-height: 1.5rem;
+  --spartant-selection-switch-thumb: 1.125rem;
+  --spartant-selection-switch-width: 2.5rem;
+  --spartant-size-min-target: 2.75rem;
+  --spartant-space-control-gap: 0.5rem;
+  --spartant-space-control-padding-x: 1rem;
+  --spartant-space-control-padding-y: 0.5rem;
+  --spartant-space-section-gap: 3rem;
+  --spartant-space-stack-gap: 1rem;
+  --spartant-space-surface-padding: 1.5rem;
+  --spartant-tooltip-max-width: 18rem;
+  --spartant-tooltip-padding-x: 0.5rem;
+  --spartant-tooltip-padding-y: 0.25rem;
+}
+
+/*
+ * Dark theme by browser preference. The `:not([data-theme="light"])` guard is
+ * what lets an explicit light choice win over the system setting.
+ */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+
+    --spartant-color-accent: oklch(74% 0.0648 300);
+    --spartant-color-accent-foreground: oklch(12% 0.0025 264);
+    --spartant-color-accent-surface: oklch(19% 0.0306 300);
+    --spartant-color-accent-text: oklch(84% 0.0396 300);
+    --spartant-color-background: oklch(12% 0.0025 264);
+    --spartant-color-border: oklch(35% 0.0092 264);
+    --spartant-color-border-strong: oklch(54% 0.0137 264);
+    --spartant-color-border-subtle: oklch(25% 0.0064 264);
+    --spartant-color-danger-active: oklch(91% 0.0464 27);
+    --spartant-color-danger: oklch(74% 0.144 27);
+    --spartant-color-danger-foreground: oklch(12% 0.0025 264);
+    --spartant-color-danger-hover: oklch(84% 0.088 27);
+    --spartant-color-danger-surface: oklch(19% 0.068 27);
+    --spartant-color-danger-text: oklch(84% 0.088 27);
+    --spartant-color-focus-ring: oklch(74% 0.1334 264);
+    --spartant-color-foreground: oklch(98% 0.0008 264);
+    --spartant-color-foreground-disabled: oklch(54% 0.0137 264);
+    --spartant-color-foreground-inverse: oklch(12% 0.0025 264);
+    --spartant-color-foreground-muted: oklch(74% 0.0101 264);
+    --spartant-color-information: oklch(74% 0.1008 240);
+    --spartant-color-information-foreground: oklch(12% 0.0025 264);
+    --spartant-color-information-surface: oklch(19% 0.0435 240);
+    --spartant-color-information-text: oklch(84% 0.0616 240);
+    --spartant-color-primary-active: oklch(91% 0.0431 264);
+    --spartant-color-primary: oklch(74% 0.1334 264);
+    --spartant-color-primary-foreground: oklch(12% 0.0025 264);
+    --spartant-color-primary-hover: oklch(84% 0.0789 264);
+    --spartant-color-primary-surface: oklch(19% 0.0646 264);
+    --spartant-color-primary-text: oklch(84% 0.0789 264);
+    --spartant-color-secondary-active: oklch(45% 0.0774 300);
+    --spartant-color-secondary: oklch(25% 0.0414 300);
+    --spartant-color-secondary-foreground: oklch(98% 0.0008 264);
+    --spartant-color-secondary-hover: oklch(35% 0.0594 300);
+    --spartant-color-success: oklch(74% 0.108 150);
+    --spartant-color-success-foreground: oklch(12% 0.0025 264);
+    --spartant-color-success-surface: oklch(19% 0.051 150);
+    --spartant-color-success-text: oklch(84% 0.066 150);
+    --spartant-color-surface: oklch(25% 0.0064 264);
+    --spartant-color-surface-disabled: oklch(19% 0.0048 264);
+    --spartant-color-surface-elevated: oklch(35% 0.0092 264);
+    --spartant-color-surface-muted: oklch(19% 0.0048 264);
+    --spartant-color-surface-selected: oklch(35% 0.1254 264);
+    --spartant-color-warning: oklch(74% 0.1224 75);
+    --spartant-color-warning-foreground: oklch(12% 0.0025 264);
+    --spartant-color-warning-surface: oklch(19% 0.04 75);
+    --spartant-color-warning-text: oklch(84% 0.0748 75);
+  }
+}
+
+/* Dark theme by explicit choice, independent of the browser preference. */
+:root[data-theme="dark"] {
+  color-scheme: dark;
+
+  --spartant-color-accent: oklch(74% 0.0648 300);
+  --spartant-color-accent-foreground: oklch(12% 0.0025 264);
+  --spartant-color-accent-surface: oklch(19% 0.0306 300);
+  --spartant-color-accent-text: oklch(84% 0.0396 300);
+  --spartant-color-background: oklch(12% 0.0025 264);
+  --spartant-color-border: oklch(35% 0.0092 264);
+  --spartant-color-border-strong: oklch(54% 0.0137 264);
+  --spartant-color-border-subtle: oklch(25% 0.0064 264);
+  --spartant-color-danger-active: oklch(91% 0.0464 27);
+  --spartant-color-danger: oklch(74% 0.144 27);
+  --spartant-color-danger-foreground: oklch(12% 0.0025 264);
+  --spartant-color-danger-hover: oklch(84% 0.088 27);
+  --spartant-color-danger-surface: oklch(19% 0.068 27);
+  --spartant-color-danger-text: oklch(84% 0.088 27);
+  --spartant-color-focus-ring: oklch(74% 0.1334 264);
+  --spartant-color-foreground: oklch(98% 0.0008 264);
+  --spartant-color-foreground-disabled: oklch(54% 0.0137 264);
+  --spartant-color-foreground-inverse: oklch(12% 0.0025 264);
+  --spartant-color-foreground-muted: oklch(74% 0.0101 264);
+  --spartant-color-information: oklch(74% 0.1008 240);
+  --spartant-color-information-foreground: oklch(12% 0.0025 264);
+  --spartant-color-information-surface: oklch(19% 0.0435 240);
+  --spartant-color-information-text: oklch(84% 0.0616 240);
+  --spartant-color-primary-active: oklch(91% 0.0431 264);
+  --spartant-color-primary: oklch(74% 0.1334 264);
+  --spartant-color-primary-foreground: oklch(12% 0.0025 264);
+  --spartant-color-primary-hover: oklch(84% 0.0789 264);
+  --spartant-color-primary-surface: oklch(19% 0.0646 264);
+  --spartant-color-primary-text: oklch(84% 0.0789 264);
+  --spartant-color-secondary-active: oklch(45% 0.0774 300);
+  --spartant-color-secondary: oklch(25% 0.0414 300);
+  --spartant-color-secondary-foreground: oklch(98% 0.0008 264);
+  --spartant-color-secondary-hover: oklch(35% 0.0594 300);
+  --spartant-color-success: oklch(74% 0.108 150);
+  --spartant-color-success-foreground: oklch(12% 0.0025 264);
+  --spartant-color-success-surface: oklch(19% 0.051 150);
+  --spartant-color-success-text: oklch(84% 0.066 150);
+  --spartant-color-surface: oklch(25% 0.0064 264);
+  --spartant-color-surface-disabled: oklch(19% 0.0048 264);
+  --spartant-color-surface-elevated: oklch(35% 0.0092 264);
+  --spartant-color-surface-muted: oklch(19% 0.0048 264);
+  --spartant-color-surface-selected: oklch(35% 0.1254 264);
+  --spartant-color-warning: oklch(74% 0.1224 75);
+  --spartant-color-warning-foreground: oklch(12% 0.0025 264);
+  --spartant-color-warning-surface: oklch(19% 0.04 75);
+  --spartant-color-warning-text: oklch(84% 0.0748 75);
+}

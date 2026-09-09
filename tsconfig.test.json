@@ -1,0 +1,21 @@
+{
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": {
+    "noEmit": true,
+    "composite": false,
+    "declaration": false,
+    "declarationMap": false,
+    "sourceMap": false
+  },
+  "include": [
+    "packages/*/src/**/*.test.ts",
+    "packages/*/src/**/*.test.tsx",
+    "apps/*/src/**/*.test.ts",
+    "apps/*/src/**/*.test.tsx",
+    "examples/*/src/**/*.test.ts",
+    "examples/*/src/**/*.test.tsx",
+    "vitest.config.ts",
+    "examples/*/vite.config.ts",
+    "packages/*/tooling/**/*.ts"
+  ]
+}

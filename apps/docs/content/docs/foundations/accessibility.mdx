@@ -1,0 +1,157 @@
+---
+title: Accessibility
+description: The floors every component meets, how each is checked, and what a consumer has to keep true.
+keywords:
+  - accessibility
+  - a11y
+  - WCAG
+  - contrast
+  - focus ring
+  - focus visible
+  - keyboard
+  - touch target
+  - 44px
+  - screen reader
+  - aria
+  - reduced motion
+  - disabled
+  - loading
+  - aria-busy
+  - axe
+  - manual review
+---
+
+Accessibility in Spartant is stated as floors and checked as tests. This page
+lists the floors, names the check behind each, and says what remains a
+person's job.
+
+## Native elements
+
+A `button` is a `button`, a label is a `label`, a checkbox is an `input`, a
+dialog is a `dialog` opened with `showModal()`. Keyboard activation, form
+participation, label click targets, focus trapping, `Escape` dismissal, and
+focus restoration come from the platform, which has them right. ARIA is added
+only where the platform has no element for the meaning, such as `role="switch"`
+on a checkbox that takes effect on flip.
+
+## Contrast
+
+Every text pairing that ships meets **4.5:1** and every boundary or focus ring
+that carries state meets **3:1**, in both themes. Disabled pairings are exempt
+by WCAG and measured anyway. A failing pairing blocks release.
+
+Checked by `pnpm check:colors` on every build. The full matrix with measured
+figures is on [Color](./color.mdx#required-pairings).
+
+## Focus
+
+One focus treatment on every focusable component: a 2px outline in
+`color.focus-ring`, offset by 2px, shown on `:focus-visible` so it appears for
+keyboard users and not on every pointer click.
+
+The ring is contrast-checked against three surfaces in both themes: the page,
+a card, and a raised surface. A ring that is visible on the page but vanishes
+inside a dialog is the failure keyboard users actually hit.
+
+Focus movement never waits for motion. Dialog restores focus to its trigger the
+instant it closes, which is why nothing in the package consumes an exit
+animation. See [Motion](./motion.mdx#known-gaps).
+
+## Touch targets
+
+Every actionable control offers a hit area of at least **44 by 44 CSS pixels**
+on a coarse pointer, carried by the `size.min-target` role. The default
+button and field heights meet it outright. A small button is 32px tall, which
+is right for a dense toolbar and wrong for a thumb, so its hit area is
+extended with a centred pseudo-element on `pointer: coarse` only. It never
+affects layout and never steals clicks in a mouse-driven toolbar.
+
+<TokenTable prefix="size" px />
+
+## Keyboard
+
+Every interactive component is fully operable by keyboard through native
+behaviour: Tab and Shift+Tab move focus, Space and Enter activate, arrow keys
+move within a radio group, and Escape closes a dialog. Keyboard activation is
+immediate; it never waits for an animation, and it triggers no spatial motion.
+
+## Names, descriptions, and announcements
+
+- A `Field` wires its `Label`, control, and `FieldMessage` together with
+  generated ids, so the control's accessible name and `aria-describedby` cannot
+  disagree with what is on screen. An error message is announced when it
+  appears.
+- `DialogTitle` is required. A modal without a name is announced as "dialog"
+  and nothing else.
+- `Separator` is decorative by default and announced only when
+  `decorative={false}` says the line carries meaning.
+- `RadioGroup` renders a `fieldset` and `legend`, so the group's name is
+  announced when focus enters it with no ARIA at all.
+
+## Disabled and loading
+
+Disabled state is carried by the `disabled` attribute, never by colour alone;
+the colour is a secondary cue. `surface.disabled` differs measurably from
+`surface`, so a disabled control is identifiable rather than merely
+unresponsive.
+
+Loading is deliberately not disabled. A disabled element loses focus and drops
+out of the tab order, so a button that becomes disabled the moment it is
+pressed loses the user's place at the exact moment they are waiting. A loading
+button stays focusable, sets `aria-busy` and `aria-disabled`, swallows the
+activation, and keeps its width so the layout does not move.
+
+## Reduced motion
+
+Under `prefers-reduced-motion: reduce` every duration, scale, and distance
+token collapses globally in the package stylesheet, so no component can forget
+it. State changes become immediate; colour and opacity transitions that
+clarify state without moving anything remain. A loading spinner stops turning
+and `aria-busy` still carries the state. The live demo on
+[Motion](./motion.mdx#live-demo) shows both modes side by side.
+
+## Themes and colour scheme
+
+The dark theme sets `color-scheme: dark`, so native form controls, scrollbars,
+and the default focus ring follow it. Theme choice is stored in a way that
+tolerates blocked storage, and a system preference is followed live rather
+than frozen at first load. See [Theming](../start/theming.mdx).
+
+## How it is checked
+
+| Check | Runs | Covers |
+| --- | --- | --- |
+| `pnpm check:colors` | Every build | Contrast and gamut over every required pairing in both themes |
+| `pnpm test:stories` | Every build | Every story rendered, its interactions played, and the result audited with axe |
+| `pnpm test` | Every build | Behaviour tests, including focus immediacy, tint separation, and the motion assertions |
+| `MANUAL-REVIEW.md` | When a change touches keyboard, focus, screen readers, pointer or touch, theme, responsive behaviour, motion, or reduced motion | What a machine cannot see: visible focus, sensible announcements, purposeful motion, real-device gestures |
+
+The story audit runs under a DOM without a layout engine, so colour contrast
+there comes back incomplete rather than passing. Rendered contrast is covered
+by the accessibility panel in Storybook, and the token pairings are proved
+deterministically by the colour check. Both use the same axe configuration so
+they cannot disagree.
+
+## What a consumer keeps true
+
+- Give every control a visible label. `Input` inside a `Field` with a `Label`
+  does this; a bare `Input` needs its own `id` and label.
+- Do not override the focus ring away. If you change `focus-ring`, keep it at
+  3:1 on every surface it can appear over.
+- Do not carry meaning by colour alone. Pair a status colour with text or an
+  icon.
+- Keep the 44px floor if you change control heights.
+- Test with a keyboard and a screen reader before shipping a prototype to
+  anyone else.
+
+## Known gaps
+
+- No screen-reader automation. VoiceOver checks are manual and recorded per
+  issue through `MANUAL-REVIEW.md`.
+- Rendered colour contrast is not audited automatically at story level,
+  because the story runner has no layout engine. The token audit covers the
+  pairings deterministically instead.
+- No high-contrast or forced-colours theme has been reviewed. `forced-colors`
+  behaviour of the components is untested.
+- Real-device touch testing depends on a physical device and is required only
+  when a gesture trigger applies.

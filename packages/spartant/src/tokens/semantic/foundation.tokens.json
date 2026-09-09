@@ -1,0 +1,229 @@
+{
+  "$schema": "../schema/spartant-tokens.schema.json",
+  "$description": "SEMANTIC non-colour roles. Components consume these, never the raw scales, so retuning a scale does not mean touching every component.",
+  "radius": {
+    "$type": "dimension",
+    "control": {
+      "$value": "{radius.md}",
+      "$description": "Buttons, inputs, and other interactive controls."
+    },
+    "surface": {
+      "$value": "{radius.lg}",
+      "$description": "Cards, dialogs, and other containers."
+    },
+    "pill": {
+      "$value": "{radius.full}",
+      "$description": "Badges and other fully rounded shapes."
+    }
+  },
+  "size": {
+    "$type": "dimension",
+    "min-target": {
+      "$value": "{size.44}",
+      "$description": "The hit area every actionable control guarantees on a coarse pointer, whatever its visual size. Deliberately a role rather than a per-component token: Button, Checkbox, Radio, and Switch all need the same floor, and three copies of one number is how they drift."
+    }
+  },
+  "space": {
+    "$type": "dimension",
+    "control-padding-x": {
+      "$value": "{space.4}"
+    },
+    "control-padding-y": {
+      "$value": "{space.2}"
+    },
+    "control-gap": {
+      "$value": "{space.2}"
+    },
+    "surface-padding": {
+      "$value": "{space.6}"
+    },
+    "stack-gap": {
+      "$value": "{space.4}"
+    },
+    "section-gap": {
+      "$value": "{space.12}"
+    }
+  },
+  "border-width": {
+    "$type": "dimension",
+    "default": {
+      "$value": "{border-width.thin}"
+    },
+    "emphasis": {
+      "$value": "{border-width.thick}"
+    }
+  },
+  "font": {
+    "family": {
+      "$type": "fontFamily",
+      "body": {
+        "$value": "{font.family.sans}"
+      },
+      "code": {
+        "$value": "{font.family.mono}"
+      }
+    },
+    "size": {
+      "$type": "dimension",
+      "caption": {
+        "$value": "{font.size.xs}"
+      },
+      "body-small": {
+        "$value": "{font.size.sm}"
+      },
+      "body": {
+        "$value": "{font.size.md}"
+      },
+      "body-large": {
+        "$value": "{font.size.lg}"
+      },
+      "heading-small": {
+        "$value": "{font.size.xl}"
+      },
+      "heading": {
+        "$value": "{font.size.2xl}"
+      },
+      "heading-large": {
+        "$value": "{font.size.3xl}"
+      },
+      "display": {
+        "$value": "{font.size.4xl}"
+      }
+    },
+    "weight": {
+      "$type": "fontWeight",
+      "body": {
+        "$value": "{font.weight.regular}"
+      },
+      "emphasis": {
+        "$value": "{font.weight.medium}"
+      },
+      "heading": {
+        "$value": "{font.weight.semibold}"
+      }
+    },
+    "line-height": {
+      "$type": "number",
+      "body": {
+        "$value": "{font.line-height.normal}"
+      },
+      "heading": {
+        "$value": "{font.line-height.tight}"
+      },
+      "caption": {
+        "$value": "{font.line-height.snug}"
+      }
+    },
+    "tracking": {
+      "$type": "dimension",
+      "body": {
+        "$value": "{font.tracking.normal}"
+      },
+      "heading": {
+        "$value": "{font.tracking.tight}"
+      }
+    }
+  },
+  "opacity": {
+    "$type": "number",
+    "disabled": {
+      "$value": "{opacity.50}"
+    }
+  },
+  "elevation": {
+    "$type": "shadow",
+    "flat": {
+      "$value": "{elevation.none}"
+    },
+    "surface": {
+      "$value": "{elevation.sm}"
+    },
+    "overlay": {
+      "$value": "{elevation.md}"
+    },
+    "modal": {
+      "$value": "{elevation.lg}"
+    }
+  },
+  "duration": {
+    "$type": "duration",
+    "press-feedback": {
+      "$value": "{duration.press}"
+    },
+    "indicator-loop": {
+      "$value": "{duration.loop}",
+      "$description": "One turn of a loading spinner. A duration role, so the global reduced-motion collapse sets it to 0ms and the indicator stops turning without the component branching on the preference."
+    },
+    "state-change": {
+      "$value": "{duration.fast}"
+    },
+    "overlay-enter": {
+      "$value": "{duration.standard}"
+    },
+    "overlay-exit": {
+      "$value": "{duration.fast}"
+    },
+    "modal-enter": {
+      "$value": "{duration.slow}"
+    },
+    "modal-exit": {
+      "$value": "{duration.standard}"
+    },
+    "reduced": {
+      "$value": "{duration.instant}",
+      "$description": "Every spatial motion collapses to this under prefers-reduced-motion."
+    }
+  },
+  "easing": {
+    "$type": "cubicBezier",
+    "enter": {
+      "$value": "{easing.out}"
+    },
+    "exit": {
+      "$value": "{easing.out}"
+    },
+    "move": {
+      "$value": "{easing.in-out}"
+    },
+    "state": {
+      "$value": "{easing.standard}"
+    },
+    "progress": {
+      "$value": "{easing.linear}"
+    }
+  },
+  "distance": {
+    "$type": "dimension",
+    "indicator": {
+      "$value": "{distance.xs}"
+    },
+    "state": {
+      "$value": "{distance.sm}"
+    },
+    "overlay": {
+      "$value": "{distance.md}"
+    }
+  },
+  "scale": {
+    "$type": "number",
+    "press": {
+      "$value": "{scale.97}"
+    },
+    "overlay-enter": {
+      "$value": "{scale.96}"
+    },
+    "reduced": {
+      "$value": "{scale.100}",
+      "$description": "Scale collapses to 1 under prefers-reduced-motion."
+    }
+  },
+  "spring": {
+    "$type": "spring",
+    "state": {
+      "$value": "{spring.responsive}"
+    },
+    "gesture": {
+      "$value": "{spring.expressive}"
+    }
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "$schema": "../schema/spartant-tokens.schema.json",
+  "$description": "COMPONENT tokens for Badge. The inset is here rather than in the spacing roles because a badge is not a control: space.control-padding-x and space.control-padding-y size the box a finger presses, and applying them to a caption-sized label produces a chip half again too large. Nothing in the semantic layer means 'the inset of a label that sits inside running text', so the exception is the smaller of the two evils. Everything else Badge needs (radius.pill, font.size.caption, every colour role) is semantic and stays semantic.",
+  "badge": {
+    "padding-x": {
+      "$type": "dimension",
+      "$value": "0.5rem",
+      "$description": "8px. Half of space.control-padding-x, which is the ratio that keeps a badge reading as a label rather than as a small button."
+    },
+    "padding-y": {
+      "$type": "dimension",
+      "$value": "0.125rem",
+      "$description": "2px. Chosen from the line box rather than from the look: caption type at its snug line height is 16.2px, so 2px above and below makes a 20.2px chip that fits inside both the body-small line box (21px) and the body line box (24px). At 4px the chip was 24.2px and measurably reflowed a body-small paragraph it sat inside, which is the whole reason an inline badge needs a stated height."
+    },
+    "gap": {
+      "$type": "dimension",
+      "$value": "0.25rem",
+      "$description": "4px between an icon and the label. space.control-gap is 8px, which is correct next to 16px body text and visibly loose next to 12px caption text."
+    }
+  }
+}

@@ -1,0 +1,169 @@
+{
+  "$schema": "../schema/spartant-tokens.schema.json",
+  "$description": "THEME override, dark. Restates semantic roles only; never primitives, never component tokens. Light is the base and only what differs appears here. Step choices follow COLOR.md: body text sits at step 500 or lighter on a dark surface. Provisional until HAUX-33.",
+  "color": {
+    "$type": "color",
+    "background": {
+      "default": {
+        "$value": "{color.neutral.1000}"
+      }
+    },
+    "surface": {
+      "default": {
+        "$value": "{color.neutral.900}"
+      },
+      "elevated": {
+        "$value": "{color.neutral.800}"
+      },
+      "muted": {
+        "$value": "{color.neutral.950}"
+      },
+      "disabled": {
+        "$value": "{color.neutral.950}"
+      },
+      "selected": {
+        "$value": "{color.primary.800}"
+      }
+    },
+    "foreground": {
+      "default": {
+        "$value": "{color.neutral.50}"
+      },
+      "muted": {
+        "$value": "{color.neutral.400}"
+      },
+      "inverse": {
+        "$value": "{color.neutral.1000}"
+      },
+      "disabled": {
+        "$value": "{color.neutral.600}"
+      }
+    },
+    "border": {
+      "default": {
+        "$value": "{color.neutral.800}"
+      },
+      "subtle": {
+        "$value": "{color.neutral.900}"
+      },
+      "strong": {
+        "$value": "{color.neutral.600}"
+      }
+    },
+    "focus-ring": {
+      "default": {
+        "$value": "{color.primary.400}"
+      }
+    },
+    "primary": {
+      "default": {
+        "$value": "{color.primary.400}"
+      },
+      "text": {
+        "$value": "{color.primary.300}"
+      },
+      "surface": {
+        "$value": "{color.primary.950}"
+      },
+      "hover": {
+        "$value": "{color.primary.300}"
+      },
+      "active": {
+        "$value": "{color.primary.200}"
+      },
+      "foreground": {
+        "$value": "{color.neutral.1000}"
+      }
+    },
+    "secondary": {
+      "default": {
+        "$value": "{color.secondary.900}"
+      },
+      "hover": {
+        "$value": "{color.secondary.800}"
+      },
+      "active": {
+        "$value": "{color.secondary.700}"
+      },
+      "foreground": {
+        "$value": "{color.neutral.50}"
+      }
+    },
+    "accent": {
+      "default": {
+        "$value": "{color.secondary.400}"
+      },
+      "text": {
+        "$value": "{color.secondary.300}"
+      },
+      "surface": {
+        "$value": "{color.secondary.950}"
+      },
+      "foreground": {
+        "$value": "{color.neutral.1000}"
+      }
+    },
+    "success": {
+      "default": {
+        "$value": "{color.success.400}"
+      },
+      "text": {
+        "$value": "{color.success.300}"
+      },
+      "surface": {
+        "$value": "{color.success.950}"
+      },
+      "foreground": {
+        "$value": "{color.neutral.1000}"
+      }
+    },
+    "warning": {
+      "default": {
+        "$value": "{color.warning.400}"
+      },
+      "text": {
+        "$value": "{color.warning.300}"
+      },
+      "surface": {
+        "$value": "{color.warning.950}"
+      },
+      "foreground": {
+        "$value": "{color.neutral.1000}"
+      }
+    },
+    "danger": {
+      "default": {
+        "$value": "{color.danger.400}"
+      },
+      "text": {
+        "$value": "{color.danger.300}"
+      },
+      "surface": {
+        "$value": "{color.danger.950}"
+      },
+      "hover": {
+        "$value": "{color.danger.300}"
+      },
+      "active": {
+        "$value": "{color.danger.200}"
+      },
+      "foreground": {
+        "$value": "{color.neutral.1000}"
+      }
+    },
+    "information": {
+      "default": {
+        "$value": "{color.information.400}"
+      },
+      "text": {
+        "$value": "{color.information.300}"
+      },
+      "surface": {
+        "$value": "{color.information.950}"
+      },
+      "foreground": {
+        "$value": "{color.neutral.1000}"
+      }
+    }
+  }
+}

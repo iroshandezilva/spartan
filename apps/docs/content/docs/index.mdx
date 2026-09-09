@@ -1,0 +1,110 @@
+---
+title: Introduction
+description: What Spartant is, what it is not, what is released today, and where each kind of answer lives.
+keywords:
+  - spartant
+  - design system
+  - react
+  - "@iroshandezilva/spartant"
+  - getting started
+  - overview
+  - status
+  - storybook
+  - fumadocs
+---
+
+Spartant is a personal, code-first React design system for building consistent
+product prototypes quickly. It is distributed as one npm package,
+`@iroshandezilva/spartant`, and it owns its component source, its public API,
+its tokens, and its themes. Nothing in it is a wrapper around another
+component library.
+
+## What it promises
+
+- **Semantic tokens.** Components consume roles such as `primary` and
+  `foreground-muted`, never raw colours or palette steps. A theme change or a
+  consumer override retypes everything at runtime, with no rebuild.
+- **Light and dark from one palette.** One OKLCH scale serves both themes;
+  what changes is which step a role points at. Every required text and state
+  pairing is contrast-checked in both themes on every build.
+- **Accessible by default.** Native elements where they work, a 44px touch
+  floor on every actionable control, one focus treatment everywhere, and
+  reduced motion handled globally rather than per component.
+- **Purposeful motion.** Every component records a motion purpose or an
+  explicit no-motion rationale. Keyboard activation never waits for an
+  animation.
+- **Agent-readable.** Source paths, exports, commands, token names, and
+  verification steps are documented so a coding agent can work from the
+  published documentation alone. See [Using with a coding agent](./start/coding-agents.mdx).
+
+## What it is not
+
+- Not a framework. The package targets any React 19 renderer and ships no
+  bundler assumptions. It has two runtime dependencies, `clsx` and
+  `tailwind-merge`.
+- Not a Tailwind requirement. A precompiled stylesheet is one of the two
+  supported styling paths. See [Installation](./start/installation.mdx).
+- Not a large catalogue. The v0.1 inventory is deliberately small and every
+  component in it is owned source.
+
+## Where to look
+
+Three surfaces, each answering a different question.
+
+| Surface | Answers |
+| --- | --- |
+| This site | How and why to use the system |
+| Storybook | What every state of a component looks like |
+| The package source | What the code actually does |
+
+This site explains foundations, decisions, usage, and contribution. Storybook
+remains the exhaustive state surface, so a component page here links to
+stories rather than repeating them.
+
+## What is released today
+
+The components whose build issues are complete at the time of writing are
+`Badge`, `Button`, `Checkbox`, `Dialog` and its parts, `Field`, `FieldMessage`,
+`Input`, `Label`, `Radio`, `RadioGroup`, `Separator`, `Switch`, and `Textarea`,
+together with `ThemeProvider`, `useTheme`, `themeScript`, `cn`, and the
+generated token surface. Every page on this site uses only those. The full
+runtime export list is generated from the package on
+[Using with a coding agent](./start/coding-agents.mdx#what-the-package-exports).
+
+<Callout type="warn">
+  Card, Tabs, Select, Tooltip, and Popover are in the approved inventory and are
+  being built in their own issues. Nothing on this site uses or documents them.
+  Treat a component as released only when its Linear issue is Done, even if
+  its name already appears in the generated export list. Component pages
+  arrive in their own issue; this site currently documents the Start and
+  Foundations sections only.
+</Callout>
+
+The buttons below are the package's `Button`, imported through its public
+entry point and rendered by this page. They are not a picture.
+
+<ButtonRow />
+
+They are painted by the same semantic tokens the package ships, so switching
+this site's theme retypes them along with everything else.
+
+## Reading order
+
+1. [Installation](./start/installation.mdx), then [Quick start](./start/quick-start.mdx).
+2. [Theming](./start/theming.mdx), which most prototypes need on day one.
+3. [Design principles](./foundations/design-principles.mdx) and
+   [Tokens](./foundations/tokens.mdx), which explain every decision after them.
+4. The rest of Foundations as needed: [Color](./foundations/color.mdx),
+   [Typography](./foundations/typography.mdx), [Spacing](./foundations/spacing.mdx),
+   [Radius and elevation](./foundations/radius-and-elevation.mdx),
+   [Motion](./foundations/motion.mdx), and [Accessibility](./foundations/accessibility.mdx).
+
+## Known gaps
+
+- The package has not yet been published to the npm registry. Its version is
+  `0.0.0` and the install command on the next page describes the intended
+  path. Publishing is its own issue.
+- No component pages exist yet. Storybook is the only per-state reference.
+- Search uses the built-in static index. Token names and prop names are
+  indexed through page keywords, but the index has not been evaluated against
+  every task the documentation plan lists.

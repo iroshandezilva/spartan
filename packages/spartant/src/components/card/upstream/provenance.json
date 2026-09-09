@@ -1,0 +1,14 @@
+{
+  "$comment": "Provenance for the shadcn source Card was adapted from, per ADOPTING-SHADCN.md. card.tsx.txt is the upstream text exactly as fetched, kept so the adaptation can be diffed against its origin. Never import it; it is evidence, not code. Same shape as src/experiments/shadcn/upstream/provenance.json so scripts/check-upstream.mjs can read it once it globs component provenance files.",
+  "entries": {
+    "card": {
+      "source": "https://ui.shadcn.com/r/styles/new-york/card.json",
+      "style": "new-york",
+      "fetchedOn": "2026-09-09",
+      "upstreamPath": "ui/card.tsx",
+      "declaredDependencies": [],
+      "registryDependencies": [],
+      "sha256": "525c4bb2c051987be64df0e92e1d90174912b219bf541e24ffbc4a3406de49e8"
+    }
+  }
+}

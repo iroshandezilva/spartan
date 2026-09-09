@@ -1,0 +1,19 @@
+/*
+ * Storybook's canvas styles.
+ *
+ * The same two imports a consumer running their own Tailwind would write, so
+ * the workbench is not a special case: if this works, their app works.
+ */
+
+@import "tailwindcss";
+@import "@iroshandezilva/spartant/theme.css";
+
+@source "../../../packages/spartant/dist";
+@source "../src";
+
+/* The canvas is a page, so it gets the page background and body type. */
+body {
+  background: var(--spartant-color-background);
+  color: var(--spartant-color-foreground);
+  font-family: var(--spartant-font-family-body);
+}
