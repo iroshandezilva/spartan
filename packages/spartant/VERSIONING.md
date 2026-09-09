@@ -108,4 +108,4 @@ release notes carry the message.
 - Name: `@iroshandezilva/spartant`. The scope is the npm account `iroshandezilva`, confirmed by Iroshan on 9 September 2026. The name was unpublished on the registry at that date.
 - Visibility: public, `publishConfig.access: "public"`.
 - License: MIT, `LICENSE` beside the manifest so it ships in the tarball.
-- Repository, homepage, and bugs fields: **not set**. The working directory is not yet a Git repository and no GitHub repository exists. Inventing a URL would break the provenance link npm checks against the repository field. Add all three in the same change that creates the repository, before HAUX-60 configures trusted publishing.
+- Repository: `https://github.com/iroshandezilva/spartan`, public, with the package under `packages/spartant`. The `repository`, `homepage`, and `bugs` fields point at it and are asserted by `scripts/inspect-package.mjs`, because npm provenance verifies `repository.url` against the repository that ran the publish.

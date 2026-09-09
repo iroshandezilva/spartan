@@ -13,6 +13,13 @@
   ],
   "license": "MIT",
   "author": "Iroshan de Zilva",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/iroshandezilva/spartan.git",
+    "directory": "packages/spartant"
+  },
+  "homepage": "https://github.com/iroshandezilva/spartan#readme",
+  "bugs": "https://github.com/iroshandezilva/spartan/issues",
   "type": "module",
   "sideEffects": false,
   "engines": {

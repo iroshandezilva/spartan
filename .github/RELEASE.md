@@ -42,11 +42,11 @@ publish, in this shape with the real owner and name:
 ```json
 "repository": {
   "type": "git",
-  "url": "git+https://github.com/<owner>/<repo>.git",
+  "url": "git+https://github.com/iroshandezilva/spartan.git",
   "directory": "packages/spartant"
 },
-"homepage": "https://github.com/<owner>/<repo>#readme",
-"bugs": "https://github.com/<owner>/<repo>/issues"
+"homepage": "https://github.com/iroshandezilva/spartan#readme",
+"bugs": "https://github.com/iroshandezilva/spartan/issues"
 ```
 
 `directory` matters: the package lives in a workspace subdirectory, and

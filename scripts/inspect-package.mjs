@@ -86,6 +86,13 @@ const EXPECTED = {
   dependencies: ["clsx", "tailwind-merge"],
   engines: ["node"],
   publishAccess: "public",
+  repository: {
+    type: "git",
+    url: "git+https://github.com/iroshandezilva/spartan.git",
+    directory: "packages/spartant",
+  },
+  homepage: "https://github.com/iroshandezilva/spartan#readme",
+  bugs: "https://github.com/iroshandezilva/spartan/issues",
 };
 
 const manifest = JSON.parse(
@@ -123,6 +130,13 @@ if (manifest.publishConfig?.access !== EXPECTED.publishAccess) {
   problems.push(`publishConfig.access is ${manifest.publishConfig?.access}`);
 }
 if (!contents.includes("package/LICENSE")) problems.push("LICENSE is not in the tarball");
+// npm provenance verifies the repository field against the repository that
+// ran the publish, so a typo here fails at publish time, not here.
+if (!same(manifest.repository, EXPECTED.repository)) {
+  problems.push(`repository is ${JSON.stringify(manifest.repository)}`);
+}
+if (manifest.homepage !== EXPECTED.homepage) problems.push(`homepage is ${manifest.homepage}`);
+if (manifest.bugs !== EXPECTED.bugs) problems.push(`bugs is ${manifest.bugs}`);
 
 // Every export target must be a real file in the tarball. A key that points at
 // a path the build no longer emits resolves fine here and fails in a consumer.
