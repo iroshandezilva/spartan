@@ -46,7 +46,7 @@
     "tokens:build": "pnpm tooling:build && node packages/spartant/tooling/.dist/tokens/generate.js",
     "tokens:check": "pnpm tooling:build && node packages/spartant/tooling/.dist/tokens/generate.js --check",
     "tooling:build": "tsc -p packages/spartant/tooling/tsconfig.json",
-    "typecheck": "tsc -b && tsc -p tsconfig.test.json",
+    "typecheck": "pnpm build:package && tsc -b && tsc -p tsconfig.test.json",
     "validate": "pnpm format:check && pnpm lint && pnpm check:docs && pnpm check:tokens && pnpm tokens:check && pnpm check:colors && pnpm typecheck && pnpm test && pnpm test:stories && pnpm build && pnpm inspect:package"
   },
   "devDependencies": {

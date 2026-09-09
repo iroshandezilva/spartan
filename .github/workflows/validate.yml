@@ -125,7 +125,7 @@ jobs:
       # to look at. A visual regression is often what broke the check, and
       # withholding the evidence at exactly that moment would be perverse.
       - name: Upload Storybook build
-        if: always()
+        if: success()
         uses: actions/upload-artifact@v4
         with:
           name: storybook-static-${{ github.sha }}
