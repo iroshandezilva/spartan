@@ -1,0 +1,5 @@
+{
+  "title": "Releases",
+  "description": "The changelog, the version rules, and the deprecation path a consumer can rely on.",
+  "pages": ["changelog", "upgrading"]
+}

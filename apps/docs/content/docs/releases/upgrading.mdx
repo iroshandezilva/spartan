@@ -1,0 +1,85 @@
+---
+title: Upgrading
+description: What a version number promises, what is public, how a deprecation is announced and removed, and what a major asks of you.
+keywords:
+  - upgrade
+  - upgrading
+  - migration
+  - deprecation
+  - deprecated
+  - semver
+  - breaking change
+  - major
+  - minor
+  - patch
+  - public API
+  - VERSIONING.md
+  - replacedBy
+  - removeIn
+---
+
+The contract is
+[`packages/spartant/VERSIONING.md`](https://github.com/iroshandezilva/spartan/blob/main/packages/spartant/VERSIONING.md),
+decided in HAUX-61. This page is the consumer's summary of it.
+
+## What is public
+
+A version number only means something against a defined surface. These are
+covered by the version rules; everything else is internal and the package
+makes it hard to reach by accident.
+
+- Named exports of the package root, and the `*Props` interfaces and type
+  unions beside them.
+- The subpath exports `./styles.css`, `./theme.css`, `./tokens.json`, and
+  `./package.json`. The `exports` map has no wildcard, so nothing under
+  `dist/` resolves.
+- Semantic and component custom properties, `--spartant-*`.
+- Token paths in `tokens.json` and `semanticTokens`.
+- Tailwind role names mapped by `theme.css`, such as `bg-primary`.
+- The `data-theme` attribute and the storage key, exported as
+  `THEME_ATTRIBUTE` and `THEME_STORAGE_KEY`.
+
+Not public: which primitive a role aliases today, the primitive values in the
+JSON export, story helpers, tooling, and the file layout under `dist/`. See
+[Tokens](../foundations/tokens.mdx#what-is-stable).
+
+## What a bump means
+
+| Bump | Means | You have to |
+| --- | --- | --- |
+| Patch | A compatible fix, or a documentation correction tied to package behaviour | Nothing |
+| Minor | A backward-compatible addition: a component, variant, size, prop, role, or export | Nothing. A deprecation may be announced; read the note |
+| Major | A change you have to act on: a rename or removal, a documented behaviour change, a package-structure change | Follow the `Migration` section of the note |
+
+A token value change is a patch when it corrects the value and a major when it
+changes what the role means. Below `1.0.0` a breaking change moves the minor
+segment, so `0.1.0` plus a breaking change is `0.2.0`; it is still marked
+major and still carries migration guidance.
+
+## Deprecations
+
+1. **Announced in a minor.** The replacement ships alongside the old surface.
+   An export or prop is marked `@deprecated` in its JSDoc naming the
+   replacement; a token carries `$deprecated` with `replacedBy` and `removeIn`,
+   which the token check validates and the generated outputs carry.
+2. **Held for at least one minor.** The deprecated surface keeps working
+   unchanged for the whole of the next minor release.
+3. **Removed in a major**, with a `Migration` section in the note. `removeIn`
+   on a token names that version in advance.
+
+There are no runtime deprecation warnings. Types and release notes carry the
+message, so nothing is logged in a consumer's console.
+
+Nothing is deprecated today.
+
+## Peer and runtime relationships
+
+React `^19.0.0` is the one peer dependency; `ref` as a prop and `use()` are
+load-bearing. `react-dom` is not declared, because the package never imports
+it. The only runtime dependencies are `clsx` and `tailwind-merge`. Tailwind
+itself is optional: the precompiled `styles.css` path needs none.
+
+## Known gaps
+
+- No release has happened, so there is no migration to describe. The
+  structure above is what a migration will look like.

@@ -1,0 +1,95 @@
+---
+title: Agent evaluation
+description: The prompt set that proves a coding agent can answer setup, theming, component, token, accessibility, testing, and contribution questions from the published documentation alone, and how to run it.
+keywords:
+  - agent evaluation
+  - retrieval evaluation
+  - llms.txt
+  - llms-full.txt
+  - prompt set
+  - coding agent
+  - validation
+  - HAUX-58
+---
+
+The machine-readable entry points exist so that a coding agent can work from
+the published documentation without a repository checkout or a person to ask.
+This page is the repeatable test of that claim: a fixed prompt set, the page
+each answer must come from, and the procedure. It was created by HAUX-58 and
+is re-run whenever `/llms.txt`, `/llms-full.txt`, or a page they link changes
+materially.
+
+## The rule
+
+The agent answers using only `/llms.txt`, `/llms-full.txt`, and the pages
+those files link. No repository files, no chat context, no memory of the
+codebase. An answer counts only if the page named in the table contains it,
+and it is marked correct only when it matches the repository at the commit
+under test. A miss or a wrong answer becomes a content fix in the same
+change, and the set is re-run after the fix.
+
+## Procedure
+
+1. Build the site and start the production server:
+
+   ```bash
+   pnpm build:docs
+   pnpm --filter spartant-docs exec next start -p 3107
+   ```
+
+2. Fetch the entry points and confirm both return `200` with
+   `text/plain; charset=utf-8`:
+
+   ```bash
+   curl -sS -o llms.txt -w "%{http_code} %{content_type}\n" http://localhost:3107/llms.txt
+   curl -sS -o llms-full.txt -w "%{http_code} %{content_type}\n" http://localhost:3107/llms-full.txt
+   ```
+
+3. For each prompt, answer from those two files and the pages they link,
+   fetched with `curl`. Record where the answer was found, whether it was
+   correct against the repository, and any fix made.
+4. Post the results table on the Linear issue that triggered the run. Stop the
+   server.
+
+## Prompt set
+
+Each prompt names the area it covers from the issue's acceptance criteria.
+The expected source is the page or section that must answer it; the expected
+answer is what the repository says at the time of writing and is what the
+result is checked against.
+
+| # | Area | Prompt | Expected source | Expected answer |
+| --- | --- | --- | --- | --- |
+| 1 | Installation | Install Spartant in a React project that does not use Tailwind. Which import provides the styles? | Installation, Without Tailwind | `import "@iroshandezilva/spartant/styles.css"` once at the entry point; no other configuration |
+| 2 | Installation | My project already runs Tailwind CSS v4. What goes in my stylesheet? | Installation, With Tailwind | `@import "tailwindcss"`, `@import "@iroshandezilva/spartant/theme.css"`, and an `@source` line pointing at `node_modules/@iroshandezilva/spartant/dist` |
+| 3 | Theming | Force dark mode in a server-rendered Next.js app without a flash of the wrong theme. | Theming, In a server-rendered application | Inline `themeScript()` in `head`, wrap with `ThemeProvider`, `suppressHydrationWarning` on `html`; `data-theme="dark"` on the root is the switch |
+| 4 | Theming | Change the primary colour for the whole system in both themes. | Theming, Overriding a role | Redefine `--spartant-color-primary` on `:root` and `:root[data-theme="dark"]`, with `primary-hover`, `primary-active`, `primary-foreground`, and `focus-ring`, then recheck the pairings |
+| 5 | Component use | List the props Button adds to the native button, and the default `type`. | Button, Public API | `variant`, `size`, `loading`, plus `className` and every native attribute; `type` defaults to `"button"` |
+| 6 | Component use | Build a confirmation dialog whose name is announced. Which parts are required and how is it controlled? | Dialog, Public API | `DialogContent` with a required `DialogTitle`; controlled through `open` and `onOpenChange`, or uncontrolled with `DialogTrigger` |
+| 7 | Component use | Wire an input to a label and an error message so the error is announced. | Text fields, Public API | `Field` with `invalid`, containing `Label`, `Input`, and `FieldMessage tone="error"`; `Field` generates the ids and `aria-describedby` |
+| 8 | Tokens | What custom property does `color.foreground.muted` become, and how is it reached from TypeScript? | Tokens, In component code and Outputs | `--spartant-color-foreground-muted`; `semanticTokens["color.foreground.muted"]` and `tokenVar("color.foreground.muted")` |
+| 9 | Accessibility | What is the minimum touch target, and which token carries it? | Accessibility, Touch targets | 44 by 44 CSS pixels on a coarse pointer; `size.min-target` |
+| 10 | Accessibility | What contrast do text and focus pairings meet, and which command proves it? | Accessibility, Contrast; Color, Required pairings | 4.5:1 for text, 3:1 for focus rings and state boundaries, in both themes; `pnpm check:colors` |
+| 11 | Motion | What is the longest a product motion may run, and what happens under reduced motion? | Motion, Duration and Reduced motion | At or below 300ms; the stylesheet collapses every duration to `0ms` and scale to `1` globally, and nothing waits for an animation |
+| 12 | Testing | Which command is the full gate, and what does it run in order? | Testing, The full gate | `pnpm validate`: format check, lint, doc links, token checks, token drift, colour checks, type check, tests, story tests, build, package inspection |
+| 13 | Testing | When is a manual test required, and where is the checklist? | Testing, Manual review | Keyboard, focus, screen reader, pointer or touch, theme, responsive or long content, animation, reduced motion, package installation, production deployment; `MANUAL-REVIEW.md` |
+| 14 | Testing | Which story proves that a loading Button refuses activation, and where is the file? | Button, Testing notes | `LoadingRefusesActivation` in `apps/storybook/src/stories/Button.stories.tsx` |
+| 15 | Contribution | What must ship together when a component is added? | Creating or importing a component, What ships together | Source and README, the export in `src/index.ts`, tests, stories with the contract, the documentation page, a release note, the manual review result |
+| 16 | Contribution | From which Linear status may work start, and what is the source-of-truth order when documents disagree? | Repository setup; Using with a coding agent, Source of truth | `Ready to Start`; the issue, its attached documents, repository conventions and tests, existing components and tokens, upstream documentation; conflicts are reported, not resolved silently |
+| 17 | Contribution | An issue would need a new animation dependency to meet its criteria. What does an agent do? | Using with a coding agent, Stop conditions | Stop and ask: a dependency that changes the architecture or consumer contract is a stop condition, and an animation library needs an issue-level justification |
+| 18 | Release | How does a change declare its version bump, what makes a change major, and what does a major require? | Release process | A note under `.changes/` with a `kind` and `bump`; a rename, removal, behaviour change, or package-structure change is major; a major needs a `## Migration` section, and below 1.0.0 moves the minor segment |
+| 19 | Release | What is deprecated today, and how would a deprecation be announced? | Upgrading, Deprecations | Nothing; `@deprecated` JSDoc or `$deprecated` with `replacedBy` and `removeIn` on a token, announced in a minor and removed in a later major |
+| 20 | Source paths | Where is the public entry point, and where do the stories live? | Using with a coding agent, Where things live | `packages/spartant/src/index.ts`; `apps/storybook/src/stories/` |
+
+## Last run
+
+Recorded on the Linear issue that ran it. The first run, for HAUX-58, is on
+that issue's completion comment together with the content fixes it produced.
+
+## Known gaps
+
+- The run is performed by an agent reading the files, so the judgement of
+  "found" and "correct" is the agent's, checked against the repository by the
+  reviewer of the pull request. There is no automated scorer.
+- The prompt set covers the acceptance criteria of HAUX-58. It does not yet
+  cover pattern-level questions, because the pattern pages are not written.

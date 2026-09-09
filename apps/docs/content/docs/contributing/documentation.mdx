@@ -1,0 +1,118 @@
+---
+title: Documentation
+description: Which surface answers which question, how a page is added to this site, the component page template, and the rules that keep the text honest.
+keywords:
+  - documentation
+  - fumadocs
+  - storybook
+  - mdx
+  - frontmatter
+  - meta.json
+  - keywords
+  - component page template
+  - Prerelease
+  - Stories
+  - llms.txt
+  - em dash
+---
+
+## Three surfaces
+
+| Surface | Answers | Lives in |
+| --- | --- | --- |
+| This site | How and why to use the system: foundations, decisions, usage, contribution, release guidance | `apps/docs/content/docs/` |
+| Storybook | What every state of a component looks like, with interaction tests and the axe audit | `apps/storybook/src/stories/` |
+| The package source | What the code actually does, with a README beside each component | `packages/spartant/src/` |
+
+Storybook is the exhaustive state surface. A component page here links to
+stories by file and name rather than repeating them, and this site is never
+used in place of exhaustive state stories.
+
+Repository-level rules live in repository files, not on this site: the agent
+guide, the manual review checklist, the release runbook, the version policy.
+Pages here point at those files so the two cannot drift; the list is on
+[Using with a coding agent](../start/coding-agents.mdx#where-things-live-in-the-repository).
+
+## Adding a page
+
+1. Add an `.mdx` file under `apps/docs/content/docs/` with `title` and
+   `description` in its frontmatter. Add `keywords` for any component name,
+   prop name, token role, or error term a reader might search for; the search
+   index appends them to the page's content.
+2. Add the file name to the `pages` array in the nearest `meta.json`. A new
+   directory needs its own `meta.json` with a `title`, and its name added to
+   the parent's `pages`.
+3. Link to other pages by their file path, such as
+   `../foundations/motion.mdx`. Paths survive a page being moved, and both the
+   rendered page and `/llms-full.txt` resolve them to URLs.
+4. End the page with a `Known gaps` section. A page with nothing to say there
+   has not looked.
+
+`/llms.txt` and `/llms-full.txt` are generated from the same page tree at
+build time, so a new page appears in both with no further step.
+
+## Component pages
+
+One page per released component or family, in this order of sections:
+
+1. Purpose and when to use
+2. When not to use
+3. Import and minimal example
+4. Anatomy
+5. Public API
+6. Variants and sizes
+7. Required states
+8. Accessibility and keyboard behaviour
+9. Motion purpose or no-motion rationale
+10. Input modality, interruption, and reduced motion
+11. Motion tokens and implementation approach
+12. Theming and token dependencies
+13. Composition examples
+14. Testing notes
+15. Known limitations
+16. Changelog
+
+[Button](../components/button.mdx) is the worked example. Each page opens
+with `<Prerelease />`, which reads the version from the package manifest;
+embeds a live example from `apps/docs/components/demo/`, which imports only
+from the package's public entry point so a broken example fails the build;
+and lists Storybook coverage with `<Stories />` by story file and story name.
+The story file's `contract` object is the source of truth for the
+accessibility, keyboard, motion, and manual-check sections, and the page must
+agree with it.
+
+## Foundation pages
+
+Tables and specimens on the foundation pages are rendered from the package's
+published `tokens.json` at build time by the components in
+`apps/docs/components/foundation/`. They restate no value, so they cannot show
+something the package does not ship. Each has a Markdown form in
+`apps/docs/lib/llm-markdown.ts` that reads the same data, which is how the
+tables reach `/llms-full.txt`. Adding a generated table means adding both.
+
+## Writing rules
+
+- No em dashes, anywhere. Use a comma, a colon, or a full stop.
+- British spelling in prose, as the existing pages do; token names, props,
+  and code stay as they are in the source.
+- State what is provisional as provisional, and what is missing as missing.
+- Never document a check as passing or a behaviour as verified without the
+  evidence.
+
+## Checks
+
+- `pnpm check:docs` validates relative links in every `.md` file. MDX links to
+  a page that does not exist fail when the page renders, so `pnpm build:docs`
+  is the check for this site.
+- `pnpm --filter spartant-docs typecheck` type-checks the site, including the
+  generated collection.
+- The retrieval evaluation on [Agent evaluation](./agent-evaluation.mdx) is
+  re-run when the entry points or the pages they link change materially.
+
+## Known gaps
+
+- Pattern pages are not written.
+- Search uses the built-in static index and has not been evaluated against
+  every task the documentation plan lists.
+- There is no automated check that a component page agrees with its story
+  contract; that is a review step.

@@ -1,6 +1,7 @@
 "use client";
 
 import * as spartant from "@iroshandezilva/spartant";
+import { groupExports } from "@/lib/package-exports";
 
 /*
  * A client component, for the same reason as ButtonRow: the package's entry
@@ -18,16 +19,7 @@ import * as spartant from "@iroshandezilva/spartant";
  * it is the package.
  */
 export function PackageExports() {
-  const names = Object.keys(spartant).sort((a, b) => a.localeCompare(b));
-  const components = names.filter((name) => /^[A-Z]/.test(name) && !/^[A-Z_]+$/.test(name));
-  const constants = names.filter((name) => /^[A-Z_]+$/.test(name));
-  const functions = names.filter((name) => /^[a-z]/.test(name));
-
-  const groups: Array<[string, string[]]> = [
-    ["Components", components],
-    ["Functions and values", functions],
-    ["Constants", constants],
-  ];
+  const groups = groupExports(Object.keys(spartant));
 
   return (
     <table>

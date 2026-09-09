@@ -1,0 +1,138 @@
+---
+title: Testing
+description: The automated lanes, the order the full gate runs them in, what each proves, and the manual review that covers what a machine cannot.
+keywords:
+  - testing
+  - pnpm validate
+  - vitest
+  - pnpm test
+  - pnpm test:stories
+  - axe
+  - accessibility tests
+  - check:colors
+  - check:tokens
+  - typecheck
+  - lint
+  - biome
+  - CI
+  - GitHub Actions
+  - manual review
+  - MANUAL-REVIEW.md
+  - smoke test
+---
+
+Every check runs from the repository root through pnpm. `pnpm validate` is
+the full gate; run it before claiming any work is complete. CI runs the same
+list as separate steps in
+[`.github/workflows/validate.yml`](https://github.com/iroshandezilva/spartan/blob/main/.github/workflows/validate.yml),
+so a failure names itself, and the two lists are changed in the same commit.
+
+## The full gate
+
+`pnpm validate` runs these in this order and stops at the first failure.
+
+| Step | Command | Proves |
+| --- | --- | --- |
+| 1 | `pnpm format:check` | Biome formatting. `pnpm format` writes the fix |
+| 2 | `pnpm lint` | Biome lint, including the accessibility and React hook rules. `pnpm lint:fix` writes safe fixes |
+| 3 | `pnpm check:docs` | Every relative link in every Markdown file resolves on disk. External links are shape-checked, never fetched |
+| 4 | `pnpm check:tokens` | Token sources match the schema; aliases resolve; layer rules, naming grammar, and deprecation fields hold; CSS, JSON, and TypeScript emission works |
+| 5 | `pnpm tokens:check` | The committed generated outputs are not stale against the sources |
+| 6 | `pnpm check:colors` | Every required contrast pairing meets its threshold in both themes, and every colour is in gamut under the deterministic policy |
+| 7 | `pnpm typecheck` | `tsc -b` across the project references, then the test files |
+| 8 | `pnpm test` | Vitest, Node only. Builds the package first, because app tests import it through its published exports |
+| 9 | `pnpm test:stories` | Every story rendered, its play function awaited, the result audited with axe |
+| 10 | `pnpm build` | Every workspace in dependency order, including this site |
+| 11 | `pnpm inspect:package` | Packs the package and fails if anything unexpected would ship or an expected file is missing |
+
+`pnpm check` runs format, lint, and import sorting in one pass, and
+`pnpm check:fix` writes them.
+
+## Running less than everything
+
+- `pnpm test <path>` runs one test file; `pnpm test -t "<name>"` runs one
+  test by name; `pnpm test:watch` watches.
+- The story lane is separate on purpose. Stories need a DOM and resolve the
+  package through its published exports, so they cannot run before
+  `pnpm build:package`. Its configuration is `apps/storybook/vitest.config.ts`.
+- `pnpm build:docs`, `pnpm --filter spartant-docs typecheck`, and
+  `pnpm check:docs` are the fast iteration checks for documentation work.
+
+## Accessibility checks, in two places
+
+`pnpm test:stories` audits every story with axe under happy-dom, which has no
+layout engine, so colour contrast comes back `incomplete` rather than
+passing. Rendered contrast is covered by the accessibility panel in Storybook,
+and the token pairings are proved deterministically by `pnpm check:colors`.
+Both configurations come from `apps/storybook/src/lib/a11y.ts`, so they
+cannot disagree. See [Accessibility](../foundations/accessibility.mdx#how-it-is-checked).
+
+## What a play function cannot assert
+
+`:hover`, `:focus-visible`, and `:active` are driven by trusted input, and the
+events a test runner dispatches are untrusted. `Escape` on a native dialog and
+focus movement through `showModal()` are platform behaviours happy-dom does
+not reproduce. Those are browser checks, and every component page lists them
+under Testing notes. The story file's `contract` object is where they are
+declared.
+
+## Manual review
+
+[`MANUAL-REVIEW.md`](https://github.com/iroshandezilva/spartan/blob/main/MANUAL-REVIEW.md)
+at the repository root is the checklist. It is required whenever a change
+affects keyboard navigation, focus, screen readers, pointer or touch
+behaviour, theme appearance, responsive or long-content behaviour, animation,
+reduced motion, package installation, or production deployment. Otherwise the
+issue states `Manual test not required` with a short reason, which is a real
+option.
+
+| Group | Covers | Blocks completion |
+| --- | --- | --- |
+| R | Render and theme, in Chrome and Safari | When it makes the component unusable or wrong in one theme |
+| K | Keyboard: Tab order, Enter and Space, disabled skipped | Always |
+| F | Focus: a visible ring on keyboard, none on click, survives 200% zoom | Always |
+| S | Screen reader, macOS VoiceOver: role, name, state, associated text | Always |
+| P | Pointer and touch, including the 44px target measured with the device toolbar on | P3, the touch target, always |
+| L | Layout at 320px, long content, empty, 200% zoom | When unusable |
+| M | Motion: purpose, token-bound values, timing, origin, interruption | When unusable |
+| D | Reduced motion with the OS setting on | Always |
+| O, G, V, C, T | Overlays, gestures, form controls, selection controls, timed behaviour, each only when its trigger applies | Always within a triggered group |
+
+A check that could not be run is not a pass; it is recorded under `Not run`
+with the reason. If the reason is a missing environment, such as a real touch
+device for the gesture group, the issue goes to `Agent Done` with
+`Human input required` and the exact steps. When an agent's environment
+supports the check, the agent performs it and records the evidence. The
+checklist ends with a result block that is pasted into the Linear completion
+comment and the pull request.
+
+## Packaging and consumer checks
+
+- `pnpm inspect:package` is part of the gate and fails on an unexpected file
+  in the tarball, a missing `LICENSE` or `README.md`, or a wrong `exports`
+  key.
+- `pnpm smoke:package` packs the package, installs the tarball in a throwaway
+  project in the system temporary directory, and proves the entry point, the
+  subpath exports, the types, and the rendered markup with no workspace alias.
+  It installs from the registry, so it belongs to the release job rather than
+  the gate. `--keep` retains the consumer project for inspection.
+- `pnpm review:storybook [path]` serves a built Storybook over HTTP. The
+  static build every CI run retains as `storybook-static-<sha>` is the visual
+  review surface; there is no hosted visual-regression provider in v0.1. See
+  [`apps/storybook/VISUAL-REVIEW.md`](https://github.com/iroshandezilva/spartan/blob/main/apps/storybook/VISUAL-REVIEW.md).
+
+## Reporting
+
+Never report a check as passing when it was not run, and explain every
+omitted check that would normally apply. The completion report has an
+`Automated verification` section for the commands and their results and a
+`Manual verification` section for the checklist result; the pull request
+template has matching sections. The exact structure is in `AGENTS.md`.
+
+## Known gaps
+
+- No image-comparing visual regression. HAUX-42 decided against a hosted
+  provider for v0.1.
+- No screen-reader automation. VoiceOver checks are manual.
+- The Node test lane has no DOM environment; component rendering is proved
+  in the story lane.

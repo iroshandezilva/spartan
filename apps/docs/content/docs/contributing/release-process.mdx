@@ -1,0 +1,135 @@
+---
+title: Release process
+description: One release note per change, a kind that fixes the version bump, a prepared release pull request, a tag, and a protected publish with no long-lived token.
+keywords:
+  - release
+  - release process
+  - changelog
+  - release note
+  - .changes
+  - semver
+  - version bump
+  - pnpm release:note
+  - pnpm release:check
+  - pnpm release:prepare
+  - npm publish
+  - trusted publishing
+  - OIDC
+  - provenance
+  - tag
+  - Vercel
+  - deploy
+---
+
+The runbook is
+[`.github/RELEASE.md`](https://github.com/iroshandezilva/spartan/blob/main/.github/RELEASE.md);
+the note format and version mapping are in
+[`.changes/README.md`](https://github.com/iroshandezilva/spartan/blob/main/.changes/README.md);
+the public surface and the version rules are in
+[`packages/spartant/VERSIONING.md`](https://github.com/iroshandezilva/spartan/blob/main/packages/spartant/VERSIONING.md).
+This page is the shape of the process; those files are the detail and win any
+disagreement.
+
+## Every change carries a note
+
+A change that a consumer of the package can see gets one file under
+`.changes/`, written with the command or by hand:
+
+```bash
+pnpm release:note --kind=component --bump=minor --issue=HAUX-43 --summary="Add Button"
+```
+
+```md
+---
+kind: component
+bump: minor
+issue: HAUX-43
+---
+
+Add `Button` with `variant` and `size` props.
+```
+
+The first line of the body is the changelog entry, written for a consumer.
+Documentation site work that does not change the package needs no note, and
+the pull request template asks which of the two applies.
+
+## The kind fixes the bump
+
+| Kind | Allowed bumps | Use it for |
+| --- | --- | --- |
+| `component` | minor, major | A new component, variant, or size is minor. Changing or removing one is major |
+| `api` | minor, major | A new public export or prop is minor. Renaming, narrowing, or removing one is major |
+| `token` | patch, minor, major | Correcting a value is patch. Adding a semantic role is minor. Renaming, removing, or deprecating one is major |
+| `fix` | patch, major | A compatible fix is patch. A fix that changes documented behaviour is major. Never minor |
+| `docs` | patch | Documentation tied to package behaviour |
+| `build` | patch, major | Internal build changes that reach the tarball are patch. A package-structure change is major |
+
+A `major` note must contain a `## Migration` section with real instructions.
+Below `1.0.0` a breaking change is still a `major` note, but it moves the
+minor segment: `0.1.0` plus a breaking change is `0.2.0`. `1.0.0` is a
+decision, not a consequence. `pnpm release:check` fails on a bump the kind
+does not allow, on a major without migration guidance, and on a documented
+version that disagrees with the manifest; it then prints the proposed
+version.
+
+## Preparing a release
+
+```bash
+pnpm release:plan      # propose only, writes nothing
+pnpm release:prepare   # apply
+```
+
+`release:prepare` bumps the package version, writes a dated section in
+`CHANGELOG.md`, rewrites every `spartant-version` marker in the
+documentation, deletes the consumed notes, and writes the release pull request
+body to `.artifacts/release-<version>.md`. It runs no Git command; it prints
+the branch, commit, and pull request commands. The release lands as one
+reviewable pull request that passes `validate` like any other.
+
+## Publishing
+
+1. On the merged commit on `main`, tag `v<version>` and push the tag. The
+   tag must equal the manifest version.
+2. The `release` workflow runs `pnpm validate`, `pnpm release:check --strict`,
+   the consumer smoke test, and the package inspection, then pauses at the
+   `npm-release` GitHub environment, where Iroshan approves the job.
+3. `npm publish --provenance` runs once, through trusted publishing with OIDC.
+   There is no long-lived registry token anywhere, and the workflow refuses
+   to run if it finds one. The npm CLI is used for that one command only;
+   everything before it is pnpm.
+4. Verify the package page: version, the Provenance badge naming the
+   repository and `release.yml`, the repository link, and a file list of
+   `dist/`, `package.json`, `README.md`, and `LICENSE`. Then install the
+   version in a clean project outside the repository.
+5. Record the version, the run URL, and the verification result on the
+   release issue.
+
+A manual run of the workflow is always a rehearsal that ends in
+`npm publish --dry-run`. A version with a hyphen, such as `0.1.0-rc.1`,
+publishes under the `next` dist-tag and is the recommended end-to-end
+rehearsal once the trusted publisher exists.
+
+## When something goes wrong
+
+A failed run publishes nothing, so re-running after a fix is safe. A published
+version cannot be replaced: `npm deprecate` marks it and a patch release
+carries the fix. Unpublishing is limited and breaks installs; it is not relied
+on. The runbook's symptom table maps each failure to its cause.
+
+## The documentation site
+
+Vercel builds this site from `main` only. Every other branch is cancelled by
+the Ignored Build Step, there are no per-branch previews, and rollback is an
+Instant Rollback to the last known-good production deployment, which is
+Iroshan's action. The policy, settings, verification steps, and rollback are
+in
+[`apps/docs/DEPLOYMENT.md`](https://github.com/iroshandezilva/spartan/blob/main/apps/docs/DEPLOYMENT.md).
+
+## Known gaps
+
+- The package is at version `0.0.0` and has not been published. The trusted
+  publisher and the `npm-release` environment are human actions recorded on
+  HAUX-60; the first release is HAUX-63.
+- `pnpm release:check --strict --base=origin/main`, which fails a package
+  change that carries no note, is not yet part of CI. Until it is, the
+  release-note section of the pull request template is the gate.

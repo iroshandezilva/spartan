@@ -17,6 +17,32 @@ function isHeading(role: string): boolean {
   return role.startsWith("heading") || role === "display";
 }
 
+export interface TypeRow {
+  role: string;
+  size: string;
+  px: string;
+  lineHeight: string;
+  weight: string;
+  tracking: string;
+  use: string;
+}
+
+/** The type roles with their resolved metrics, shared by the table and its Markdown form. */
+export function typeRows(): TypeRow[] {
+  return ROLES.map(([role, use]) => {
+    const heading = isHeading(role);
+    return {
+      role: `font.size.${role}`,
+      size: scalar(`font.size.${role}`),
+      px: remToPx(scalar(`font.size.${role}`)),
+      lineHeight: scalar(heading ? "font.line-height.heading" : "font.line-height.body"),
+      weight: scalar(heading ? "font.weight.heading" : "font.weight.body"),
+      tracking: scalar(heading ? "font.tracking.heading" : "font.tracking.body"),
+      use,
+    };
+  });
+}
+
 /**
  * Every type role at real size, set with the same custom properties a
  * component would use, so what is on screen is what the package renders.
@@ -75,24 +101,21 @@ export function TypeTable() {
         </tr>
       </thead>
       <tbody>
-        {ROLES.map(([role, use]) => {
-          const heading = isHeading(role);
-          return (
-            <tr key={role}>
-              <td>
-                <code>font.size.{role}</code>
-              </td>
-              <td>
-                <code>{scalar(`font.size.${role}`)}</code>
-              </td>
-              <td>{remToPx(scalar(`font.size.${role}`))}</td>
-              <td>{scalar(heading ? "font.line-height.heading" : "font.line-height.body")}</td>
-              <td>{scalar(heading ? "font.weight.heading" : "font.weight.body")}</td>
-              <td>{scalar(heading ? "font.tracking.heading" : "font.tracking.body")}</td>
-              <td>{use}</td>
-            </tr>
-          );
-        })}
+        {typeRows().map((row) => (
+          <tr key={row.role}>
+            <td>
+              <code>{row.role}</code>
+            </td>
+            <td>
+              <code>{row.size}</code>
+            </td>
+            <td>{row.px}</td>
+            <td>{row.lineHeight}</td>
+            <td>{row.weight}</td>
+            <td>{row.tracking}</td>
+            <td>{row.use}</td>
+          </tr>
+        ))}
       </tbody>
     </table>
   );

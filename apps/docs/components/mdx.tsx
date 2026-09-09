@@ -13,6 +13,7 @@ import { SeparatorDemo } from "./demo/SeparatorDemo";
 import { TabsDemo } from "./demo/TabsDemo";
 import { TextFieldsDemo } from "./demo/TextFieldsDemo";
 import { TooltipDemo } from "./demo/TooltipDemo";
+import { AgentGuidance } from "./docs/AgentGuidance";
 import { Prerelease } from "./docs/Prerelease";
 import { Stories } from "./docs/Stories";
 import { ColorRoles } from "./foundation/ColorRoles";
@@ -48,6 +49,7 @@ export function getMDXComponents(components?: MDXComponents) {
     TooltipDemo,
     PopoverDemo,
     TabsDemo,
+    AgentGuidance,
     Prerelease,
     Stories,
     MotionDemo,

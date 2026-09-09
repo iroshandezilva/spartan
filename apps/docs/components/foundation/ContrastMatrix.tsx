@@ -2,14 +2,14 @@ import { contrastRatio } from "@/lib/contrast";
 import { type Pairing, type PairingKind, REQUIRED_PAIRINGS, THRESHOLDS } from "@/lib/pairings";
 import { colorRole } from "@/lib/tokens";
 
-interface Measured {
+export interface Measured {
   pairing: Pairing;
   light: number;
   dark: number;
   required: number;
 }
 
-function measure(pairing: Pairing): Measured {
+export function measure(pairing: Pairing): Measured {
   const foreground = colorRole(pairing.foreground);
   const background = colorRole(pairing.background);
   return {
@@ -20,14 +20,14 @@ function measure(pairing: Pairing): Measured {
   };
 }
 
-const KIND_LABEL: Record<PairingKind, string> = {
+export const KIND_LABEL: Record<PairingKind, string> = {
   "body-text": "Body text, 4.5:1",
   "large-text": "Large text, 3:1",
   "non-text": "Non-text, 3:1",
   disabled: "Disabled, exempt",
 };
 
-function shortRole(path: string): string {
+export function shortRole(path: string): string {
   return path.replace(/^color\./, "").replace(/\.default$/, "");
 }
 
