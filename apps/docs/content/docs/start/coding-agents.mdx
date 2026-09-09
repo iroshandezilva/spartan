@@ -49,11 +49,10 @@ Subpath exports, the only ones that exist: `./styles.css`, `./theme.css`,
 under `dist/`, is internal and does not resolve.
 
 <Callout type="warn">
-  Card, Tabs, Select, Tooltip, and Popover are being built in their own issues
-  at the time of writing. A name appearing in the generated list above means
-  the entry point exports it, not that its issue is Done. Check Linear before
-  importing one of those, and do not write documentation or examples that
-  assume it until it is.
+  A name appearing in the generated list above means the entry point exports
+  it. Every export listed has a page under Components, and every page carries
+  the same prerelease notice: the package is at version `0.0.0` and unpublished,
+  so any API may still change before the first release.
 </Callout>
 
 ## Where things live in the repository
@@ -176,5 +175,8 @@ The headings and their expected contents are defined in `AGENTS.md`.
   time, such as the export list above, the colour role tables, and the
   contrast matrix. An agent that needs those values should read
   `@iroshandezilva/spartant/tokens.json` directly, which is the same source.
-- There are no component pages yet, so an agent choosing a component reads
-  `INVENTORY.md`, the component's source, and its stories.
+- Component pages describe each component's public API prop by prop, its
+  keyboard behaviour, its motion contract, and its token dependencies. The
+  authoritative machine-readable form of the motion and accessibility
+  contract is still the `contract` object in each story file under
+  `apps/storybook/src/stories/`, which the pages are written to agree with.

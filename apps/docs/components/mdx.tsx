@@ -1,7 +1,20 @@
 import defaultMdxComponents from "fumadocs-ui/mdx";
 import type { MDXComponents } from "mdx/types";
+import { BadgeDemo } from "./demo/BadgeDemo";
+import { ButtonDemo } from "./demo/ButtonDemo";
 import { ButtonRow } from "./demo/ButtonRow";
+import { CardDemo } from "./demo/CardDemo";
+import { DialogDemo } from "./demo/DialogDemo";
 import { MotionDemo } from "./demo/MotionDemo";
+import { PopoverDemo } from "./demo/PopoverDemo";
+import { SelectDemo } from "./demo/SelectDemo";
+import { SelectionControlsDemo } from "./demo/SelectionControlsDemo";
+import { SeparatorDemo } from "./demo/SeparatorDemo";
+import { TabsDemo } from "./demo/TabsDemo";
+import { TextFieldsDemo } from "./demo/TextFieldsDemo";
+import { TooltipDemo } from "./demo/TooltipDemo";
+import { Prerelease } from "./docs/Prerelease";
+import { Stories } from "./docs/Stories";
 import { ColorRoles } from "./foundation/ColorRoles";
 import { ColorScale } from "./foundation/ColorScale";
 import { ContrastMatrix } from "./foundation/ContrastMatrix";
@@ -24,6 +37,19 @@ export function getMDXComponents(components?: MDXComponents) {
   return {
     ...defaultMdxComponents,
     ButtonRow,
+    ButtonDemo,
+    BadgeDemo,
+    CardDemo,
+    SeparatorDemo,
+    TextFieldsDemo,
+    SelectionControlsDemo,
+    SelectDemo,
+    DialogDemo,
+    TooltipDemo,
+    PopoverDemo,
+    TabsDemo,
+    Prerelease,
+    Stories,
     MotionDemo,
     ColorRoles,
     ColorScale,

@@ -1,0 +1,386 @@
+---
+title: Badge
+description: A compact label for a status or a category. An inert span with seven variants named for meaning, one size at caption type, and no motion.
+keywords:
+  - Badge
+  - BadgeProps
+  - BadgeVariant
+  - variant
+  - className
+  - children
+  - neutral
+  - primary
+  - accent
+  - success
+  - warning
+  - danger
+  - information
+  - status
+  - category
+  - tag
+  - chip
+  - label
+  - tint
+  - aria-hidden
+  - inert
+  - non-interactive
+  - color.surface.muted
+  - color.foreground
+  - color.primary.surface
+  - color.primary.text
+  - color.accent.surface
+  - color.accent.text
+  - color.success.surface
+  - color.success.text
+  - color.warning.surface
+  - color.warning.text
+  - color.danger.surface
+  - color.danger.text
+  - color.information.surface
+  - color.information.text
+  - radius.pill
+  - font.size.caption
+  - font.line-height.caption
+  - font.weight.emphasis
+  - badge.padding-x
+  - badge.padding-y
+  - badge.gap
+---
+
+<Prerelease />
+
+## Purpose and when to use
+
+Badge labels a status or a category: `In review`, `Failed`, `Design`,
+`main`. It is a `span` with a soft tint, sized from the caption line box so
+it can sit inside running text, in a table cell, or next to a heading without
+disturbing the line it lands on.
+
+Every list and table needs one, and it is the place a design system most
+often ends up encoding meaning in colour alone. Badge is built so it cannot:
+the label is the accessible name, and the tint is reinforcement. Write
+`3 failed`, not `3`; write `In review`, not a yellow dot. Every variant is
+readable, and says what it means, with the colour removed entirely.
+
+## When not to use
+
+- **Something the user can press.** A badge that can be clicked is a
+  [Button](./button.mdx). A badge that can be dismissed is a button inside a
+  badge. Badge carries no role, no `tabIndex`, and no handlers, and adding
+  one to a `span` does not make it a control.
+- **Validation text.** An error or hint under a field is
+  [FieldMessage](./text-fields.mdx#fieldmessage), which is associated with
+  its input and announced. A badge is neither.
+- **A count that must be announced when it changes.** Badge has no live
+  region on purpose. Put the badge inside a region owned by the component
+  that changes the value.
+- **A product status vocabulary.** The mapping from `Shipped`, `Blocked`, and
+  `Needs QA` onto tones is the product's language, not the system's. Badge
+  ships the tones; the application owns the mapping.
+
+## Import and minimal example
+
+```tsx
+import { Badge } from "@iroshandezilva/spartant";
+
+<Badge variant="warning">In review</Badge>;
+```
+
+The badges below are the package's `Badge`, rendered live. The demo is static
+because the component has no motion: nothing changes in response to the
+reader, so there is no reduced-motion copy to show.
+
+<BadgeDemo />
+
+## Anatomy
+
+One element. Badge renders a single `span` and nothing else:
+
+- The **label** is the children, and it is the whole accessible name.
+- An optional **icon** is any glyph a caller places before the label. It is
+  decorative by definition, because the label already names the badge, so
+  it must carry `aria-hidden="true"`.
+- The **tint** is the `surface` role of one colour family as the background
+  and the same family's `text` role as the ink. No border: the tints separate
+  from the page and from a card by a measured 1.08 to 1.17, faint by design
+  and enough to read as a shape.
+
+There is no `ref` in `BadgeProps` today; see Known limitations.
+
+## Public API
+
+`BadgeProps` extends `ComponentPropsWithoutRef<"span">`. Every native
+attribute and handler passes through.
+
+| Prop | Type | Default | Notes |
+| --- | --- | --- | --- |
+| `variant` | `BadgeVariant`, one of `"neutral"`, `"primary"`, `"accent"`, `"success"`, `"warning"`, `"danger"`, `"information"` | `"neutral"` | What the badge means, never what colour it is. |
+| `children` | `ReactNode` | | The label, and the accessible name. Must say what it means on its own. |
+| `className` | `string` | | Merged last through `cn`, so a caller's class wins. |
+| `...rest` | `ComponentPropsWithoutRef<"span">` | | Forwarded, including `title`, `data-*`, and `aria-*`. |
+
+Exported types: `BadgeProps`, `BadgeVariant`.
+
+Badge holds no state, so there is no controlled or uncontrolled mode. There
+is no `size` prop and no `secondary` variant; both are deliberate and
+explained below.
+
+## Variants and sizes
+
+Seven variants, named for meaning. Choosing one is a question about the thing
+being labelled, not about the palette.
+
+| Variant | Use |
+| --- | --- |
+| `neutral` | A category rather than a status. The default, because most badges are categories, and a system whose default is a status colour is one where `Design` ends up red. |
+| `primary` | The thing the product is currently steering towards. |
+| `accent` | A second category that has to be told apart from neutral. |
+| `success` | Completed or healthy. |
+| `warning` | Needs attention, not yet failing. |
+| `danger` | Failed, blocked, or destructive. |
+| `information` | Context the user does not have to act on. |
+
+There is no `secondary` variant. `secondary` is a filled role with no `text`
+or `surface` pair, so it has no tint to be a badge with.
+
+There are no sizes. One size, at caption type: a badge is already the
+smallest thing on the page, and a scale would mostly be used to make it
+compete with the text beside it. The chip is 20.2px tall, caption type at its
+snug line height plus 2px above and below, sized from the line box rather
+than from the look so it fits inside both the body-small (21px) and body
+(24px) line boxes.
+
+## Required states
+
+A badge is inert, so almost every state in the standard is unreachable: it
+cannot be hovered meaningfully, focused, pressed, disabled, or selected. Long
+content is the one that applies, and it is the one that breaks chips in real
+layouts.
+
+| State | How it is reached | Where it is proved |
+| --- | --- | --- |
+| Default | | `Default` story |
+| Long content | A label longer than its column, or a single unbroken token. It wraps inside the chip, and the pill radius stays correct at any height because it is larger than any height the chip can reach. | `States` story, manual check |
+| With icon | A decorative glyph before the label, `aria-hidden`. | `States` story |
+| Light and dark | Every variant in both themes. | `Variants` and `DarkTheme` stories |
+
+`empty` is absent deliberately: a badge with no children renders an empty
+pill with no accessible name, which is a bug in the caller rather than a
+state worth designing for.
+
+## Accessibility and keyboard behaviour
+
+- **Role**: none. A `span` with no role, because a badge is a run of text
+  with a background rather than a widget. Giving it `role="status"` would
+  make every category chip announce itself on render.
+- **Name**: its own text content. This is why the label has to be
+  self-sufficient: a red chip reading `3` names itself `3`, and the colour
+  that carries the meaning reaches neither a screen reader nor a colour-blind
+  reader.
+- **Focus**: never receives focus. Composing a badge inside a button moves
+  focus to the button, which is the intended way to make one interactive.
+- **Announcements**: none on its own. A badge whose value changes and must be
+  announced belongs inside a live region owned by the component that changes
+  it, not wrapped in one here.
+
+| Key | Behaviour |
+| --- | --- |
+| `Tab` | Not focusable. A badge is not a control and never enters the tab order. `BadgeIsInert` proves that Tab reaches a wrapping button and never the badge, and that the badge adds no second stop. |
+
+There is no keyboard interaction, because there is nothing to operate. What
+assistive technology gets instead is plain text: a screen reader reads the
+label in the flow of whatever contains it, exactly as it reads the words on
+either side. That is the whole reason the label must carry the meaning.
+
+Text on its own tint measures 6.1 to 7.0 in light and 11.1 to 11.5 in dark,
+against a 4.5 floor. See [Accessibility](../foundations/accessibility.mdx)
+for the floors every component shares.
+
+## No-motion rationale
+
+None, and not by omission. A badge does not change state in response to the
+user. Its text can be replaced when the thing it labels changes, but that is
+a content change in someone else's component, and animating it here would
+mean this component owning a transition whose start and end it cannot see.
+The [motion standard](../foundations/motion.mdx) keeps static components
+still.
+
+## Input modality, interruption, and reduced motion
+
+Nothing moves on any input, so there is nothing to interrupt and reduced
+motion changes nothing.
+
+| Input | Behaviour |
+| --- | --- |
+| Pointer, touch | Nothing. There is no hover, press, or active style; a badge is not a target. |
+| Keyboard | Nothing. The badge is never focused, so no key reaches it. |
+| Interruption | Nothing to interrupt. No transition or animation is declared. |
+| Reduced motion | No change. The component consumes no motion token, so the global collapse has nothing to collapse here, and the badge looks identical under both preferences. |
+
+## Motion tokens and implementation approach
+
+No motion tokens are consumed. Badge declares no transition and no
+animation, so there is no duration, easing, scale, or distance role to bind,
+and no property for the reduced-motion collapse to reach. That is the correct
+shape for a static component: a token it does not use is a token it cannot
+misuse. No dependency beyond CSS is used, and none is planned.
+
+## Theming and token dependencies
+
+Semantic roles, so a theme change or a consumer override retypes the badge
+with no rebuild:
+
+| Role | Where |
+| --- | --- |
+| `color.surface.muted`, `color.foreground` | The `neutral` variant. Neutral has no family of its own, so it uses the surface and foreground roles directly; `foreground` rather than `foreground-muted`, because muting the text as well would take it below the ratio the other variants hold. |
+| `color.primary.surface`, `color.primary.text` | The `primary` variant |
+| `color.accent.surface`, `color.accent.text` | The `accent` variant |
+| `color.success.surface`, `color.success.text` | The `success` variant |
+| `color.warning.surface`, `color.warning.text` | The `warning` variant |
+| `color.danger.surface`, `color.danger.text` | The `danger` variant |
+| `color.information.surface`, `color.information.text` | The `information` variant |
+| `radius.pill` | Corner radius, larger than any height the chip can reach |
+| `font.size.caption`, `font.line-height.caption` | Type size and the snug line height the chip is sized from |
+
+The label weight is Tailwind's `font-medium` (500) rather than the
+`font.weight.emphasis` role, which holds the same value today; see Known
+limitations.
+
+Component tokens: `badge.padding-x` (8px), `badge.padding-y` (2px), and
+`badge.gap` (4px, between an icon and the label). Justified in
+`packages/spartant/src/tokens/component/badge.tokens.json`: the control
+spacing roles size a box a finger presses, and applied to a caption-sized
+label they produce a chip half again too large. Nothing in the semantic layer
+means "the inset of a label that sits inside running text".
+
+Every variant is one family's `text` on the same family's `surface`, never
+mixed across families, and `pnpm check:colors` validates each pairing in both
+themes, so there is no combination a caller can reach that has not been
+measured. See [Color](../foundations/color.mdx) and
+[Theming](../start/theming.mdx).
+
+## Composition examples
+
+In a card header, where the status sits beside the title without competing
+with it:
+
+```tsx
+<Card>
+  <CardHeader>
+    <div className="flex items-center justify-between gap-3">
+      <CardTitle>Checkout rewrite</CardTitle>
+      <Badge variant="warning">In review</Badge>
+    </div>
+  </CardHeader>
+</Card>
+```
+
+Inline in running text, where the chip's height was chosen so the paragraph
+does not reflow around it:
+
+```tsx
+<p className="text-body-small text-foreground-muted">
+  Merged into <Badge>main</Badge> yesterday, and now waiting on{" "}
+  <Badge variant="danger">2 failing checks</Badge> before it can ship.
+</p>
+```
+
+Made interactive by composition. The button brings focus, keyboard
+activation, and a hit area, none of which a `span` acquires by having a
+handler attached to it:
+
+```tsx
+<button
+  type="button"
+  onClick={() => setFilter("frontend")}
+  className="inline-flex rounded-pill focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus-ring"
+>
+  <Badge variant="primary">Filter by: Frontend</Badge>
+</button>
+```
+
+## Testing notes
+
+<Stories
+  file="Badge.stories.tsx"
+  stories={[
+    { name: "Contract", proves: "The declared contract, including why this component does not move, rendered." },
+    { name: "Default", proves: "The component as first reached for: a neutral badge reading Draft." },
+    { name: "Variants", proves: "Every variant from the story contract with the meaning it carries, so the story is a usage guide and not a palette." },
+    { name: "States", proves: "Long content wrapping inside the chip in a narrow column, a single unbroken token staying inside, and a decorative icon hidden from assistive technology." },
+    { name: "DarkTheme", proves: "Every variant pinned to dark, because every tint has to survive both themes." },
+    { name: "Composition", proves: "A badge inline in running text without disturbing the line, and the correct way to make one interactive: a real button around it." },
+    { name: "BadgeIsInert", proves: "The badge is a span with no role and no tabindex; a real Tab reaches the wrapping button and never the badge, and the badge adds no second stop." },
+    { name: "LabelIsTheName", proves: "Every variant's accessible name is its own text, and that text is not empty." },
+  ]}
+/>
+
+Every story is rendered, its play function awaited, and the result audited
+with axe by `pnpm test:stories`. Theme appearance, zoom, and responsive
+wrapping cannot be judged from a play function, so they are manual checks.
+The contract lists three:
+
+1. Open the `Variants` story in light theme, then switch to dark. Expect all
+   seven tints to stay distinguishable from the page background, every label
+   to stay comfortably readable, and no variant to invert into a heavier chip
+   than its neighbours.
+2. Zoom the browser to 200% on the `LongContent` case in the `States` story.
+   Expect the label to wrap inside the chip, the pill radius to stay circular
+   at both ends, and nothing to overflow the column.
+3. View the `Composition` story at a narrow window width. Expect badges to
+   wrap with the running text and barely disturb it: the chip is 20.2px
+   inside a 21px body-small line box, measured at 63.91px against a 63px
+   three-line control, so it adds under a pixel across a paragraph rather
+   than opening each line it appears on.
+
+The checklist those steps come from is `MANUAL-REVIEW.md` at the repository
+root.
+
+## Known limitations
+
+- `BadgeProps` extends `ComponentPropsWithoutRef<"span">` and declares no
+  `ref`, so `<Badge ref={...}>` is a type error at package version `0.0.0`,
+  even though the API conventions require every component to forward one. At
+  runtime a ref passed through a cast reaches the `span`, because React 19
+  passes `ref` as a prop and the component spreads its props onto it. Recorded
+  on HAUX-56 for the package to resolve.
+- **A tint is invisible on `surface.muted`.** All the colour ramps share one
+  lightness ladder, and the surface roles occupy rungs of it, so a tint
+  placed to clear `background` and `surface` lands on the same rung as
+  `surface.muted` and measures 1.00 to 1.02 against it. A badge on a recessed
+  surface reads as coloured text rather than as a chip. Fixing it properly
+  means a tint that is not a rung of the shared ladder, which is a
+  token-system change rather than a component one.
+  `tooling/tokens/tint-separation.test.ts` holds the two grounds that were
+  fixed and names this one as the exclusion.
+- **The tints moved during HAUX-45.** Light went from step 50 to 100 and dark
+  from 900 to 950, because every one of them measured exactly 1.00 against a
+  ground and so was not visible in greyscale at all. Badge was their first
+  consumer, so nothing else was affected.
+- **No dot, count, or removable variants.** Out of scope for HAUX-45. A
+  dismiss control is a button composed next to or around a badge, not a prop.
+- **No `secondary` variant and no sizes**, for the reasons above. A caller
+  who needs a larger chip is usually reaching for a different component.
+- **No `whitespace-nowrap`**, deliberately. A long label wraps rather than
+  overflowing, which means a badge in a very narrow cell can become two lines
+  tall. Widen the column or shorten the label.
+- **The label weight is not a token.** `Badge` uses Tailwind's `font-medium`
+  rather than the `font.weight.emphasis` role the component README lists, so a
+  theme that retypes the emphasis weight leaves badges at 500.
+- **No live region.** A badge whose value must be announced when it changes
+  has to be placed inside one by the caller.
+
+## Changelog
+
+Badge was added by HAUX-45. The consumer-facing record is
+[`CHANGELOG.md`](https://github.com/iroshandezilva/spartan/blob/main/CHANGELOG.md)
+at the repository root; changes that are merged but not yet released are
+individual notes in
+[`.changes/`](https://github.com/iroshandezilva/spartan/tree/main/.changes).
+Source: `packages/spartant/src/components/badge/`.
+
+Related: [Card](./card.mdx) for the surface a badge most often sits on,
+[Button](./button.mdx) for the control to compose around a badge that must be
+pressed, [Text fields](./text-fields.mdx#fieldmessage) for FieldMessage, the
+other status-coloured piece, [Color](../foundations/color.mdx) for the tint
+and text pairs, [Typography](../foundations/typography.mdx) for caption type.

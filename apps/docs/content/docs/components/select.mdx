@@ -1,0 +1,538 @@
+---
+title: Select
+description: One choice from a list, on the native select. Keyboard, typeahead, form participation, and the mobile picker come from the platform; Spartant styles the closed control and wires it into Field.
+keywords:
+  - Select
+  - SelectProps
+  - placeholder
+  - onValueChange
+  - value
+  - defaultValue
+  - onChange
+  - children
+  - option
+  - optgroup
+  - name
+  - required
+  - disabled
+  - ref
+  - className
+  - native select
+  - combo box
+  - pop-up button
+  - dropdown
+  - Field
+  - Label
+  - FieldMessage
+  - aria-label
+  - aria-invalid
+  - aria-describedby
+  - typeahead
+  - color.border
+  - color.border.strong
+  - color.danger
+  - color.surface
+  - color.surface.disabled
+  - color.foreground
+  - color.foreground.muted
+  - color.foreground.disabled
+  - color.focus-ring
+  - radius.control
+  - font.family.body
+  - font.size.body
+  - duration.state-change
+  - easing.state
+  - field.height.md
+  - field.padding-x
+---
+
+<Prerelease />
+
+## Purpose and when to use
+
+Select lets a user choose one option from a list. It is a native `select`, so
+arrow keys, `Home` and `End`, typeahead, `Escape`, form participation, and the
+picker on iOS and Android all come from the platform rather than from the
+component. Spartant styles the closed control so it lines up with
+[Input](./text-fields.mdx), draws the chevron from a token, and wires the
+control into `Field` so the label, description, error, and required and
+disabled flags are associated without the caller doing anything.
+
+Native rather than custom was a decision, not a default. HAUX-52 compared
+shadcn's Select, a Radix listbox with ten parts, a runtime dependency, a
+portal, a positioning engine, and every keyboard behaviour reimplemented in
+JavaScript, against what the native element already gives, and every
+acceptance criterion was met by the element alone. The cost is the popup's
+appearance, recorded under [Known limitations](#known-limitations) rather than
+bought back with a dependency.
+
+Use it for a single choice from a short to medium list of plain-text options:
+a country, a status, a role, a sort order.
+
+## When not to use
+
+- **A boolean.** Use [Switch](./selection-controls.mdx#switch) for a setting
+  that takes effect on flip, or [Checkbox](./selection-controls.mdx#checkbox)
+  for a boolean submitted with a form.
+- **Two to five visible options that should all be seen at once.** Use
+  [Radio group](./selection-controls.mdx#radio-group). A select hides its
+  options until opened, which is a cost when the list is short.
+- **Options that need icons, descriptions, or rich rows.** The native popup
+  renders text only. That is a limitation with a trigger to reopen it, not
+  something to work around by putting markup in an `option`.
+- **Multiple choice, search, or async loading.** Out of scope in v0.1.
+  `multiple` and `size` are deliberately omitted from the props because both
+  turn the element into a listbox with different behaviour.
+- **Actions.** A select changes a value; it does not run a command. A menu of
+  actions is a [Popover](./popover.mdx) of buttons, or the deferred
+  DropdownMenu.
+
+## Import and minimal example
+
+```tsx
+import { Field, FieldMessage, Label, Select } from "@iroshandezilva/spartant";
+
+<Field required>
+  <Label>Country</Label>
+  <Select placeholder="Choose a country">
+    <option value="gb">United Kingdom</option>
+    <option value="lk">Sri Lanka</option>
+  </Select>
+  <FieldMessage>Where the invoice is addressed.</FieldMessage>
+</Field>;
+```
+
+The control below is the package's `Select`, controlled, inside a `Field`,
+rendered live under both motion modes. The readout flips in `onValueChange`,
+so it is correct the moment a choice lands and never waits for the border
+transition.
+
+<SelectDemo />
+
+## Anatomy
+
+One control and one decorative glyph:
+
+| Part | Element | Role |
+| --- | --- | --- |
+| The control | `select` | Everything the user interacts with. `ref` and `className` both target it. |
+| Options | `option`, `optgroup` | The caller's children, native and untouched. |
+| Placeholder | `option value=""` | Rendered from the `placeholder` prop as the first option. |
+| Chevron | `svg` | Decorative, `aria-hidden`, and `pointer-events: none` so a press on it reaches the control. |
+
+A wrapper `span` positions the chevron over the control. It carries nothing a
+caller would style; `className` lands on the `select`, not on the wrapper.
+
+The list the user picks from is the platform's popup. It is rendered outside
+the document, so there is no Spartant element for it and nothing to portal.
+
+The ref points at the `select`.
+
+## Public API
+
+`SelectProps` extends `ComponentPropsWithoutRef<"select">` with `multiple`
+and `size` omitted. Every other native attribute and handler passes through.
+
+| Prop | Type | Default | Notes |
+| --- | --- | --- | --- |
+| `placeholder` | `string` | | Shown while nothing is chosen. Rendered as the first option with an empty value; see below. |
+| `value` | `string` | | Controlled value. The component is controlled whenever this is not `undefined`. |
+| `defaultValue` | `string` | | Uncontrolled initial value. When both this and `value` are absent and a `placeholder` is given, the component supplies `""` so the placeholder starts selected. |
+| `onValueChange` | `(value: string) => void` | | Called with the new value, not the event. |
+| `onChange` | `ChangeEventHandler<HTMLSelectElement>` | | Native. Still fires, before `onValueChange`. |
+| `children` | `option`, `optgroup` | | Composition stays native. |
+| `required` | `boolean` | from `Field` | Native. Also disables the placeholder option so it cannot be chosen deliberately. |
+| `disabled` | `boolean` | from `Field` | Native. Skipped by `Tab`; the chevron dims with the text. |
+| `id` | `string` | from `Field` | The `Field` generates one and points its `Label` at it. |
+| `aria-invalid` | | from `Field` | Set when the `Field` is `invalid`. |
+| `aria-describedby` | | from `Field` | The `Field` lists its messages, description first, then error. |
+| `name` | `string` | | Native. What the form submits the value under. |
+| `className` | `string` | | Merged last through `cn`, so a caller's class wins. Targets the `select`. |
+| `ref` | `Ref<HTMLSelectElement>` | | Points at the `select`. |
+| `...rest` | `ComponentPropsWithoutRef<"select">` | | Forwarded, including `form`, `autoComplete`, `aria-*`, and every handler. |
+
+Exported types: `SelectProps`.
+
+Inside a `Field`, the five props marked "from `Field`" are read from the
+field context. An explicit prop wins over the field, so a `Select` with `disabled={false}`
+inside a disabled `Field` is enabled.
+
+### Controlled and uncontrolled
+
+The native pairing, as the shared API conventions require of every stateful
+component:
+
+- **Uncontrolled is the default.** The DOM holds the value. Pass
+  `defaultValue` to start somewhere other than the placeholder or first
+  option, and read the result from `onValueChange`, `onChange`, or `FormData`.
+- **Controlled** when `value` is not `undefined`. The parent decides, and the
+  DOM follows the prop rather than itself: choosing an option calls
+  `onValueChange` and the control shows whatever the parent renders next. A
+  controlled `value=""` shows the placeholder, which is how a parent resets to
+  no choice.
+
+Do not switch modes after mount.
+
+### The placeholder is an option, and the value is honest
+
+A native `select` has no placeholder attribute. `placeholder` renders as the
+first option with an empty value, and that empty value is what the control
+reports and what the form submits until the user chooses. A screen reader
+hears "Choose a country" as the value, which is true.
+
+- **Required:** the placeholder option is disabled, so it cannot be chosen
+  deliberately, and the empty value fails native validation. Browsers omit a
+  disabled selected option from `FormData` entirely, so `get("country")` is
+  `null` rather than `""` while the placeholder shows.
+- **Optional:** the placeholder stays selectable, so the user can return to no
+  choice.
+
+The HTML selectedness algorithm skips a disabled first option, which would
+open a required select showing its first real option as though it had been
+chosen. The component pins the placeholder by supplying an empty default
+value, only when the caller has set neither `value` nor `defaultValue`. While
+the placeholder is the selection the text is `color.foreground.muted`, as for
+an empty `Input`.
+
+### Standalone
+
+A bare `Select` outside a `Field` renders and stops wiring itself. Pass `id`
+and a `Label htmlFor`, or `aria-label`:
+
+```tsx
+<Label htmlFor="country">Country</Label>
+<Select id="country" placeholder="Choose a country">
+  <option value="gb">United Kingdom</option>
+</Select>
+```
+
+## Variants and sizes
+
+Select has no variants and no sizes: the story contract declares `[]` for
+both. What varies is state. There is one height, `field.height.md`, which is
+44px and matches `Input` and the default `Button` so a select, a text field,
+and a button line up in one row. The control is full width and takes its
+width from its container.
+
+## Required states
+
+| State | How it is reached | Where it is proved |
+| --- | --- | --- |
+| Default | | `Default` story |
+| Hover | Pointer over an enabled, valid control. The border moves to `color.border.strong`, colour only, and only where a pointer can hover. | `PointerPath` story, manual check |
+| Focus visible | Keyboard focus. A 2px outline at 2px offset in `color.focus-ring`. | `KeyboardPath` story, manual check |
+| Disabled | `disabled`, or a disabled `Field`. `color.surface.disabled` fill, `color.foreground.disabled` text and chevron, skipped by `Tab`. | `States` story |
+| Invalid | `aria-invalid`, or an invalid `Field`. Border moves to `color.danger`; hover does not override it. | `States` and `KeyboardPath` stories |
+| Empty | A placeholder and no options. The placeholder is the whole list and the value is empty. | `States` story |
+| Long content | A chosen label wider than the box is clipped with an ellipsis under the chevron. The value and accessible label are intact. | `States` and `ConstrainedViewport` stories |
+| Light and dark | Every static state in both themes. | `States` and `DarkTheme` stories |
+
+Read-only does not exist for a `select`. Use `disabled`, or render the value
+as text. Hover and focus-visible cannot be rendered into a static matrix
+without restating the styles under test, so the story that produces them for
+real is the proof, and `:focus-visible` is a manual check because synthesised
+events are untrusted.
+
+## Accessibility and keyboard behaviour
+
+- **Role**: a native `select`, reported as a combo box or pop-up button by
+  the platform. Options are native `option` and `optgroup` elements. No ARIA
+  role is added anywhere; a test asserts that none appears.
+- **Name**: the associated `label`, wired by `Field` through `htmlFor` and
+  `id`. Standalone, pass `aria-label`, or `id` and `htmlFor` yourself.
+- **Focus**: a 2px `focus-visible` outline at 2px offset in the focus-ring
+  colour, identical to every other focusable component. Focus never leaves the
+  control: the popup is rendered by the platform outside the document, so
+  there is nothing to trap and nothing to restore.
+- **Announcements**: the chosen option's label is the accessible value, and
+  while nothing is chosen the placeholder is, which is honest. `aria-invalid`
+  marks the control and `aria-describedby` names the description and then the
+  error, exactly as for `Input`.
+- **Hit area**: the control is 44px tall and full width, so it meets the floor
+  by being that size and needs no extended target.
+
+All keyboard behaviour is the platform's. Spartant adds no key handler, and a
+test asserts that `onKeyDown`, `onKeyUp`, and `tabIndex` do not appear in the
+source.
+
+| Key | Behaviour |
+| --- | --- |
+| `Tab` | Moves focus to the control. |
+| `Space`, `Enter`, `Alt+Down`, or `Down` | Opens the list. Which keys open it and which change the value without opening it is the platform's convention, and it differs between macOS and Windows. |
+| `Up`, `Down` | Move through the options. Typing letters jumps to the first option that starts with them. |
+| `Enter` | Chooses and closes. `Escape` closes without changing the value. Focus is on the control in both cases. |
+| `Tab` past a disabled select | Skips it. |
+
+See [Accessibility](../foundations/accessibility.mdx) for the floors every
+component shares.
+
+## Motion purpose
+
+Border and background colour change on hover, focus, and on becoming
+invalid, so a state change is noticed without the control moving. That is
+**state**, one of the purposes the [motion standard](../foundations/motion.mdx)
+allows, and the same transition `Input` uses, shared through one style string
+so the two cannot drift.
+
+The list itself is the platform's popup and has no motion of ours. The
+decision to stay native means its entry is the operating system's, and adding
+a transition to the closed control to stand in for it would decorate without
+explaining. The Motion and Micro-interaction Standard lists origin-aware entry
+as the Select baseline; that presumes a custom surface, so the native decision
+makes the baseline inapplicable rather than unmet.
+
+Colour only. The control never moves, the chevron does not rotate, and the
+focus ring is an outline that is not transitioned, so focus arrives instantly
+and in the right colour.
+
+## Input modality, interruption, and reduced motion
+
+| Input | Behaviour |
+| --- | --- |
+| Pointer, touch | Hover strengthens the border, colour only and only where a pointer can hover; Tailwind wraps `hover:` in `@media (hover: hover)`, so touch never sees it. A press opens the platform picker. |
+| Keyboard | Focus styling is immediate. Arrow keys, typeahead, `Enter`, `Space`, and `Escape` are handled by the browser and never wait for anything. |
+| Interruption | A transition rather than a keyframe animation, so tabbing quickly on and off retargets the colour from where it is. The popup cannot be interrupted mid-flight because it has no flight. |
+| Reduced motion | The stylesheet collapses `duration.state-change` to `0ms`, so the colour change is instant. No branch in the component. The right-hand copy of the example above shows exactly that. |
+
+There is no origin row: the contract declares `overlay: false`, because there
+is no positioned surface of Spartant's to give an origin to.
+
+## Motion tokens and implementation approach
+
+| Token | Used for |
+| --- | --- |
+| `duration.state-change` | The border and background colour transition. |
+| `easing.state` | Its curve, the gentle standard curve reserved for colour. |
+
+One CSS transition, named as `transition-[border-color,background-color]`
+rather than `all`, so the focus outline and the text colour are never
+animated. It lives in the control style string shared with `Input` and
+`Textarea`; `Select` adds no transition of its own, and a test asserts that
+neither `transition-all` nor `transition-colors` appears in the source. No
+dependency beyond CSS is used, and none is planned.
+
+The reduced-motion collapse reaches the control because the duration is a
+token. The platform popup is unaffected by either mode, because it was never
+Spartant's to animate.
+
+## Theming and token dependencies
+
+Semantic roles, so a theme change or a consumer override retypes the control
+with no rebuild:
+
+| Role | Where |
+| --- | --- |
+| `color.surface` | The control's fill, and each `option` on browsers that paint their own popup |
+| `color.border` | The resting border |
+| `color.border.strong` | The hover border |
+| `color.danger` | The invalid border |
+| `color.foreground` | The chosen value's text, and each `option` |
+| `color.foreground.muted` | The placeholder while it is the selection, and the chevron |
+| `color.surface.disabled`, `color.foreground.disabled` | Disabled fill, text, chevron, and disabled options |
+| `color.focus-ring` | Focus |
+| `radius.control` | Corner radius |
+| `font.family.body`, `font.size.body` | The control's text |
+
+Component tokens: `field.height.md` for the 44px height and `field.padding-x`
+for the horizontal inset. Both are shared with the text fields deliberately,
+so a select and an input in one row are the same height and their text starts
+at the same inset. No select-specific token was justified: the chevron is a
+1rem glyph, and the right padding is derived from `field.padding-x` around it.
+
+Options are given the surface and foreground roles explicitly because Chrome
+on Windows and Linux paints its own popup and inherits `color` from the
+control; without them a muted placeholder colour would wash over every option.
+macOS and iOS ignore option styling and show the system picker. The shared
+control styles also carry a read-only tint that would match every `select`,
+because a `select` is never `:read-write`; `Select` overrides it back to
+`color.surface`.
+
+Every text-on-surface pairing is contrast-checked in both themes by
+`pnpm check:colors`. See [Color](../foundations/color.mdx) and
+[Theming](../start/theming.mdx).
+
+## Composition examples
+
+The usual shape: a required select inside a `Field`, beside the text fields
+it has to line up with, in a form that the browser refuses to submit while
+the placeholder is chosen:
+
+```tsx
+<form onSubmit={handleSubmit}>
+  <Field required>
+    <Label>Company</Label>
+    <Input name="company" placeholder="Haux Studio" />
+  </Field>
+  <div className="grid gap-stack sm:grid-cols-2">
+    <Field required>
+      <Label>Country</Label>
+      <Select name="country" placeholder="Choose a country">
+        <option value="gb">United Kingdom</option>
+        <option value="lk">Sri Lanka</option>
+      </Select>
+    </Field>
+    <Field>
+      <Label>Postcode</Label>
+      <Input name="postcode" />
+    </Field>
+  </div>
+  <Button type="submit">Save address</Button>
+</form>
+```
+
+Grouped options cost nothing, because `optgroup` passes through:
+
+```tsx
+<Field>
+  <Label>Region</Label>
+  <Select placeholder="Choose a region">
+    <optgroup label="Europe">
+      <option value="gb">United Kingdom</option>
+      <option value="de">Germany</option>
+    </optgroup>
+    <optgroup label="Asia and Pacific">
+      <option value="lk">Sri Lanka</option>
+      <option value="nz">New Zealand</option>
+    </optgroup>
+  </Select>
+</Field>
+```
+
+Controlled, with the value owned by the parent and an error that clears the
+moment a choice lands:
+
+```tsx
+const [status, setStatus] = useState("");
+
+<Field required invalid={submitted && status === ""}>
+  <Label>Tax status</Label>
+  <Select placeholder="Choose a status" value={status} onValueChange={setStatus}>
+    <option value="registered">VAT registered</option>
+    <option value="exempt">Exempt</option>
+    <option value="reverse">Reverse charge</option>
+  </Select>
+  {submitted && status === "" ? (
+    <FieldMessage tone="error">Choose a tax status before saving.</FieldMessage>
+  ) : null}
+</Field>
+```
+
+See [Text fields](./text-fields.mdx) for what `Field`, `Label`, and
+`FieldMessage` do, and [Tabs](./tabs.mdx) for the other choice control, which
+switches panels rather than a value.
+
+## Testing notes
+
+<Stories
+  file="Select.stories.tsx"
+  stories={[
+    { name: "Default", proves: "The recommended composition: everything wired by Field." },
+    { name: "Standalone", proves: "A bare Select with the id and label association made by hand." },
+    { name: "Groups", proves: "Native optgroup children pass through, so grouping costs nothing." },
+    { name: "States", proves: "Disabled, invalid, empty, and long content in one matrix, with a note on where hover and focus-visible are proved." },
+    { name: "DarkTheme", proves: "The same matrix pinned to dark." },
+    { name: "Composition", proves: "A billing-address form with selects beside text fields, an invalid select, and a submit row." },
+    { name: "KeyboardPath", proves: "The label resolves to a native select; the placeholder is the value and fails validity; Tab reaches it; choosing changes the value, calls onValueChange, and passes validity; description and error are associated in reading order; Tab moves on." },
+    { name: "PointerPath", proves: "Clicking the label focuses the control; picking with the pointer changes the value; an optional select can return to no choice." },
+    { name: "Controlled", proves: "Picking updates the parent and the parent updates the control; a reset from outside returns the placeholder." },
+    { name: "FormSubmission", proves: "With the placeholder chosen the form is invalid and nothing usable is in FormData; after choosing, submission delivers the value under its name." },
+    { name: "NoDanglingDescribedBy", proves: "A select with no messages carries no aria-describedby at all." },
+    { name: "LongList", proves: "Sixty options, for the manual check that the platform popup scrolls and repositions." },
+    { name: "ConstrainedViewport", proves: "At a narrow width a long chosen label is the full value, clipped only visually." },
+    { name: "ReducedMotion", proves: "The control with the motion tokens collapsed: the border changes colour instantly." },
+    { name: "SlowMotion", proves: "The hover and focus colour change at eight times its length, for judging the curve." },
+    { name: "Contract", proves: "The motion, accessibility, and manual-review contract, rendered." },
+  ]}
+/>
+
+Every story is rendered, its play function awaited, and the result audited
+with axe by `pnpm test:stories`. `selectOptions` is the runner's stand-in for
+choosing; arrow keys, typeahead, `Escape`, and the popup itself cannot be
+driven, because happy-dom does not implement them and the popup is outside
+the document.
+
+The unit tests in `Select.test.tsx` beside the source prove the decision
+stayed made: the upstream comparison is still a Radix listbox with a declared
+dependency, the owned source has no primitive, icon library, key handler, or
+added dependency, and it renders a `select` rather than a button wearing a
+role. They also prove the placeholder rules, controlled and uncontrolled
+behaviour, `Field` wiring with an explicit prop winning, `FormData` and
+validity, the decorative pass-through chevron, ref forwarding, `optgroup`
+pass-through, and that every class survives `cn` with the caller's last.
+
+The contract lists six manual checks:
+
+1. Tab to the select, open it with the keyboard, move with the arrows, type a
+   letter, choose with `Enter`, then open and press `Escape`. Expect the list
+   to open, typeahead to jump, `Enter` to choose, `Escape` to close with the
+   value unchanged, and focus on the control throughout.
+2. Click the label, then click the chevron. Expect the label to focus the
+   control and the chevron to open the list, because presses pass through it.
+3. Open the `LongList` story near the bottom of a short window, and the
+   `ConstrainedViewport` story at 320px. Expect the list to be repositioned by
+   the platform so it stays on screen and scrolls, and nothing to overflow the
+   page horizontally.
+4. Zoom the browser to 200% and Tab to the control. Expect the focus ring to
+   be fully visible, the chevron to stay inside the box, and a long value to
+   be clipped with an ellipsis.
+5. Submit the `FormSubmission` story with the placeholder still chosen, then
+   choose an option and submit again. Expect the browser to block the first
+   submission as missing and the second to submit the chosen value.
+6. Switch to dark theme and open the list. Expect the closed control to use
+   the dark roles and the platform popup to be legible: on Chrome for Windows
+   and Linux it follows the theme through `color-scheme`; on macOS it is the
+   system picker.
+
+The checklist those steps come from is `MANUAL-REVIEW.md` at the repository
+root.
+
+## Known limitations
+
+The costs of the native decision, each with the trigger that would reopen it:
+
+- **The popup is the platform's.** Its font, colours, radius, and row height
+  cannot be styled consistently across browsers. Chrome on Windows and Linux
+  honours `option` colours and follows `color-scheme`; macOS and iOS ignore
+  option styling entirely and show the system picker. Reopen if a prototype
+  needs the list to match the design rather than the platform.
+- **Options are text only.** No icons, descriptions, or rich rows. Reopen
+  when a prototype needs an option that is more than a label.
+- **No popup motion of ours.** The entry is the operating system's, so the
+  origin-aware entry the motion standard names as the Select baseline does
+  not apply.
+- **The chevron does not rotate when the list opens.** No open state is
+  exposed to CSS by every browser, and an affordance that animates in one
+  browser and not another is worse than one that stays still.
+- **No multi-select, no search, no async loading.** Out of scope on the
+  issue. `multiple` and `size` are omitted from the props.
+
+And the rest:
+
+- **No read-only state.** A `select` has none. Use `disabled`, or render the
+  value as text.
+- **The transient states cannot be screenshotted from a story.** Hover and
+  focus-visible are proved by the input-path stories and the manual review.
+- **Arrow keys, typeahead, `Escape`, and the popup have no automated proof.**
+  happy-dom does not implement them, so they rest on the six manual checks
+  above, and the component README does not record those checks as performed.
+- **The reduced-motion copy of the demo changes only the closed control.**
+  The popup opened from either copy is the platform's and looks the same in
+  both.
+- **`scripts/check-upstream.mjs` does not yet read this component's
+  provenance.** It globs only the experiments file; the one-line change
+  belongs to the upstream audit issue.
+
+## Changelog
+
+Select was added by HAUX-52. The consumer-facing record is
+[`CHANGELOG.md`](https://github.com/iroshandezilva/spartan/blob/main/CHANGELOG.md)
+at the repository root; changes that are merged but not yet released are
+individual notes in
+[`.changes/`](https://github.com/iroshandezilva/spartan/tree/main/.changes).
+Source: `packages/spartant/src/components/select/`.
+
+Related: [Text fields](./text-fields.mdx) for `Field`, `Label`, and
+`FieldMessage`, [Popover](./popover.mdx) for a surface Spartant does own,
+[Tabs](./tabs.mdx) for switching panels rather than values,
+[Accessibility](../foundations/accessibility.mdx) for the shared floors,
+[Motion](../foundations/motion.mdx) for the token scale.

@@ -1,0 +1,520 @@
+---
+title: Text fields
+description: The text-entry family. Field wires a native label, input or textarea, and its messages together, with a polite error announcement and colour-only focus and validation feedback.
+keywords:
+  - Field
+  - Label
+  - Input
+  - Textarea
+  - FieldMessage
+  - FieldProps
+  - LabelProps
+  - InputProps
+  - TextareaProps
+  - FieldMessageProps
+  - FieldMessageTone
+  - id
+  - invalid
+  - required
+  - disabled
+  - tone
+  - description
+  - error
+  - htmlFor
+  - type
+  - placeholder
+  - readOnly
+  - value
+  - defaultValue
+  - onChange
+  - text field
+  - text input
+  - form
+  - validation
+  - error message
+  - help text
+  - aria-invalid
+  - aria-describedby
+  - aria-live
+  - color.border
+  - color.surface
+  - color.surface.muted
+  - color.surface.disabled
+  - color.foreground
+  - color.foreground.muted
+  - color.foreground.disabled
+  - color.danger
+  - color.danger.text
+  - color.focus-ring
+  - radius.control
+  - space.control-padding-y
+  - font.family.body
+  - font.size.body
+  - font.size.body-small
+  - font.size.caption
+  - duration.state-change
+  - easing.state
+  - field.height.md
+  - field.padding-x
+  - field.textarea-min-height
+---
+
+<Prerelease />
+
+## Purpose and when to use
+
+The text-field family is five parts that ship as one contract: `Field`,
+`Label`, `Input`, `Textarea`, and `FieldMessage`. Use it for any single-line
+or multi-line text entry, with a label and optional help or validation text.
+
+A prototype without a form is a mockup, and a form is mostly text fields. The
+parts are native `label`, `input`, and `textarea` elements, so keyboard
+behaviour, platform keyboards, pickers, and form participation come from the
+browser. What Spartant adds is the wiring: `Field` generates the ids, points
+the label at the control, and lists the messages in `aria-describedby`, so
+the association that most hand-written forms get wrong is never left to the
+caller. `FieldMessage` is the piece most prototypes lack, which is why error
+text in them is ad hoc.
+
+## When not to use
+
+- **A boolean.** Use [Checkbox](./selection-controls.mdx#checkbox) for a value
+  that is submitted with a form, or [Switch](./selection-controls.mdx#switch)
+  for a setting that takes effect on flip.
+- **A choice from a list.** Use the radio group in
+  [Selection controls](./selection-controls.mdx) for a few visible options, or
+  [Select](./select.mdx) for a longer list.
+- **A masked, formatted, or suggesting input.** A phone mask, a currency
+  format, or a combobox with suggestions is its own decision. `Input` forwards
+  the native `type` and stays out of the behaviour.
+
+## Import and minimal example
+
+```tsx
+import { Field, FieldMessage, Input, Label } from "@iroshandezilva/spartant";
+
+<Field required>
+  <Label>Email address</Label>
+  <Input type="email" placeholder="you@example.com" />
+  <FieldMessage>We only use this to send receipts.</FieldMessage>
+</Field>;
+```
+
+Nothing to wire: the id, the `htmlFor`, the `required` attribute, the marker
+in the label, and the `aria-describedby` all come from `Field`. The fields
+below are the package's, rendered live. The email field becomes invalid as
+you type, and the error message, the `aria-invalid` attribute, and the border
+colour all change on the keystroke.
+
+<TextFieldsDemo />
+
+## Anatomy
+
+Five parts, each rendering one native element:
+
+| Part | Element | What it does |
+| --- | --- | --- |
+| `Field` | `div` | Generates the ids and shares `invalid`, `required`, and `disabled` with everything inside. A plain container with no role of its own. |
+| `Label` | `label` | Names the control through `htmlFor`. Clicking it focuses the control, which is native behaviour rather than anything added. Shows the required marker. |
+| `Input` | `input` | Single-line entry. `type` is forwarded untouched. |
+| `Textarea` | `textarea` | Multi-line entry. Resizes vertically only, because free horizontal resizing lets a user drag a control out of its column. |
+| `FieldMessage` | `p` | Standing help text (`tone="description"`) or a validation error (`tone="error"`). Registers itself so the control's `aria-describedby` names it. |
+
+The **required marker** inside `Label` is an asterisk in `color.danger.text`
+that is `aria-hidden`, followed by a visually hidden "(required)". A lone
+asterisk is announced as "star" or skipped depending on verbosity settings, so
+screen readers get the word instead.
+
+None of the exported Props interfaces includes a `ref`; see
+[Known limitations](#known-limitations).
+
+## Public API
+
+Every part extends its native element's props, so every native attribute and
+handler passes through. Inside a `Field`, the parts read the shared context
+for their defaults; a prop passed directly always wins over the context.
+
+### Field
+
+`FieldProps` extends `Omit<ComponentPropsWithoutRef<"div">, "id">`, with `id`
+redefined as the control's id rather than the wrapper's.
+
+| Prop | Type | Default | Notes |
+| --- | --- | --- | --- |
+| `id` | `string` | generated | The id given to the control, not the wrapper. Pass it when something outside the field has to point at the control, such as an error summary that links to the first invalid input. |
+| `invalid` | `boolean` | `false` | Sets `aria-invalid` on the control. `Field` does not validate anything; the caller decides. |
+| `required` | `boolean` | `false` | Sets `required` on the control and shows the marker in the label. |
+| `disabled` | `boolean` | `false` | Disables the control and dims the label and the description. |
+| `className` | `string` | | Merged last through `cn` onto the wrapper, so a caller's class wins. The default is a vertical grid with a small gap. |
+| `children` | `ReactNode` | | The parts, in the order they should read: label, control, description, error. |
+| `...rest` | `ComponentPropsWithoutRef<"div">` | | Forwarded to the wrapper. |
+
+Ids come from `useId`, so two fields on one page cannot collide. The label's
+id is `<control id>-label`, and each message's id is `<control id>-<tone>`.
+
+### Label
+
+`LabelProps` extends `ComponentPropsWithoutRef<"label">`.
+
+| Prop | Type | Default | Notes |
+| --- | --- | --- | --- |
+| `required` | `boolean` | the surrounding `Field`'s `required`, else `false` | Shows the marker. Inherited so the marker and the control's attribute cannot disagree; pass it only on a standalone label. |
+| `htmlFor` | `string` | the surrounding `Field`'s control id | Native. Required on a standalone label. |
+| `id` | `string` | generated inside a `Field` | Native. |
+| `className` | `string` | | Merged last through `cn`. |
+| `...rest` | `ComponentPropsWithoutRef<"label">` | | Forwarded. |
+
+### Input
+
+`InputProps` extends `ComponentPropsWithoutRef<"input">` and adds nothing.
+
+| Prop | Type | Default | Notes |
+| --- | --- | --- | --- |
+| `id` | `string` | the surrounding `Field`'s control id | Native. Required on a standalone input if a label is to reach it. |
+| `type` | native `type` values | browser default (`text`) | Forwarded untouched. `email`, `number`, `date`, `search`, and the rest keep their platform keyboards, pickers, and validation. |
+| `aria-invalid` | native | the surrounding `Field`'s `invalid`, omitted when `false` | Pass it only to override the field. |
+| `aria-describedby` | `string` | the ids of the messages currently rendered in the `Field`, omitted when there are none | Pass it only to override the field. |
+| `required` | `boolean` | the surrounding `Field`'s `required` | Native. |
+| `disabled` | `boolean` | the surrounding `Field`'s `disabled` | Native. Removes the control from the tab order. |
+| `readOnly` | `boolean` | | Native. Keeps focus, selection, and copying; only looks quieter. |
+| `className` | `string` | | Merged last through `cn`. |
+| `...rest` | `ComponentPropsWithoutRef<"input">` | | Forwarded, including `value`, `defaultValue`, `onChange`, `placeholder`, `name`, and every handler. |
+
+### Textarea
+
+`TextareaProps` extends `ComponentPropsWithoutRef<"textarea">` and adds
+nothing. The context defaults are the same as `Input`'s.
+
+| Prop | Type | Default | Notes |
+| --- | --- | --- | --- |
+| `id` | `string` | the surrounding `Field`'s control id | Native. |
+| `aria-invalid` | native | the surrounding `Field`'s `invalid`, omitted when `false` | Pass it only to override the field. |
+| `aria-describedby` | `string` | the ids of the messages currently rendered in the `Field`, omitted when there are none | Pass it only to override the field. |
+| `required` | `boolean` | the surrounding `Field`'s `required` | Native. |
+| `disabled` | `boolean` | the surrounding `Field`'s `disabled` | Native. |
+| `rows` | `number` | | Native. The minimum height is `field.textarea-min-height` regardless, two field heights. |
+| `className` | `string` | | Merged last through `cn`. |
+| `...rest` | `ComponentPropsWithoutRef<"textarea">` | | Forwarded. |
+
+### FieldMessage
+
+`FieldMessageProps` extends `ComponentPropsWithoutRef<"p">`.
+
+| Prop | Type | Default | Notes |
+| --- | --- | --- | --- |
+| `tone` | `FieldMessageTone`, one of `"description"`, `"error"` | `"description"` | `description` is standing help text in `color.foreground.muted`. `error` is a validation failure in `color.danger.text`, and a polite live region. |
+| `id` | `string` | `<control id>-<tone>` inside a `Field` | Native. Passing your own id takes the message out of the field's `aria-describedby`. |
+| `className` | `string` | | Merged last through `cn`. |
+| `...rest` | `ComponentPropsWithoutRef<"p">` | | Forwarded. |
+
+Exported types: `FieldProps`, `LabelProps`, `InputProps`, `TextareaProps`,
+`FieldMessageProps`, `FieldMessageTone`.
+
+### Controlled and uncontrolled
+
+`Input` and `Textarea` are native controls, so they follow the native
+pairing: `value` with `onChange` is controlled, `defaultValue` is
+uncontrolled, and uncontrolled is the default. There is no `onValueChange`;
+the native `onChange` is the only channel, and it receives the event.
+
+`Field` holds no state of its own. `invalid`, `required`, and `disabled` are
+plain props that describe the control; nothing inside the family validates,
+counts, or formats. Derive `invalid` from your own state and pass it.
+
+### Every part works alone
+
+None of the parts throws outside a `Field`. A bare `Input` on a page is
+legitimate; it simply stops wiring itself, and the caller owns the `id` and
+the association:
+
+```tsx
+<Label htmlFor="email">Email address</Label>
+<Input id="email" type="email" />
+```
+
+A standalone `FieldMessage` renders and describes nothing. To associate it by
+hand, give it an `id` and name that id in the control's `aria-describedby`.
+
+### Messages register themselves
+
+`aria-describedby` names only ids that exist. A field with no messages has no
+`aria-describedby` at all, and a message that unmounts is removed from the
+list.
+
+This matters more than it sounds. A reference to a missing id looks deliberate
+in the markup and announces nothing, and the accessibility audit does not
+catch it: injecting a dangling reference left every axe check green. The
+`NoDanglingDescribedBy` story asserts it directly for that reason. The order is
+description, then error, which is the order they are announced.
+
+## Variants and sizes
+
+The family has no variants and no sizes. Emphasis in a form comes from layout
+and copy, not from a coloured input.
+
+What varies instead is the native `type` on `Input`, the `tone` on
+`FieldMessage`, and the three flags on `Field`. There is one control height,
+the component token `field.height.md`, which deliberately equals
+`button.height.md` so a field and a button line up in a row. `Textarea`
+starts at `field.textarea-min-height`, two field heights, and grows from
+there as the user drags it.
+
+## Required states
+
+| State | How it is reached | Where it is proved |
+| --- | --- | --- |
+| Default | | `Default` story |
+| Hover | Pointer over the control. Colour only, per the contract. | `PointerPath` story, manual check |
+| Focus visible | Keyboard focus. A 2px outline at 2px offset in `color.focus-ring`. | `KeyboardPath` story, manual check |
+| Disabled | `disabled` on `Field` or the control. `color.surface.disabled` fill, `color.foreground.disabled` text, placeholder, label, and description. Skipped by Tab. | `States` story |
+| Invalid | `invalid` on `Field`. Border in `color.danger`, `aria-invalid` on the control, and an error `FieldMessage`. | `States` and `KeyboardPath` stories |
+| Read only | `readOnly` on the control. `color.surface.muted` fill. Still focusable, selectable, and copyable. | `States` story |
+| Empty | No value. The placeholder shows in `color.foreground.muted`. Never the label. | `States` story |
+| Long content | A wrapping description, and a value longer than the control. | `States` story |
+| Light and dark | Every static state in both themes. | `States` and `DarkTheme` stories |
+
+Hover and focus-visible cannot be rendered into a static matrix without
+restating the styles under test, so the story that produces each for real is
+the proof, and `:focus-visible` is a manual check because synthesised events
+are untrusted.
+
+## Accessibility and keyboard behaviour
+
+- **Role**: native `label`, `input`, and `textarea`. The wrapper is a plain
+  container with no role of its own.
+- **Name**: the `label`, associated by `htmlFor` and `id`. Ids come from
+  `useId`, so two fields on a page cannot collide. `getByLabelText` in the
+  stories resolves through the accessible name, so it only finds the control
+  when the label genuinely targets it.
+- **Focus**: a 2px `focus-visible` outline at 2px offset in the focus-ring
+  colour, identical to every other focusable component.
+- **Announcements**: `aria-describedby` names the description and then the
+  error, in that order. The error is a polite live region, so it announces
+  when it appears without interrupting mid-word; polite rather than assertive
+  because a validation message is not an emergency. `aria-invalid` marks the
+  control itself, and the border changes colour, because colour alone is not
+  an accessible signal and neither is text alone.
+
+| Key | Behaviour |
+| --- | --- |
+| `Tab` | Moves focus between controls in document order. Nothing traps it. |
+| Click on the label | Focuses its control. Native label behaviour, nothing added. |
+| `Tab` past a disabled control | Skips it. A read-only control is not skipped: its value is still selectable and copyable. |
+
+Read-only is not disabled. Disabled removes the control from the tab order
+entirely; reaching for it to mean "you cannot change this" hides the value
+from keyboard users who only wanted to read it.
+
+See [Accessibility](../foundations/accessibility.mdx) for the floors every
+component shares.
+
+## Motion purpose
+
+Border and background colour change on focus and on becoming invalid, so a
+state change is noticed without the field moving under the cursor. That
+explains **state**, which is one of the purposes the
+[motion standard](../foundations/motion.mdx) allows. Colour only: a field must
+never move while it is being typed into, and the error message is not
+animated at all, because validation has to be immediate. `Label` and
+`FieldMessage` are static content with no motion of their own.
+
+## Input modality, interruption, and reduced motion
+
+| Input | Behaviour |
+| --- | --- |
+| Pointer, touch | Hover and focus change colour only. Nothing scales or moves. |
+| Keyboard | Focus styling is immediate. Nothing waits for the transition, and typing is never delayed. |
+| Interruption | A transition rather than a keyframe animation, so tabbing quickly through a form retargets each colour from where it is. Typing is not a retriggerable transition, so there is no rapid-repeat case. |
+| Reduced motion | No branch in the component. The stylesheet collapses `duration.state-change` to `0ms`, so the colour change is instant. The right-hand copy of the example above shows exactly that. |
+
+## Motion tokens and implementation approach
+
+| Token | Used for |
+| --- | --- |
+| `duration.state-change` | The border and background colour transition. |
+| `easing.state` | Its curve. |
+
+CSS transitions only. The transition names its properties, `border-color` and
+`background-color`, rather than `all`. The focus outline is deliberately not
+in that list: transitioning `outline-color` made the ring appear instantly but
+spend the whole duration settling from the inherited text colour to the
+focus-ring colour, which no other focusable component did. HAUX-68 found the
+inconsistency and removed it, so focus feedback is now instant and correct
+everywhere. No dependency beyond CSS is used, and none is planned.
+
+## Theming and token dependencies
+
+Semantic roles, so a theme change or a consumer override retypes every field
+with no rebuild:
+
+| Role | Where |
+| --- | --- |
+| `color.surface`, `color.border` | The control's fill and border |
+| `color.foreground` | The value and the label |
+| `color.foreground.muted` | Placeholder text and the description |
+| `color.surface.muted` | The read-only fill |
+| `color.surface.disabled`, `color.foreground.disabled` | Disabled: fill, value, placeholder, label, and description |
+| `color.danger` | The invalid border |
+| `color.danger.text` | The error message and the required marker |
+| `color.focus-ring` | Focus |
+| `radius.control` | Corner radius |
+| `space.control-padding-y` | The textarea's vertical padding |
+| `font.family.body` | The control's typeface |
+| `font.size.body`, `font.size.body-small`, `font.size.caption` | The value, the label, and the messages |
+
+Component tokens: `field.height.md`, `field.padding-x`,
+`field.textarea-min-height`. Control height is the case where a component
+token is justified, because no semantic role means "the accessibility floor",
+and `field.height.md` equals `button.height.md` so the two line up. If a
+shared control-height role ever appears, both should move to it together.
+
+`color.danger.text` exists because of this family. A status fill used as text
+on the page has no contrast guarantee, and one of them fails AA, so the
+inventory added a text role per status family and both pairings to
+`pnpm check:colors`. See [Color](../foundations/color.mdx) and
+[Theming](../start/theming.mdx).
+
+## Composition examples
+
+A form is the only context these parts ever appear in. Validation lives in
+the caller and arrives as `invalid`, with the error swapped in for the
+description so the field never carries both a reassurance and a complaint:
+
+```tsx
+const [name, setName] = useState("");
+const invalid = name.trim().length === 0;
+
+<form onSubmit={handleSubmit}>
+  <Field invalid={invalid} required>
+    <Label>Workspace name</Label>
+    <Input value={name} onChange={(event) => setName(event.target.value)} />
+    {invalid ? (
+      <FieldMessage tone="error">Enter a name. It appears in every invite.</FieldMessage>
+    ) : (
+      <FieldMessage>Shown to everyone you invite.</FieldMessage>
+    )}
+  </Field>
+  <Button type="submit">Save</Button>
+</form>;
+```
+
+`Field` also wires [Checkbox](./selection-controls.mdx#checkbox),
+[Switch](./selection-controls.mdx#switch), and [Select](./select.mdx), which
+read the same context, so a settings form uses one wrapper for every row:
+
+```tsx
+<Field>
+  <Label>Weekly digest</Label>
+  <Switch defaultChecked />
+  <FieldMessage>Takes effect immediately. Nothing to save.</FieldMessage>
+</Field>
+<Field required>
+  <Label>Region</Label>
+  <Select placeholder="Choose a region">
+    <option value="eu">Europe</option>
+    <option value="us">United States</option>
+  </Select>
+</Field>
+```
+
+An error summary that links to the first invalid control needs a known id, so
+pass one:
+
+```tsx
+<a href="#email">Fix the email address</a>
+<Field id="email" invalid>
+  <Label>Email address</Label>
+  <Input type="email" defaultValue="not-an-address" />
+  <FieldMessage tone="error">Enter an address in the form name@example.com.</FieldMessage>
+</Field>
+```
+
+The [Quick start](../start/quick-start.mdx) puts a field, a switch, and a
+dialog together on one screen.
+
+## Testing notes
+
+<Stories
+  file="Field.stories.tsx"
+  stories={[
+    { name: "Contract", proves: "The motion, accessibility, and manual-review contract, rendered." },
+    { name: "Default", proves: "The recommended composition, everything wired by Field." },
+    { name: "StandaloneParts", proves: "Each part alone: nothing throws outside a Field, and the caller owns the id and the association." },
+    { name: "States", proves: "Disabled, invalid, read-only, empty, and long content in one matrix, with hover and focus-visible delegated to the stories that produce them." },
+    { name: "Required", proves: "The marker in the label and the attribute on the control, from one prop." },
+    { name: "DarkTheme", proves: "Every static state pinned to dark." },
+    { name: "Composition", proves: "A realistic invitation form with a required field, an invalid field, a textarea, and two buttons." },
+    { name: "KeyboardPath", proves: "The label resolves to the control by accessible name, Tab reaches it, typing works, description and error are both in aria-describedby in reading order with every id resolving, and aria-invalid is set." },
+    { name: "PointerPath", proves: "Clicking the label focuses its control." },
+    { name: "NoDanglingDescribedBy", proves: "A field with no messages has no aria-describedby at all, which the axe audit cannot catch." },
+    { name: "ReducedMotion", proves: "The family with every motion token collapsed; the border colour changes instantly on focus." },
+    { name: "SlowMotion", proves: "The focus and validation colour change at a slowed pace, for judging the curve." },
+  ]}
+/>
+
+Every story is rendered, its play function awaited, and the result audited
+with axe by `pnpm test:stories`. `:hover` and `:focus-visible` cannot be
+asserted from a play function, because synthesised events are untrusted, and
+neither can a screen reader, browser autofill, or reflow, so they are manual
+checks. The contract lists four:
+
+1. Tab through the `Composition` story and type into each control. Expect
+   focus to be visible, and no field to move or resize while being typed
+   into.
+2. With VoiceOver, move to an invalid field. Expect the label, then the
+   description, then the error to be announced, and the field to report
+   invalid.
+3. Let the browser autofill a saved value. Expect the autofilled background
+   not to hide the text. Chrome overrides `background-color` on autofill,
+   which no stylesheet can fully prevent.
+4. Zoom the browser to 200% and reflow to 320px. Expect labels, controls, and
+   messages to stay readable and nothing to be clipped.
+
+The checklist those steps come from is `MANUAL-REVIEW.md` at the repository
+root.
+
+## Known limitations
+
+- **Browser autofill restyles the control.** Chrome applies its own background
+  on autofill and no stylesheet fully prevents it. It is a manual check, and
+  nothing automated covers it.
+- No character counter, no floating label, no input mask. Each is a separate
+  decision.
+- Full form-validation library integration is explicitly out of scope for
+  HAUX-49. `Field` takes `invalid` as a prop; it does not validate anything.
+- **One message per tone.** A `Field` has one `description` slot and one
+  `error` slot. Two `FieldMessage`s with the same tone in one field receive
+  the same generated id, and when either unmounts the tone is deregistered.
+  Put more than one sentence in one message instead.
+- **`ref` is not part of the exported types.** Every Props interface extends
+  `ComponentPropsWithoutRef`, which omits `ref`, so a typed consumer cannot
+  pass one to `Field`, `Label`, `Input`, `Textarea`, or `FieldMessage`. The
+  conventions say the ref should point at the native element, and Switch and
+  Select in the same package do type it; this family does not yet.
+- **No public hook.** The field context is deliberately not exported, so a
+  control of your own cannot join a `Field`. Only the package's `Input`,
+  `Textarea`, `Checkbox`, `Switch`, and `Select` are wired by it.
+- The gap between label, control, and message inside `Field` is a raw Tailwind
+  step (`gap-1.5`) rather than a spacing role, and the label weight is
+  `font-medium` rather than `font.weight.emphasis`, so a theme cannot retune
+  either. Override through `className` if you need to.
+- The example on this page validates as you type so the transition is visible.
+  A real form usually validates on blur or on submit, and the family leaves
+  that timing to the caller.
+
+## Changelog
+
+The text-field family was added by HAUX-49. The consumer-facing record is
+[`CHANGELOG.md`](https://github.com/iroshandezilva/spartan/blob/main/CHANGELOG.md)
+at the repository root; changes that are merged but not yet released are
+individual notes in
+[`.changes/`](https://github.com/iroshandezilva/spartan/tree/main/.changes).
+Source: `packages/spartant/src/components/field/`.
+
+Related: [Button](./button.mdx) for the submit action,
+[Selection controls](./selection-controls.mdx) for booleans and exclusive
+choice, [Select](./select.mdx) for a choice from a list,
+[Badge](./badge.mdx) for status that is not an error message,
+[Accessibility](../foundations/accessibility.mdx) for names, descriptions,
+and announcements, [Typography](../foundations/typography.mdx) for the label
+and message roles.

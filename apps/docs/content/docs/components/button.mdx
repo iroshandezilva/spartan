@@ -1,0 +1,380 @@
+---
+title: Button
+description: The action control. A native button with four variants, three sizes, press feedback on pointer and touch, and a loading state that keeps focus.
+keywords:
+  - Button
+  - ButtonProps
+  - ButtonVariant
+  - ButtonSize
+  - variant
+  - size
+  - loading
+  - disabled
+  - primary
+  - secondary
+  - danger
+  - ghost
+  - sm
+  - md
+  - lg
+  - aria-label
+  - aria-busy
+  - aria-disabled
+  - icon-only button
+  - press feedback
+  - color.primary
+  - color.secondary
+  - color.danger
+  - color.surface.muted
+  - color.surface.selected
+  - color.surface.disabled
+  - color.foreground.disabled
+  - color.focus-ring
+  - radius.control
+  - space.control-gap
+  - size.min-target
+  - duration.press-feedback
+  - duration.indicator-loop
+  - easing.state
+  - easing.progress
+  - scale.press
+  - button.height
+  - button.padding-x
+---
+
+<Prerelease />
+
+## Purpose and when to use
+
+Button performs an action: submit, delete, open, confirm, cancel. It is a
+native `button`, so keyboard activation, form participation, and disabled
+semantics come from the platform rather than from the component.
+
+Use it for anything that does something when pressed. It is the most used
+control in any prototype, and it is the component that establishes variants,
+sizes, states, and press feedback for everything built after it.
+
+## When not to use
+
+- **Navigation.** Use a link. A button that navigates breaks middle-click,
+  open in new tab, and every other affordance the browser gives an anchor, and
+  no amount of styling restores them.
+- **A toggle.** Use [Switch](./selection-controls.mdx#switch) for a setting
+  that takes effect on flip, or [Checkbox](./selection-controls.mdx#checkbox)
+  for a boolean that is submitted with a form.
+- **A trigger for an overlay** is still a Button, but reach for
+  [Dialog](./dialog.mdx), [Popover](./popover.mdx), or [Tooltip](./tooltip.mdx)
+  for the overlay itself rather than building one around a button.
+
+## Import and minimal example
+
+```tsx
+import { Button } from "@iroshandezilva/spartant";
+
+<Button onClick={save}>Save changes</Button>;
+```
+
+The buttons below are the package's `Button`, rendered live. Every control in
+both copies flips its state in the click handler, so nothing waits for a
+transition.
+
+<ButtonDemo />
+
+## Anatomy
+
+One element. Button renders a single `button` and nothing else visible:
+
+- The **label** is the children, wrapped in an inline span so it can be hidden
+  at zero opacity while loading without leaving the DOM.
+- The **loading indicator** is a rotating ring, `aria-hidden`, centred over the
+  label. It exists only while `loading` is true.
+- The **hit area** is a pseudo-element on coarse pointers, centred and at
+  least 44px square, so the `sm` size meets the touch floor without growing.
+
+There is no `ref` in `ButtonProps` today; see Known limitations.
+
+## Public API
+
+`ButtonProps` extends `ComponentPropsWithoutRef<"button">`. Every native
+attribute and handler passes through.
+
+| Prop | Type | Default | Notes |
+| --- | --- | --- | --- |
+| `variant` | `ButtonVariant`, one of `"primary"`, `"secondary"`, `"danger"`, `"ghost"` | `"primary"` | Emphasis, described by meaning rather than colour. |
+| `size` | `ButtonSize`, one of `"sm"`, `"md"`, `"lg"` | `"md"` | Scale. `md` meets the 44px touch floor on its own. |
+| `loading` | `boolean` | `false` | Shows the indicator and refuses activation while keeping focus. Not the same as `disabled`; see below. |
+| `disabled` | `boolean` | | Native. Removes the button from the tab order. |
+| `type` | `"button"`, `"submit"`, `"reset"` | `"button"` | Defaults to `"button"` deliberately: an unspecified button inside a form submits it, which is rarely what a prototype means. |
+| `className` | `string` | | Merged last through `cn`, so a caller's class wins. |
+| `...rest` | `ComponentPropsWithoutRef<"button">` | | Forwarded, including `form`, `aria-*`, and every handler. |
+
+Exported types: `ButtonProps`, `ButtonVariant`, `ButtonSize`.
+
+### Loading is not disabled
+
+`disabled` removes an element from the tab order and drops focus. A button
+that becomes disabled the moment it is pressed loses the user's place at
+exactly the moment they are waiting for something.
+
+`loading` keeps the button focusable, marks it `aria-busy` and
+`aria-disabled`, and refuses the activation: the consumer's `onClick` is not
+called and the default is prevented, which is what stops a `type="submit"`
+button submitting. The label stays in the DOM at zero opacity, which keeps
+both the accessible name and the button's width, so starting a load does not
+resize the button.
+
+A listener attached directly to the element with `addEventListener` still sees
+the event. React delegates from the root, and a component cannot stop a
+listener attached to its own element.
+
+### Icon-only buttons
+
+There is no text, so supply the name:
+
+```tsx
+<Button aria-label="Close" variant="ghost" className="aspect-square px-0">
+  <CloseIcon aria-hidden="true" />
+</Button>
+```
+
+Without `aria-label` the accessibility audit fails the story. That is the
+intended outcome.
+
+## Variants and sizes
+
+| Variant | Use |
+| --- | --- |
+| `primary` | The one action the screen is for. Filled with `color.primary`. |
+| `secondary` | An action that should not compete with the primary. |
+| `danger` | A destructive action. The variant that looks destructive is the one that is. |
+| `ghost` | Cancel, dismiss, and toolbar actions. No fill until hover. |
+
+| Size | Height | Use |
+| --- | --- | --- |
+| `sm` | 32px | Dense toolbars and table rows. The 44px target is restored as a centred hit area on coarse pointers. |
+| `md` | 44px | Default. Meets the touch floor on its own. |
+| `lg` | 52px | A primary action that should be the obvious target on a small screen. |
+
+Heights are component tokens (`button.height.sm`, `button.height.md`,
+`button.height.lg`) rather than spacing roles, so a spacing change cannot
+silently shrink a control below the accessibility floor. The `sm` and `lg`
+horizontal padding is `button.padding-x.sm` and `button.padding-x.lg`; `md`
+matches `space.control-padding-x`.
+
+## Required states
+
+| State | How it is reached | Where it is proved |
+| --- | --- | --- |
+| Default | | `Default` story |
+| Hover | Pointer over the button. Fill moves to the `hover` role of the variant. | `PointerPath` story, manual check |
+| Focus visible | Keyboard focus. A 2px outline at 2px offset in `color.focus-ring`. | `KeyboardPath` story, manual check |
+| Active | Pointer held. Fill moves to the `active` role and the button scales to `scale.press`. | `PointerPath` story, manual check |
+| Disabled | `disabled`. `color.surface.disabled` fill, `color.foreground.disabled` text, skipped by Tab. | `States` story |
+| Loading | `loading`. Indicator shown, label hidden, width kept, focus kept. | `States` and `LoadingRefusesActivation` stories |
+| Long content | A label with no natural break. It does not wrap; the button grows. | `States` story |
+| Light and dark | Every variant in both themes. | `Variants` and `DarkTheme` stories |
+
+Hover, focus-visible, and active cannot be rendered into a static matrix
+without restating the styles under test, so the story that produces them for
+real is the proof, and `:focus-visible` is a manual check because synthesised
+events are untrusted.
+
+## Accessibility and keyboard behaviour
+
+- **Role**: `button`, from the native element.
+- **Name**: the text content, or `aria-label` when there is none. An icon-only
+  button without `aria-label` fails the audit.
+- **Focus**: one focus treatment, a 2px `focus-visible` outline at 2px offset
+  in the focus-ring colour, identical to every other focusable component.
+- **Announcements**: `aria-busy` alongside `aria-disabled` while loading, so
+  assistive technology reports a wait rather than a dead control.
+- **Hit area**: 44px on coarse pointers at every size, as a centred
+  pseudo-element that never affects layout.
+
+| Key | Behaviour |
+| --- | --- |
+| `Tab` | Moves focus to the button, and on to the next element. Nothing traps it. |
+| `Space` | Activates. |
+| `Enter` | Activates. |
+| `Tab` past a disabled button | Skips it; it cannot be activated. |
+| `Space` or `Enter` on a loading button | Refused. Focus stays on the button and it remains in the tab order. |
+
+See [Accessibility](../foundations/accessibility.mdx) for the floors every
+component shares.
+
+## Motion purpose
+
+Press feedback, so a pointer or touch press is acknowledged before the action
+resolves, and a loading indicator while it does. Both explain **feedback**,
+which is one of the purposes the [motion standard](../foundations/motion.mdx)
+allows. Nothing else moves: hover and disabled are colour changes only.
+
+## Input modality, interruption, and reduced motion
+
+| Input | Behaviour |
+| --- | --- |
+| Pointer, touch | Scales to `scale.press` while held, over `duration.press-feedback`, and returns on release. |
+| Keyboard | Focus styling and activation are immediate. The press scale does apply while `Space` or `Enter` is held, because `:active` covers both input paths and CSS cannot separate them. Nothing waits for it. |
+| Interruption | The press is a transition rather than a keyframe, so a second press retargets from the current scale instead of queueing. Ten rapid presses land ten activations, proved by `RapidRepeat`. |
+| Reduced motion | No branch in the component. The stylesheet collapses the durations to `0ms` and the scale to `1`, so the press is instant and the spinner stops turning while `aria-busy` still carries the state. The right-hand copy of the example above shows exactly that. |
+
+## Motion tokens and implementation approach
+
+| Token | Used for |
+| --- | --- |
+| `duration.press-feedback` | The press transition, 120ms. |
+| `scale.press` | The held scale, 0.97. |
+| `easing.state` | The press and colour transition curve. |
+| `duration.indicator-loop` | One rotation of the loading ring. |
+| `easing.progress` | Constant speed for the ring. |
+
+CSS transitions and one CSS animation, nothing else. The transition names its
+properties, `transform`, `background-color`, and `color`, rather than `all`.
+The ring is `animate-spin` with its duration bound to the duration role, which
+is why the global reduced-motion collapse stops it: a duration of `0ms` is a
+ring that does not turn. No dependency beyond CSS is used, and none is
+planned.
+
+## Theming and token dependencies
+
+Semantic roles, so a theme change or a consumer override retypes the button
+with no rebuild:
+
+| Role | Where |
+| --- | --- |
+| `color.primary`, `.hover`, `.active`, `.foreground` | The `primary` variant |
+| `color.secondary`, `.hover`, `.active`, `.foreground` | The `secondary` variant |
+| `color.danger`, `.hover`, `.active`, `.foreground` | The `danger` variant |
+| `color.foreground`, `color.surface.muted`, `color.surface.selected` | The `ghost` variant's text, hover, and active |
+| `color.surface.disabled`, `color.foreground.disabled` | Disabled |
+| `color.focus-ring` | Focus |
+| `radius.control` | Corner radius |
+| `space.control-gap` | Gap between an icon and the label |
+| `size.min-target` | The 44px hit area |
+
+Component tokens: `button.height.sm`, `button.height.md`, `button.height.lg`,
+`button.padding-x.sm`, `button.padding-x.md`, `button.padding-x.lg`. Control
+height is the one case where a component token is justified, because no
+semantic role means "the accessibility floor".
+
+Every label-on-fill pairing, including hover and active, is contrast-checked
+in both themes by `pnpm check:colors`. See [Color](../foundations/color.mdx)
+and [Theming](../start/theming.mdx).
+
+## Composition examples
+
+Buttons almost never appear alone. They appear in a row, in priority order,
+next to a cancel that must not compete:
+
+```tsx
+<div className="flex flex-wrap justify-end gap-control-gap">
+  <Button variant="ghost">Cancel</Button>
+  <Button variant="secondary">Export first</Button>
+  <Button variant="danger">Delete workspace</Button>
+</div>
+```
+
+As a form submit, with `type` set explicitly because the default is
+`"button"`:
+
+```tsx
+<form onSubmit={handleSubmit}>
+  <Field>
+    <Label>Workspace name</Label>
+    <Input name="name" />
+  </Field>
+  <Button type="submit" loading={saving}>
+    Save
+  </Button>
+</form>
+```
+
+As the trigger for a confirmation, controlled through Dialog's `open` prop:
+
+```tsx
+<Button variant="danger" onClick={() => setConfirming(true)}>
+  Delete workspace
+</Button>
+<Dialog open={confirming} onOpenChange={setConfirming}>
+  <DialogContent>
+    <DialogTitle>Delete this workspace?</DialogTitle>
+  </DialogContent>
+</Dialog>
+```
+
+The [Quick start](../start/quick-start.mdx) puts these together on one screen.
+
+## Testing notes
+
+<Stories
+  file="Button.stories.tsx"
+  stories={[
+    { name: "Default", proves: "The component as first reached for." },
+    { name: "Variants", proves: "Every variant from the story contract." },
+    { name: "Sizes", proves: "Every size, with the measured height of each." },
+    { name: "States", proves: "Disabled, loading, and long content in one matrix." },
+    { name: "DarkTheme", proves: "Every variant pinned to dark." },
+    { name: "Composition", proves: "A destructive confirmation with three buttons in priority order." },
+    { name: "KeyboardPath", proves: "Tab focuses the button, Space and Enter each activate it, and Tab moves on." },
+    { name: "PointerPath", proves: "A click reaches the button and nothing covers it." },
+    { name: "LoadingRefusesActivation", proves: "aria-busy and aria-disabled without the disabled attribute; focus is kept; the consumer's onClick never runs." },
+    { name: "RapidRepeat", proves: "Ten fast presses are ten activations and the element is the same one." },
+    { name: "ReducedMotion", proves: "The loading state with every motion token collapsed." },
+    { name: "SlowMotion", proves: "The press curve at eight times its length, for judging the easing." },
+    { name: "IconOnly", proves: "An icon-only button at every size carries aria-label and passes the audit." },
+    { name: "Contract", proves: "The motion, accessibility, and manual-review contract, rendered." },
+  ]}
+/>
+
+Every story is rendered, its play function awaited, and the result audited
+with axe by `pnpm test:stories`. `:hover`, `:focus-visible`, and `:active`
+cannot be asserted from a play function, because synthesised events are
+untrusted, so they are manual checks. The contract lists four:
+
+1. Tab to the button with a real keyboard, in light and dark. Expect a visible
+   offset focus ring, readable against both the surface and the page.
+2. Press and hold with a pointer, then press repeatedly and quickly. Expect it
+   to scale while held, return on release, and never stick pressed.
+3. Press the small size on a touch device. Expect the 32px button to be
+   comfortable to hit, because the target is 44px.
+4. Turn on the OS reduce-motion setting and reload, then press and load.
+   Expect the press to be instant and the spinner not to turn, while the
+   button still reports busy.
+
+The checklist those steps come from is `MANUAL-REVIEW.md` at the repository
+root.
+
+## Known limitations
+
+- No `asChild` or polymorphic `as`. A link that looks like a button is a
+  separate decision, and slot-style composition is not in the approved API.
+- Button groups and split buttons are out of scope for v0.1.
+- The loading spinner is a static ring under reduced motion. That is
+  deliberate, and `aria-busy` carries the state, but it does look like a
+  stalled indicator rather than an obviously reduced one.
+- The press scale applies on the keyboard path while the key is held, because
+  `:active` covers both input paths. Nothing waits for it, so the keyboard
+  path is still immediate.
+- `ButtonProps` extends `ComponentPropsWithoutRef<"button">` and declares no
+  `ref`, so `<Button ref={...}>` is a type error at package version `0.0.0`,
+  even though the component README says the ref points at the `button` and
+  the API conventions require every component to forward one. At runtime a
+  ref passed through a cast does reach the element, because React 19 passes
+  `ref` as a prop and the component spreads its props onto the `button`. This
+  is recorded on HAUX-56 for the package to resolve.
+- The `icon` size and `[&_svg]` sizing that shadcn's button ships are
+  public-API additions and need their own decision; the HAUX-69 audit kept
+  Spartant's Button as it is.
+
+## Changelog
+
+Button was added by HAUX-43. The consumer-facing record is
+[`CHANGELOG.md`](https://github.com/iroshandezilva/spartan/blob/main/CHANGELOG.md)
+at the repository root; changes that are merged but not yet released are
+individual notes in
+[`.changes/`](https://github.com/iroshandezilva/spartan/tree/main/.changes).
+Source: `packages/spartant/src/components/button/`.
+
+Related: [Selection controls](./selection-controls.mdx) for toggles,
+[Dialog](./dialog.mdx) for confirmations, [Motion](../foundations/motion.mdx)
+for the token scale.
