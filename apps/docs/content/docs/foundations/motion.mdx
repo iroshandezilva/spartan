@@ -209,8 +209,12 @@ removed. A loading spinner stops turning; `aria-busy` still carries the state.
 | Input, Textarea | Focus, validation, and error colour at `duration.state-change`; no scale | State, with no layout shift |
 | Checkbox, Radio | Indicator transition at `duration.state-change` | State. Immediate under reduced motion |
 | Switch | Thumb travel at `duration.state-change` with `easing.move` | Continuity between two positions |
+| Select | Border and background colour at `duration.state-change`, shared with Input; the popup is the platform's | State. No surface of Spartant's to animate |
+| Tabs | Indicator and label colour fade at `duration.state-change` on pointer selection | State. The keyboard path is painted immediately through `data-source` |
 | Dialog | Centred entry at `duration.modal-enter`, `easing.enter`, `scale.overlay-enter`, with a coordinated backdrop. Closes instantly | Softens a jarring change. Focus restoration never waits for motion |
-| Badge, Label, Separator, FieldMessage | None | Static content. An error message is announced, not animated |
+| Tooltip | Enters from the trigger's side at `duration.state-change`, `easing.enter`, `scale.overlay-enter`; leaves at `duration.press-feedback`, `easing.exit` | Location. The exit paints after `hidePopover()` has already run |
+| Popover | Enters from the trigger's side at `duration.overlay-enter`, `easing.enter`, `scale.overlay-enter`; leaves at `duration.overlay-exit`, `easing.exit` | Location. Focus moves before the surface has finished arriving |
+| Badge, Card, Label, Separator, FieldMessage | None | Static content. An error message is announced, not animated |
 
 ## Which values are frozen
 
@@ -222,13 +226,16 @@ because a value nothing has exercised has not been validated by anything.
 
 ## Known gaps
 
-- `duration.overlay-exit`, `duration.modal-exit`, and `easing.exit` have never
-  been observed on a component. Dialog closes the instant its state goes false
-  because that is what restores focus, so nothing consumes an exit token. The
-  demo above animates an overlay's exit only because that overlay is non-modal
-  and holds no focus.
+- `duration.modal-exit` has no consumer. Dialog closes the instant its state
+  goes false because that is what restores focus, so it consumes no exit
+  token. Popover and Tooltip do animate their exit, through
+  `duration.overlay-exit` and `easing.exit`, because the Popover API keeps
+  `display` and `overlay` transitionable after `hidePopover()` has already
+  restored focus; see their component pages.
 - The distance roles are unused: no released component moves anything
-  spatially. The overlay in the demo is the only thing on this site that does.
+  spatially. Popover and Tooltip scale from the trigger's side rather than
+  travelling. The overlay in the demo is the only thing on this site that
+  moves spatially.
 - `springs` are exported and consumed by nothing. Whether to keep them pending
   a gesture-driven component or remove them is an open decision.
 - The Web Animations API, Motion for React, and GSAP tiers are documented but
