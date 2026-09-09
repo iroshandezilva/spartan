@@ -1,0 +1,567 @@
+---
+title: Popover
+description: Interactive content anchored to a trigger, without taking over the page. A non-modal dialog on the Popover API and CSS anchor positioning, with focus that moves in at once and an exit that never delays it.
+keywords:
+  - Popover
+  - PopoverTrigger
+  - PopoverContent
+  - PopoverTitle
+  - PopoverDescription
+  - PopoverClose
+  - PopoverProps
+  - PopoverTriggerProps
+  - PopoverContentProps
+  - PopoverTitleProps
+  - PopoverDescriptionProps
+  - PopoverCloseProps
+  - open
+  - defaultOpen
+  - onOpenChange
+  - placement
+  - top
+  - bottom
+  - left
+  - right
+  - className
+  - ref
+  - popover="auto"
+  - popovertarget
+  - top layer
+  - light dismiss
+  - anchor positioning
+  - position-area
+  - position-try-fallbacks
+  - anchor-name
+  - position-anchor
+  - role="dialog"
+  - non-modal
+  - aria-expanded
+  - aria-haspopup
+  - aria-labelledby
+  - aria-describedby
+  - aria-label
+  - autofocus
+  - data-side
+  - data-state
+  - Escape
+  - outside click
+  - focus restoration
+  - color.surface.elevated
+  - color.border
+  - color.foreground
+  - color.foreground.muted
+  - radius.surface
+  - elevation.overlay
+  - space.control-gap
+  - space.stack-gap
+  - font.family.body
+  - font.size.body
+  - font.size.body-small
+  - font.size.heading-small
+  - font.tracking.heading
+  - duration.overlay-enter
+  - duration.overlay-exit
+  - easing.enter
+  - easing.exit
+  - scale.overlay-enter
+  - popover.width
+  - popover.padding
+---
+
+<Prerelease />
+
+## Purpose and when to use
+
+Popover holds interactive content that belongs beside a trigger while the
+page stays usable: a share form, a filter panel, a colour picker, a short
+settings sheet. It is a non-modal `role="dialog"`, shown in the browser's top
+layer through `popover="auto"` and placed beside its trigger by CSS anchor
+positioning. The platform supplies the top layer, light dismiss, Escape, and
+focus restoration to the invoker; the component owns the surface styling,
+the entry and exit motion, moving focus in, and naming the surface so it
+announces as a dialog rather than as a group of unexplained controls.
+
+Use it when the user needs a few controls or a paragraph next to the thing
+they were looking at, and should be able to leave without ceremony. The
+inventory released it because Atlas imports a raw popover at two call sites
+that repeat the same six lines, which is the sign that a system should own
+it.
+
+## When not to use
+
+- **A few words about a control, nothing to click.** Use
+  [Tooltip](./tooltip.mdx). A popover that only holds text has focus stay on
+  its trigger and still costs a click, where a tooltip appears on hover and
+  focus.
+- **A task the user must finish or abandon before continuing.** Use
+  [Dialog](./dialog.mdx). The page behind a popover is live: Tab leaves the
+  surface into the page, and a click on the page dismisses the popover and
+  lands on whatever was clicked. If that would lose the user's work, it is a
+  Dialog.
+- **A list of choices that sets a value.** Use [Select](./select.mdx).
+  Popover has no selection semantics and no typeahead, and a menu built on it
+  would need roving focus that it deliberately does not implement.
+- **Nested floating menus.** Out of scope for v0.1, and nested popovers are
+  untested.
+
+## Import and minimal example
+
+```tsx
+import {
+  Popover,
+  PopoverClose,
+  PopoverContent,
+  PopoverDescription,
+  PopoverTitle,
+  PopoverTrigger,
+} from "@iroshandezilva/spartant";
+
+<Popover>
+  <PopoverTrigger>Share</PopoverTrigger>
+  <PopoverContent>
+    <PopoverTitle>Share this document</PopoverTitle>
+    <PopoverDescription>Anyone with the link can view.</PopoverDescription>
+    <Input readOnly defaultValue={link} />
+    <PopoverClose>Done</PopoverClose>
+  </PopoverContent>
+</Popover>;
+```
+
+The popovers below are the package's parts, rendered live. The readout flips
+in `onOpenChange`, which every open and close path reports through, so it
+changes on the keypress or the click and never at the end of the exit.
+
+<PopoverDemo />
+
+## Anatomy
+
+Six parts. The parent holds state and renders nothing; the rest each render
+one element:
+
+| Part | Element | Notes |
+| --- | --- | --- |
+| `Popover` | none | Holds the open state, the generated ids, and the anchor name. Renders no DOM. |
+| `PopoverTrigger` | `button` | The invoker, through `popovertarget`. Carries `aria-expanded` and `aria-haspopup="dialog"`, and names the anchor. Unstyled: the caller supplies the classes, including the focus treatment. |
+| `PopoverContent` | `div` | The surface. `role="dialog"`, `popover="auto"`, positioned against the trigger. Carries `data-state` and `data-side`. |
+| `PopoverTitle` | `h2` | The accessible name, linked through `aria-labelledby`. |
+| `PopoverDescription` | `p` | Optional. Linked through `aria-describedby` and announced after the name. |
+| `PopoverClose` | `button` | Dismisses. Unstyled, like the trigger. |
+
+**Name it.** Render a `PopoverTitle`, or give `PopoverContent` an
+`aria-label`. A popover with neither announces as an unnamed dialog, and the
+accessibility audit fails it.
+
+Refs point at the element each part renders: the `button` for
+`PopoverTrigger` and `PopoverClose`, the `div` for `PopoverContent`, the `h2`
+for `PopoverTitle`, the `p` for `PopoverDescription`. There is no portal: the
+surface is a DOM descendant of wherever it is rendered, shown in the top
+layer by the browser, so it inherits custom properties, including the
+reduced-motion collapse, from its ancestors.
+
+## Public API
+
+### Popover
+
+`PopoverProps` is a plain interface; the parent renders no element, so there
+is nothing native to extend.
+
+| Prop | Type | Default | Notes |
+| --- | --- | --- | --- |
+| `open` | `boolean` | | Controlled open state. Controlled whenever it is not `undefined`. |
+| `defaultOpen` | `boolean` | `false` | Uncontrolled initial state. |
+| `onOpenChange` | `(open: boolean) => void` | | Called once per change with the new state, from every path: the trigger, `PopoverClose`, Escape, an outside press, and the platform's own light dismiss. |
+| `children` | `ReactNode` | | The parts. |
+
+Uncontrolled is the default: a `Popover` with no `open` prop manages its own
+state and needs no `useState`. Pass `open` to control it and use
+`onOpenChange` to follow every dismissal. Do not switch modes after mount.
+
+### PopoverTrigger
+
+`PopoverTriggerProps` extends `ComponentPropsWithoutRef<"button">`.
+
+| Prop | Type | Default | Notes |
+| --- | --- | --- | --- |
+| `disabled` | `boolean` | | Native. A disabled trigger cannot invoke, and unlike a tooltip a popover has nothing to say about why. |
+| `onClick`, `onKeyDown` | native handlers | | Called first. Calling `preventDefault` on the click stops the fallback toggle; on the keydown it stops the Escape handling. |
+| `className` | `string` | | Applied as given; there are no default classes to merge with. |
+| `ref` | `Ref<HTMLButtonElement>` | | Points at the `button`. |
+| `...rest` | `ComponentPropsWithoutRef<"button">` | | Forwarded. `type="button"`, `popovertarget`, `aria-expanded`, and `aria-haspopup` are set by the part and a caller's `style` is merged after the anchor name. |
+
+### PopoverContent
+
+`PopoverContentProps` extends `ComponentPropsWithoutRef<"div">`.
+
+| Prop | Type | Default | Notes |
+| --- | --- | --- | --- |
+| `placement` | one of `"top"`, `"bottom"`, `"left"`, `"right"` | `"bottom"` | The preferred side of the trigger. The browser flips or slides it when there is no room. |
+| `aria-label` | `string` | | The name, when there is no `PopoverTitle`. |
+| `onToggle`, `onKeyDown` | native handlers | | Called first. The part syncs its state from the platform's `toggle` event and handles Escape after them. |
+| `className` | `string` | | Merged last through `cn`, so a caller's class wins. Use it for width and for `max-h-*` with `overflow-auto` on long content. |
+| `ref` | `Ref<HTMLDivElement>` | | Points at the surface `div`. |
+| `...rest` | `ComponentPropsWithoutRef<"div">` | | Forwarded. `id`, `role`, `popover`, `aria-labelledby`, `aria-describedby`, `data-state`, and `data-side` are set by the part. |
+
+### PopoverTitle, PopoverDescription, PopoverClose
+
+`PopoverTitleProps` extends `ComponentPropsWithoutRef<"h2">`,
+`PopoverDescriptionProps` extends `ComponentPropsWithoutRef<"p">`, and
+`PopoverCloseProps` extends `ComponentPropsWithoutRef<"button">`.
+
+| Prop | Type | Default | Notes |
+| --- | --- | --- | --- |
+| `id` | `string` | generated | Title and description. Override it and the link attributes follow. |
+| `className` | `string` | | Title and description merge it last through `cn`. `PopoverClose` applies it as given, with no defaults. |
+| `onClick` | native handler | | `PopoverClose` calls it first and does not close when the caller prevented the default. |
+| `ref` | | | The `h2`, the `p`, or the `button`. |
+
+Exported types: `PopoverProps`, `PopoverTriggerProps`, `PopoverContentProps`,
+`PopoverTitleProps`, `PopoverDescriptionProps`, `PopoverCloseProps`. The
+placement union is typed inline on `PopoverContentProps` and is not exported
+under its own name.
+
+A part rendered outside its `Popover` throws with a message naming both, for
+example `PopoverTitle must be rendered inside a Popover.`
+
+## Variants and sizes
+
+Popover has no variants and no sizes: the story contract declares `[]` for
+both. What varies instead is `placement`, which is the side of the trigger
+the surface prefers, and the content. The surface is `popover.width` wide
+(288px) so a form inside is sized by the surface rather than by its longest
+label, and it is clamped to the viewport less `space.stack-gap`; a wider
+surface is a `className`.
+
+| Placement | Fallbacks |
+| --- | --- |
+| `top` | Flips to the bottom, then slides to hang off the left or right edge of the trigger. |
+| `bottom` | Default. Flips to the top, then slides left or right. |
+| `left` | Flips to the right, then slides to hang off the top or bottom edge. |
+| `right` | Flips to the left, then slides up or down. |
+
+The browser evaluates the fallbacks on every scroll and resize with no
+listener and no measuring. The side the surface actually landed on is
+written to `data-side`, and the transform origin follows it.
+
+## Required states
+
+| State | How it is reached | Where it is proved |
+| --- | --- | --- |
+| Default | Closed, trigger says `aria-expanded="false"`. | `Default` story |
+| Focus visible | Keyboard focus on the trigger, or on the first field inside after opening. The focus treatment on the trigger is the caller's class; the fields inside bring their own. | `KeyboardPath` story, manual check |
+| Disabled | `disabled` on `PopoverTrigger`. Cannot invoke. | `States` story |
+| Empty | A title and nothing focusable. Focus stays on the trigger; Escape closes it from there. | `States` story |
+| Long content | The caller bounds the height with `max-h-*` and `overflow-auto`. The width is kept. | `States` story |
+| Light and dark | The surface is `color.surface.elevated` in both; in dark the elevation leans on the border. | `Default` and `DarkTheme` stories |
+
+Focus-visible cannot be rendered into a static matrix without restating the
+styles under test, so the story that produces it for real is the proof, and
+`:focus-visible` is a manual check because synthesised events are untrusted.
+
+## Accessibility and keyboard behaviour
+
+- **Role**: a `div` with `role="dialog"`, non-modal, shown through
+  `popover="auto"`. The page behind it stays live, which is what separates
+  it from Dialog.
+- **Name**: `PopoverTitle`, through `aria-labelledby`, or an `aria-label` on
+  `PopoverContent`. One of the two is required, and the audit fails a popover
+  with neither. `aria-describedby` is set only when a `PopoverDescription` is
+  rendered.
+- **Focus**: on open, focus moves to the first focusable element inside, or
+  to the element marked `autofocus`, and stays on the trigger when the
+  surface holds nothing focusable. On close, it returns to the trigger unless
+  the user already put it somewhere else, which an outside click does and the
+  popover must not undo. The platform restores focus too, when focus was
+  inside the surface at the moment it closed; the component's own restore
+  covers the browsers and the paths where it does not, and the two never
+  disagree.
+- **Announcements**: the title is announced on open, then the description
+  when there is one. The trigger reports its expanded state through
+  `aria-expanded`.
+- **Hit area**: the trigger and close parts are unstyled buttons, so the
+  caller's classes are what meet the 44px floor. The example above uses the
+  `md` button height.
+
+| Key | Behaviour |
+| --- | --- |
+| `Enter` or `Space` on the trigger | Opens it. Focus moves to the first focusable element inside at once. |
+| `Escape` | Closes it, whether focus is inside the surface or still on the trigger. Focus returns to the trigger immediately. |
+| `Tab` | Moves through the surface and then back into the page. Nothing is trapped, because nothing behind it is inert. |
+
+Dismissal, path by path:
+
+| Path | Owner |
+| --- | --- |
+| Escape, focus inside the surface | The component and the platform. The key is consumed so it is not done twice. |
+| Escape, focus on the trigger | The same. |
+| Press outside the surface | The platform's light dismiss on a trusted pointer, and an owned `pointerdown` listener otherwise. Both end in the same state, and the second report is deduplicated. |
+| Click on the trigger while open | The platform. The trigger is the invoker, so it is exempt from light dismiss and toggles instead of dismissing and reopening. |
+| `PopoverClose` | The component. |
+
+Every path reports through `onOpenChange`, exactly once.
+
+One more platform rule: an `auto` popover light-dismisses every other `auto`
+popover that is not its ancestor when it opens. Two popovers cannot be open
+side by side, and the thing the user opened last is the thing they are
+looking at. Tooltips are `manual` and exempt, so a toolbar can show one while
+a popover is open.
+
+See [Accessibility](../foundations/accessibility.mdx) for the floors every
+component shares.
+
+## Motion purpose
+
+The surface fades and scales in from its trigger's side and back out again,
+so it reads as opening from the control that owns it rather than appearing
+over the page. That explains **location**, which is one of the purposes the
+[motion standard](../foundations/motion.mdx) allows. The exit is faster than
+the entry, because leaving is in the way.
+
+This is the first component whose exit animates, and it is worth saying why
+that is not in tension with the rule that focus never waits for motion.
+`hidePopover()` restores focus and fires its events at once; the surface
+merely stays painted, out of the accessibility tree, for the length of the
+exit, because `display` and `overlay` transition with `allow-discrete`.
+Dialog could not do this, since `close()` removes the element from view
+instantly. The Popover API keeps both transitionable, which is why
+`duration.overlay-exit` and `easing.exit` finally have a consumer.
+
+## Input modality, interruption, and reduced motion
+
+| Input | Behaviour |
+| --- | --- |
+| Pointer, touch | A click on the trigger toggles it. A press anywhere outside dismisses it, from the platform's light dismiss on a trusted pointer and from an owned listener otherwise. Touch behaves the same way: tap to open, tap outside to close. |
+| Keyboard | `Enter` or `Space` on the trigger opens it and focus moves to the first focusable element inside at once; the surface animates around a focus that has already moved. `Escape` closes it and focus returns to the trigger immediately. `Tab` moves through the surface and then on into the page, because the page behind is not inert. |
+| Interruption | Closing mid-entry retargets the same transition from wherever it is, and the state, focus, and events have already changed. Nothing queues. Four fast open-and-close cycles land closed with focus on the trigger, proved by `RapidRepeat`. |
+| Reduced motion | No branch in the component. The stylesheet collapses both durations to `0ms` and the entry scale to `1`, so the surface appears and disappears in place. The right-hand copy of the example above shows exactly that. |
+| Origin | The side of the trigger the surface actually landed on, read back after the browser resolves placement and collision fallbacks, so a flipped popover still grows from and shrinks toward its trigger. Nothing is paired with it: there is no backdrop, because the page behind stays live. |
+
+## Motion tokens and implementation approach
+
+| Token | Used for |
+| --- | --- |
+| `duration.overlay-enter` | The entry transition, 200ms. |
+| `duration.overlay-exit` | The exit transition, 160ms, 20 percent faster than the entry. |
+| `easing.enter` | The entry curve. |
+| `easing.exit` | The exit curve. |
+| `scale.overlay-enter` | The scale the surface grows from and shrinks to, 0.96. |
+
+CSS transitions only. The transition names its properties, `opacity`,
+`scale`, `display`, and `overlay`, rather than `all`, with
+`transition-behavior: allow-discrete` so the last two can animate. Entry
+starts from `@starting-style`; the open state carries the entry timing and
+the closed state the exit timing, because a transition runs on the timing of
+the state it is moving into. The transform origin is set from `data-side` in
+a layout effect, before the first paint, so the first frame of the entry is
+already from the right side. No dependency beyond CSS is used, and none is
+planned.
+
+## Theming and token dependencies
+
+Semantic roles, so a theme change or a consumer override retypes the surface
+with no rebuild:
+
+| Role | Where |
+| --- | --- |
+| `color.surface.elevated` | The surface fill |
+| `color.border` | The surface border, which carries the elevation in dark |
+| `color.foreground` | Body text and the title |
+| `color.foreground.muted` | The description |
+| `radius.surface` | Corner radius |
+| `elevation.overlay` | The shadow |
+| `space.control-gap` | The distance from the trigger, as a margin on every side so it survives a flip |
+| `space.stack-gap` | The viewport clamp: the surface is never wider than the viewport less this gap |
+| `font.family.body`, `font.size.body` | The surface text |
+| `font.size.heading-small`, `font.tracking.heading` | The title |
+| `font.size.body-small` | The description |
+
+Component tokens: `popover.width` (18rem) and `popover.padding` (1rem). The
+width is here for the same reason `dialog.max-width` is: a floating surface
+needs a stated width or its content decides. The padding is here because
+`space.surface-padding` is sized for a card or a dialog and would consume a
+sixth of a 288px box on each side.
+
+The trigger and close parts consume nothing: they are unstyled buttons, and
+the caller's classes decide their roles. See [Color](../foundations/color.mdx),
+[Radius and elevation](../foundations/radius-and-elevation.mdx), and
+[Theming](../start/theming.mdx).
+
+## Composition examples
+
+A filter control in a list header, which is the popover's natural habitat:
+
+```tsx
+<Popover>
+  <PopoverTrigger className={buttonLook}>Filter</PopoverTrigger>
+  <PopoverContent>
+    <div className="grid gap-stack">
+      <PopoverTitle>Filter projects</PopoverTitle>
+      <Field>
+        <Label>Owner</Label>
+        <Input placeholder="Anyone" />
+      </Field>
+      <Field>
+        <div className="flex items-center gap-control-gap">
+          <Checkbox defaultChecked />
+          <Label>Active</Label>
+        </div>
+      </Field>
+      <div className="flex justify-end gap-control-gap">
+        <PopoverClose className={closeLook}>Cancel</PopoverClose>
+        <Button size="sm">Apply</Button>
+      </div>
+    </div>
+  </PopoverContent>
+</Popover>
+```
+
+Controlled, so the owner can close it when the action inside succeeds:
+
+```tsx
+const [open, setOpen] = useState(false);
+
+<Popover open={open} onOpenChange={setOpen}>
+  <PopoverTrigger className={buttonLook}>Rename</PopoverTrigger>
+  <PopoverContent placement="right">
+    <PopoverTitle>Rename this file</PopoverTitle>
+    <Field>
+      <Label>Name</Label>
+      <Input defaultValue={name} autoFocus />
+    </Field>
+    <Button size="sm" onClick={() => rename().then(() => setOpen(false))}>
+      Save
+    </Button>
+  </PopoverContent>
+</Popover>;
+```
+
+Long content, with the height bounded by the caller and an `aria-label` in
+place of a title:
+
+```tsx
+<PopoverContent aria-label="Recent changes" className="max-h-64 overflow-auto">
+  {entries.map((entry) => (
+    <p key={entry.id} className="text-body-small text-foreground-muted">
+      {entry.summary}
+    </p>
+  ))}
+</PopoverContent>
+```
+
+`buttonLook` and `closeLook` are the caller's class strings; the demo above
+and the stories use the look of a secondary [Button](./button.mdx).
+
+## Testing notes
+
+<Stories
+  file="Popover.stories.tsx"
+  stories={[
+    { name: "Contract", proves: "The motion, accessibility, and manual-review contract, rendered." },
+    { name: "Default", proves: "The recommended composition: a small form that does not need the whole page." },
+    { name: "Placements", proves: "Every placement, opened on demand because one auto popover is open at a time." },
+    { name: "States", proves: "Disabled, empty, and long content in one matrix; focus-visible is deferred to KeyboardPath." },
+    { name: "DarkTheme", proves: "The open surface pinned to dark, where elevation leans on the border." },
+    { name: "Composition", proves: "A filter control in a list header." },
+    { name: "KeyboardPath", proves: "Tab reaches the trigger, Enter opens a named and described dialog with focus in the first field at once, Tab moves on without trapping, Escape closes it and focus returns to the trigger." },
+    { name: "PointerPath", proves: "A click opens it, a click inside keeps it open, the close part closes it and restores focus, a press outside dismisses it." },
+    { name: "RapidRepeat", proves: "Four fast open-and-close cycles end closed, with focus on the trigger and aria-expanded false." },
+    { name: "OverlayOrigin", proves: "Opened from each side in turn, the surface records that side in data-side, so the origin follows the trigger." },
+    { name: "ReducedMotion", proves: "The open surface with every motion token collapsed: it appears rather than arrives." },
+    { name: "ViewportEdges", proves: "Four corner triggers each ask for the placement that would leave the viewport, so the browser's fallbacks have to answer." },
+    { name: "PartOutsidePopover", proves: "A part outside its Popover throws, naming the part and the parent." },
+    { name: "SlowMotion", proves: "The entry and the exit at eight times their length, so the origin and the faster exit can be watched." },
+  ]}
+/>
+
+Every story is rendered, its play function awaited, and the result audited
+with axe by `pnpm test:stories`. The unit tests in `Popover.test.tsx` prove
+opening and the expanded state, the name and description links, focus moving
+in, `autofocus` precedence, focus staying on the trigger when there is nothing
+to focus, Escape from both places, the close part, outside and inside presses,
+focus not being stolen back, the disabled trigger, rapid repeat with
+`onOpenChange` called once per change, controlled and uncontrolled behaviour,
+ref forwarding, that `cn` kept every class, and that the adaptation from
+shadcn stayed adapted. `overlay.test.ts` proves the side resolution, including
+a flip and the all-zero geometry a layout-less environment returns, the
+placement classes and their fallbacks, and the anchor name.
+
+What is not asserted: the top layer, the platform's light dismiss, and anchor
+positioning, because happy-dom implements none of them. Where the Popover API
+is missing the component falls back to the `hidden` attribute and its own
+outside-press listener, which is what the tests observe. The platform
+behaviour is the manual check. The contract lists six:
+
+1. Open the Default popover with the keyboard, Tab through it and out the
+   other side, then reopen and press Escape. Expect focus to land on the first
+   field on open, leave the surface into the page on Tab, and return to the
+   trigger on Escape. Nothing waits for the animation.
+2. Open it with the mouse, then click the page behind it. Expect it to close.
+   Clicking the trigger while it is open closes it too, without reopening.
+3. Open ViewportEdges and click each corner trigger in turn. Expect each
+   surface to flip or slide to stay in view, with the animation growing from
+   the trigger it belongs to. Opening one closes the previous one: the
+   platform allows one auto popover at a time.
+4. Zoom to 200% and repeat the edge check. Expect the same result.
+5. Watch SlowMotion open and close. Expect the exit to be visibly faster than
+   the entry, and both to run from the trigger's side.
+6. With VoiceOver, open the Default popover. Expect it to announce as a dialog
+   with the title, then the description, then the focused field.
+
+The checklist those steps come from is `MANUAL-REVIEW.md` at the repository
+root.
+
+## Known limitations
+
+- **`PopoverTrigger` renders its own button.** It cannot wrap a `Button` or
+  any other element, following the Dialog and Tooltip precedent. Style it with
+  the same classes, as the demo and the stories do; that includes the focus
+  treatment and the 44px hit area, which the part does not ship. A `render`
+  or `asChild` escape hatch is a follow-up decision. `PopoverClose` is the
+  same.
+- **`PopoverTitle` is an `h2`**, matching `DialogTitle`. A heading level that
+  fits the surrounding page is a follow-up now that there is a real page to
+  test it against.
+- **Nested popovers are untested.** The Popover API stacks `auto` popovers
+  correctly when one is rendered inside another's subtree, but no story proves
+  it and DropdownMenu, which would need it, is deferred.
+- **Browsers without anchor positioning centre the surface in the viewport.**
+  Safari before 26, Firefox before 147. It still opens in the top layer,
+  dismisses, and manages focus correctly.
+- **A controlled popover the platform dismisses stays dismissed** even if the
+  owner ignores `onOpenChange`, until `open` next changes. Dialog has the same
+  characteristic, for the same reason.
+- **One `auto` popover at a time.** Opening one light-dismisses any other that
+  is not its ancestor. That is the platform's rule, and it is the right one,
+  but a design that wants two open side by side cannot have it.
+- **The placement type is not exported.** `placement` accepts the four string
+  literals; there is no `PopoverPlacement` type to import.
+- **The manual checks in Chrome and VoiceOver are still owed.** HAUX-53
+  recorded the computed motion values, the keyboard open through the
+  platform, the viewport-edge flips, and both themes as passing in Chrome,
+  but the trusted-input pass of the popover's own overlay checks (click to
+  open with focus moving in, Tab through and out, invoker click to close
+  without reopening, Escape while the exit paints, outside click), the
+  VoiceOver announcement, Safari, and the OS-level reduce-motion setting were
+  not run for lack of environment and were handed to Iroshan. The issue has
+  since moved to Done; no comment records the result of those checks.
+- **The top layer, light dismiss, and anchor positioning are not asserted by
+  any automated test**, because happy-dom implements none of them.
+
+## Changelog
+
+Popover was added by HAUX-53, alongside Tooltip, which owned the decision to
+build both on the platform rather than on a primitive library. The
+consumer-facing record is
+[`CHANGELOG.md`](https://github.com/iroshandezilva/spartan/blob/main/CHANGELOG.md)
+at the repository root; changes that are merged but not yet released are
+individual notes in
+[`.changes/`](https://github.com/iroshandezilva/spartan/tree/main/.changes).
+Source: `packages/spartant/src/components/popover/`.
+
+Related: [Tooltip](./tooltip.mdx) for supplemental text on the same
+positioning, [Dialog](./dialog.mdx) for a task that must be finished,
+[Button](./button.mdx) for the look the trigger borrows,
+[Select](./select.mdx) for choosing a value, [Motion](../foundations/motion.mdx)
+for the token scale, [Accessibility](../foundations/accessibility.mdx) for
+the shared floors, and
+[Radius and elevation](../foundations/radius-and-elevation.mdx) for the
+surface roles.

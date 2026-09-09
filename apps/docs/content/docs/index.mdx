@@ -63,21 +63,22 @@ stories rather than repeating them.
 
 ## What is released today
 
-The components whose build issues are complete at the time of writing are
-`Badge`, `Button`, `Checkbox`, `Dialog` and its parts, `Field`, `FieldMessage`,
-`Input`, `Label`, `Radio`, `RadioGroup`, `Separator`, `Switch`, and `Textarea`,
-together with `ThemeProvider`, `useTheme`, `themeScript`, `cn`, and the
-generated token surface. Every page on this site uses only those. The full
-runtime export list is generated from the package on
+Every component in the approved v0.1 inventory is built: `Badge`, `Button`,
+`Card` and its parts, `Checkbox`, `Dialog` and its parts, `Field`,
+`FieldMessage`, `Input`, `Label`, `Popover` and its parts, `Radio`,
+`RadioGroup`, `Select`, `Separator`, `Switch`, `Tabs` and its parts,
+`Textarea`, and `Tooltip` and its parts, together with `ThemeProvider`,
+`useTheme`, `themeScript`, `cn`, and the generated token surface. Each has a
+page in [Components](./components/button.mdx). The full runtime export list is
+generated from the package on
 [Using with a coding agent](./start/coding-agents.mdx#what-the-package-exports).
 
 <Callout type="warn">
-  Card, Tabs, Select, Tooltip, and Popover are in the approved inventory and are
-  being built in their own issues. Nothing on this site uses or documents them.
-  Treat a component as released only when its Linear issue is Done, even if
-  its name already appears in the generated export list. Component pages
-  arrive in their own issue; this site currently documents the Start and
-  Foundations sections only.
+  The package has not been published, so every component is prerelease and
+  every component page says so. Tooltip and Popover are complete in the
+  repository and pass every automated check, but their build issue is awaiting
+  a manual keyboard and VoiceOver review; their pages record exactly what is
+  still unverified.
 </Callout>
 
 The buttons below are the package's `Button`, imported through its public
@@ -104,7 +105,8 @@ this site's theme retypes them along with everything else.
 - The package has not yet been published to the npm registry. Its version is
   `0.0.0` and the install command on the next page describes the intended
   path. Publishing is its own issue.
-- No component pages exist yet. Storybook is the only per-state reference.
+- Component pages link to Storybook coverage by file path and story name,
+  because there is no hosted Storybook. The static build is a CI artifact.
 - Search uses the built-in static index. Token names and prop names are
   indexed through page keywords, but the index has not been evaluated against
   every task the documentation plan lists.

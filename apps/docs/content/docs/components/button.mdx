@@ -91,7 +91,7 @@ One element. Button renders a single `button` and nothing else visible:
 - The **hit area** is a pseudo-element on coarse pointers, centred and at
   least 44px square, so the `sm` size meets the touch floor without growing.
 
-The ref points at the `button`.
+There is no `ref` in `ButtonProps` today; see Known limitations.
 
 ## Public API
 
@@ -106,7 +106,6 @@ attribute and handler passes through.
 | `disabled` | `boolean` | | Native. Removes the button from the tab order. |
 | `type` | `"button"`, `"submit"`, `"reset"` | `"button"` | Defaults to `"button"` deliberately: an unspecified button inside a form submits it, which is rarely what a prototype means. |
 | `className` | `string` | | Merged last through `cn`, so a caller's class wins. |
-| `ref` | `Ref<HTMLButtonElement>` | | Points at the `button`. |
 | `...rest` | `ComponentPropsWithoutRef<"button">` | | Forwarded, including `form`, `aria-*`, and every handler. |
 
 Exported types: `ButtonProps`, `ButtonVariant`, `ButtonSize`.
@@ -356,6 +355,13 @@ root.
 - The press scale applies on the keyboard path while the key is held, because
   `:active` covers both input paths. Nothing waits for it, so the keyboard
   path is still immediate.
+- `ButtonProps` extends `ComponentPropsWithoutRef<"button">` and declares no
+  `ref`, so `<Button ref={...}>` is a type error at package version `0.0.0`,
+  even though the component README says the ref points at the `button` and
+  the API conventions require every component to forward one. At runtime a
+  ref passed through a cast does reach the element, because React 19 passes
+  `ref` as a prop and the component spreads its props onto the `button`. This
+  is recorded on HAUX-56 for the package to resolve.
 - The `icon` size and `[&_svg]` sizing that shadcn's button ships are
   public-API additions and need their own decision; the HAUX-69 audit kept
   Spartant's Button as it is.

@@ -1,0 +1,505 @@
+---
+title: Dialog
+description: A modal task on the native dialog element, opened with showModal, with a coordinated backdrop, an instant close so focus restoration never waits, and a page scroll lock.
+keywords:
+  - Dialog
+  - DialogTrigger
+  - DialogContent
+  - DialogTitle
+  - DialogDescription
+  - DialogClose
+  - DialogProps
+  - DialogTriggerProps
+  - DialogContentProps
+  - DialogTitleProps
+  - DialogDescriptionProps
+  - DialogCloseProps
+  - open
+  - defaultOpen
+  - onOpenChange
+  - dismissOnOutsideClick
+  - modal
+  - showModal
+  - top layer
+  - focus trap
+  - focus restoration
+  - backdrop
+  - scroll lock
+  - Escape
+  - aria-labelledby
+  - aria-describedby
+  - color.surface
+  - color.border
+  - color.foreground
+  - color.foreground.muted
+  - color.focus-ring
+  - radius.surface
+  - elevation.modal
+  - space.surface-padding
+  - space.stack-gap
+  - font.size.heading
+  - font.tracking.heading
+  - font.size.body
+  - duration.modal-enter
+  - easing.enter
+  - scale.overlay-enter
+  - dialog.backdrop
+  - dialog.max-width
+---
+
+<Prerelease />
+
+## Purpose and when to use
+
+Dialog asks a focused question without losing the page behind it: confirm a
+deletion, collect one field, show a result. It is the native `dialog` element
+opened with `showModal()`, which is the decision HAUX-44 approved instead of a
+primitive library. That one call gives a focus trap, top layer stacking above
+every `z-index`, `Escape` dismissal, inertness of everything behind it, and
+focus restoration to whatever opened it. Those five are exactly where
+hand-built dialogs go wrong, and the platform has them right.
+
+It is the hardest accessibility contract in the set and the one most often got
+wrong, which is why it was built early: the focus and dismissal patterns it
+establishes are what every later overlay copies. Spartant owns what the
+platform leaves open: the backdrop and surface styling from tokens, their
+coordinated timing, the page scroll lock, and making sure the exit never delays
+focus coming back.
+
+## When not to use
+
+- **Supplemental text on hover or focus.** Use [Tooltip](./tooltip.mdx). A
+  modal for a hint is a wall for a whisper.
+- **Rich content that should not take over the page.** Use
+  [Popover](./popover.mdx). It anchors to its trigger, keeps the page live,
+  and does not trap focus.
+- **Content that belongs on the page.** Use [Card](./card.mdx). If the user
+  should be able to scroll past it, it is not a modal.
+- **A confirmation with a destructive default or a stacked second dialog.**
+  Alert dialogs and nested dialogs are out of scope for v0.1 and need their
+  own decision.
+
+## Import and minimal example
+
+```tsx
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogTitle,
+  DialogTrigger,
+} from "@iroshandezilva/spartant";
+
+<Dialog>
+  <DialogTrigger>Delete workspace</DialogTrigger>
+  <DialogContent>
+    <DialogTitle>Delete this workspace?</DialogTitle>
+    <DialogDescription>This cannot be undone.</DialogDescription>
+    <DialogClose>Cancel</DialogClose>
+  </DialogContent>
+</Dialog>;
+```
+
+The dialog below is the package's `Dialog`, rendered live and controlled so
+the readout can count. The readout flips inside `onOpenChange`, which runs
+from every dismissal path, so nothing waits for the entry transition. The
+dialog is not portalled: `showModal()` paints it in the top layer while it
+stays a DOM descendant of its panel, so the right-hand copy inherits the
+collapsed tokens and simply appears.
+
+<DialogDemo />
+
+## Anatomy
+
+Six parts, one of them invisible:
+
+| Part | Element | Notes |
+| --- | --- | --- |
+| `Dialog` | none | Holds the open state and the generated ids. Renders no DOM. |
+| `DialogTrigger` | `button` | Opens it. Unstyled; any button works, this one just wires the state. |
+| `DialogContent` | `dialog` | The surface, and the backdrop through `::backdrop`. Rendered where it sits in the tree, not in a portal. |
+| `DialogTitle` | `h2` | **Required.** The accessible name, referenced by `aria-labelledby`. |
+| `DialogDescription` | `p` | Optional. Announced after the name through `aria-describedby`. |
+| `DialogClose` | `button` | Dismisses. Unstyled. |
+
+The padding and the vertical rhythm live on an inner wrapper inside
+`DialogContent`, not on the `dialog` itself. Padding on the element would make
+its box larger than the visible surface, and a click in that margin would
+dismiss even though it looks like a click on the dialog.
+
+`DialogTitle` is required, not merely recommended. An unnamed modal announces
+that something has taken over the page and not what it is.
+
+No part exposes a `ref`. Every props interface extends
+`ComponentPropsWithoutRef`, and `DialogContent` keeps the `dialog` reference to
+itself because it needs it to call `showModal()` and `close()`. See
+[Known limitations](#known-limitations).
+
+## Public API
+
+Every rendering part extends its native element's props. Every native
+attribute and handler passes through, including `onClose` and `onCancel` on
+`DialogContent`, which are called before the component syncs its own state.
+
+### `Dialog`
+
+`DialogProps` extends nothing: it is the state holder and renders no element.
+
+| Prop | Type | Default | Notes |
+| --- | --- | --- | --- |
+| `open` | `boolean` | | Controlled open state. Controlled when not `undefined`. |
+| `defaultOpen` | `boolean` | `false` | Uncontrolled initial state. |
+| `onOpenChange` | `(open: boolean) => void` | | Called with the new state from every path: the trigger, `Escape`, a backdrop click, `DialogClose`, and `close()` on the element. |
+| `children` | `ReactNode` | | The parts. |
+
+Uncontrolled is the default: `<Dialog>` with a `DialogTrigger` needs no
+`useState`. Pass `open` to control it, as the [Quick start](../start/quick-start.mdx)
+does so a `Button` can be the trigger. Do not switch modes on the fly; the
+component does not warn about it, it documents it here instead. In controlled
+mode `DialogTrigger` and `DialogClose` still work: they report through
+`onOpenChange` rather than holding state.
+
+### `DialogTrigger`
+
+`DialogTriggerProps` extends `ComponentPropsWithoutRef<"button">`.
+
+| Prop | Type | Default | Notes |
+| --- | --- | --- | --- |
+| `onClick` | native | | Called first. Call `preventDefault()` on the event to stop the open. |
+| `className` | `string` | | The trigger ships no styles at all. Give it the classes you want, or control the dialog and use a `Button`. |
+| `...rest` | `ComponentPropsWithoutRef<"button">` | | Forwarded. `type` is fixed to `"button"` before the spread, so a caller can override it. |
+
+### `DialogContent`
+
+`DialogContentProps` extends `ComponentPropsWithoutRef<"dialog">`.
+
+| Prop | Type | Default | Notes |
+| --- | --- | --- | --- |
+| `dismissOnOutsideClick` | `boolean` | `true` | Whether a click on the backdrop dismisses. Turn it off for a dialog holding unsaved work, where a stray click should not discard it. |
+| `onClose` | native | | Called before the state syncs. `close` fires for every platform dismissal: `Escape`, `close()`, and a form with `method="dialog"`. |
+| `onCancel` | native | | Called on `Escape`. Forwarded only; the state syncs from `close`. |
+| `onClick` | native | | Called first. Call `preventDefault()` to veto a backdrop dismissal for that click. |
+| `className` | `string` | | Merged last through `cn`. This is where `max-h-*` and `overflow-auto` go for a long dialog. |
+| `children` | `ReactNode` | | Rendered inside the padded wrapper. |
+| `...rest` | `ComponentPropsWithoutRef<"dialog">` | | Forwarded after `aria-labelledby` and `aria-describedby`, so a caller can override both. |
+
+### `DialogTitle` and `DialogDescription`
+
+`DialogTitleProps` extends `ComponentPropsWithoutRef<"h2">`.
+`DialogDescriptionProps` extends `ComponentPropsWithoutRef<"p">`.
+
+| Prop | Type | Default | Notes |
+| --- | --- | --- | --- |
+| `id` | `string` | generated with `useId` | Override it and the `aria-labelledby` or `aria-describedby` on the `dialog` still points at the generated id, so keep the default unless you also set the attribute on `DialogContent`. |
+| `className` | `string` | | Merged last through `cn`. |
+| `...rest` | native | | Forwarded. |
+
+### `DialogClose`
+
+`DialogCloseProps` extends `ComponentPropsWithoutRef<"button">`.
+
+| Prop | Type | Default | Notes |
+| --- | --- | --- | --- |
+| `onClick` | native | | Called first. Call `preventDefault()` to stop the close. |
+| `className` | `string` | | Unstyled, like the trigger. |
+| `...rest` | `ComponentPropsWithoutRef<"button">` | | Forwarded, with `type` fixed to `"button"` before the spread. |
+
+Exported types: `DialogProps`, `DialogTriggerProps`, `DialogContentProps`,
+`DialogTitleProps`, `DialogDescriptionProps`, `DialogCloseProps`. The context
+the parts share is not exported; a part rendered outside its `Dialog` throws
+with a message naming both.
+
+### The exit is instant, on purpose
+
+`close()` is called the moment the state goes false, without waiting for an
+exit animation. The [motion standard](../foundations/motion.mdx) is explicit
+that focus must never wait for motion, and `close()` is what restores focus to
+the trigger. Holding it back to let a transition finish would strand a
+keyboard user for the length of the animation with focus nowhere useful.
+
+The entry animates; the exit does not. That asymmetry is deliberate and is the
+honest reading of the rule.
+
+### Page scroll is locked while open
+
+`showModal()` makes the page inert, but inert does not make the viewport
+unscrollable: measured in Chrome, the root's computed `overflow` stayed
+`visible` with a modal open, so a wheel over the backdrop scrolled the
+document behind it. `DialogContent` sets `overflow: hidden` on the root
+element while open, adds the width of the scrollbar that disappears as
+padding so the page does not shift sideways, and restores both to exactly
+what they were on close or unmount, so a consumer's own inline styles survive.
+
+### Backdrop clicks
+
+The backdrop belongs to the `dialog` element, so a click on it targets the
+element itself rather than any child. Comparing `event.target` to the element
+is the whole test, and it is why the padding lives on the inner wrapper.
+
+## Variants and sizes
+
+Dialog has no variants and no sizes: the contract declares `[]` for both.
+What varies is composition and behaviour: whether a `DialogDescription` is
+present, whether `dismissOnOutsideClick` is off for unsaved work, and whether
+the caller adds `max-h-*` and `overflow-auto` for long content. The width is
+fixed by `dialog.max-width` (32rem) inside a `calc(100vw - 2rem)` ceiling, so
+the surface never touches the viewport edge on a small screen.
+
+## Required states
+
+| State | How it is reached | Where it is proved |
+| --- | --- | --- |
+| Default | Closed. Only the trigger is on the page. | `Default` story |
+| Open | `DialogTrigger`, or `open` going true. The surface and backdrop enter together. | `KeyboardPath`, `OverlayOrigin` stories |
+| Focus visible | Keyboard focus on the trigger, then on the first focusable inside. A 2px outline at 2px offset in `color.focus-ring` on the controls you style. | `KeyboardPath` story, manual check |
+| Long content | `max-h-*` and `overflow-auto` on `DialogContent`. The dialog scrolls; the page behind it does not. | `States` story, manual check |
+| Empty | A title and nothing else. Still named, still dismissible, `aria-describedby` absent. | `States` story |
+| Dismissal off | `dismissOnOutsideClick={false}`. A backdrop click does nothing; `Escape` and `DialogClose` still work. | `PointerPath` and `Composition` stories |
+| Light and dark | The surface, border, and backdrop in both themes. | `Default` and `DarkTheme` stories |
+
+`:focus-visible` cannot be rendered into a static matrix without restating the
+styles under test, so the story that produces it is the proof and the real
+keyboard is the manual check.
+
+## Accessibility and keyboard behaviour
+
+- **Role**: `dialog`, from the native element opened with `showModal()`,
+  which carries the modal semantics, the focus trap, the top layer, and
+  inertness of the page behind it.
+- **Name**: `DialogTitle`, referenced by `aria-labelledby`. Required: an
+  unnamed modal announces only that something took over the page.
+- **Focus**: the platform moves focus into the surface on open and restores it
+  to the trigger on close. The exit animation never gates the restore. The
+  controls you place inside take the one shared focus treatment, a 2px
+  `focus-visible` outline at 2px offset in the focus-ring colour.
+- **Announcements**: the title is announced on open, then the description when
+  one is present. `aria-describedby` is only set when a `DialogDescription`
+  is rendered, so a screen reader is never pointed at nothing.
+
+| Key | Behaviour |
+| --- | --- |
+| `Escape` | Dismisses. The platform fires `cancel` then `close`, and the state syncs from `close`. |
+| `Tab` | Cycles within the dialog and cannot reach the page behind it. |
+| Close, by any path | Focus returns to the trigger when the dialog closes. |
+
+See [Accessibility](../foundations/accessibility.mdx) for the floors every
+component shares.
+
+## Motion purpose
+
+The surface and its backdrop fade and scale in together, so a modal reads as
+arriving over the page rather than replacing it. That softens a **potentially
+jarring change**, which is one of the purposes the
+[motion standard](../foundations/motion.mdx) allows. Nothing else moves, and
+the exit does not animate at all, because the close is what restores focus.
+
+## Input modality, interruption, and reduced motion
+
+| Input | Behaviour |
+| --- | --- |
+| Pointer, touch | Clicking the backdrop dismisses, unless `dismissOnOutsideClick` is off because the dialog holds unsaved work. A click on the surface never dismisses. |
+| Keyboard | `Escape` dismisses, from the platform. Focus enters the surface on open and returns to the trigger on close, and neither waits for the animation. |
+| Interruption | Opening and closing quickly retargets the transition. The close is never gated on it: `close()` is called immediately so focus restoration cannot be delayed. Four fast open-and-close cycles end closed, proved by `RapidRepeat`. |
+| Reduced motion | No branch in the component. The stylesheet collapses the duration to `0ms` and the entry scale to `1`, so the dialog simply appears. The right-hand copy of the example above shows exactly that. |
+| Origin | Centre, which is what the standard specifies for a dialog rather than the trigger origin used by popovers. The backdrop shares the surface's duration and easing, so neither lands first. |
+
+## Motion tokens and implementation approach
+
+| Token | Used for |
+| --- | --- |
+| `duration.modal-enter` | The entry of the surface and the backdrop, 280ms, one value for both. |
+| `easing.enter` | The entry curve for both, the shared strong ease-out. |
+| `scale.overlay-enter` | The scale the surface starts from, 0.96. |
+
+CSS transitions only. The entry uses `@starting-style` with
+`transition-behavior: allow-discrete`, so the `display` and `overlay` flips
+that `showModal()` performs are part of the transition and no JavaScript is
+involved in the animation at all. The transition names its properties,
+`opacity`, `scale`, `display`, and `overlay` on the surface and `opacity`,
+`display`, and `overlay` on the backdrop, rather than `all`. No exit token is
+consumed, because the close is instant. No dependency beyond CSS is used, and
+none is planned.
+
+## Theming and token dependencies
+
+Semantic roles, so a theme change or a consumer override retypes the dialog
+with no rebuild:
+
+| Role | Where |
+| --- | --- |
+| `color.surface` | The surface fill |
+| `color.border` | The surface border |
+| `color.foreground` | The surface text and the title |
+| `color.foreground.muted` | The description |
+| `color.focus-ring` | Focus on the controls you style inside |
+| `radius.surface` | Corner radius |
+| `elevation.modal` | The surface shadow |
+| `space.surface-padding` | Padding on the inner wrapper |
+| `space.stack-gap` | Gap between the title, description, and body |
+| `font.size.heading`, `font.tracking.heading` | The title |
+| `font.size.body` | The description |
+
+Component tokens: `dialog.backdrop` and `dialog.max-width`. `dialog.backdrop`
+is the only translucent colour in the system, and the one documented exception
+to the opaque rule: every other colour is opaque so its contrast can be
+asserted against a single number, and a backdrop has nothing behind it worth
+asserting against. `dialog.max-width` is 32rem, wide enough for a paragraph
+and a form row and narrow enough that a line stays readable.
+
+The title's weight is Tailwind's `font-semibold`, whose value matches
+`font.weight.heading` (600) but does not read the role, so overriding the
+role does not retype the title. See [Color](../foundations/color.mdx),
+[Radius and elevation](../foundations/radius-and-elevation.mdx), and
+[Theming](../start/theming.mdx).
+
+## Composition examples
+
+A confirmation controlled from a [Button](./button.mdx), which is how the
+[Quick start](../start/quick-start.mdx) wires it:
+
+```tsx
+const [confirming, setConfirming] = useState(false);
+
+<Button variant="danger" onClick={() => setConfirming(true)}>
+  Delete workspace
+</Button>
+<Dialog open={confirming} onOpenChange={setConfirming}>
+  <DialogContent>
+    <DialogTitle>Delete this workspace?</DialogTitle>
+    <DialogDescription>Everything in it goes with it. This cannot be undone.</DialogDescription>
+    <div className="flex justify-end gap-control-gap">
+      <DialogClose className="text-body underline">Keep it</DialogClose>
+      <Button variant="danger" onClick={() => setConfirming(false)}>
+        Delete
+      </Button>
+    </div>
+  </DialogContent>
+</Dialog>
+```
+
+A dialog holding a form, with backdrop dismissal off so a stray click cannot
+discard the work:
+
+```tsx
+<Dialog>
+  <DialogTrigger className="text-body underline">Invite a teammate</DialogTrigger>
+  <DialogContent dismissOnOutsideClick={false}>
+    <DialogTitle>Invite a teammate</DialogTitle>
+    <DialogDescription>They get access to this workspace and everything in it.</DialogDescription>
+    <Field required>
+      <Label>Email address</Label>
+      <Input type="email" placeholder="you@example.com" />
+    </Field>
+    <div className="flex justify-end gap-control-gap">
+      <DialogClose className="text-body underline">Cancel</DialogClose>
+      <Button>Send invitation</Button>
+    </div>
+  </DialogContent>
+</Dialog>
+```
+
+Long content, with scrolling handed to the dialog rather than the page:
+
+```tsx
+<DialogContent className="max-h-[min(32rem,calc(100vh-4rem))] overflow-auto">
+  <DialogTitle>Terms of service</DialogTitle>
+  {paragraphs.map((text, index) => (
+    <p key={index} className="text-body text-foreground-muted">
+      {text}
+    </p>
+  ))}
+  <DialogClose className="text-body underline">Close</DialogClose>
+</DialogContent>
+```
+
+## Testing notes
+
+<Stories
+  file="Dialog.stories.tsx"
+  stories={[
+    { name: "Contract", proves: "The motion, accessibility, and manual-review contract, rendered." },
+    { name: "Default", proves: "The recommended composition: trigger, title, description, cancel, and a danger action." },
+    { name: "States", proves: "Long content that scrolls inside the dialog, and an empty dialog with a title and nothing else." },
+    { name: "DarkTheme", proves: "The open dialog pinned to dark." },
+    { name: "Composition", proves: "A dialog holding a form with dismissOnOutsideClick off, so a stray click does not discard unsaved work." },
+    { name: "KeyboardPath", proves: "Opening names the dialog by its title and description; Cancel closes it and syncs state; the platform's own close() syncs state too." },
+    { name: "PointerPath", proves: "A click on the surface never dismisses; with dismissal off a click on the dialog box does not either; the close control still works." },
+    { name: "RapidRepeat", proves: "Four fast open-and-close cycles end closed, never half open." },
+    { name: "OverlayOrigin", proves: "Centre origin and the backdrop sharing the surface's duration and easing." },
+    { name: "ReducedMotion", proves: "The open dialog with every motion token collapsed: it appears rather than arriving." },
+    { name: "PartOutsideDialog", proves: "A part rendered outside its Dialog throws with a message naming both." },
+    { name: "SlowMotion", proves: "The entry at eight times its length, for watching whether the backdrop or the surface lands first." },
+  ]}
+/>
+
+Every story is rendered, its play function awaited, and the result audited
+with axe by `pnpm test:stories`. Focus movement is deliberately not asserted
+in a play function: happy-dom implements `showModal()` without moving focus,
+measured with a bare `dialog`, so an assertion would fail on code that is
+correct in every browser. `Escape` cannot be pressed from a play function
+either, because a synthesised key does not trigger the platform's behaviour;
+the story calls `close()` directly, which is what `Escape` does. Both are
+browser checks, and the contract lists four:
+
+1. Open with the keyboard, Tab all the way round, then press Escape. Expect
+   focus never to leave the dialog, and to land back on the trigger
+   afterwards.
+2. Open the long-content dialog on a short window and scroll. Expect the
+   dialog to scroll, the page behind it not to, and nothing to be clipped.
+3. With VoiceOver, open the dialog. Expect it to announce as a dialog with the
+   title, then the description.
+4. Turn on the OS reduce-motion setting and reload, then open and close.
+   Expect the dialog to appear and disappear with no scaling or fade, and
+   focus still to move correctly.
+
+The checklist those steps come from is `MANUAL-REVIEW.md` at the repository
+root.
+
+## Known limitations
+
+- **Nested dialogs are out of scope** for HAUX-50. The top layer stacks them
+  in ways that need their own decision.
+- The exit is not animated, for the focus reason above. `duration.modal-exit`
+  and `easing.exit` exist in the scale and nothing consumes them.
+- Scrolling inside the dialog is the caller's: pass `max-h-*` and
+  `overflow-auto` to `DialogContent`, as the long-content story does. A
+  default would be wrong for short dialogs.
+- The scroll lock is `overflow: hidden` on the root, which every desktop
+  browser honours. iOS Safari has historically let the page rubber-band behind
+  an `overflow: hidden` root when a touch starts on the backdrop; that needs
+  touch handling of its own and is not measured. A consumer with
+  `scrollbar-gutter: stable` on the root will see the gutter compensated twice
+  while a dialog is open.
+- The wheel over the backdrop is a manual check only, because browser
+  automation cannot produce a trusted wheel event. The lock itself was
+  measured in Chrome.
+- No part accepts a `ref`. The shared conventions say every rendering
+  component forwards one, and Dialog's parts do not yet, so a consumer cannot
+  reach the `dialog` element or the trigger from outside. Focus the dialog
+  through `open` and let the platform place it.
+- `DialogTrigger` and `DialogClose` ship no styles. Style them with
+  `className`, or control the dialog and use a `Button`.
+- `DialogTrigger` does not set `aria-haspopup` or `aria-expanded`. Neither is
+  required for a modal dialog, and the trigger is inert while it is open.
+- The browser's own UI can be part of the `Tab` cycle at either end of a
+  modal dialog; that is the platform, and the page behind is still
+  unreachable.
+
+## Changelog
+
+Dialog was added by HAUX-50. The consumer-facing record is
+[`CHANGELOG.md`](https://github.com/iroshandezilva/spartan/blob/main/CHANGELOG.md)
+at the repository root; changes that are merged but not yet released are
+individual notes in
+[`.changes/`](https://github.com/iroshandezilva/spartan/tree/main/.changes).
+Source: `packages/spartant/src/components/dialog/`.
+
+Related: [Button](./button.mdx) for the trigger and the actions inside,
+[Popover](./popover.mdx) and [Tooltip](./tooltip.mdx) for the non-modal
+overlays, [Card](./card.mdx) for content that belongs on the page,
+[Motion](../foundations/motion.mdx) for the token scale,
+[Accessibility](../foundations/accessibility.mdx) for the shared floors,
+[Radius and elevation](../foundations/radius-and-elevation.mdx) for
+`elevation.modal`, and the [Quick start](../start/quick-start.mdx) for the
+controlled form.

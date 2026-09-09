@@ -1,0 +1,573 @@
+---
+title: Tabs
+description: Switching between related panels. A tablist on native buttons with a roving tabindex, automatic or manual activation, either orientation, and an indicator that fades on pointer selection while the keyboard path stays immediate.
+keywords:
+  - Tabs
+  - TabsList
+  - Tab
+  - TabsPanel
+  - TabsProps
+  - TabsListProps
+  - TabProps
+  - TabsPanelProps
+  - TabsOrientation
+  - TabsActivation
+  - value
+  - defaultValue
+  - onValueChange
+  - orientation
+  - activation
+  - keepMounted
+  - disabled
+  - id
+  - horizontal
+  - vertical
+  - automatic
+  - manual
+  - roving tabindex
+  - tablist
+  - tab
+  - tabpanel
+  - aria-selected
+  - aria-controls
+  - aria-labelledby
+  - aria-orientation
+  - aria-label
+  - data-source
+  - indicator
+  - color.primary
+  - color.foreground
+  - color.foreground.muted
+  - color.foreground.disabled
+  - color.border
+  - color.focus-ring
+  - radius.control
+  - space.control-padding-x
+  - space.control-gap
+  - space.stack-gap
+  - size.min-target
+  - font.size.body
+  - font.family.body
+  - border-width.emphasis
+  - duration.state-change
+  - easing.state
+---
+
+<Prerelease />
+
+## Purpose and when to use
+
+Tabs switch between a small set of related views of one thing, where the user
+chooses which to look at and the others stay a click away: the sections of a
+settings page, the views of a record, the tabs of an inspector.
+
+The parts are `Tabs`, `TabsList`, `Tab`, and `TabsPanel`. They follow the
+WAI-ARIA tabs pattern on native elements: the tabs are `button`s, so Enter,
+Space, focus, and `disabled` come from the platform, and the roving tabindex
+that makes the list a single tab stop is the thing this component exists to
+get right. It is the component that establishes roving tabindex and the
+automatic-versus-manual activation choice for the system.
+
+## When not to use
+
+- **Steps in a sequence.** Tabs let the user go anywhere; a wizard should not.
+- **Navigation between pages.** A tab that changes the URL is a link. Use
+  links styled as a bar, or wire `value` to the router yourself; routing
+  integration is out of scope for v0.1.
+- **More than about seven.** Tabs scroll rather than wrap, and a scrolled tab
+  is a hidden tab. Use a [Select](./select.mdx) or a list instead.
+- **One choice submitted with a form.** That is a
+  [Radio group](./selection-controls.mdx#radio-group), which has a value and takes
+  part in the form; a tab set shows a panel and submits nothing.
+
+## Import and minimal example
+
+```tsx
+import { Tab, Tabs, TabsList, TabsPanel } from "@iroshandezilva/spartant";
+
+<Tabs defaultValue="overview">
+  <TabsList aria-label="Project">
+    <Tab value="overview">Overview</Tab>
+    <Tab value="activity">Activity</Tab>
+    <Tab value="settings">Settings</Tab>
+  </TabsList>
+  <TabsPanel value="overview">Overview panel</TabsPanel>
+  <TabsPanel value="activity">Activity panel</TabsPanel>
+  <TabsPanel value="settings">Settings panel</TabsPanel>
+</Tabs>;
+```
+
+Give the list an `aria-label`. The tabs name themselves, the panels are named
+by their tabs, and the label is what names the group.
+
+The tab sets below are the package's `Tabs`, rendered live. The readouts flip
+in `onValueChange`, so they show that the selection changed before the
+indicator finished fading.
+
+<TabsDemo />
+
+## Anatomy
+
+Four parts, each a real component with its own `className` and ref:
+
+- **`Tabs`** renders a `div` that holds the selection and lays out its
+  children per orientation: a column when horizontal, a row when vertical. The
+  ref points at this `div`.
+- **`TabsList`** renders a `div` with `role="tablist"` and
+  `aria-orientation`. It owns the keyboard model, is the scroll container for
+  a long horizontal set, and carries the rule the indicator sits on as an
+  `after` pseudo-element. The ref points at the list.
+- **`Tab`** renders a native `button` with `role="tab"`, `aria-selected`,
+  and, once its panel has rendered, `aria-controls`. The **indicator** is an
+  inset box shadow on the edge that meets the list's rule, so it paints
+  without taking space. The **hit area** is a centred pseudo-element on coarse
+  pointers, at least 44px square. The ref points at the `button`.
+- **`TabsPanel`** renders a `div` with `role="tabpanel"` and
+  `aria-labelledby`, hidden unless its tab is selected, and focusable when
+  shown. The ref points at the panel.
+
+Parts communicate through a context that is not exported. A part outside its
+`Tabs` throws with a message naming both, for example
+`Tab must be rendered inside a Tabs.`
+
+## Public API
+
+### Tabs
+
+`TabsProps` extends `ComponentPropsWithoutRef<"div">` with `defaultValue`
+retyped. Every other native attribute and handler passes through to the root.
+
+| Prop | Type | Default | Notes |
+| --- | --- | --- | --- |
+| `value` | `string` | | Controlled selection: the `value` of the selected `Tab`. |
+| `defaultValue` | `string` | | Uncontrolled initial selection. With neither, nothing is selected and no panel shows. |
+| `onValueChange` | `(value: string) => void` | | Called with the newly selected value, from pointer and keyboard alike, once per input interaction. |
+| `orientation` | `TabsOrientation`, one of `"horizontal"`, `"vertical"` | `"horizontal"` | Which way the list runs, and therefore which arrow keys move through it. |
+| `activation` | `TabsActivation`, one of `"automatic"`, `"manual"` | `"automatic"` | Whether focusing a tab selects it. See below. |
+| `id` | `string` | | Base for every generated id. Generated with `useId` when omitted. |
+| `className` | `string` | | Merged last through `cn`, so a caller's class wins over the orientation layout. |
+| `ref` | `Ref<HTMLDivElement>` | | Points at the root `div`. |
+| `...rest` | `ComponentPropsWithoutRef<"div">` | | Forwarded to the root. |
+
+### TabsList
+
+`TabsListProps` extends `ComponentPropsWithoutRef<"div">`.
+
+| Prop | Type | Default | Notes |
+| --- | --- | --- | --- |
+| `aria-label` | `string` | | Not required by the type, but give it one: it is what names the group. |
+| `onKeyDown` | `KeyboardEventHandler` | | Runs before the list's own handler. Call `preventDefault()` to opt a key out of the roving model. |
+| `onPointerDown` | `PointerEventHandler` | | Runs before the list records that the input was a pointer. |
+| `className` | `string` | | Merged last through `cn`. |
+| `ref` | `Ref<HTMLDivElement>` | | Points at the `tablist`. |
+| `...rest` | `ComponentPropsWithoutRef<"div">` | | Forwarded to the list. |
+
+### Tab
+
+`TabProps` extends `ComponentPropsWithoutRef<"button">` with `id`, `type`,
+and `value` omitted: `type` is always `"button"`, and the id is derived, see
+below.
+
+| Prop | Type | Default | Notes |
+| --- | --- | --- | --- |
+| `value` | `string` | required | What selecting this tab selects. Also names its panel. |
+| `disabled` | `boolean` | | Native. Skipped by the arrow keys and by Tab, and cannot be selected by click. |
+| `onClick` | `MouseEventHandler` | | Runs first. Call `preventDefault()` to stop the click selecting. |
+| `onFocus` | `FocusEventHandler` | | Runs first; in automatic activation the tab selects itself after it. |
+| `className` | `string` | | Merged last through `cn`. |
+| `ref` | `Ref<HTMLButtonElement>` | | Points at the `button`. |
+| `...rest` | `ComponentPropsWithoutRef<"button">` minus `id`, `type`, `value` | | Forwarded, including `aria-*` and every handler. |
+
+### TabsPanel
+
+`TabsPanelProps` extends `ComponentPropsWithoutRef<"div">` with `id` omitted.
+
+| Prop | Type | Default | Notes |
+| --- | --- | --- | --- |
+| `value` | `string` | required | The `Tab` this panel belongs to. |
+| `keepMounted` | `boolean` | `false` | Keep the children rendered while another tab is selected. See below. |
+| `className` | `string` | | Merged last through `cn`. |
+| `ref` | `Ref<HTMLDivElement>` | | Points at the `tabpanel`. |
+| `...rest` | `ComponentPropsWithoutRef<"div">` minus `id` | | Forwarded to the panel. |
+
+Exported types: `TabsProps`, `TabsListProps`, `TabProps`, `TabsPanelProps`,
+`TabsOrientation`, `TabsActivation`.
+
+### Controlled and uncontrolled
+
+Uncontrolled by default: `defaultValue` sets the initial selection and the
+component keeps it from there. Supplying `value` makes it controlled, and the
+mode is fixed on first render, as it is for a native input.
+
+`onValueChange` fires once per input interaction. A pointer click arrives as
+focus and then click, and in automatic activation both would ask for the same
+selection; the second is folded into the first. A controlled parent that
+declines the request therefore hears it once, and hears it again on the next
+click. A click on the already selected tab reports nothing.
+
+### Automatic and manual activation
+
+**Automatic** is the default and the WAI-ARIA default: a tab is selected the
+moment it receives focus, so the arrow keys both move and select. Right for
+panels that are cheap to show, which is most of them.
+
+**Manual** moves focus only. Enter or Space selects the focused tab, through
+the click a native button dispatches for both keys. Use it when showing a
+panel is expensive or has side effects, so a keyboard user passing through the
+list to reach the third tab does not load the second.
+
+The choice is a prop rather than a behaviour hidden in the component, so a
+reader of the JSX can see which one is in force.
+
+### Why `Tab` and `TabsPanel` take no `id`
+
+Ids are derived from the root's id and each part's `value`:
+`<root>-tab-<value>` and `<root>-panel-<value>`. That is what lets a tab and
+its panel point at each other without a registry. An `id` override on one side
+would silently break `aria-controls` or `aria-labelledby` on the other, so the
+override lives on `Tabs`, where it moves both sides together. Whitespace in a
+value becomes a hyphen, because an id cannot hold a space.
+
+### Hidden panels and `keepMounted`
+
+A hidden panel keeps its element and drops its children. The element stays so
+`aria-controls` always resolves; the children go so an expensive panel costs
+nothing until shown. `keepMounted` keeps them, for a panel holding state that
+must survive switching away, such as a half-filled form.
+
+## Variants and sizes
+
+Tabs has no variants and no sizes. What varies is `orientation` and
+`activation`, both props on `Tabs`.
+
+| Orientation | Layout | Arrow keys |
+| --- | --- | --- |
+| `horizontal` | The list runs across, above the panel. Labels stay on one line and the list scrolls when it overflows. The indicator is a bottom edge. | `ArrowRight`, `ArrowLeft` |
+| `vertical` | The list runs down, beside the panel. Labels wrap inside the list's width. The indicator is a right edge. | `ArrowDown`, `ArrowUp` |
+
+| Activation | Arrow keys | Enter and Space |
+| --- | --- | --- |
+| `automatic` | Move focus and select. | Select the focused tab, which already is. |
+| `manual` | Move focus only. | Select the focused tab. |
+
+Every tab is `size.min-target` tall, which is the 44px floor, and a narrow tab
+gains a centred 44px target on coarse pointers, the same way
+[Button](./button.mdx) does.
+
+## Required states
+
+| State | How it is reached | Where it is proved |
+| --- | --- | --- |
+| Default | | `Default` story |
+| Hover | Pointer over an enabled tab. The label moves from `color.foreground.muted` to `color.foreground`. | `PointerPath` story, manual check |
+| Focus visible | Keyboard focus. A 2px outline at 2px offset in `color.focus-ring`, on the tab and on the shown panel. | `KeyboardPath` story, manual check |
+| Selected | `aria-selected="true"`. The `color.primary` indicator and a `color.foreground` label mark it; the others read muted. | `States` story |
+| Disabled | `disabled`. `color.foreground.disabled` label, skipped by the arrow keys and by Tab, ignores clicks. | `States`, `KeyboardPath`, and `PointerPath` stories |
+| Empty | No `value` and no `defaultValue`, or the selected tab was removed. Nothing is selected, no panel shows, and the first enabled tab holds the tab stop. | `States` and `DynamicPanels` stories |
+| Long content | Long labels stay on one line and the list scrolls when horizontal; they wrap when vertical. A long panel wraps below the list. | `States`, `LongLabels`, and `Overflow` stories |
+| Light and dark | Every static state in both themes. | `States` and `DarkTheme` stories |
+
+Hover and focus-visible cannot be rendered into a static matrix without
+restating the styles under test, so the story that produces them for real is
+the proof, and `:focus-visible` is a manual check because synthesised events
+are untrusted.
+
+## Accessibility and keyboard behaviour
+
+- **Role**: `tablist` on a `div`, `tab` on native `button` elements,
+  `tabpanel` on a `div`. Enter, Space, focus, and `disabled` come from the
+  button.
+- **Name**: each tab is named by its own text. Each panel is named by its tab
+  through `aria-labelledby`, and each tab points at its panel through
+  `aria-controls`. Give the list an `aria-label` so the group itself is named.
+- **Focus**: a 2px `focus-visible` outline at 2px offset in the focus-ring
+  colour, identical to every other focusable component. The list carries 4px
+  of padding so the ring is never clipped by its own scroll container.
+- **Announcements**: selecting a tab announces it as selected with its
+  position in the list. Ids are generated from the root's id and each tab's
+  value, so the relationships hold with no coordination.
+- **Disabled** is the native attribute, so it is announced, skipped, and
+  unclickable rather than merely grey.
+- **Hit area**: 44px on coarse pointers for every tab, as a centred
+  pseudo-element that never affects layout.
+
+| Key | Behaviour |
+| --- | --- |
+| `Tab` | Moves to the selected tab, or to the first enabled tab when nothing selected can take focus. The list is a single tab stop. `Tab` again moves into the panel, which is focusable. |
+| `ArrowRight`, `ArrowLeft` | Move to the next or previous enabled tab when horizontal. Disabled tabs are skipped and the ends wrap. Ignored when vertical. |
+| `ArrowDown`, `ArrowUp` | Move to the next or previous enabled tab when vertical. Disabled tabs are skipped and the ends wrap. Ignored when horizontal. |
+| `Home`, `End` | Move to the first and last enabled tab. |
+| `Enter`, `Space` | With automatic activation, the focused tab is already selected. With manual activation, either selects the focused tab. |
+
+The list consumes the keys it handles so the page does not scroll. A caller's
+own `onKeyDown` on `TabsList` runs first and can `preventDefault()` to opt
+out. The list reads the DOM when a key is pressed, so a tab added a moment ago
+is already in the arrow order.
+
+See [Accessibility](../foundations/accessibility.mdx) for the floors every
+component shares.
+
+## Motion purpose
+
+The selected tab's indicator and label colour fade in on pointer selection, so
+the selection reads as a change rather than as a different picture. That is
+**state**, which is one of the purposes the
+[motion standard](../foundations/motion.mdx) allows. The indicator is an inset
+box shadow, so nothing around it moves and there is no layout shift. The panel
+swap itself is not animated: the old panel is hidden and the new one shown in
+the same commit as `aria-selected`.
+
+## Input modality, interruption, and reduced motion
+
+| Input | Behaviour |
+| --- | --- |
+| Pointer, touch | Clicking a tab selects it and the indicator fades in over the state duration, `duration.state-change`, with `easing.state`. |
+| Keyboard | Arrow keys move focus and, in automatic activation, select. The list records that the input was a key (`data-source="keyboard"` on the tablist) and paints the new state immediately: the keyboard path never waits for the fade. Focus, the panel, and `aria-selected` never wait for it on either path. |
+| Interruption | Transitions rather than keyframes, so clicking through tabs quickly retargets each indicator from wherever its fade currently is instead of queueing. Nine fast clicks end on the last clicked tab with one tab stop, proved by `RapidRepeat`. |
+| Reduced motion | No branch in the component. The stylesheet collapses `duration.state-change` to `0ms`, so the indicator appears at once on every path. The right-hand copy of the example above shows exactly that. |
+
+## Motion tokens and implementation approach
+
+| Token | Used for |
+| --- | --- |
+| `duration.state-change` | The indicator and label colour fade on pointer selection, 160ms. |
+| `easing.state` | The curve of that fade. |
+
+CSS transitions only. The transition names its properties, `color` and
+`box-shadow`, rather than `all`, and deliberately not `transition-colors`,
+which would include the focus ring's outline. The indicator is a shadow
+colour, which is why it can transition at all: a border or a child element
+would take space and move the label.
+
+The keyboard path is made immediate by the list rather than by the tab. The
+list records whether the last input was a pointer or a key as `data-source` on
+the tablist, and a group variant on every tab turns its transition off while
+the source is `keyboard`. Reduced motion needs nothing here: the duration is a
+token and the stylesheet collapses it. No dependency beyond CSS is used, and
+none is planned.
+
+## Theming and token dependencies
+
+Semantic roles, so a theme change or a consumer override retypes the tabs with
+no rebuild:
+
+| Role | Where |
+| --- | --- |
+| `color.foreground.muted` | An unselected tab's label |
+| `color.foreground` | The selected and hovered label, and panel text |
+| `color.foreground.disabled` | A disabled tab's label |
+| `color.primary` | The indicator |
+| `color.border` | The list's rule and each tab's edge that meets it |
+| `color.focus-ring` | Focus on a tab and on the panel |
+| `radius.control` | The panel's corners, which shape its focus outline |
+| `space.control-padding-x` | Horizontal padding inside a tab |
+| `space.control-gap` | Gap between an icon and the label inside a tab |
+| `space.stack-gap` | Gap between the list and the panel |
+| `size.min-target` | Tab height, and the 44px hit area on coarse pointers |
+| `font.size.body`, `font.family.body` | Tab and panel text |
+| `border-width.emphasis` | The indicator's thickness, 2px |
+
+No component tokens. The tab height is the shared touch floor, and everything
+else a semantic role already expresses.
+
+The indicator is `color.primary` rather than a filled pill because a pill
+measured 1.16:1 in light and 1.15:1 in dark against its track in Spartant
+tokens, which cannot carry state. A 2px primary underline measures 5.25:1 and
+4.96:1 on the surface and page in light, 6.86:1 and 8.71:1 in dark, against a
+3:1 floor for an indicator that carries state. See
+[Color](../foundations/color.mdx) and [Theming](../start/theming.mdx).
+
+## Composition examples
+
+A settings page, which is where tabs hold real forms. The panels that hold
+input are `keepMounted`, so a half-typed name survives a look at another tab:
+
+```tsx
+<Tabs defaultValue="general">
+  <TabsList aria-label="Workspace settings">
+    <Tab value="general">General</Tab>
+    <Tab value="members">Members</Tab>
+    <Tab value="billing" disabled>
+      Billing
+    </Tab>
+  </TabsList>
+  <TabsPanel value="general" keepMounted>
+    <Card>
+      <CardContent>
+        <Field>
+          <Label>Workspace name</Label>
+          <Input defaultValue="Spartant" />
+        </Field>
+      </CardContent>
+      <CardActions>
+        <Button>Save changes</Button>
+      </CardActions>
+    </Card>
+  </TabsPanel>
+  <TabsPanel value="members" keepMounted>
+    <Card>
+      <CardContent>
+        <Field>
+          <Label>Invite by email</Label>
+          <Input type="email" placeholder="you@example.com" />
+        </Field>
+      </CardContent>
+      <CardActions>
+        <Button variant="secondary">Send invitation</Button>
+      </CardActions>
+    </Card>
+  </TabsPanel>
+  <TabsPanel value="billing">Billing</TabsPanel>
+</Tabs>
+```
+
+A vertical inspector with manual activation, because each panel fetches on
+show and a keyboard user should not fetch every one on the way past:
+
+```tsx
+<Tabs orientation="vertical" activation="manual" defaultValue="properties">
+  <TabsList aria-label="Inspector" className="w-48">
+    <Tab value="properties">Properties</Tab>
+    <Tab value="history">History</Tab>
+    <Tab value="permissions">Permissions</Tab>
+  </TabsList>
+  <TabsPanel value="properties">
+    <PropertiesPane />
+  </TabsPanel>
+  <TabsPanel value="history">
+    <HistoryPane />
+  </TabsPanel>
+  <TabsPanel value="permissions">
+    <PermissionsPane />
+  </TabsPanel>
+</Tabs>
+```
+
+A controlled set driven from outside as well as from the tabs, so a button
+elsewhere on the page can jump to a section:
+
+```tsx
+const [section, setSection] = useState("overview");
+
+<Button variant="secondary" onClick={() => setSection("settings")}>
+  Jump to settings
+</Button>
+<Tabs value={section} onValueChange={setSection}>
+  <TabsList aria-label="Project">
+    <Tab value="overview">Overview</Tab>
+    <Tab value="activity">Activity</Tab>
+    <Tab value="settings">Settings</Tab>
+  </TabsList>
+  <TabsPanel value="overview">Overview panel</TabsPanel>
+  <TabsPanel value="activity">Activity panel</TabsPanel>
+  <TabsPanel value="settings">Settings panel</TabsPanel>
+</Tabs>
+```
+
+A list with no panels is allowed, for a filter bar. A tab only carries
+`aria-controls` once its panel has rendered, so a panel-less tab does not point
+at an id that is not in the document.
+
+## Testing notes
+
+<Stories
+  file="Tabs.stories.tsx"
+  stories={[
+    { name: "Default", proves: "Three tabs and three panels, which is what a tab set usually is, with orientation and activation as controls." },
+    { name: "States", proves: "Selected, disabled, empty, and long content in one matrix, with hover and focus-visible delegated to the input-path stories." },
+    { name: "DarkTheme", proves: "The same matrix pinned to dark." },
+    { name: "Vertical", proves: "The list runs down the side and Up and Down move through it." },
+    { name: "ManualActivation", proves: "ArrowRight moves focus without selecting; Enter selects the focused tab and names the panel; Space selects too." },
+    { name: "Overflow", proves: "Ten tabs in a 320px container scroll rather than wrap or clip." },
+    { name: "LongLabels", proves: "Long labels stay on one line and scroll when horizontal, and wrap inside the list's width when vertical." },
+    { name: "DynamicPanels", proves: "A tab added after mount joins the arrow order and selects; removing the selected tab leaves nothing selected, no panel, and one tab stop on the first tab." },
+    { name: "Controlled", proves: "A change from outside moves the selection and the panel, and the panel is named by its tab." },
+    { name: "Composition", proves: "A settings page with a disabled tab and keepMounted forms." },
+    { name: "KeyboardPath", proves: "Roles and relationships hold for every tab; the list is one tab stop on the selected tab; ArrowRight moves and selects with the panel following at once; a disabled tab is skipped; the ends wrap; Home and End work; Tab leaves the list for the focusable panel." },
+    { name: "PointerPath", proves: "A click selects, records data-source as pointer, and shows the panel; a click on a disabled tab does nothing." },
+    { name: "RapidRepeat", proves: "Nine fast clicks end on the last clicked tab, not between two, with exactly one tab stop." },
+    { name: "ReducedMotion", proves: "The same tabs with the motion tokens collapsed: the indicator appears at once." },
+    { name: "SlowMotion", proves: "The indicator fade at eight times its length, for judging the easing, while the keyboard path stays immediate." },
+    { name: "PartOutsideTabs", proves: "A Tab rendered outside a Tabs throws a message naming both." },
+    { name: "Contract", proves: "The motion, accessibility, and manual-review contract, rendered." },
+  ]}
+/>
+
+Every story is rendered, its play function awaited, and the result audited
+with axe by `pnpm test:stories`.
+
+`Tabs.test.tsx` beside the source covers what a story would only exercise by
+accident: the roles and id relationships, `aria-controls` only claiming a
+panel that exists, whitespace in a value becoming a valid id, distinct ids for
+two instances, the roving tab stop and its fallbacks when nothing is selected
+or the selected tab is disabled, every key in both orientations and the
+cross-axis keys being ignored, the navigation keys being consumed so the page
+does not scroll, a caller's `preventDefault` opting out, both activation
+modes, controlled and uncontrolled behaviour including a declined request
+being reported once per interaction, dynamic tabs, `cn` keeping every default
+class, ref forwarding to every part, `data-source` recording the input, and
+the assertions that the shadcn adaptation stayed adapted with no Radix
+dependency.
+
+What no test can see is the focus ring, the fade, and what a screen reader
+says. The contract lists five manual checks:
+
+1. Click the canvas, press Tab, then use ArrowRight, ArrowLeft, Home, and End.
+   Expect the selected tab to take focus, the arrows to move and select,
+   skipping the disabled tab and wrapping at the ends, and the panel to change
+   instantly with no fade.
+2. Click a tab with the mouse, then watch the indicator. Expect the underline
+   to fade in over 160ms and nothing around it to shift.
+3. Open the `Overflow` story and Tab into the list, then press End. Expect the
+   list to scroll to reveal the focused tab and the focus ring not to be
+   clipped.
+4. Zoom the browser to 200% on the `LongLabels` story. Expect horizontal
+   labels to scroll rather than clip, and vertical labels to wrap and stay
+   aligned to the indicator.
+5. With VoiceOver, move through the list and select a tab. Expect each tab to
+   announce as a tab with its position, the selected one as selected, and the
+   panel to be named by its tab.
+
+The checklist those steps come from is `MANUAL-REVIEW.md` at the repository
+root.
+
+## Known limitations
+
+- **No RTL flip.** ArrowRight always moves to the next tab in DOM order. A
+  right-to-left document would want the arrows mirrored, and nothing here
+  reads `dir`.
+- **`aria-controls` arrives at hydration.** A tab only points at its panel once
+  the panel has registered, which happens in an effect. A page served
+  statically and never hydrated has panels named by their tabs, but tabs that
+  do not point at their panels.
+- **The indicator does not slide.** It fades in on the newly selected tab
+  rather than travelling from the old one. Sliding needs a measured position,
+  which means JavaScript reading layout on every selection; the fade needs
+  neither and reads clearly enough.
+- **No `dir`, no `loop` prop, no `forceMount`.** Radix has all three; none was
+  needed for the issue, and each is a decision to make when something asks for
+  it.
+- **The input source is per list, not per event.** After a keyboard
+  selection, the tablist stays in `data-source="keyboard"` until the next
+  pointer press, so a hover colour change in that window is also instant. The
+  next click restores the fade.
+- **The screen-reader check has no recorded result.** The README says the
+  focus ring, the fade, and what a screen reader says are the manual checks
+  in the story contract, and does not record the VoiceOver pass as performed.
+- Browser routing integration and drag-reorderable tabs are out of scope by
+  the issue.
+
+## Changelog
+
+Tabs was added by HAUX-51. The consumer-facing record is
+[`CHANGELOG.md`](https://github.com/iroshandezilva/spartan/blob/main/CHANGELOG.md)
+at the repository root; changes that are merged but not yet released are
+individual notes in
+[`.changes/`](https://github.com/iroshandezilva/spartan/tree/main/.changes).
+Source: `packages/spartant/src/components/tabs/`.
+
+Related: [Select](./select.mdx) for more than about seven choices,
+[Card](./card.mdx) for the surface a panel usually holds,
+[Button](./button.mdx) for the control that jumps a controlled set,
+[Motion](../foundations/motion.mdx) for the token scale,
+[Accessibility](../foundations/accessibility.mdx) for the shared floors.

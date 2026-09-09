@@ -1,0 +1,489 @@
+---
+title: Selection controls
+description: Checkbox, RadioGroup with Radio, and Switch. Three native inputs with three different meanings, painted by the system and left to the platform for everything else.
+keywords:
+  - Checkbox
+  - Radio
+  - RadioGroup
+  - Switch
+  - CheckboxProps
+  - RadioProps
+  - RadioGroupProps
+  - SwitchProps
+  - checked
+  - defaultChecked
+  - indeterminate
+  - onCheckedChange
+  - value
+  - defaultValue
+  - onValueChange
+  - name
+  - label
+  - invalid
+  - disabled
+  - required
+  - id
+  - className
+  - ref
+  - selection controls
+  - toggle
+  - setting
+  - radio group
+  - fieldset
+  - legend
+  - mixed
+  - role="switch"
+  - aria-checked
+  - aria-invalid
+  - aria-describedby
+  - aria-label
+  - Field
+  - Label
+  - color.primary
+  - color.primary.foreground
+  - color.surface
+  - color.surface.disabled
+  - color.border
+  - color.border.strong
+  - color.foreground
+  - color.foreground.muted
+  - color.foreground.disabled
+  - color.danger
+  - color.focus-ring
+  - radius.control
+  - radius.pill
+  - size.min-target
+  - duration.state-change
+  - easing.state
+  - easing.move
+  - selection.box
+  - selection.switch.width
+  - selection.switch.height
+  - selection.switch.thumb
+---
+
+<Prerelease />
+
+## Purpose and when to use
+
+Three controls that are constantly mistaken for one another, because they
+look alike and mean different things. The difference is behavioural, not
+visual. Pick the one that matches what happens, not the one that looks right
+in the layout.
+
+| Control | Use | Takes effect |
+| --- | --- | --- |
+| `Checkbox` | An independent yes or no, usually inside a form | On submit |
+| `RadioGroup` with `Radio` | One choice from a small, visible set | On submit |
+| `Switch` | A setting | Immediately, on flip |
+
+All three are native inputs. `Checkbox` and `Radio` are `input type="checkbox"`
+and `type="radio"` with `appearance-none`; `Switch` is a native checkbox
+carrying `role="switch"`. That keeps form participation, label activation,
+the `indeterminate` property, and the platform's keyboard handling. Only the
+painting is Spartant's. The inventory records why they are in the first
+release: a prototype that stands a native checkbox in for a setting that
+saves on flip is exactly the confusion the system exists to remove.
+
+## When not to use
+
+- **A switch inside a form with a Save button.** If the change only takes
+  effect on submit, it is a `Checkbox`. A switch that waits for a button is
+  the common mistake.
+- **A checkbox for a setting that applies immediately.** That is a `Switch`,
+  and the switch role tells assistive technology it will.
+- **More than roughly six mutually exclusive options.** Use
+  [Select](./select.mdx). A radio group shows every option at once, which
+  stops being a benefit when the list is long.
+- **Row selection in a table** is a checkbox, but the table itself is out of
+  scope for v0.1, and so are checkbox trees and segmented controls.
+- **An action.** Anything that does something when pressed is a
+  [Button](./button.mdx), not a control that holds a value.
+
+## Import and minimal example
+
+```tsx
+import { Checkbox, Label, Radio, RadioGroup, Switch } from "@iroshandezilva/spartant";
+
+<div className="flex items-center gap-control-gap">
+  <Checkbox id="terms" />
+  <Label htmlFor="terms">I agree to the terms</Label>
+</div>;
+```
+
+The controls below are the package's `Checkbox`, `Switch`, `RadioGroup`, and
+`Radio`, rendered live. Every readout flips in the change handler, so the
+state is correct before the indicator or the thumb has finished moving, and
+the last example drives `indeterminate` from the rows beneath it.
+
+<SelectionControlsDemo />
+
+## Anatomy
+
+- **Checkbox** renders one `input type="checkbox"` inside a positioning
+  `span`. The tick and the dash are two sibling `svg` elements, `aria-hidden`,
+  centred over the input and shown by opacity according to its `checked` and
+  `indeterminate` state. The `span` carries nothing a caller would style; both
+  `className` and the ref target the `input`.
+- **RadioGroup** renders a `fieldset` with a `legend` when `label` is given.
+  The radios inside share a `name`, which is what makes them mutually
+  exclusive and gives the group its keyboard model.
+- **Radio** renders one `input type="radio"`. The dot is an inset shadow in
+  the surface colour, so there is no child element. Rendered outside a
+  `RadioGroup` it throws rather than silently becoming an orphan.
+- **Switch** renders one `input type="checkbox"` with `role="switch"`. The
+  thumb is a radial-gradient `background-image` positioned from the left,
+  because an `input` cannot have children; moving it is a
+  `background-position` transition, which keeps the movement off the layout.
+- The **hit area** on coarse pointers is a centred pseudo-element at least
+  44px square on all three, so the 20px box and the 24px track meet the touch
+  floor without growing.
+
+The `Checkbox` and `Switch` refs point at the `input`. `RadioGroup` and
+`Radio` do not accept a ref in this release; see Known limitations.
+
+## Public API
+
+All three read a surrounding [Field](./text-fields.mdx) where it applies, and
+all three follow the native controlled and uncontrolled pairing from the
+[API conventions](https://github.com/iroshandezilva/spartan/blob/main/packages/spartant/src/components/API-CONVENTIONS.md):
+uncontrolled is the default, controlled when the controlling prop is not
+`undefined`, and the `on*Change` callback receives the new value while native
+`onChange` still fires.
+
+### Checkbox
+
+`CheckboxProps` extends `ComponentPropsWithoutRef<"input">` with `type`
+omitted. Every other native attribute and handler passes through.
+
+| Prop | Type | Default | Notes |
+| --- | --- | --- | --- |
+| `indeterminate` | `boolean` | `false` | Neither checked nor unchecked. A DOM property, not an attribute, so the component sets it through a ref; writing `indeterminate` on a raw `input` does nothing. Reported to assistive technology as mixed. |
+| `onCheckedChange` | `(checked: boolean) => void` | | Called with the new checked state. Native `onChange` still fires first. |
+| `checked` | `boolean` | | Controlled state. Pair with `onCheckedChange`. |
+| `defaultChecked` | `boolean` | | Uncontrolled initial state. The default mode. |
+| `disabled` | `boolean` | from `Field` | Native. Skipped by Tab. Falls back to the surrounding field's `disabled`. |
+| `id` | `string` | from `Field` | Falls back to the surrounding field's control id, so a `Label` inside the same field associates without either being given an id. |
+| `aria-invalid`, `aria-describedby` | | from `Field` | Fall back to the field's `invalid` flag and its rendered messages. |
+| `className` | `string` | | Merged last through `cn` onto the `input`. |
+| `ref` | `Ref<HTMLInputElement>` | | Points at the `input`. |
+| `...rest` | `ComponentPropsWithoutRef<"input">` | | Forwarded, including `name`, `value`, `required`, `form`, and every handler. |
+
+### Radio group
+
+`RadioGroupProps` extends `ComponentPropsWithoutRef<"fieldset">` with
+`onChange` omitted. Selection is controlled at the group, never on a `Radio`.
+
+| Prop | Type | Default | Notes |
+| --- | --- | --- | --- |
+| `name` | `string` | generated | Shared by every `Radio` inside. Generated with `useId` when omitted. Pass it when the group is submitted with a form. |
+| `value` | `string` | | Controlled selection. Pair with `onValueChange`. |
+| `defaultValue` | `string` | | Uncontrolled initial selection. The default mode. |
+| `onValueChange` | `(value: string) => void` | | Called with the newly selected value. |
+| `label` | `string` | | The visible group label, rendered as the `legend`, which is what names the group. |
+| `invalid` | `boolean` | `false` | Sets `aria-invalid` on every option. |
+| `disabled` | `boolean` | | Native `fieldset` disabled, so every option is disabled and skipped. |
+| `className` | `string` | | Merged last through `cn` onto the `fieldset`. |
+| `...rest` | `ComponentPropsWithoutRef<"fieldset">` | | Forwarded. |
+
+`RadioProps` extends `ComponentPropsWithoutRef<"input">` with `type` and
+`name` omitted, because both come from the group.
+
+| Prop | Type | Default | Notes |
+| --- | --- | --- | --- |
+| `value` | `string` | required | What this option contributes when selected. |
+| `id` | `string` | | Give one, and point a `Label` at it. Radios do not read a `Field`. |
+| `disabled` | `boolean` | | Disables this one option. |
+| `className` | `string` | | Merged last through `cn` onto the `input`. |
+| `...rest` | `ComponentPropsWithoutRef<"input">` | | Forwarded, including `aria-label` and every handler. |
+
+### Switch
+
+`SwitchProps` extends `ComponentPropsWithoutRef<"input">` with `type` and
+`role` omitted. It is the `Checkbox` API without `indeterminate`, which a
+switch cannot be.
+
+| Prop | Type | Default | Notes |
+| --- | --- | --- | --- |
+| `onCheckedChange` | `(checked: boolean) => void` | | Called with the new checked state. Native `onChange` still fires first. |
+| `checked` | `boolean` | | Controlled state. Pair with `onCheckedChange`. |
+| `defaultChecked` | `boolean` | | Uncontrolled initial state. The default mode. |
+| `disabled` | `boolean` | from `Field` | Native. Falls back to the surrounding field's `disabled`. |
+| `id` | `string` | from `Field` | Falls back to the surrounding field's control id. |
+| `aria-invalid`, `aria-describedby` | | from `Field` | Fall back to the field's `invalid` flag and its rendered messages. |
+| `className` | `string` | | Merged last through `cn` onto the `input`. |
+| `ref` | `Ref<HTMLInputElement>` | | Points at the `input`. |
+| `...rest` | `ComponentPropsWithoutRef<"input">` | | Forwarded. |
+
+The component writes no `aria-checked`. A native checkbox maps `checked`
+onto it, and a hand-written attribute would be a second source of truth that
+goes stale in the uncontrolled case. The `PointerPath` story asserts the
+mapping through the accessibility tree.
+
+Exported types: `CheckboxProps`, `RadioGroupProps`, `RadioProps`,
+`SwitchProps`.
+
+## Variants and sizes
+
+None. The story contract declares an empty variant set and an empty size set
+for the whole family. What varies instead is which control is used, since
+each has a different meaning; `indeterminate` on `Checkbox`; and the shared
+`disabled` and `invalid` states. The visible sizes are fixed by component
+tokens: the checkbox and radio box is `selection.box` (20px) and the switch
+track is `selection.switch.width` by `selection.switch.height` (40px by
+24px) with a `selection.switch.thumb` (18px) thumb.
+
+## Required states
+
+| State | How it is reached | Where it is proved |
+| --- | --- | --- |
+| Default | | `Default` and `AllThree` stories |
+| Hover | Pointer over an enabled checkbox or radio. Border moves to `color.foreground.muted`; colour only. | `PointerPath` story, manual check |
+| Focus visible | Keyboard focus. A 2px outline at 2px offset in `color.focus-ring`. | `KeyboardPath` story, manual check |
+| Selected | `checked`, `defaultChecked`, or the group's `value`. Fill moves to `color.primary`; the switch thumb travels to the right. | `States` story |
+| Indeterminate | `indeterminate` on a checkbox. The dash replaces the tick and the control reports mixed. | `Indeterminate` story |
+| Disabled | `disabled`, or a disabled `Field` or `RadioGroup`. `color.surface.disabled` fill unchecked, `color.foreground.disabled` fill checked, skipped by Tab. | `States` story |
+| Invalid | `invalid` on a `Field` or a `RadioGroup`, or `aria-invalid`. Border moves to `color.danger`. | `States` story |
+| Long content | A label that wraps beside the control. The control stays put at the top of the first line. | `States` story |
+| Light and dark | Every static state in both themes. | `States` and `DarkTheme` stories |
+
+Hover and focus-visible cannot be rendered into a static matrix without
+restating the styles under test, so the stories that produce them for real are
+the proof, and both remain manual checks because synthesised events are
+untrusted.
+
+## Accessibility and keyboard behaviour
+
+- **Role**: native `input type="checkbox"` and `type="radio"`. `Switch` is a
+  native checkbox carrying `role="switch"`, which keeps form participation and
+  label activation while reporting the right role.
+- **Name**: the associated `label`. A radio group is named by its `legend`,
+  which is what `label` renders. A control with no visible label needs
+  `aria-label`; the `States` story does exactly that for its bare controls.
+- **Focus**: a 2px `focus-visible` outline at 2px offset in the focus-ring
+  colour, identical to every other focusable component.
+- **Announcements**: checked, unchecked, and mixed are reported by the native
+  control. `indeterminate` is a DOM property, so the component sets it through
+  a ref rather than an attribute, which is what makes mixed reach assistive
+  technology.
+- **Hit area**: 44px on coarse pointers for all three, as a centred
+  pseudo-element that never affects layout.
+
+| Key | Behaviour |
+| --- | --- |
+| `Tab` | Moves focus to the control. A radio group is one tab stop, and `Tab` again leaves the whole group. |
+| `Space` | Toggles a checkbox or a switch. |
+| Arrow keys | Move and select within a radio group, wrapping at the ends. That is the browser's own behaviour, because the radios share a `name`; there is no key handler. |
+| Click on a label | Activates its control. Native label behaviour, not a click handler. |
+
+See [Accessibility](../foundations/accessibility.mdx) for the floors every
+component shares.
+
+## Motion purpose
+
+The switch thumb travels between its two positions, and the checkbox and
+radio fills change colour, so a change of state is seen as a change rather
+than as a different picture appearing. The thumb explains **continuity**
+between two visible positions and the fills explain **state**, both of which
+the [motion standard](../foundations/motion.mdx) allows. Nothing else moves:
+hover, focus, disabled, and invalid are colour changes only, and the hit area
+is static.
+
+## Input modality, interruption, and reduced motion
+
+| Input | Behaviour |
+| --- | --- |
+| Pointer, touch | Clicking the control or its label toggles it, and the change animates: the fill over `duration.state-change` with `easing.state`, the thumb over the same duration with `easing.move`. |
+| Keyboard | `Space` toggles a checkbox or switch; arrow keys move within a radio group. The state changes on the keypress and nothing waits for the animation. The same transition then plays, because it is a colour or background-position change rather than spatial motion tied to the pointer. |
+| Interruption | Transitions rather than keyframes, so toggling repeatedly retargets the thumb from wherever it is instead of queueing. Nine rapid clicks land on the ninth state, proved by `RapidRepeat`. |
+| Reduced motion | No branch in the component. The stylesheet collapses `duration.state-change` to `0ms`, so the thumb jumps and the fill changes instantly. The right-hand copy of the example above shows exactly that. |
+
+## Motion tokens and implementation approach
+
+| Token | Used for |
+| --- | --- |
+| `duration.state-change` | Every transition in the family, 160ms: the fill and border on all three, the mark opacity on the checkbox, and the thumb travel on the switch. |
+| `easing.state` | The checkbox and radio colour curve, and the mark opacity. |
+| `easing.move` | The switch curve, because the thumb travels between two visible positions. |
+
+CSS transitions only, with named properties. `Checkbox` and `Radio`
+transition `background-color` and `border-color` on the input and `opacity`
+on the marks. `Switch` transitions `background-color`, `background-position`,
+and `border-color`. The thumb moves by `background-position` rather than by
+moving a child element, so it is off the layout entirely and nothing around
+the switch can shift whatever the timing does. No dependency beyond CSS is
+used, and none is planned.
+
+## Theming and token dependencies
+
+Semantic roles, so a theme change or a consumer override retypes every
+control with no rebuild:
+
+| Role | Where |
+| --- | --- |
+| `color.surface` | Unchecked fill on all three; the radio dot; the switch thumb, which inverts with the theme |
+| `color.border.strong` | Resting border on checkbox and radio; the unchecked switch track |
+| `color.primary` | Checked and indeterminate fill; the checked switch track |
+| `color.primary.foreground` | The tick and the dash |
+| `color.foreground.muted` | Hover border on checkbox and radio |
+| `color.border`, `color.surface.disabled` | Disabled border and unchecked fill |
+| `color.foreground.disabled` | Disabled checked fill, so a disabled-on control stays legible |
+| `color.danger` | Invalid border |
+| `color.focus-ring` | Focus |
+| `color.foreground` | The radio group `legend` |
+| `radius.control` | Checkbox corners, at half the control radius with a 2px floor |
+| `radius.pill` | Radio and switch |
+| `size.min-target` | The 44px hit area |
+
+Component tokens: `selection.box`, `selection.switch.width`,
+`selection.switch.height`, `selection.switch.thumb`. Control size is the one
+case where a component token is justified, because no semantic role means "a
+20px box" or "a 40px track", and a spacing change must not be able to shrink
+one.
+
+The switch thumb takes `color.surface` rather than a literal white because
+white measured 2.33:1 against the checked track in dark theme, and a colour
+written inside an arbitrary value is invisible to `pnpm check:colors`. See
+[Color](../foundations/color.mdx) and [Theming](../start/theming.mdx).
+
+## Composition examples
+
+A checkbox inside a `Field`, so the label, the error, and `aria-describedby`
+associate with no ids written by hand:
+
+```tsx
+<Field invalid={!agreed && submitted}>
+  <div className="flex items-center gap-control-gap">
+    <Checkbox checked={agreed} onCheckedChange={setAgreed} />
+    <Label>Accept the terms</Label>
+  </div>
+  <FieldMessage tone="error">You have to accept the terms to continue.</FieldMessage>
+</Field>
+```
+
+A settings panel, which is where switches belong, with the label on the left
+and each switch taking effect on flip:
+
+```tsx
+<div className="grid gap-3">
+  <div className="flex items-center justify-between gap-4">
+    <Label htmlFor="setting-email">Email notifications</Label>
+    <Switch id="setting-email" defaultChecked onCheckedChange={saveEmailSetting} />
+  </div>
+  <div className="flex items-center justify-between gap-4">
+    <Label htmlFor="setting-push">Push notifications</Label>
+    <Switch id="setting-push" onCheckedChange={savePushSetting} />
+  </div>
+</div>
+```
+
+A radio group submitted with a form. `name` is given so the value reaches
+the form data, and `Button` sets `type` explicitly because its default is
+`"button"`:
+
+```tsx
+<form onSubmit={handleSubmit}>
+  <RadioGroup label="Digest frequency" name="digest" defaultValue="weekly">
+    {[
+      { value: "daily", label: "Daily" },
+      { value: "weekly", label: "Weekly" },
+      { value: "never", label: "Never" },
+    ].map((option) => (
+      <div key={option.value} className="flex items-center gap-control-gap">
+        <Radio id={`digest-${option.value}`} value={option.value} />
+        <Label htmlFor={`digest-${option.value}`}>{option.label}</Label>
+      </div>
+    ))}
+  </RadioGroup>
+  <Button type="submit">Save</Button>
+</form>
+```
+
+## Testing notes
+
+<Stories
+  file="Selection.stories.tsx"
+  stories={[
+    { name: "Contract", proves: "The motion, accessibility, and manual-review contract, rendered." },
+    { name: "Default", proves: "A checked checkbox with its label, the component as first reached for." },
+    { name: "AllThree", proves: "Checkbox, switch, and radio group together, the only way to see that they differ." },
+    { name: "States", proves: "Selected, disabled, invalid, and long content in one matrix, with hover and focus-visible delegated to the path stories." },
+    { name: "Indeterminate", proves: "The indeterminate DOM property is set through the ref and the input is still a checkbox." },
+    { name: "DarkTheme", proves: "Every static state pinned to dark." },
+    { name: "Composition", proves: "A notification settings panel with switches, a radio group, and a form checkbox." },
+    { name: "KeyboardPath", proves: "Tab focuses the checkbox and Space toggles it; the radio group is a single tab stop and Tab leaves it entirely." },
+    { name: "PointerPath", proves: "The switch reports role switch, clicking its label toggles it, and the checked state reaches the accessibility tree without a hand-written aria-checked." },
+    { name: "RapidRepeat", proves: "Nine fast toggles of a switch end checked, not somewhere in between." },
+    { name: "ReducedMotion", proves: "A checked checkbox and switch with every motion token collapsed." },
+    { name: "SlowMotion", proves: "The switch thumb travelling at eight times its length, for judging the easing." },
+  ]}
+/>
+
+Every story is rendered, its play function awaited, and the result audited
+with axe by `pnpm test:stories`. `:hover` and `:focus-visible` cannot be
+asserted from a play function, and screen-reader output cannot be asserted
+at all, so the contract lists four manual checks:
+
+1. Tab into the radio group, then use the arrow keys. Expect the group to be
+   one tab stop, the arrows to move and select, and the selection to wrap at
+   the ends.
+2. Click each label rather than the control. Expect the control to toggle.
+   This is native label behaviour, not a click handler.
+3. Toggle a switch on a touch device. Expect the 24px track to be comfortable
+   to hit, because the target is 44px.
+4. With VoiceOver, move through a checkbox, a switch, and a radio group.
+   Expect the checkbox to report checkbox, the switch to report switch, and
+   the group to announce its legend and position.
+
+The checklist those steps come from is `MANUAL-REVIEW.md` at the repository
+root.
+
+## Known limitations
+
+- **The switch thumb is a `background-image`, not a child element.** An
+  `input` cannot have children, so the thumb is a radial gradient positioned
+  from the left, which is also what keeps the movement off the layout. It
+  reads `color.surface` through a custom property, so it inverts with the
+  theme; it was a literal white until a review measured it at 2.33:1 against
+  the checked track in dark theme. Checkbox and Radio draw their marks as
+  sibling elements instead, which they can because they need no positional
+  animation.
+- Checkbox trees and segmented controls are explicitly out of scope for
+  HAUX-48.
+- No card-style or button-style radio. The plain control is the primitive.
+- `RadioGroup` and `Radio` do not declare a `ref` prop, so neither accepts one
+  in this release. `Checkbox` and `Switch` do. The API conventions say every
+  component forwards its ref; this is a gap to close.
+- `Radio` and `RadioGroup` do not read a surrounding `Field`. A radio group
+  gets its name from `label`, its invalid state from `invalid`, and its
+  disabled state from `disabled`; an error message for a group has to be
+  associated by hand with `aria-describedby` on the `fieldset` or on each
+  option.
+- `Radio` throws when rendered outside a `RadioGroup`. That is deliberate, and
+  it means a lone radio is not a supported use.
+- A `Field` marked `required` shows the marker on the `Label`, but `Checkbox`
+  and `Switch` do not read `required` from the field, so pass `required` on
+  the control as well when the form should refuse to submit without it.
+- `indeterminate` is visual and reported as mixed. It does not change what
+  the checkbox submits, which is the platform's behaviour: an indeterminate
+  checkbox submits according to `checked`.
+- The `States` story delegates hover to `PointerPath`, but that story clicks a
+  label rather than hovering, so hover is only seen in a real browser. Hover
+  is colour only and never blocks anything.
+- Manual check 4, the VoiceOver pass, needs a real screen reader and is not
+  recorded on the README as having been run.
+
+## Changelog
+
+Checkbox, RadioGroup, Radio, and Switch were added by HAUX-48. The
+consumer-facing record is
+[`CHANGELOG.md`](https://github.com/iroshandezilva/spartan/blob/main/CHANGELOG.md)
+at the repository root; changes that are merged but not yet released are
+individual notes in
+[`.changes/`](https://github.com/iroshandezilva/spartan/tree/main/.changes).
+Source: `packages/spartant/src/components/selection/`.
+
+Related: [Text fields](./text-fields.mdx) for `Field`, `Label`, and
+`FieldMessage`, [Button](./button.mdx) for actions rather than values,
+[Accessibility](../foundations/accessibility.mdx) for the shared floors,
+[Motion](../foundations/motion.mdx) for the token scale.

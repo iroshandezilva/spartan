@@ -1,0 +1,506 @@
+---
+title: Card
+description: The surface that groups related content. A plain container with two variants, a real heading for its title, optional parts that leave no hole when omitted, and no motion.
+keywords:
+  - Card
+  - CardHeader
+  - CardTitle
+  - CardDescription
+  - CardContent
+  - CardActions
+  - CardProps
+  - CardHeaderProps
+  - CardTitleProps
+  - CardDescriptionProps
+  - CardContentProps
+  - CardActionsProps
+  - CardVariant
+  - CardTitleLevel
+  - variant
+  - level
+  - className
+  - raised
+  - flat
+  - surface
+  - container
+  - heading level
+  - nested card
+  - aria-labelledby
+  - region
+  - color.surface
+  - color.foreground
+  - color.foreground.muted
+  - color.border
+  - color.border.subtle
+  - elevation.surface
+  - elevation.flat
+  - radius.surface
+  - space.surface-padding
+  - space.stack-gap
+  - space.control-gap
+  - font.size.heading-small
+  - font.line-height.heading
+  - font.tracking.heading
+  - font.size.body-small
+---
+
+<Prerelease />
+
+## Purpose and when to use
+
+Card groups a heading, some content, and the actions that belong to them on
+one surface, so a page of many things reads as a page of things rather than a
+column of text. A project in a list, a setting with its own save button, a
+summary with a number in it.
+
+It is the default container in a prototype, and it is the component that
+proves the surface, elevation, radius, and spacing roles against real content
+rather than a swatch. It is a `div` and nothing more: no role, no focus, no
+handlers. The parts are optional, the card is a grid with the stack gap
+between whatever parts are present, and a card with only a paragraph in it is
+a legitimate card.
+
+## When not to use
+
+- **As a clickable thing.** A card is a container, and making the whole
+  surface a link or a button is a separate decision with its own focus, press,
+  and nested-control rules. Put a real link or a [Button](./button.mdx) inside
+  the card instead.
+- **Around everything.** A page where every paragraph has a border and a
+  shadow has no hierarchy left. Cards separate groups; they do not decorate
+  content. A [Separator](./separator.mdx) divides content without a surface.
+- **For a modal task.** That is [Dialog](./dialog.mdx), which owns focus and
+  dismissal.
+
+## Import and minimal example
+
+```tsx
+import {
+  Card,
+  CardActions,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@iroshandezilva/spartant";
+
+<Card>
+  <CardHeader>
+    <CardTitle>Checkout rewrite</CardTitle>
+    <CardDescription>Replaces the three-step flow with a single page.</CardDescription>
+  </CardHeader>
+  <CardContent>
+    <p>Merged into main yesterday.</p>
+  </CardContent>
+  <CardActions>
+    <Button size="sm">Open</Button>
+  </CardActions>
+</Card>;
+```
+
+The cards below are the package's `Card`, rendered live, one per variant. The
+demo is static because the component has no motion: nothing on either surface
+changes in response to the pointer or the keyboard, and only the buttons
+inside move, under their own contract.
+
+<CardDemo />
+
+## Anatomy
+
+Six parts, each a single element with type on it and a `className`. None is
+mandatory, and none depends on a context, so a part works anywhere and adds no
+behaviour:
+
+- **Card** is the surface: a `div` with the padding, radius, border,
+  elevation, and text colour. It is a one-column grid with the stack gap
+  between its children, so leaving a part out leaves no hole.
+- **CardHeader** is a `div` that groups the title and description with the
+  tighter control gap between them, so the two read as one unit.
+- **CardTitle** is a real heading, `h3` by default, chosen with `level`.
+- **CardDescription** is a `p` in muted body-small text.
+- **CardContent** is a `div` that adds nothing but a box. It exists to be a
+  target for `className` and a name in the tree.
+- **CardActions** is a `div` laid out as a wrapping row of controls,
+  left-aligned by default.
+
+Every ref points at the part's own element: the outer surface for `Card`, the
+heading for `CardTitle`, the paragraph for `CardDescription`, and the `div`
+for the rest.
+
+## Public API
+
+Card holds no state, so there is no controlled or uncontrolled mode to choose.
+Every part extends the props of the element it renders, and every native
+attribute and handler passes through.
+
+### Card
+
+`CardProps` extends `ComponentPropsWithoutRef<"div">`.
+
+| Prop | Type | Default | Notes |
+| --- | --- | --- | --- |
+| `variant` | `CardVariant`, one of `"raised"`, `"flat"` | `"raised"` | How the card separates from its ground. See below. |
+| `className` | `string` | | Merged last through `cn`, so a caller's class wins. `p-0` replaces the surface padding rather than sitting beside it. |
+| `ref` | `Ref<HTMLDivElement>` | | Points at the outer surface. |
+| `...rest` | `ComponentPropsWithoutRef<"div">` | | Forwarded, including `id`, `aria-*`, and every handler. |
+
+### CardTitle
+
+`CardTitleProps` extends `ComponentPropsWithoutRef<"h3">`.
+
+| Prop | Type | Default | Notes |
+| --- | --- | --- | --- |
+| `level` | `CardTitleLevel`, one of `2`, `3`, `4`, `5`, `6` | `3` | The heading level. The outline belongs to the page, so set it so headings do not skip a level: a card that is the main thing on a page is a `2`, a card nested inside another card is a `4`. |
+| `className` | `string` | | Merged last. |
+| `ref` | `Ref<HTMLHeadingElement>` | | Points at the heading, whatever its level. |
+| `...rest` | `ComponentPropsWithoutRef<"h3">` | | Forwarded. |
+
+### CardHeader, CardContent, CardActions
+
+`CardHeaderProps`, `CardContentProps`, and `CardActionsProps` each extend
+`ComponentPropsWithoutRef<"div">`.
+
+| Prop | Type | Default | Notes |
+| --- | --- | --- | --- |
+| `className` | `string` | | Merged last. `justify-end` on `CardActions` moves the row to the trailing edge. |
+| `ref` | `Ref<HTMLDivElement>` | | Points at the `div`. |
+| `...rest` | `ComponentPropsWithoutRef<"div">` | | Forwarded. |
+
+### CardDescription
+
+`CardDescriptionProps` extends `ComponentPropsWithoutRef<"p">`.
+
+| Prop | Type | Default | Notes |
+| --- | --- | --- | --- |
+| `className` | `string` | | Merged last. |
+| `ref` | `Ref<HTMLParagraphElement>` | | Points at the paragraph. |
+| `...rest` | `ComponentPropsWithoutRef<"p">` | | Forwarded. |
+
+Exported types: `CardProps`, `CardHeaderProps`, `CardTitleProps`,
+`CardDescriptionProps`, `CardContentProps`, `CardActionsProps`, `CardVariant`,
+`CardTitleLevel`.
+
+### The title is a heading
+
+The shadcn source this component was adapted from renders the title as a
+`div`. Both look identical, and only one of them lets a screen-reader user
+jump between the cards on a page, which is the one thing a card can
+contribute to the accessibility tree. `level` defaults to `3` because a card
+usually sits under a page title and a section heading. There is no `1`: a card
+is never the document.
+
+## Variants and sizes
+
+Two variants, and both are pairings from the
+[radius and elevation](../foundations/radius-and-elevation.mdx) foundation
+rather than free choices. Elevation is always paired with a border and a
+background, because each theme leans on a different cue: in light `surface`
+is already white so the shadow does the separating, and in dark a shadow
+against a dark surface is nearly invisible so the lighter fill does.
+
+| Variant | Elevation | Border | Use |
+| --- | --- | --- | --- |
+| `raised` | `elevation.surface` | `color.border.subtle` | A card on the page background. The default. |
+| `flat` | `elevation.flat` | `color.border` | A card inside another surface, or one of many in a dense list where a shadow on each is noise. |
+
+Nested cards go flat. A raised card inside a raised card stacks two shadows
+that mean nothing.
+
+There are no sizes: the contract declares `[]`. A card takes the width of its
+column and the height of its content, and its padding and gaps are fixed
+spacing roles rather than a scale. What varies instead is the content, the
+`level` of the title, and any width the caller sets through `className`, as
+the `max-w-md` in the stories does.
+
+## Required states
+
+| State | How it is reached | Where it is proved |
+| --- | --- | --- |
+| Default | | `Default` story |
+| Empty | No children. The padding alone holds the shape rather than collapsing to a line. | `States` story |
+| Long content | A wrapping title, a paragraph, and an unbroken token in a narrow column. The card and header pin their grid column to `minmax(0,1fr)` so no child can widen the track, `break-words` then breaks the word, and the actions wrap onto a second row instead of overflowing. | `States` and `NarrowWidth` stories, manual check |
+| Only content | A card with no header and no actions. Every part is optional and nothing leaves a hole. | `States` story |
+| Nested | A flat card inside a raised one, at the same radius. | `States` and `Composition` stories |
+| Light and dark | Both variants on the page background in each theme. | `Variants` and `DarkTheme` stories, manual check |
+
+Hover, focus, active, disabled, selected, invalid, loading, and read-only do
+not exist for a container, and the contract declares only `empty` and
+`long-content`. Declaring the others would be dishonest.
+
+## Accessibility and keyboard behaviour
+
+- **Role**: none. A `div` with no role: a card is a generic container, not a
+  landmark or a widget. Giving every card `role="region"` would fill the
+  landmark list of a page of twenty cards with twenty entries.
+- **Name**: none on its own. `CardTitle` renders a real heading, so the card
+  is findable by heading navigation, which is how a screen-reader user scans
+  a page of cards. To make one specific card a named region as well, give it
+  `role="region"` and `aria-labelledby` pointing at the title's `id`; the
+  component does not wire this itself, because the parts share no context.
+- **Focus**: never receives focus. Focus rings on nested controls are not
+  clipped: the card sets no `overflow`, and its padding keeps the ring inside
+  the surface.
+- **Announcements**: none. A card that must announce a change belongs inside
+  a live region owned by the component that changes it.
+
+There is no keyboard interaction, because there is nothing to operate. The
+one entry in the contract's keyboard list says what happens instead:
+
+| Key | Behaviour |
+| --- | --- |
+| `Tab` | Never stops on the card. Focus moves to the controls the caller put inside it, in document order, and then out the other side. The `NestedControls` story asserts both halves. |
+
+What assistive technology gets from a card is structure rather than
+interaction: a heading per card at the level the page needs, muted
+description text that is still body text at 4.5:1, and the controls inside in
+reading order. See [Accessibility](../foundations/accessibility.mdx) for the
+floors every component shares.
+
+## No-motion rationale
+
+A card does not change state in response to the user. It has no open,
+selected, or pressed condition of its own, so there is nothing for motion to
+explain, and the [motion standard](../foundations/motion.mdx) names Card as
+no-motion by default. An interactive card would take the same press rules as
+any pressable control, and that is a separate decision rather than a default.
+The controls inside a card keep their own motion contracts, which is why the
+buttons in the example above still scale when pressed while the surface under
+them does not move.
+
+## Input modality, interruption, and reduced motion
+
+Nothing on the card moves on any input, so there is nothing to interrupt and
+reduced motion changes nothing.
+
+| Input | Behaviour |
+| --- | --- |
+| Pointer, touch | No response. A press on the surface reaches whatever control is under it, or nothing. |
+| Keyboard | No response. The card is not in the tab order; keys reach the nested controls directly. |
+| Interruption | Nothing to interrupt. No transition or animation is declared on any part. |
+| Reduced motion | Nothing changes. The global collapse of the motion tokens has no effect here because no motion token is consumed. |
+
+## Motion tokens and implementation approach
+
+No motion tokens are consumed. The card declares no `transition` and no
+`animation` on any part, so there is no duration, easing, scale, or distance
+role to bind, and the reduced-motion rule in the package stylesheet has
+nothing to reach. This is deliberate: binding a token to a property that never
+changes would suggest a state that does not exist. Any motion inside a card
+belongs to the control that owns it, and that control consumes its own tokens.
+
+## Theming and token dependencies
+
+Semantic roles only, and no component token: every requirement here is
+already a stable semantic role, and a card token would only duplicate one. A
+theme change or a consumer override retypes the card with no rebuild.
+
+| Role | Where |
+| --- | --- |
+| `color.surface` | The fill |
+| `color.foreground` | Text colour, set on the surface so content inherits it, and the title |
+| `color.foreground.muted` | The description |
+| `color.border.subtle` | The `raised` border |
+| `color.border` | The `flat` border |
+| `elevation.surface` | The `raised` shadow |
+| `elevation.flat` | The `flat` shadow |
+| `radius.surface` | The corners, on the outer card and on a nested one |
+| `space.surface-padding` | Padding on the card |
+| `space.stack-gap` | Between the card's parts |
+| `space.control-gap` | Between title and description, and between actions |
+| `font.size.heading-small`, `font.line-height.heading`, `font.tracking.heading` | The title |
+| `font.size.body-small` | The description |
+
+The title's weight is Tailwind's `font-semibold` rather than the
+`font.weight.heading` role, so a theme that changes the heading weight does not
+reach a card title. See Known limitations.
+
+The pairings a card actually sits on, measured with the repository's OKLCH
+tooling while the component was built:
+
+| Pairing | Light | Dark |
+| --- | --- | --- |
+| `surface` on `background` | 1.06 | 1.27 |
+| `border.subtle` on `surface` (`raised`) | 1.16 | 1.00 |
+| `border` on `surface` (`flat`) | 1.31 | 1.42 |
+| `foreground` on `surface` | 16.00 | 15.10 |
+| `foreground.muted` on `surface` | 7.44 | 6.94 |
+
+Text passes body thresholds in both themes with room to spare. The borders
+are decorative and carry no minimum; the `raised` border in dark is the row
+to know about, and it is the first known limitation below. See
+[Color](../foundations/color.mdx),
+[Radius and elevation](../foundations/radius-and-elevation.mdx), and
+[Theming](../start/theming.mdx).
+
+## Composition examples
+
+A project in a list, with a [Badge](./badge.mdx) beside the title. The
+header is a grid, so the title row is one child of it and the description the
+next:
+
+```tsx
+<Card>
+  <CardHeader>
+    <div className="flex items-start justify-between gap-control-gap">
+      <CardTitle>Checkout rewrite</CardTitle>
+      <Badge variant="warning">In review</Badge>
+    </div>
+    <CardDescription>Replaces the three-step flow with a single page.</CardDescription>
+  </CardHeader>
+  <CardContent>
+    <dl className="grid gap-2 text-body-small">
+      <div className="flex justify-between">
+        <dt className="text-foreground-muted">Owner</dt>
+        <dd className="text-foreground">Priya</dd>
+      </div>
+    </dl>
+  </CardContent>
+  <CardActions>
+    <Button size="sm">Open</Button>
+    <Button size="sm" variant="ghost">
+      Share
+    </Button>
+  </CardActions>
+</Card>
+```
+
+A settings section with a nested danger zone. The inner card is `flat` so it
+does not stack a second shadow, and its title is a `4` so the outline does not
+skip a level:
+
+```tsx
+<Card>
+  <CardHeader>
+    <CardTitle>Workspace settings</CardTitle>
+    <CardDescription>Changes here apply to every member.</CardDescription>
+  </CardHeader>
+  <Card variant="flat">
+    <CardHeader>
+      <CardTitle level={4}>Delete workspace</CardTitle>
+      <CardDescription>Removes every project. This cannot be undone.</CardDescription>
+    </CardHeader>
+    <CardActions>
+      <Button size="sm" variant="danger">
+        Delete workspace
+      </Button>
+    </CardActions>
+  </Card>
+</Card>
+```
+
+A card with a form inside it, and the actions pushed to the trailing edge.
+The card is inert, so Tab goes straight to the input and then to the buttons:
+
+```tsx
+<Card>
+  <CardHeader>
+    <CardTitle>Invite a teammate</CardTitle>
+    <CardDescription>They get access to every project in this workspace.</CardDescription>
+  </CardHeader>
+  <CardContent>
+    <Field>
+      <Label>Email</Label>
+      <Input type="email" name="email" />
+    </Field>
+  </CardContent>
+  <CardActions className="justify-end">
+    <Button variant="ghost">Cancel</Button>
+    <Button type="submit">Send invite</Button>
+  </CardActions>
+</Card>
+```
+
+The [Quick start](../start/quick-start.mdx) deliberately keeps its screen
+small and does not use a card; the `Composition` story is the page-of-cards
+example, with neighbours, a section heading, and a nested surface.
+
+## Testing notes
+
+<Stories
+  file="Card.stories.tsx"
+  stories={[
+    { name: "Contract", proves: "The no-motion rationale, the accessibility contract, and the manual-review steps, rendered." },
+    { name: "Default", proves: "The component as first reached for: header, content, and two actions." },
+    { name: "Variants", proves: "Both variants on the page background, which is the ground that decides whether elevation reads, with the reason to pick each." },
+    { name: "States", proves: "Empty and long content from the contract, plus only-content and a nested flat card, in one matrix." },
+    { name: "DarkTheme", proves: "Both variants pinned to dark, where the fill has to do the separating." },
+    { name: "Composition", proves: "A page of cards with neighbours, a section heading, a badge in a header, and a nested surface." },
+    { name: "NarrowWidth", proves: "A card in a 320px column: the long token, the wrapped title, and three actions all stay inside the surface." },
+    { name: "NestedControls", proves: "The card is a div with no role or tabindex; Tab reaches the input and each button in document order, never the card, and then leaves it entirely." },
+    { name: "HeadingLevels", proves: "Titles are headings at their declared levels: h3 by default, h2 when asked, h3 nested under it." },
+  ]}
+/>
+
+Every story is rendered, its play function awaited, and the result audited
+with axe by `pnpm test:stories`. The unit test beside the source,
+`Card.test.tsx`, proves the rest: that `Card` renders a plain `div` with no
+role, `tabindex`, or handler; that every part forwards its ref to its own
+element; that `raised` is the default and `flat` switches the border and
+shadow classes; that `cn` keeps every default class, including the pinned
+grid column, and lets a caller's conflicting class win; that native props
+spread onto the element; that `CardTitle` renders a heading at each of the
+five levels where upstream renders a `div`; that every part renders its
+element and works outside a `Card`; that nothing in a full composition is
+focusable except the controls the caller adds; and that the adaptation stayed
+adapted, with no shadcn import, alias, `forwardRef`, token name, or raw scale
+step surviving, and the upstream snapshot recorded with its provenance.
+
+Theme appearance, the rendered focus ring, and zoomed layout cannot be judged
+from a play function, so the contract lists three manual checks:
+
+1. Open `Variants` in light theme, then switch to dark. Expect the raised
+   card to separate from the page by shadow and a faint border in light, and
+   by its lighter fill in dark; the flat card to show a visible border in
+   both; and neither to disappear into the page.
+2. Open `NestedControls`, click the canvas background, and press Tab through
+   the card. Expect focus to land on the input, then each button in order,
+   with a visible ring inside the card's edge each time, and the card itself
+   never to be a stop.
+3. Open `NarrowWidth` with the viewport at 320px and the page zoomed to 200%.
+   Expect the long token to wrap inside the surface, the actions to wrap onto
+   a second row, and nothing to scroll horizontally or clip.
+
+The checklist those steps come from is `MANUAL-REVIEW.md` at the repository
+root. The result block for this component is recorded on HAUX-47 rather than
+in the repository.
+
+## Known limitations
+
+- **The raised border is invisible in dark.** `color.border.subtle` and
+  `color.surface` resolve to the same neutral step in the dark theme, so a
+  raised card in dark separates from the page by fill and shadow only. It
+  still reads as a surface on the page background, but a raised card on a
+  `surface`-coloured ground in dark would have no edge at all. Use `flat`
+  there. Whether `border.subtle` should sit a step above `surface` in dark is
+  a token decision, recorded on HAUX-47.
+- **No clickable card.** Out of scope by decision. A caller who wants a card
+  to lead somewhere puts a link or a button in it.
+- **No media slot.** A full-bleed image needs negative margins against the
+  surface padding, and a caller adding `overflow-hidden` for it will clip
+  focus rings at the edge.
+- **Parts carry no context.** A `CardTitle` outside a `Card` is just a
+  heading. That is deliberate, and it means the card cannot wire
+  `aria-labelledby` to its own title automatically; pass it by hand, with a
+  role, when a named region is wanted.
+- **The title weight is not a token.** `CardTitle` uses Tailwind's
+  `font-semibold` rather than the `font.weight.heading` role, so a theme that
+  retypes heading weight leaves card titles at 600.
+- **No `level={1}`.** `CardTitleLevel` is `2` to `6`. A card that needs the
+  document's only `h1` is not a card.
+- **No size scale.** Padding and gaps are fixed spacing roles. A denser card
+  is a `className` override, not a prop.
+
+## Changelog
+
+Card was added by HAUX-47. The consumer-facing record is
+[`CHANGELOG.md`](https://github.com/iroshandezilva/spartan/blob/main/CHANGELOG.md)
+at the repository root; changes that are merged but not yet released are
+individual notes in
+[`.changes/`](https://github.com/iroshandezilva/spartan/tree/main/.changes).
+Source: `packages/spartant/src/components/card/`.
+
+Related: [Button](./button.mdx) and [Badge](./badge.mdx) for what goes inside
+a card, [Separator](./separator.mdx) for dividing without a surface,
+[Dialog](./dialog.mdx) for a modal task,
+[Radius and elevation](../foundations/radius-and-elevation.mdx) for the
+pairings the variants come from.

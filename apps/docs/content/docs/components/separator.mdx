@@ -1,0 +1,353 @@
+---
+title: Separator
+description: A dividing line, horizontal or vertical, decorative by default and reported as a separator only when the line genuinely means something.
+keywords:
+  - Separator
+  - SeparatorProps
+  - orientation
+  - decorative
+  - horizontal
+  - vertical
+  - divider
+  - rule
+  - hr
+  - role
+  - separator
+  - none
+  - aria-hidden
+  - aria-orientation
+  - static component
+  - no motion
+  - color.border
+  - border-width.default
+---
+
+<Prerelease />
+
+## Purpose and when to use
+
+Separator draws a dividing line between two groups of content that a gap
+alone does not separate clearly enough. It is the smallest component in the
+system, and it is released because the distinction between a line that means
+something and a line that is only drawn is worth establishing once rather than
+guessing at in every prototype.
+
+Use it between sections of a card, between the parts of a toolbar, or between
+two blocks that would otherwise read as one. It runs horizontally by default
+and vertically on request.
+
+## When not to use
+
+- **As spacing.** If the only goal is breathing room, use a spacing role from
+  [Spacing](../foundations/spacing.mdx). A rule where a gap would do adds a
+  line the eye has to step over.
+- **Around every section.** A page of rules reads as a form, and the
+  meaningful ones stop being noticed. Draw one where two groups genuinely
+  touch.
+- **Inside a [Card](./card.mdx) that already has a heading.** The heading
+  already separates the sections. A decorative rule there is fine as a visual
+  choice, but it is decoration, so leave `decorative` at its default.
+- **As a thematic break in prose.** That is what a native `hr` is for, and
+  Separator deliberately is not one; see [Anatomy](#anatomy).
+
+## Import and minimal example
+
+```tsx
+import { Separator } from "@iroshandezilva/spartant";
+
+<Separator />
+<Separator orientation="vertical" />
+<Separator decorative={false} />
+```
+
+The lines below are the package's `Separator`, rendered live. The demo is
+static because the component has no motion: nothing to press, hover, or
+interrupt, so there is no reduced-motion copy to compare against.
+
+<SeparatorDemo />
+
+## Anatomy
+
+One element. Separator renders a single `div` and nothing else:
+
+- The **line** is the `div` itself, filled with `color.border` and one
+  `border-width.default` thick along the axis that matters. Horizontal is full
+  width and one border-width tall; vertical is full height and one
+  border-width wide.
+- There is no label, no icon, and no child. Children are forwarded as native
+  `div` props but the component draws nothing inside the line.
+
+It is a `div`, not an `hr`. `hr` is a thematic break between paragraph-level
+content and carries that meaning whether or not it fits, and it cannot go
+vertical without fighting its own default styling. A `div` that says
+`role="separator"` when the line means something, and nothing at all when it
+does not, is more honest than an element borrowed for its appearance.
+
+`SeparatorProps` does not declare a `ref`, so there is no typed way to reach
+the `div`. See [Known limitations](#known-limitations).
+
+## Public API
+
+`SeparatorProps` extends `ComponentPropsWithoutRef<"div">`. Every native
+attribute and handler passes through.
+
+| Prop | Type | Default | Notes |
+| --- | --- | --- | --- |
+| `orientation` | one of `"horizontal"`, `"vertical"` | `"horizontal"` | Which way the line runs. Also sets `aria-orientation` when the line is semantic. |
+| `decorative` | `boolean` | `true` | Whether the line carries meaning. `true` removes it from the accessibility tree; `false` reports `role="separator"`. |
+| `className` | `string` | | Merged last through `cn`, so a caller's class wins. Margins, such as `my-4`, go here. |
+| `...rest` | `ComponentPropsWithoutRef<"div">` | | Forwarded onto the `div`, including `data-*`, `id`, and every handler. |
+
+Exported types: `SeparatorProps`. There is no exported orientation type; the
+union is inline on the prop.
+
+There is no internal state, so the controlled and uncontrolled question does
+not arise.
+
+### Decorative by default
+
+That default is the whole design. Most rules in a layout exist because a gap
+looked thin, and announcing every one of them is noise in a screen reader. A
+decorative separator is `aria-hidden` and carries `role="none"`, which
+together remove it from the accessibility tree entirely. `role="none"` alone
+would leave it present but unnamed.
+
+Set `decorative={false}` when the line genuinely divides two groups a
+screen-reader user needs to know are separate. It then reports
+`role="separator"` with `aria-orientation` set from `orientation`.
+
+The two look identical on screen, which is why the story suite asserts both.
+
+## Variants and sizes
+
+Separator has no variants and no sizes: the contract declares `[]` for both.
+What varies instead is `orientation`, which picks the axis, and `decorative`,
+which picks whether assistive technology hears about the line at all. Colour
+and thickness come from the theme, not from a prop.
+
+| Axis | Values | What changes |
+| --- | --- | --- |
+| `orientation` | `horizontal`, `vertical` | The dimension that fills its parent and the dimension that is one border-width. |
+| `decorative` | `true`, `false` | Nothing visible. `false` adds `role="separator"` and `aria-orientation`. |
+
+## Required states
+
+The contract declares no states. A line is not hoverable, focusable, or
+selectable, and saying otherwise to fill a matrix would be dishonest. What is
+covered:
+
+| State | How it is reached | Where it is proved |
+| --- | --- | --- |
+| Default | | `Default` story |
+| Horizontal | `orientation="horizontal"`, the default. Full width, one border-width tall. | `States` story |
+| Vertical | `orientation="vertical"` inside a parent with a resolvable height. Full height, one border-width wide. | `States` story |
+| Decorative | `decorative` left at `true`. Hidden from assistive technology. | `States` and `SemanticsAreCorrect` stories |
+| Semantic | `decorative={false}`. Reported as a separator with its orientation. | `States` and `SemanticsAreCorrect` stories |
+| Light and dark | The line on both grounds. | `Default` and `DarkTheme` stories |
+
+## Accessibility and keyboard behaviour
+
+- **Role**: none by default. A decorative line is `aria-hidden` with
+  `role="none"` and is removed from the accessibility tree. With
+  `decorative={false}` it is `role="separator"` with `aria-orientation`.
+- **Name**: none, and deliberately. A separator that announced a name would
+  be describing itself rather than the content it divides.
+- **Focus**: never receives focus.
+- **Announcements**: a decorative separator announces nothing at all. A
+  semantic one is reported as a separator with its orientation, which is how a
+  screen-reader user learns that two groups are distinct.
+- **Hit area**: not applicable. Nothing is actionable, so the 44px floor does
+  not apply.
+
+There is no keyboard interaction. Separator is static: it is not a control,
+so it takes no key.
+
+| Key | Behaviour |
+| --- | --- |
+| Any | Not focusable in either mode. A separator is not a control, so Tab passes over it and no key reaches it. |
+
+What assistive technology gets instead is structure. A semantic separator is
+exposed with the `separator` role in the reading order, with its orientation,
+so a screen-reader user moving through the content hears that one group has
+ended and another begun. A decorative one is simply absent, and the content on
+either side reads as continuous.
+
+See [Accessibility](../foundations/accessibility.mdx) for the floors every
+component shares.
+
+## No-motion rationale
+
+A separator never changes state, so there is nothing for motion to explain.
+None of the purposes the [motion standard](../foundations/motion.mdx) allows,
+location, continuity, state, feedback, or softening a jarring change, applies
+to a line that is drawn once and stays. Animating a static rule would be
+decoration in a component whose whole job is to be quiet, and the standard is
+explicit that static components stay still.
+
+## Input modality, interruption, and reduced motion
+
+Nothing moves on any input, so there is nothing to interrupt and reduced
+motion changes nothing.
+
+| Input | Behaviour |
+| --- | --- |
+| Pointer, touch | No response. The line is not a target and has no hover, press, or active treatment. |
+| Keyboard | No response. The line is not focusable and takes no key. |
+| Interruption | Nothing to interrupt. There is no transition in flight at any moment. |
+| Reduced motion | No difference. No motion token is consumed, so the global collapse has nothing to collapse here. |
+
+## Motion tokens and implementation approach
+
+No motion tokens are consumed. The component sets no `transition` and no
+`animation`, so there is no duration, easing, distance, or scale role to list,
+and no dependency beyond the stylesheet. That is the correct shape for a
+static component: a rule that reached for a motion token would be declaring an
+intent to move that it has no reason to act on.
+
+## Theming and token dependencies
+
+Two roles, both semantic, so a theme change or a consumer override retypes the
+line with no rebuild:
+
+| Role | Where |
+| --- | --- |
+| `color.border` | The line's fill, through `bg-border`. |
+| `border-width.default` | The line's thickness, through `var(--spartant-border-width)`. |
+
+No radius, space, size, or shadow role is used. Margins around the line are
+the caller's, through `className`.
+
+Separator is the only component that reads `border-width.default` through
+`var()` rather than a Tailwind utility, because Tailwind has no border-width
+theme namespace to map the token into. The value is still the token, so
+overriding `--spartant-border-width` changes every separator along with every
+border.
+
+No component tokens. `color.border` is contrast-checked against the surface
+and background roles in both themes by `pnpm check:colors`. See
+[Color](../foundations/color.mdx) and [Theming](../start/theming.mdx).
+
+## Composition examples
+
+Between two sections of a card, where the heading already separates them and
+the rule is visual:
+
+```tsx
+<Card>
+  <CardHeader>
+    <CardTitle>Workspace</CardTitle>
+  </CardHeader>
+  <CardContent>
+    <dl className="grid gap-2 text-body-small">
+      <div className="flex justify-between">
+        <dt className="text-foreground-muted">Plan</dt>
+        <dd>Studio</dd>
+      </div>
+    </dl>
+    <Separator className="my-3" />
+    <p className="text-body-small text-foreground-muted">Next invoice on 1 October.</p>
+  </CardContent>
+</Card>
+```
+
+Between two cards that nothing else says are different things, so the rule
+is semantic:
+
+```tsx
+<div className="grid gap-stack">
+  <Card>
+    <CardTitle>Workspace</CardTitle>
+  </Card>
+  <Separator decorative={false} />
+  <Card>
+    <CardTitle>Billing</CardTitle>
+  </Card>
+</div>
+```
+
+Vertical, in a toolbar. The parent is a flex row with `items-stretch`, which
+is what gives the line its height:
+
+```tsx
+<div className="flex items-stretch gap-control-gap">
+  <Button variant="ghost">Undo</Button>
+  <Button variant="ghost">Redo</Button>
+  <Separator orientation="vertical" />
+  <Button variant="ghost">Share</Button>
+</div>
+```
+
+Between a form's fields and its actions, decorative, because the submit button
+already marks the end of the form. See [Text fields](./text-fields.mdx) for the
+field parts:
+
+```tsx
+<form onSubmit={handleSubmit} className="grid gap-stack">
+  <Field>
+    <Label>Workspace name</Label>
+    <Input name="name" />
+  </Field>
+  <Separator />
+  <Button type="submit">Save</Button>
+</form>
+```
+
+## Testing notes
+
+<Stories
+  file="Separator.stories.tsx"
+  stories={[
+    { name: "Contract", proves: "The declared contract, including why this component does not move." },
+    { name: "Default", proves: "A horizontal line between two paragraphs, as first reached for." },
+    { name: "States", proves: "The two axes that vary, orientation and meaning, in one matrix: horizontal, vertical, decorative, and semantic." },
+    { name: "DarkTheme", proves: "The line stays visible on the dark ground." },
+    { name: "Composition", proves: "A decorative rule inside each card and a semantic rule between the two cards, in a realistic settings layout." },
+    { name: "SemanticsAreCorrect", proves: "A decorative separator carries aria-hidden and is not in the accessibility tree; a semantic one reports role=separator and aria-orientation for both horizontal and vertical." },
+  ]}
+/>
+
+Every story is rendered, its play function awaited, and the result audited
+with axe by `pnpm test:stories`. `SemanticsAreCorrect` is the accessibility
+contract asserted rather than described: it queries the separator role and
+expects exactly the two semantic lines, then reads the orientation off each.
+
+Manual testing is not required. The contract records the reason: no motion,
+no interaction, no state. The two things worth checking are the role and the
+orientation, and both are asserted in the story suite and audited by axe.
+
+The checklist that decision is made against is `MANUAL-REVIEW.md` at the
+repository root.
+
+## Known limitations
+
+- A vertical separator needs a parent with a resolvable height, typically a
+  flex row with `items-stretch`. That is CSS, not the component, and the
+  `States` story and the toolbar example above show the working shape. In a
+  parent whose height is `auto`, `h-full` resolves to nothing and the line
+  disappears.
+- Resizable split panes are out of scope for HAUX-46.
+- `SeparatorProps` does not declare `ref`, so `<Separator ref={...} />` is a
+  type error even though React 19 would forward the prop at runtime. The
+  [API conventions](https://github.com/iroshandezilva/spartan/blob/main/packages/spartant/src/components/API-CONVENTIONS.md)
+  say every component that renders a DOM element forwards its ref, and
+  [Card](./card.mdx) declares one explicitly; Separator does not. Reach the
+  `div` through a ref on the parent until that is resolved.
+- No label or text variant. A separator with a caption in the middle, as some
+  systems draw for "or" between two sign-in options, is a composition the
+  package does not ship.
+- Thickness is the theme's `border-width.default`. There is no prop for a
+  thicker line; override the custom property or pass a height class.
+
+## Changelog
+
+Separator was added by HAUX-46. The consumer-facing record is
+[`CHANGELOG.md`](https://github.com/iroshandezilva/spartan/blob/main/CHANGELOG.md)
+at the repository root; changes that are merged but not yet released are
+individual notes in
+[`.changes/`](https://github.com/iroshandezilva/spartan/tree/main/.changes).
+Source: `packages/spartant/src/components/separator/`.
+
+Related: [Card](./card.mdx) for the surface a rule most often sits inside,
+[Text fields](./text-fields.mdx) for the form parts in the last example,
+[Spacing](../foundations/spacing.mdx) for when a gap is enough, and
+[Color](../foundations/color.mdx) for the border role.

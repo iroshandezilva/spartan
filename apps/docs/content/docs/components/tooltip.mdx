@@ -1,0 +1,534 @@
+---
+title: Tooltip
+description: Brief supplemental text for a control. A native button as the trigger and a top-layer surface placed by CSS anchor positioning, with a delay for the pointer and none for the keyboard.
+keywords:
+  - Tooltip
+  - TooltipTrigger
+  - TooltipContent
+  - TooltipProps
+  - TooltipTriggerProps
+  - TooltipContentProps
+  - open
+  - defaultOpen
+  - onOpenChange
+  - delay
+  - placement
+  - disabled
+  - top
+  - bottom
+  - left
+  - right
+  - role="tooltip"
+  - aria-describedby
+  - aria-label
+  - aria-disabled
+  - popover="manual"
+  - anchor positioning
+  - position-anchor
+  - position-area
+  - top layer
+  - data-side
+  - data-instant
+  - sequential tooltips
+  - hover delay
+  - touch
+  - color.foreground
+  - color.foreground.inverse
+  - radius.control
+  - elevation.overlay
+  - space.control-gap
+  - font.size.body-small
+  - font.line-height.body
+  - font.family.body
+  - duration.state-change
+  - duration.press-feedback
+  - easing.enter
+  - easing.exit
+  - scale.overlay-enter
+  - tooltip.padding-x
+  - tooltip.padding-y
+  - tooltip.max-width
+---
+
+<Prerelease />
+
+## Purpose and when to use
+
+Tooltip shows a few words about a control: what an icon does, the shortcut
+that triggers it, why a control is unavailable. It opens after a pointer rests
+on the trigger, or the moment the trigger receives keyboard focus, and it
+closes when the reason for it goes away.
+
+It is built on the platform rather than on a primitive library, which was the
+decision HAUX-53 owned. The Popover API supplies the top layer, so the surface
+paints above every `z-index` with no portal; CSS anchor positioning supplies
+placement and collision handling, re-evaluated by the browser on every scroll
+and resize with no listener and no measuring. Only the timing, which is the
+whole of a tooltip's behaviour, is owned code.
+
+Use it where a label alone is not enough and a paragraph is too much: icon-only
+toolbars, truncated labels, shortcut hints, and disabled controls that owe the
+user an explanation. The Atlas prototype reaches for the native `title`
+attribute in roughly 57 files; that is unstyled, delayed, invisible on touch,
+and cannot hold a shortcut, and this is its replacement.
+
+## When not to use
+
+- **Essential information.** A tooltip is a description, not a name, and it is
+  invisible to anyone who cannot hover. Whatever it says must also be available
+  another way: as the control's accessible name, as text on the page, or in a
+  [Popover](./popover.mdx).
+- **Anything to click.** The surface holds no interactive content, the pointer
+  passes straight through it, and focus never enters it. Controls that belong
+  beside a trigger go in a [Popover](./popover.mdx).
+- **A paragraph.** Text that wraps past the max width is content, not a hint.
+  Put it on the page or in a Popover.
+- **A task the user must finish or abandon** is a [Dialog](./dialog.mdx).
+- **Wrapping an existing [Button](./button.mdx).** `TooltipTrigger` renders
+  its own `button`; it cannot wrap one. Style it with the same classes instead.
+
+## Import and minimal example
+
+```tsx
+import { Tooltip, TooltipContent, TooltipTrigger } from "@iroshandezilva/spartant";
+
+<Tooltip>
+  <TooltipTrigger aria-label="Bold">
+    <BoldIcon aria-hidden="true" />
+  </TooltipTrigger>
+  <TooltipContent>Bold Cmd+B</TooltipContent>
+</Tooltip>;
+```
+
+The example below is the package's Tooltip, rendered live under both motion
+modes. The readout is driven by `onOpenChange`, which fires in the event
+handler for every path, so it flips before the surface has finished its
+transition. The surface paints in the top layer but stays a descendant of its
+panel in the DOM, so the right-hand copy really is reduced.
+
+<TooltipDemo />
+
+## Anatomy
+
+Three parts, exported separately and joined through a context that is not
+exported. A part rendered outside its `Tooltip` throws with a message naming
+both.
+
+| Part | Element | Notes |
+| --- | --- | --- |
+| `Tooltip` | none | Holds the open state, the generated ids, and the delay timer. Renders no DOM. |
+| `TooltipTrigger` | `button` | The described control. Carries `aria-describedby` pointing at the content, always, and an `anchor-name` the surface positions against. It must have its own accessible name. |
+| `TooltipContent` | `div` | `role="tooltip"`, `popover="manual"`, `position-anchor` matching the trigger. Always in the document so the description link never dangles; shown through the Popover API when open. |
+
+`TooltipTrigger` is unstyled. It supplies the behaviour and the ARIA, and the
+caller supplies the look, usually the same classes a `Button` of the matching
+variant would have, including the focus ring. The stories and the demo above
+show the class string.
+
+The refs point at the `button` for `TooltipTrigger` and at the `div` for
+`TooltipContent`. `Tooltip` renders nothing and takes no ref.
+
+## Public API
+
+### Tooltip
+
+`TooltipProps` is a plain interface; `Tooltip` renders no element and forwards
+nothing.
+
+| Prop | Type | Default | Notes |
+| --- | --- | --- | --- |
+| `open` | `boolean` | | Controlled open state. Controlled whenever it is not `undefined`. |
+| `defaultOpen` | `boolean` | `false` | Uncontrolled initial state. |
+| `onOpenChange` | `(open: boolean) => void` | | Called with the new state, once per change, from every path: hover, focus, blur, Escape, press. |
+| `delay` | `number` | `500` | Milliseconds a pointer must rest on the trigger before it opens. Focus ignores it. |
+| `children` | `ReactNode` | | The trigger and the content. |
+
+Uncontrolled is the default, as everywhere in the system: a tooltip needs no
+`useState` to work. Pass `open` to control it, and keep the mode fixed for the
+life of the instance; the component does not switch modes on the fly and does
+not warn if you try.
+
+### TooltipTrigger
+
+`TooltipTriggerProps` extends `ComponentPropsWithoutRef<"button">`. Every
+native attribute and handler passes through; the component's own pointer,
+focus, blur, and click handlers run after the caller's.
+
+| Prop | Type | Default | Notes |
+| --- | --- | --- | --- |
+| `disabled` | `boolean` | | Translated, not passed through: the button stays focusable, carries `aria-disabled="true"` and `data-disabled`, and swallows activation including Enter and Space. See below. |
+| `aria-label` | `string` | | Required when the trigger has no text content. The tooltip is a description, and a description is not a name. |
+| `className` | `string` | | Applied to the `button`. The trigger has no classes of its own. |
+| `style` | `CSSProperties` | | Merged after the generated `anchor-name`, so a caller can override it. |
+| `ref` | `Ref<HTMLButtonElement>` | | Points at the `button`. |
+| `...rest` | `ComponentPropsWithoutRef<"button">` | | Forwarded, including every handler and `aria-*`. `type` is `"button"`. |
+
+### TooltipContent
+
+`TooltipContentProps` extends `ComponentPropsWithoutRef<"div">`.
+
+| Prop | Type | Default | Notes |
+| --- | --- | --- | --- |
+| `placement` | one of `"top"`, `"bottom"`, `"left"`, `"right"` | `"top"` | The preferred side. The browser flips to the opposite side when there is no room, then slides. |
+| `className` | `string` | | Merged last through `cn`, so a caller's class wins. |
+| `style` | `CSSProperties` | | Merged after the generated `position-anchor`. |
+| `ref` | `Ref<HTMLDivElement>` | | Points at the `div`. |
+| `...rest` | `ComponentPropsWithoutRef<"div">` | | Forwarded. `id`, `role`, and `popover` are set by the component. |
+
+Exported types: `TooltipProps`, `TooltipTriggerProps`, `TooltipContentProps`.
+The placement union has no exported name of its own; refer to it as
+`TooltipContentProps["placement"]`.
+
+### When it opens and closes
+
+| Input | Opens | Closes |
+| --- | --- | --- |
+| Mouse or pen | After `delay` resting on the trigger | Leaving the trigger, or pressing it |
+| Keyboard | Immediately on focus | Escape, from anywhere on the page, or blur |
+| Touch | On focus, where the platform focuses a tapped button | Blur |
+
+**Sequential tooltips skip the delay and the animation.** Once one tooltip on
+the page has closed, another that opens within 300ms opens at once, marked
+`data-instant`, which switches its transition off. Sweeping across a toolbar
+shows each label as the pointer reaches it rather than half a second later.
+The window is a property of the page, so it is tracked at module level rather
+than through a provider that would have to wrap every toolbar.
+
+**A press dismisses.** Clicking a trigger is activation, and the tooltip gets
+out of the way. The focus that a mouse click causes is deliberately ignored,
+or the tooltip would reopen in the same instant under the keyboard path's
+rules. A touch press is not ignored, because focus is the only route a touch
+user has to the tooltip.
+
+**Nothing fires in a hidden tab.** A delay timer that elapses while the page
+is hidden does not open the tooltip, per the motion standard's timed-state
+rule.
+
+### Disabled triggers
+
+`disabled` on `TooltipTrigger` does not disable the button natively. A
+natively disabled button cannot be focused and does not reliably receive
+pointer events, so its tooltip could never open, and explaining why a control
+is unavailable is the most common reason to put a tooltip on one. Instead the
+trigger stays focusable and in the tab order, carries `aria-disabled="true"`,
+and refuses activation. It is the same treatment [Button](./button.mdx) gives
+its loading state, for the same reason. Style it through `aria-disabled:`
+variants.
+
+## Variants and sizes
+
+Tooltip has no variants and no sizes; the contract declares `[]` for both.
+What varies is `placement` on `TooltipContent`, which is a preference rather
+than a fixed position:
+
+| Placement | Fallbacks, in order |
+| --- | --- |
+| `top` (default) | Flip to bottom; slide so the surface hangs off the left or right edge of the trigger, above then below. |
+| `bottom` | Flip to top; slide left or right, below then above. |
+| `left` | Flip to right; slide so the surface hangs off the top or bottom edge, left then right. |
+| `right` | Flip to left; slide up or down, right then left. |
+
+The side the surface actually landed on is written back as `data-side`, and
+the transform origin follows it, so a flipped tooltip still grows from its
+trigger. The surface is always one size: `font.size.body-small` on
+`font.line-height.body`, wrapping at `tooltip.max-width`.
+
+## Required states
+
+| State | How it is reached | Where it is proved |
+| --- | --- | --- |
+| Default | Closed. The trigger is described by the tooltip whether or not it opens. | `Default` story |
+| Hover | A pointer rests on the trigger for `delay`. The surface fades and scales in from the trigger's side. | `PointerPath` story, manual check |
+| Focus visible | Keyboard focus on the trigger. Opens at once, with the focus ring the caller's classes supply. | `KeyboardPath` story, manual check |
+| Disabled | `disabled` on the trigger. `aria-disabled`, still focusable, tooltip still opens to say why. | `States` story |
+| Long content | Text that wraps at `tooltip.max-width`, 288px. | `States` story |
+| Light and dark | The surface is `color.foreground` and the ink `color.foreground.inverse`, so it inverts with the theme. | `DarkTheme` story |
+
+Hover and focus-visible cannot be rendered into a static matrix without
+restating the styles under test, so the story that produces them for real is
+the proof, and `:focus-visible` is a manual check because synthesised events
+are untrusted.
+
+## Accessibility and keyboard behaviour
+
+- **Role**: `tooltip`, on a `div`, shown through `popover="manual"` so it sits
+  in the top layer above every `z-index` without a portal.
+- **Name**: the tooltip has no name of its own and needs none. It is the
+  trigger's description, through `aria-describedby`, set whether open or
+  closed so the description is always available. The trigger, a native
+  `button`, must carry its own accessible name: an icon-only trigger needs
+  `aria-label`.
+- **Focus**: never enters the tooltip. It holds no interactive content and the
+  pointer passes through it, so it can neither take focus nor take a click.
+  The trigger's focus ring comes from the classes the caller gives it; use the
+  system's one treatment, `focus-visible:outline-2 focus-visible:outline-offset-2
+  focus-visible:outline-focus-ring`.
+- **Announcements**: a screen reader announces the tooltip text as the
+  trigger's description when the trigger receives focus, before the tooltip is
+  visually open and whether or not it ever opens.
+- **Escape is consumed**: the keydown is `preventDefault`ed, so an enclosing
+  dialog does not close on the same press. The innermost thing dismisses first.
+
+| Key | Behaviour |
+| --- | --- |
+| `Tab` to the trigger | Opens the tooltip immediately, with no delay. |
+| `Escape` | Dismisses it, from anywhere on the page. Focus stays where it was. |
+| `Tab` away | Dismisses it. |
+| `Enter` or `Space` on a disabled trigger | Refused. The trigger stays focused and the tooltip stays open. |
+
+See [Accessibility](../foundations/accessibility.mdx) for the floors every
+component shares. The 44px hit area is the trigger's responsibility: the
+`md` button height meets it, and the toolbar composition uses square triggers
+at that size.
+
+## Motion purpose
+
+The tooltip fades and scales in from its trigger's side, so it reads as
+belonging to the control under the pointer rather than appearing somewhere
+near it. That explains **location**, one of the purposes the
+[motion standard](../foundations/motion.mdx) allows. The timing is fast because
+a tooltip is glanced at, not watched, and the exit is faster than the entry
+because a surface that is leaving is in the way.
+
+The delay is not motion. It is timing, and it is what stops a sweep across a
+toolbar from flashing every label in turn.
+
+## Input modality, interruption, and reduced motion
+
+| Input | Behaviour |
+| --- | --- |
+| Pointer, touch | Opens after a 500ms rest on the trigger, closes the moment the pointer leaves or presses. A second tooltip within 300ms of the first closing opens at once, with no delay and no animation. Touch cannot hover: a touch user gets the tooltip on focus where the platform focuses a tapped button (Android does, iOS does not), and otherwise not at all, which is why the tooltip is never the only place the information lives. |
+| Keyboard | Focus opens it immediately, with no delay. The state and the `aria-describedby` link are already there; only the surface animates. Escape dismisses from anywhere, and blur dismisses. |
+| Interruption | Hover and unhover retarget the same transition, so a sweep across the trigger never queues a second entry. Leaving before the delay elapses cancels the open entirely: six sweeps faster than the delay never open it, proved by `RapidRepeat`. |
+| Reduced motion | The stylesheet collapses the durations to 0ms and the entry scale to 1, so the tooltip simply appears and disappears. The delay is unaffected: it is timing, not motion. The right-hand copy of the example above shows exactly that. |
+| Origin | The side of the trigger the surface actually landed on, read back after the browser resolves the placement and its collision fallbacks, so a flipped tooltip still grows from the trigger. Nothing is paired with it. |
+
+## Motion tokens and implementation approach
+
+| Token | Used for |
+| --- | --- |
+| `duration.state-change` | The entry, 160ms. Aliases the fast step the motion standard names for tooltips. |
+| `duration.press-feedback` | The exit, 120ms. The only faster role, which keeps the exit 25 percent ahead of the entry. |
+| `easing.enter` | The entry curve, a strong ease-out. |
+| `easing.exit` | The exit curve, the same ease-out; never an ease-in. |
+| `scale.overlay-enter` | The scale the surface grows from, 0.96, and shrinks back to. |
+
+CSS transitions only. The transition names its properties, `opacity`, `scale`,
+`display`, and `overlay`, rather than `all`. Entry uses `@starting-style`,
+which is what lets a surface that was `display: none` transition in; exit uses
+`transition-behavior: allow-discrete` on `display` and `overlay`, so the
+surface stays painted for the length of the exit and then leaves the top
+layer. No JavaScript is involved in either, and the open state never waits
+for a transition: `hidePopover()` runs at once and the exit paints on its own.
+A sequential tooltip sets `data-instant`, which turns the transition off for
+that open. There is no tooltip-specific duration role; the two roles above
+already carry the standard's values for a tooltip, and renaming them would be
+a token decision rather than a component one.
+
+## Theming and token dependencies
+
+Semantic roles, so a theme change or a consumer override retypes the surface
+with no rebuild:
+
+| Role | Where |
+| --- | --- |
+| `color.foreground` | The surface fill. Dark ink becomes the dark surface, so the tooltip inverts with the theme. |
+| `color.foreground.inverse` | The text. |
+| `radius.control` | Corner radius. |
+| `elevation.overlay` | The shadow. |
+| `space.control-gap` | The distance between the trigger and the surface, as a margin on every side so it survives a flip. |
+| `font.size.body-small`, `font.line-height.body`, `font.family.body` | The text. |
+
+Component tokens: `tooltip.padding-x` (8px), `tooltip.padding-y` (4px), and
+`tooltip.max-width` (288px). The inset is a component token because nothing
+semantic means the inset of a caption-scale surface: `space.control-padding`
+sizes the box a finger presses and would make the tooltip larger than the
+button it describes, and `space.surface-padding` is sized for cards. The
+justification is recorded in `tooltip.tokens.json` beside the source.
+
+The trigger consumes no roles of its own; the caller's classes decide it, so a
+trigger styled as a `secondary` Button draws on exactly what
+[Button](./button.mdx#theming-and-token-dependencies) does, including
+`color.focus-ring`. See [Color](../foundations/color.mdx) and
+[Theming](../start/theming.mdx). The `color.foreground.inverse` on
+`color.foreground` pairing is not yet declared in the colour check; see Known
+limitations.
+
+## Composition examples
+
+The place tooltips earn their keep is a toolbar of icon-only buttons. Each
+button has its own name through `aria-label`; the tooltip repeats it with the
+shortcut, so nothing is lost if the tooltip never opens:
+
+```tsx
+<div role="toolbar" aria-label="Formatting" className="inline-flex gap-control-gap">
+  {tools.map(({ label, shortcut, Icon }) => (
+    <Tooltip key={label}>
+      <TooltipTrigger className={iconButtonClass} aria-label={label}>
+        <Icon aria-hidden="true" />
+      </TooltipTrigger>
+      <TooltipContent placement="bottom">
+        {label} {shortcut}
+      </TooltipContent>
+    </Tooltip>
+  ))}
+</div>
+```
+
+A disabled control that says why. The trigger stays focusable, so a keyboard
+user finds the explanation too:
+
+```tsx
+<Tooltip>
+  <TooltipTrigger className={buttonClass} disabled={!title}>
+    Publish
+  </TooltipTrigger>
+  <TooltipContent>Add a title before publishing</TooltipContent>
+</Tooltip>
+```
+
+Controlled, to open a tooltip programmatically, for example after a copy
+action, and to observe every change:
+
+```tsx
+const [copied, setCopied] = useState(false);
+
+<Tooltip open={copied} onOpenChange={setCopied}>
+  <TooltipTrigger
+    className={buttonClass}
+    onClick={async () => {
+      await navigator.clipboard.writeText(url);
+      setCopied(true);
+    }}
+  >
+    Copy link
+  </TooltipTrigger>
+  <TooltipContent>Copied</TooltipContent>
+</Tooltip>;
+```
+
+A pointer press dismisses whatever was open before the click handler runs, and
+the pointer leaving or the trigger blurring reports `false` through
+`onOpenChange` as usual, so `copied` resets itself when the user moves on.
+
+## Testing notes
+
+<Stories
+  file="Tooltip.stories.tsx"
+  stories={[
+    { name: "Contract", proves: "The motion, accessibility, and manual-review contract, rendered." },
+    { name: "Default", proves: "The recommended composition: a named control with supplemental text." },
+    { name: "Placements", proves: "Every placement, open, so the four positions can be compared at once." },
+    { name: "States", proves: "Disabled and long content in one matrix; hover and focus-visible are named as proved in PointerPath and KeyboardPath." },
+    { name: "DarkTheme", proves: "Pinned to dark regardless of the toolbar. The surface inverts with the theme." },
+    { name: "Composition", proves: "A toolbar of icon-only buttons, each named through aria-label, with the tooltip repeating the name and the shortcut." },
+    { name: "KeyboardPath", proves: "The trigger is described before anything opens; Tab opens within 150ms where the delay is 500; Escape closes and focus stays; focus again reopens and Tab away closes." },
+    { name: "PointerPath", proves: "Hover is not open at 40ms and is open after the 400ms delay; leaving closes; the next tooltip opens within 150ms carrying data-instant; a press dismisses and the focus it causes does not reopen." },
+    { name: "RapidRepeat", proves: "Six sweeps faster than the delay never open it, and it still opens and closes cleanly afterwards on the same element." },
+    { name: "OverlayOrigin", proves: "Each of the four surfaces records the side it sits on in data-side, which the transform origin follows." },
+    { name: "ReducedMotion", proves: "The same tooltip with every motion token collapsed. The delay remains." },
+    { name: "ViewportEdges", proves: "A trigger in each corner asking for the placement that would leave the viewport, so the browser's fallbacks have to answer." },
+    { name: "PartOutsideTooltip", proves: "A part outside its Tooltip throws, naming both the part and the parent." },
+    { name: "SlowMotion", proves: "The entry and exit slowed eight times, so the origin and the faster exit can be watched." },
+  ]}
+/>
+
+Every story is rendered, its play function awaited, and the result audited
+with axe by `pnpm test:stories`. The pointer story's delay is its own, and the
+checks straddle it: not open well before it elapses, open after. Asserting a
+frame count would be flaky; asserting the state on either side of the
+boundary is not.
+
+The unit tests in `Tooltip.test.tsx` prove, with fake timers, the delay and
+its cancellation, the sequential window on both sides of its 300ms boundary, the
+touch exclusion, the hidden-tab guard, focus and blur, Escape from the document
+and that the key is consumed, the press-then-focus rule for mouse and its
+absence for touch, the disabled translation, the description link whether open
+or closed, the anchor name on the trigger and the matching `position-anchor`
+on the surface, controlled and uncontrolled behaviour with `onOpenChange`
+firing exactly once per change, ref forwarding to both elements, that `cn`
+kept every class and the caller's `className` wins, and that the adaptation
+stayed adapted: upstream wraps Radix and this component does not.
+
+What is not asserted: `:hover` and `:focus-visible` styling, because synthetic
+events do not set them; and the top layer, light dismiss, and anchor
+positioning, because happy-dom implements none of them. Where the Popover API
+is missing the component falls back to the `hidden` attribute, which is what
+the tests observe. The platform behaviour is the manual check. The contract
+lists six:
+
+1. Rest the mouse on the Default trigger, then move it off. Expect nothing for
+   about half a second, then the tooltip grows in from the trigger's side, and
+   vanishes the moment the pointer leaves.
+2. Sweep the pointer across the Composition toolbar without pausing. Expect the
+   first tooltip to wait for the delay and each one after it to appear at
+   once, with no delay and no animation, until you pause for longer than
+   300ms.
+3. Tab to a trigger, press Escape, then Tab on. Expect the tooltip to open with
+   no delay, Escape to close it, and Tab away to close it too.
+4. Open ViewportEdges and shrink the window until a trigger is near an edge.
+   Expect each tooltip to flip or slide to stay in view, never clipping and
+   never covering its trigger.
+5. Zoom the browser to 200% and repeat the edge check. Expect the same result:
+   anchor positioning is evaluated in CSS pixels, so zoom changes nothing.
+6. With VoiceOver, Tab to an icon-only trigger in the Composition story. Expect
+   the button's own name to be announced, then the tooltip text as its
+   description.
+
+The checklist those steps come from is `MANUAL-REVIEW.md` at the repository
+root.
+
+## Known limitations
+
+- **`TooltipTrigger` renders its own button.** It cannot wrap a `Button` or
+  any other element, which follows the Dialog precedent and avoids a slot API
+  that would be a decision issue. It also carries no styles of its own, so the
+  caller supplies the look and the focus ring. A `render` or `asChild` escape
+  hatch is a follow-up decision.
+- **No long-press on touch.** Touch cannot hover, and long-press is not a
+  reliable hover either. A touch user gets the tooltip on focus where the
+  platform focuses a tapped button, which Android does and iOS does not. The
+  tooltip is supplemental by contract, so nothing depends on it.
+- **Browsers without anchor positioning centre the tooltip in the viewport.**
+  Safari before 26 and Firefox before 147 still open it in the top layer, but
+  where the user-agent stylesheet puts an unanchored popover rather than
+  beside the trigger. Degraded, not broken, and no positioning engine is
+  planned for browsers no longer current.
+- **A tooltip inside a scrolling container that clips does not clip**, because
+  it is in the top layer. It also does not close on scroll, so a trigger
+  scrolled out of view leaves its tooltip anchored off-screen until the
+  pointer leaves. Closing on scroll is a follow-up if it proves to matter.
+- **The placement union is not exported by name.** Use
+  `TooltipContentProps["placement"]`.
+- **The `color.foreground.inverse` on `color.foreground` pairing is not
+  declared in the colour check.** The rendered pair sits at the extremes of the
+  lightness ladder in both themes, but `pnpm check:colors` does not assert it.
+- **The sequential window is page-level state.** A tooltip closed by any other
+  tooltip on the page within the last 300ms makes the next open instant,
+  including across unrelated components and, in Storybook, across stories.
+- **Manual checks still outstanding from HAUX-53.** The Chrome pass covered the
+  keyboard path, the mouse press rule, the sequential open, the computed
+  motion values, viewport edges, the 44px targets, and the dark theme. Not
+  run: VoiceOver (manual check 6), Safari, the OS-level reduce-motion setting
+  (the reduced-motion evidence is the token decorator and the demo above),
+  and browser zoom at 200% (CSS zoom was used instead). The exact delay
+  boundary was not timed with a real mouse, because a backgrounded tab aligns
+  timers to one second; it is proved by the fake-timer unit tests and the
+  story lane. The issue's completion comment asks Iroshan for the VoiceOver
+  check.
+
+## Changelog
+
+Tooltip was added by HAUX-53, alongside Popover. The consumer-facing record is
+[`CHANGELOG.md`](https://github.com/iroshandezilva/spartan/blob/main/CHANGELOG.md)
+at the repository root; changes that are merged but not yet released are
+individual notes in
+[`.changes/`](https://github.com/iroshandezilva/spartan/tree/main/.changes).
+Source: `packages/spartant/src/components/tooltip/`, with the shared anchored
+overlay internals in `packages/spartant/src/components/popover/overlay.ts`.
+
+Related: [Popover](./popover.mdx) for content a user can interact with,
+[Button](./button.mdx) for the classes a trigger borrows,
+[Dialog](./dialog.mdx) for a task that must be finished,
+[Motion](../foundations/motion.mdx) for the token scale,
+[Accessibility](../foundations/accessibility.mdx) for the shared floors.
