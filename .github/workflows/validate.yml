@@ -114,6 +114,11 @@ jobs:
         with:
           name: package-tarball
           path: .artifacts/*.tgz
+          # upload-artifact excludes dot-directories by default since v4.4,
+          # and the tarball is written to .artifacts by inspect-package.mjs.
+          # Without this the step reports "No files were found" after every
+          # other step has passed.
+          include-hidden-files: true
           if-no-files-found: error
           retention-days: 14
 
