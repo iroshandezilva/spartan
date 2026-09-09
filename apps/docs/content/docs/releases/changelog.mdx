@@ -1,0 +1,44 @@
+---
+title: Changelog
+description: Where released changes are recorded, where pending ones wait, and what the package version is today.
+keywords:
+  - changelog
+  - CHANGELOG.md
+  - release notes
+  - unreleased
+  - version
+  - 0.0.0
+---
+
+The consumer-facing record is
+[`CHANGELOG.md`](https://github.com/iroshandezilva/spartan/blob/main/CHANGELOG.md)
+at the repository root. It is not copied here, because a copy would be the one
+that is out of date.
+
+## Today
+
+The package is at version `0.0.0` and has not been published. Every component
+in the approved v0.1 inventory is built and documented, and every component
+page carries the same prerelease notice: the API may change before the first
+release. The changelog has no dated section yet.
+
+## Pending changes
+
+Changes that are merged but not released are not in the changelog. They are
+individual notes in
+[`.changes/`](https://github.com/iroshandezilva/spartan/tree/main/.changes/),
+one file per change, and become a dated section when a release is prepared.
+`pnpm release:check` lists what is pending and proposes the version it would
+produce.
+
+## Reading an entry
+
+Each entry is one line written for a consumer, with the Linear issue it came
+from linked. A breaking change is marked as such and links to migration
+guidance; see [Upgrading](./upgrading.mdx). Documentation site changes that
+do not affect the package are not listed.
+
+## Known gaps
+
+- Until the first release, this page and the changelog describe the intended
+  path. The first publish is HAUX-63.

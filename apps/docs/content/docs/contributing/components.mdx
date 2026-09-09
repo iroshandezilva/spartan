@@ -1,0 +1,101 @@
+---
+title: Creating or importing a component
+description: What has to exist before a component is started, the build order the repository's own skill enforces, and what ships together.
+keywords:
+  - contributing
+  - new component
+  - build component
+  - shadcn
+  - adopt
+  - inventory
+  - API conventions
+  - story contract
+  - skill
+  - motion decision
+  - exports
+---
+
+A component starts from a Linear issue named `Build <component>` that is
+`Ready to Start`, and from three approved documents in the repository. Nothing
+here is a substitute for reading them; this page says which they are and in
+what order they apply.
+
+## Before starting
+
+| Read | Why |
+| --- | --- |
+| [`packages/spartant/src/components/INVENTORY.md`](https://github.com/iroshandezilva/spartan/blob/main/packages/spartant/src/components/INVENTORY.md) | The approved v0.1 inventory. A component not in it needs a decision issue, not a pull request |
+| [`packages/spartant/src/components/API-CONVENTIONS.md`](https://github.com/iroshandezilva/spartan/blob/main/packages/spartant/src/components/API-CONVENTIONS.md) | The rules every component API follows: native element first, props extend the element's props, `className` merged last through `cn`, variants as a plain `Record<Variant, string>`, no primitive library API in public props |
+| [`.claude/skills/spartant-component-builder/SKILL.md`](https://github.com/iroshandezilva/spartan/blob/main/.claude/skills/spartant-component-builder/SKILL.md) | The repository's own component skill: the build order below, the frozen motion scale, a review mode, and the traps that each cost real time in the first slice. Claude Code loads it automatically; other agents read the file |
+| [`packages/spartant/src/components/ADOPTING-SHADCN.md`](https://github.com/iroshandezilva/spartan/blob/main/packages/spartant/src/components/ADOPTING-SHADCN.md) | Required when the component starts from shadcn source. Spartant is shadcn-first and never shadcn-dependent: the source is copied, its tokens replaced with semantic roles, unused dependencies removed, and the API, styling, accessibility, motion, tests, stories, and documentation owned before it ships |
+
+## Build order
+
+The skill fixes the order, because doing these out of sequence is how a
+component ends up with a story that lies about it.
+
+1. **Start from shadcn** where a comparable component exists, following the
+   adoption checklist. Otherwise write it from the native element.
+2. **Decide the element.** Native first. A `button` is a `button`; ARIA is
+   added only where the platform has no element for the meaning.
+3. **Write the story contract first.** The `contract` object in
+   `apps/storybook/src/stories/<Name>.stories.tsx` declares the role, the
+   accessible name source, the keyboard model, the motion kind and its tokens,
+   and the manual checks. The documentation page must agree with it later, so
+   it is written before the code it describes.
+4. **Map the tokens.** Semantic roles only, from
+   [Tokens](../foundations/tokens.mdx) and [Color](../foundations/color.mdx).
+   A component token is a rare, justified exception, never a duplicate of a
+   semantic role.
+5. **Implement**, in `packages/spartant/src/components/<name>/`, and export
+   from `packages/spartant/src/index.ts`. Every export passes through that
+   entry point.
+6. **Motion.** Every component records a motion purpose or an explicit
+   no-motion rationale. Motion consumes the shared roles on
+   [Motion](../foundations/motion.mdx); pointer and touch press may animate,
+   keyboard activation is immediate, hover motion is gated behind
+   `@media (hover: hover) and (pointer: fine)`, and focus, announcements,
+   validation, and state never wait for an animation.
+7. **Accessibility.** Native semantics preserved, one focus treatment, a
+   44px hit area on coarse pointers, contrast pairings added to the audit if
+   the component introduces one.
+8. **Stories.** Every public variant and size, the required edge states, dark
+   theme, a realistic composition, keyboard and pointer paths, rapid repeat or
+   interruption, reduced motion, and a `Contract` story. The template is
+   [`apps/storybook/STORY-TEMPLATE.md`](https://github.com/iroshandezilva/spartan/blob/main/apps/storybook/STORY-TEMPLATE.md).
+9. **Documentation.** One page under `apps/docs/content/docs/components/`
+   following the sixteen-section template on
+   [Documentation](./documentation.mdx).
+10. **Verify**, then close the issue with the completion report. See
+    [Testing](./testing.mdx).
+
+## What ships together
+
+A component is not done when its source compiles. In the same change:
+
+| Artifact | Where |
+| --- | --- |
+| Source and its README | `packages/spartant/src/components/<name>/` |
+| Public export and types | `packages/spartant/src/index.ts` |
+| Unit or behaviour tests | Beside the source, `*.test.ts` or `*.test.tsx` |
+| Stories with the contract | `apps/storybook/src/stories/<Name>.stories.tsx` |
+| Documentation page | `apps/docs/content/docs/components/<name>.mdx`, added to that folder's `meta.json` |
+| Release note | `.changes/<issue>-<summary>.md`, `kind: component`, `bump: minor`. See [Release process](./release-process.mdx) |
+| Manual review result | The `MANUAL-REVIEW.md` result block, in the Linear comment and the pull request |
+
+## Boundaries that stop a component
+
+Stop and ask for a decision rather than choosing when a component would need
+a new dependency, would expose a primitive library's API through public
+props, cannot meet a required accessibility behaviour, or needs an API choice
+the issue leaves materially ambiguous. Animation dependencies in particular
+need an issue-level justification covering behaviour, bundle impact, cleanup,
+server rendering, reduced motion, testing, and the consumer contract. The
+full list is on [Using with a coding agent](../start/coding-agents.mdx#stop-conditions).
+
+## Known gaps
+
+- There is no generator or scaffold command. The skill's worked examples are
+  the template.
+- Pattern pages, which would show components composed into forms, overlay
+  flows, and empty states, are not written yet.

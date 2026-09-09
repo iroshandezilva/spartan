@@ -1,7 +1,7 @@
 import { cssVar, primitiveTokens, remToPx, rolesUnder } from "@/lib/tokens";
 
 /** The primitive spacing steps, in scale order rather than alphabetical. */
-function primitiveSteps(): Array<[string, string]> {
+export function primitiveSteps(): Array<[string, string]> {
   return Object.entries(primitiveTokens)
     .filter((entry): entry is [string, string] => {
       return entry[0].startsWith("space.") && typeof entry[1] === "string";

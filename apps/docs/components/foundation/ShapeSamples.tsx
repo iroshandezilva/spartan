@@ -26,13 +26,15 @@ export function RadiusSamples() {
  * with. The pairing is the point: a shadow alone is nearly invisible in dark,
  * and in light `surface.elevated` cannot be lighter than `surface`.
  */
+export const ELEVATION_PAIRING: Record<string, { border: string; surface: string }> = {
+  flat: { border: "border-border", surface: "bg-surface" },
+  surface: { border: "border-border-subtle", surface: "bg-surface" },
+  overlay: { border: "border-border", surface: "bg-surface-elevated" },
+  modal: { border: "border-border", surface: "bg-surface-elevated" },
+};
+
 export function ElevationSamples() {
-  const pairing: Record<string, { border: string; surface: string }> = {
-    flat: { border: "border-border", surface: "bg-surface" },
-    surface: { border: "border-border-subtle", surface: "bg-surface" },
-    overlay: { border: "border-border", surface: "bg-surface-elevated" },
-    modal: { border: "border-border", surface: "bg-surface-elevated" },
-  };
+  const pairing = ELEVATION_PAIRING;
 
   return (
     <div className="not-prose grid gap-6 rounded-surface border border-border bg-background p-6 sm:grid-cols-4">

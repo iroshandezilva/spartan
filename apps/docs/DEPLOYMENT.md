@@ -99,7 +99,7 @@ Rules:
 
 | Name | Class | Purpose | Status |
 | --- | --- | --- | --- |
-| `NEXT_PUBLIC_SITE_URL` | Public build-time | Canonical origin for metadata, `sitemap.xml`, and Open Graph URLs | Set during HAUX-64 to the Vercel production URL |
+| `NEXT_PUBLIC_SITE_URL` | Public build-time | Canonical origin for metadata, `sitemap.xml`, Open Graph URLs, and the absolute links in `/llms.txt` and `/llms-full.txt`, which fall back to site-relative paths while it is unset | Set during HAUX-64 to the Vercel production URL |
 
 The documentation site is static content built from this repository. It needs no
 database, no API key, and no runtime secret. If that stops being true, the change

@@ -16,6 +16,8 @@ keywords:
   - Storybook
   - source paths
   - conventions
+  - source of truth
+  - stop conditions
 ---
 
 Spartant is built with coding agents as a first-class audience. This page is
@@ -26,12 +28,34 @@ and how it proves its work. Everything here is also true for a person.
 
 | Path | Holds |
 | --- | --- |
-| `/llms.txt` | An index of every published page, generated from the same page tree this site renders |
-| `/llms-full.txt` | Every page as one Markdown document, for an agent that would rather read the whole system than crawl it |
+| `/llms.txt` | The index: every published page with its description, grouped by section, preceded by the source-of-truth order, the stop conditions, the stable commands, and links to the repository files that have no page of their own |
+| `/llms-full.txt` | Every page as one Markdown document in navigation order, with the tables this site generates from the token JSON rendered as Markdown tables and the Storybook coverage tables included |
 
-Both are generated at build time from the content, so neither can fall behind
-the site. Individual pages can be read as rendered Markdown through those
-routes; there is no separate hand-maintained summary to drift.
+Both are generated at build time from the same page tree this site renders,
+so neither can fall behind the site, and the guidance below is printed from
+the same constants `/llms.txt` prints. Live interactive examples have no text
+form; the full text says so where each one sits. The prompt set that proves an
+agent can answer from these files alone is on
+[Agent evaluation](../contributing/agent-evaluation.mdx).
+
+## Source of truth
+
+When sources disagree, earlier wins:
+
+<AgentGuidance section="source-of-truth" />
+
+## Stop conditions
+
+Stop and ask for a decision when:
+
+<AgentGuidance section="stop-conditions" />
+
+Two of these come up most: a dependency, in particular an animation library,
+needs an issue-level justification covering behaviour, bundle impact, cleanup,
+server rendering, reduced motion, testing, and the consumer contract; and a
+task that conflicts with a settled decision on
+[Decision records](../contributing/decision-records.mdx) is reported, not
+resolved.
 
 ## What the package exports
 
@@ -57,20 +81,24 @@ under `dist/`, is internal and does not resolve.
 
 ## Where things live in the repository
 
+Source directories, relative to the repository root:
+
 | Path | Holds |
 | --- | --- |
-| `AGENTS.md` | The authoritative agent guide: source-of-truth order, boundaries, token rules, Storybook and documentation requirements, verification, the Linear workflow, the definition of done, and the completion report format |
-| `CLAUDE.md` | Repository state and day-one facts. It imports `AGENTS.md` and does not repeat it |
 | `packages/spartant/src/index.ts` | The public entry point. Every export passes through it |
-| `packages/spartant/src/components/` | Owned component source, one directory per family, with `INVENTORY.md`, `API-CONVENTIONS.md`, and `ADOPTING-SHADCN.md` beside them |
-| `packages/spartant/src/tokens/` | DTCG token sources under `primitive/`, `semantic/`, `component/`, and `theme/`, the generated outputs under `generated/`, and `README.md`, `COLOR.md`, `THEMES.md`, `FOUNDATIONS.md` |
+| `packages/spartant/src/components/` | Owned component source, one directory per family, each with a README |
+| `packages/spartant/src/tokens/` | DTCG token sources under `primitive/`, `semantic/`, `component/`, and `theme/`, and the generated outputs under `generated/` |
 | `packages/spartant/src/styles/` | `tokens.css` (generated), `theme.css` (the Tailwind mapping and the reduced-motion rule), `index.css` (the precompiled entry) |
 | `packages/spartant/src/theme/` | `ThemeProvider`, `useTheme`, `themeScript`, and the attribute constants |
-| `packages/spartant/VERSIONING.md` | The public surface, version rules, and the deprecation path |
-| `.claude/skills/spartant-component-builder/SKILL.md` | The repository's own component skill: build order, the frozen motion scale, a review mode, and the traps that cost time in the first slice |
-| `MANUAL-REVIEW.md` | The manual checklist for keyboard, focus, screen reader, motion, and real-device checks |
-| `apps/storybook/` | The component workbench and the exhaustive state surface |
-| `apps/docs/` | This site |
+| `apps/storybook/src/stories/` | One `<Name>.stories.tsx` per component family. Its `contract` object is the machine-readable accessibility, motion, and manual-check contract |
+| `apps/docs/content/docs/` | This site's pages |
+
+Repository files that hold rules rather than code. The pages under
+[Contributing](../contributing/repository-setup.mdx) and
+[Releases](../releases/changelog.mdx) point at these rather than restating
+them, so the file is always the current version:
+
+<AgentGuidance section="repository-files" />
 
 ## Stable commands
 
@@ -166,15 +194,15 @@ The headings and their expected contents are defined in `AGENTS.md`.
 
 ## Known gaps
 
-- `/llms.txt` exists and is generated, but its retrieval has not yet been
-  validated by asking an agent to answer setup, component, token, and testing
-  questions from the published documentation alone. That validation is its
-  own issue.
-- `/llms-full.txt` carries each page's prose and hand-written tables, but not
-  the tables and specimens that are generated from the token JSON at build
-  time, such as the export list above, the colour role tables, and the
-  contrast matrix. An agent that needs those values should read
-  `@iroshandezilva/spartant/tokens.json` directly, which is the same source.
+- The source-of-truth order and the stop conditions above are copied from
+  `AGENTS.md` into this site's source so the site can answer without a
+  checkout. `AGENTS.md` wins if they ever differ, and a change there is made
+  here in the same pull request.
+- `/llms-full.txt` renders the generated tables, but not the specimens that
+  only make sense drawn: the type specimens, the spacing bars, the radius
+  boxes, and the easing curve plots. The text says so where each sits and the
+  values are in the table beside it. An agent that wants the raw data reads
+  `@iroshandezilva/spartant/tokens.json`, which is the same source.
 - Component pages describe each component's public API prop by prop, its
   keyboard behaviour, its motion contract, and its token dependencies. The
   authoritative machine-readable form of the motion and accessibility

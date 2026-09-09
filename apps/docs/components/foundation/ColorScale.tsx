@@ -1,6 +1,6 @@
 import { primitiveTokens } from "@/lib/tokens";
 
-const FAMILIES = [
+export const FAMILIES = [
   "neutral",
   "primary",
   "secondary",
@@ -10,7 +10,7 @@ const FAMILIES = [
   "information",
 ] as const;
 
-const STEPS = [0, 50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950, 1000] as const;
+export const STEPS = [0, 50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950, 1000] as const;
 
 /**
  * The seven primitive families, thirteen steps each, from the published

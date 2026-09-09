@@ -15,7 +15,8 @@ interface TokenTableProps {
   px?: boolean;
 }
 
-function display(value: TokenValue): string {
+/** A token value as one string, whatever its shape. */
+export function display(value: TokenValue): string {
   if (typeof value === "string" || typeof value === "number") return String(value);
   if (isShadow(value)) return shadowToCss(value);
   if (isSpring(value)) {

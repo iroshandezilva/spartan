@@ -38,6 +38,10 @@ const PROVISIONAL_BECAUSE: Record<string, string> = {
     "No component moves anything spatially yet. The first slice used scale and colour throughout.",
 };
 
+interface MotionTableProps {
+  prefix: "duration" | "easing" | "distance" | "scale";
+}
+
 const USE: Record<string, string> = {
   "duration.press-feedback": "Pointer and touch press",
   "duration.state-change": "Hover, selection, small indicators",
@@ -60,16 +64,60 @@ const USE: Record<string, string> = {
   "scale.reduced": "Under reduced motion",
 };
 
-function Status({ path }: { path: string }) {
+/** The status column as text. Throws for a role in neither list, so a new
+ * token cannot appear on the page without a stated status. */
+export function motionStatus(path: string): string {
   const validated = VALIDATED_BY[path];
-  if (validated) return <span>Frozen. {validated}.</span>;
+  if (validated) return `Frozen. ${validated}.`;
   const why = PROVISIONAL_BECAUSE[path];
-  if (why) return <span>Provisional. {why}</span>;
+  if (why) return `Provisional. ${why}`;
   throw new Error(`${path} is in neither the frozen nor the provisional list`);
 }
 
-interface MotionTableProps {
-  prefix: "duration" | "easing" | "distance" | "scale";
+export interface MotionRow {
+  path: string;
+  value: string;
+  use: string;
+  variable: string;
+  status: string;
+}
+
+/** One motion category's rows, shared by the rendered table and its Markdown form. */
+export function motionRows(prefix: MotionTableProps["prefix"]): MotionRow[] {
+  return rolesUnder(prefix).map(({ path }) => ({
+    path,
+    value: scalar(path),
+    use: USE[path] ?? "",
+    variable: cssVariable(path),
+    status: motionStatus(path),
+  }));
+}
+
+export interface SpringRow {
+  name: string;
+  stiffness: number;
+  damping: number;
+  mass: number;
+  character: string;
+  status: string;
+}
+
+/** The spring rows, shared by the rendered table and its Markdown form. */
+export function springRows(): SpringRow[] {
+  return rolesUnder("spring").map(({ role, value }) => {
+    if (!isSpring(value)) throw new Error(`spring.${role} is not a spring`);
+    return {
+      name: role,
+      stiffness: value.stiffness,
+      damping: value.damping,
+      mass: value.mass,
+      character:
+        role === "state"
+          ? "Settles fast, essentially no overshoot"
+          : "Slight overshoot, longer settle",
+      status: "Provisional. No component needed spring physics; CSS covered every interaction.",
+    };
+  });
 }
 
 /** One motion category with its value, use, custom property, and status. */
@@ -86,21 +134,19 @@ export function MotionTable({ prefix }: MotionTableProps) {
         </tr>
       </thead>
       <tbody>
-        {rolesUnder(prefix).map(({ path }) => (
-          <tr key={path}>
+        {motionRows(prefix).map((row) => (
+          <tr key={row.path}>
             <td>
-              <code>{path}</code>
+              <code>{row.path}</code>
             </td>
             <td>
-              <code>{scalar(path)}</code>
+              <code>{row.value}</code>
             </td>
-            <td>{USE[path] ?? ""}</td>
+            <td>{row.use}</td>
             <td>
-              <code className="text-caption">{cssVariable(path)}</code>
+              <code className="text-caption">{row.variable}</code>
             </td>
-            <td>
-              <Status path={path} />
-            </td>
+            <td>{row.status}</td>
           </tr>
         ))}
       </tbody>
@@ -113,10 +159,6 @@ export function MotionTable({ prefix }: MotionTableProps) {
  * exports them as `springs`, generated from the same source.
  */
 export function SpringTable() {
-  const springs = rolesUnder("spring").map(({ role, value }) => {
-    if (!isSpring(value)) throw new Error(`spring.${role} is not a spring`);
-    return [role, value] as const;
-  });
   return (
     <table>
       <thead>
@@ -130,20 +172,16 @@ export function SpringTable() {
         </tr>
       </thead>
       <tbody>
-        {springs.map(([name, spring]) => (
-          <tr key={name}>
+        {springRows().map((spring) => (
+          <tr key={spring.name}>
             <td>
-              <code>springs.{name}</code>
+              <code>springs.{spring.name}</code>
             </td>
             <td>{spring.stiffness}</td>
             <td>{spring.damping}</td>
             <td>{spring.mass}</td>
-            <td>
-              {name === "state"
-                ? "Settles fast, essentially no overshoot"
-                : "Slight overshoot, longer settle"}
-            </td>
-            <td>Provisional. No component needed spring physics; CSS covered every interaction.</td>
+            <td>{spring.character}</td>
+            <td>{spring.status}</td>
           </tr>
         ))}
       </tbody>

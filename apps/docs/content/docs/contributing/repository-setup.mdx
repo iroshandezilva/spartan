@@ -1,0 +1,111 @@
+---
+title: Repository setup
+description: Clone, install with pnpm, run the full gate once, and know where requirements come from before changing anything.
+keywords:
+  - contributing
+  - setup
+  - clone
+  - pnpm install
+  - pnpm validate
+  - workspace
+  - monorepo
+  - Linear
+  - AGENTS.md
+  - CONTRIBUTING.md
+  - Node version
+---
+
+The repository is
+[github.com/iroshandezilva/spartan](https://github.com/iroshandezilva/spartan),
+a pnpm workspace whose production branch is `main`. The directory is named
+`spartan`; the system is named Spartant everywhere else, and that mismatch is
+recorded as accepted.
+
+The authoritative guide for anyone changing the repository, human or coding
+agent, is
+[`AGENTS.md`](https://github.com/iroshandezilva/spartan/blob/main/AGENTS.md)
+at its root. This page orients; it does not replace that file.
+
+## Requirements
+
+| Requirement | Value | Where it is pinned |
+| --- | --- | --- |
+| Node.js | `20.19.0` or newer to build the package; CI uses the version in `.node-version` | `engines` in `packages/spartant/package.json`, `.node-version` |
+| pnpm | The exact version in the root `packageManager` field, `pnpm@11.24.0` at the time of writing | `package.json` at the root. Corepack or a matching global install both work |
+| npm or yarn | Never. A `preinstall` guard fails the install | `scripts/check-package-manager.mjs` |
+
+## Install and prove the clone
+
+```bash
+git clone https://github.com/iroshandezilva/spartan.git
+cd spartan
+pnpm install --frozen-lockfile
+pnpm validate
+```
+
+`pnpm validate` is the full gate and takes a few minutes on a fresh clone,
+because several checks build the package first. Run it once before touching
+anything so that a failure later is yours. What it runs, in order, is on
+[Testing](./testing.mdx).
+
+## Workspace layout
+
+| Path | Holds |
+| --- | --- |
+| `packages/spartant` | `@iroshandezilva/spartant`, the only published artifact |
+| `apps/storybook` | The component workbench and the exhaustive state surface. `pnpm dev:storybook` |
+| `apps/docs` | This site. `pnpm dev:docs` |
+| `examples/consumer` | A minimal consumer that keeps the workspace boundaries verifiable |
+| `.changes/` | Pending release notes, one file per change |
+| `.github/` | CI, the release workflow, the pull request template, and the release and branch protection runbooks |
+
+Dependencies point inward, toward the package, through the `workspace:`
+protocol. The package never depends on an app or the example. Shared
+dependency versions live in the `catalog` in `pnpm-workspace.yaml`; a new
+shared dependency is added there, never inline. Do not add a top-level folder
+without an issue that approves it.
+
+## Where requirements come from
+
+Linear, not this site and not chat. Every change traces to an issue in the
+Spartant Design System project, and an issue's acceptance criteria and its
+attached specifications are what the work is judged against. Linear status is
+the source of truth for whether an issue may be worked on:
+
+| Status | Meaning for a contributor |
+| --- | --- |
+| `Ready to Start` | The only status work may start from. All blockers are `Done` |
+| `In Progress` | Move the issue here immediately before editing a file |
+| `Agent Done` | Everything an agent can do is done, but a decision, credential, account action, or manual check from Iroshan remains. Carries the `Human input required` label |
+| `Done` | Acceptance criteria and required verification are complete. An agent moves an issue straight here when nothing from Iroshan is required |
+
+The full transition list, the wave execution mode, and the definition of done
+are in `AGENTS.md`. The short orientation for people is
+[`.github/CONTRIBUTING.md`](https://github.com/iroshandezilva/spartan/blob/main/.github/CONTRIBUTING.md).
+
+## The loop
+
+1. Take a `Ready to Start` issue. Read it and every attached document.
+2. Move it to `In Progress`, then branch from `main`.
+3. Implement the smallest change that satisfies the acceptance criteria. Do
+   not expand scope; work outside the issue belongs in a new issue.
+4. Run `pnpm validate` and any check the issue names.
+5. Open a pull request with
+   [`.github/PULL_REQUEST_TEMPLATE.md`](https://github.com/iroshandezilva/spartan/blob/main/.github/PULL_REQUEST_TEMPLATE.md)
+   filled in honestly. `main` accepts pull requests only, and CI must pass.
+6. Post the completion report in the format `AGENTS.md` defines, then move
+   the issue to `Done` or `Agent Done`.
+
+## Two rules worth repeating
+
+- **Do not claim a check passed unless you ran it** and can show the output.
+- **No em dashes** anywhere in the repository's writing: code comments,
+  documentation, commit messages, and issue comments included.
+
+## Known gaps
+
+- `.github/CONTRIBUTING.md` says an agent moves a finished issue to
+  `Agent Done`, never `Done`. `AGENTS.md` and the agent implementation guide
+  say an agent moves it directly to `Done` when no action from Iroshan is
+  required. `AGENTS.md` is authoritative and this page follows it; the
+  orientation file is due a correction.

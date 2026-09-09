@@ -1,0 +1,80 @@
+---
+title: Decision records
+description: Where a decision is recorded, which decisions are settled, and how one is changed.
+keywords:
+  - decisions
+  - decision records
+  - ADR
+  - architecture
+  - Linear
+  - confirmed decisions
+  - HAUX-26
+  - inventory
+  - version policy
+  - visual regression
+  - re-litigate
+---
+
+Spartant does not keep a separate decision log. A decision is recorded where
+it is enforced, and the record says which Linear issue made it. Changing a
+decision is a new Linear decision issue, never a pull request that quietly
+does something else.
+
+## Where decisions live
+
+| Kind | Recorded in |
+| --- | --- |
+| Project-level | The Linear project documents linked from `AGENTS.md`: the project brief and v0.1 scope, the architecture and technology decisions, the token and colour specification, the component standard, the motion standard, the Storybook and quality strategy, the Fumadocs information architecture, the CI, workspace, registry, and Vercel plan, and the roadmap |
+| Confirmed release decisions | `CLAUDE.md` at the repository root, frozen in HAUX-26 |
+| Component inventory and API rules | [`INVENTORY.md`](https://github.com/iroshandezilva/spartan/blob/main/packages/spartant/src/components/INVENTORY.md) and [`API-CONVENTIONS.md`](https://github.com/iroshandezilva/spartan/blob/main/packages/spartant/src/components/API-CONVENTIONS.md), approved in HAUX-44 |
+| Token taxonomy, colour policy, themes, frozen motion scale | [`packages/spartant/src/tokens/`](https://github.com/iroshandezilva/spartan/tree/main/packages/spartant/src/tokens/): `README.md`, `COLOR.md`, `THEMES.md`, and `FOUNDATIONS.md`, the last frozen by HAUX-68 |
+| Public surface, version rules, deprecation | [`packages/spartant/VERSIONING.md`](https://github.com/iroshandezilva/spartan/blob/main/packages/spartant/VERSIONING.md), HAUX-61 |
+| Release notes tooling instead of Changesets | [`.changes/README.md`](https://github.com/iroshandezilva/spartan/blob/main/.changes/README.md) |
+| Trusted publishing and the release runbook | [`.github/RELEASE.md`](https://github.com/iroshandezilva/spartan/blob/main/.github/RELEASE.md), HAUX-60 |
+| Visual regression by static artifact | [`apps/storybook/VISUAL-REVIEW.md`](https://github.com/iroshandezilva/spartan/blob/main/apps/storybook/VISUAL-REVIEW.md), HAUX-42 |
+| Documentation hosting | [`apps/docs/DEPLOYMENT.md`](https://github.com/iroshandezilva/spartan/blob/main/apps/docs/DEPLOYMENT.md) |
+| Per-component decisions | The component's README beside its source, its story `contract`, and the Known limitations section of its page here |
+
+## Settled decisions
+
+Treat these as inputs. Changing one requires a Linear decision issue.
+
+- Package manager: pnpm. npm is allowed only for the final protected publish
+  command.
+- Package name `@iroshandezilva/spartant`, public, from a public repository,
+  with provenance.
+- Production branch `main`; pull requests only; CI must pass.
+- Styling: Tailwind CSS v4 with CSS custom properties as the semantic
+  boundary; OKLCH as the colour model; no SCSS; no StyleX before its own
+  experiment.
+- Components are owned source. shadcn is a source to adopt from, never a
+  runtime dependency. No primitive library's API in public props.
+- Motion: CSS first; Motion for React only with a justification issue; GSAP
+  only for separately approved choreography. Every component records a
+  motion purpose or a no-motion rationale.
+- Light and dark from one palette, switched by `data-theme`.
+- Visual regression in v0.1 by reading the static Storybook artifact.
+- Documentation on the default Vercel production URL; a custom domain is
+  deferred to HAUX-64.
+- The v0.1 inventory is the sixteen components in `INVENTORY.md`, add
+  nothing.
+
+## Changing a decision
+
+1. Open a Linear issue that states the decision, the options, and the
+   consequence for the public API, dependencies, accessibility, release
+   behaviour, or scope.
+2. When it is decided, update the file that records it and the Linear document
+   that states it in the same change, and reference the issue from both.
+3. If the change is visible to a consumer, it also carries a release note.
+
+An agent that finds a task in conflict with a settled decision stops and
+reports the conflict. That is one of the stop conditions on
+[Using with a coding agent](../start/coding-agents.mdx#stop-conditions).
+
+## Known gaps
+
+- Decisions before HAUX-26 are recorded in Linear only. The repository holds
+  their consequences, not their reasoning.
+- There is no index of decision issues. Searching the Linear project for
+  `Decide` or `Confirm` in the title finds them.

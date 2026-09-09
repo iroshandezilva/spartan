@@ -1,0 +1,13 @@
+{
+  "title": "Contributing",
+  "description": "How work enters the repository, how a component is built, what a change has to prove before it lands, and how the documentation is kept honest.",
+  "pages": [
+    "repository-setup",
+    "components",
+    "testing",
+    "documentation",
+    "release-process",
+    "decision-records",
+    "agent-evaluation"
+  ]
+}

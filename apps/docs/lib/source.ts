@@ -1,6 +1,7 @@
 import { loader } from "fumadocs-core/source";
 import { metaSchema, pageSchema } from "fumadocs-core/source/schema";
 import { defineDocs } from "fumadocs-mdx/macro";
+import type { MDXComponents } from "mdx/types";
 import { docsRoute } from "./shared";
 
 /*
@@ -21,8 +22,11 @@ const docs = defineDocs({
       keywords: pageSchema.shape.title.array().optional(),
     }),
     postprocess: {
-      /* Keeps the rendered Markdown available to the llms.txt routes. */
-      includeProcessedMarkdown: true,
+      /* Keeps the rendered Markdown available to the llms.txt routes. The
+       * function form keeps every JSX element with its real props, so the
+       * generated tables can be rendered into the text through the Markdown
+       * components in lib/llm-markdown.ts instead of being left as tags. */
+      includeProcessedMarkdown: { output: "function" },
     },
   },
   meta: {
@@ -37,10 +41,20 @@ export const source = loader({
 
 export type DocsPageData = (typeof source)["$inferPage"];
 
-/** One page rendered as plain Markdown, prefixed with its title and URL so a
- * coding agent reading the concatenated output can tell pages apart. */
-export async function getLLMText(page: DocsPageData): Promise<string> {
-  const processed = await page.data.getText("processed");
+/**
+ * One page rendered as plain Markdown, prefixed with its title and URL so a
+ * coding agent reading the concatenated output can tell pages apart.
+ *
+ * Links that the MDX writes as file paths, such as `../foundations/motion.mdx`,
+ * are resolved to the page URLs the site serves, the same way
+ * `createRelativeLink` resolves them on the rendered page. A text reader has
+ * no file system to resolve them against.
+ */
+export async function getLLMText(page: DocsPageData, components?: MDXComponents): Promise<string> {
+  const processed = await page.data.getText("processed", { components });
+  const resolved = processed.replace(/\]\((\.{1,2}\/[^)\s]+\.mdx(?:#[^)\s]*)?)\)/g, (_, href) => {
+    return `](${source.resolveHref(href, page)})`;
+  });
 
-  return `# ${page.data.title} (${page.url})\n\n${processed}`;
+  return `# ${page.data.title} (${page.url})\n\n${resolved}`;
 }
