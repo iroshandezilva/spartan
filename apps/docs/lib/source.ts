@@ -47,14 +47,19 @@ export type DocsPageData = (typeof source)["$inferPage"];
  *
  * Links that the MDX writes as file paths, such as `../foundations/motion.mdx`,
  * are resolved to the page URLs the site serves, the same way
- * `createRelativeLink` resolves them on the rendered page. A text reader has
- * no file system to resolve them against.
+ * `createRelativeLink` resolves them on the rendered page, and same-page
+ * fragment links gain their page. A text reader has no file system, and no
+ * current page, to resolve them against.
  */
 export async function getLLMText(page: DocsPageData, components?: MDXComponents): Promise<string> {
   const processed = await page.data.getText("processed", { components });
-  const resolved = processed.replace(/\]\((\.{1,2}\/[^)\s]+\.mdx(?:#[^)\s]*)?)\)/g, (_, href) => {
-    return `](${source.resolveHref(href, page)})`;
-  });
+  const resolved = processed
+    .replace(/\]\((\.{1,2}\/[^)\s]+\.mdx(?:#[^)\s]*)?)\)/g, (_, href) => {
+      return `](${source.resolveHref(href, page)})`;
+    })
+    /* A same-page fragment link, `[Anatomy](#anatomy)`, points nowhere once
+     * every page is one document. Prefix it with the page it belongs to. */
+    .replace(/\]\(#([^)\s]+)\)/g, (_, hash) => `](${page.url}#${hash})`);
 
   return `# ${page.data.title} (${page.url})\n\n${resolved}`;
 }

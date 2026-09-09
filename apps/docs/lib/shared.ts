@@ -1,3 +1,5 @@
+import type { Metadata } from "next";
+
 /** Values used by more than one route or layout. Kept in one place so the
  * navigation shell, metadata, and the machine-readable entry points cannot
  * disagree about what this site is called or where its content lives. */
@@ -22,17 +24,84 @@ export function repositoryFileUrl(path: string): string {
   return `${repositoryUrl}/${kind}/main/${path}`;
 }
 
-/**
- * The site's canonical origin, without a trailing slash, or an empty string
- * when it is not configured. It comes from `NEXT_PUBLIC_SITE_URL`, which
- * `DEPLOYMENT.md` records as the one required value and which HAUX-64 sets on
- * the production project. While it is empty, the machine-readable entry
- * points link pages by path, which is correct relative to wherever the file
- * was fetched from.
- */
-export const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL ?? "").replace(/\/+$/, "");
+/** Where `pnpm dev:docs` and `pnpm --filter spartant-docs start` serve the site. */
+const localOrigin = "http://localhost:3100";
 
-/** A site path as an absolute URL when the origin is known, else the path itself. */
+/**
+ * The origin the site is served from, when it is known, without a trailing
+ * slash. Resolved once, at build time, in this order:
+ *
+ * 1. `NEXT_PUBLIC_SITE_URL`, the one required value in `DEPLOYMENT.md`, set
+ *    on the production project by HAUX-64.
+ * 2. `VERCEL_PROJECT_PRODUCTION_URL`, which Vercel exposes to every build of
+ *    a project. Only the production branch builds, so it is the production
+ *    origin. It exists so a build never ships `localhost` in its sitemap
+ *    because a dashboard value was forgotten.
+ * 3. Nothing. A local build has no origin to claim.
+ */
+function configuredOrigin(): string {
+  const explicit = process.env.NEXT_PUBLIC_SITE_URL?.trim();
+  if (explicit) return explicit.replace(/\/+$/, "");
+
+  const vercel = process.env.VERCEL_PROJECT_PRODUCTION_URL?.trim();
+  if (vercel) return `https://${vercel.replace(/^https?:\/\//, "").replace(/\/+$/, "")}`;
+
+  return "";
+}
+
+/** The configured origin, or an empty string while none is configured. */
+export const siteOrigin = configuredOrigin();
+
+/**
+ * The origin used wherever a URL has to be absolute: `metadataBase`,
+ * `sitemap.xml`, `robots.txt`, and Open Graph. Falls back to the local
+ * development origin, which is right for a build that is only ever served
+ * locally and is visibly wrong, rather than subtly wrong, anywhere else.
+ */
+export const siteUrl = siteOrigin || localOrigin;
+
+/**
+ * A site path as an absolute URL when the origin is configured, else the path
+ * itself. Used by the machine-readable entry points, where a relative path is
+ * correct against wherever the file was fetched from and a guessed origin
+ * would not be.
+ */
 export function absoluteUrl(path: string): string {
-  return `${siteUrl}${path}`;
+  return `${siteOrigin}${path}`;
+}
+
+interface PageMetadataOptions {
+  title: string;
+  description: string;
+  /** Site-relative path, which becomes the canonical URL and the Open Graph URL. */
+  path: string;
+  type?: "website" | "article";
+}
+
+/**
+ * The per-page metadata every route declares the same way: title,
+ * description, canonical, and the Open Graph basics. Next merges `openGraph`
+ * by replacement rather than by field, so the whole object is built here to
+ * keep the site name and locale on every page.
+ */
+export function pageMetadata({
+  title,
+  description,
+  path,
+  type = "article",
+}: PageMetadataOptions): Metadata {
+  const fullTitle = title === siteName ? siteName : `${title} · ${siteName}`;
+  return {
+    title,
+    description,
+    alternates: { canonical: path },
+    openGraph: {
+      type,
+      siteName,
+      locale: "en",
+      title: fullTitle,
+      description,
+      url: path,
+    },
+  };
 }

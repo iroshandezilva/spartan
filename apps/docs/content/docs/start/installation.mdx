@@ -11,6 +11,8 @@ keywords:
   - "@source"
   - tailwind
   - peer dependency
+  - Cannot find module
+  - unstyled
   - react 19
   - next.js
   - use client
@@ -113,6 +115,11 @@ colour, with white text and 8px corners. Press and hold it with a pointer and
 it scales down slightly; release and it springs back. If it renders as an
 unstyled browser button, the stylesheet import is missing or the `@source`
 path is wrong.
+
+A `Cannot find module` error names a path the package does not publish. The
+only subpath exports are `styles.css`, `theme.css`, `tokens.json`, and
+`package.json`; every component and type comes from the package root, and
+nothing under `dist` can be imported directly.
 
 ## Server components
 

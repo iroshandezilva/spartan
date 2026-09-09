@@ -5,6 +5,10 @@
   "type": "module",
   "scripts": {
     "build": "next build",
+    "check:a11y": "node scripts/audit-a11y.mjs",
+    "check:links": "node scripts/crawl-links.mjs",
+    "check:search": "node scripts/evaluate-search.mjs",
+    "check:site": "node scripts/check-site.mjs",
     "clean": "rm -rf .next .source out next-env.d.ts tsconfig.tsbuildinfo",
     "dev": "next dev --port 3100",
     "start": "next start --port 3100",
@@ -25,6 +29,8 @@
     "@types/node": "catalog:",
     "@types/react": "catalog:",
     "@types/react-dom": "catalog:",
+    "axe-core": "catalog:",
+    "happy-dom": "catalog:",
     "postcss": "catalog:",
     "tailwindcss": "catalog:",
     "typescript": "catalog:"

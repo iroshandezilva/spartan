@@ -1,10 +1,21 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { ButtonRow } from "@/components/demo/ButtonRow";
-import { docsRoute, packageName, siteDescription, siteName } from "@/lib/shared";
+import { docsRoute, packageName, pageMetadata, siteDescription, siteName } from "@/lib/shared";
+
+export const metadata: Metadata = pageMetadata({
+  title: siteName,
+  description: siteDescription,
+  path: "/",
+  type: "website",
+});
 
 export default function HomePage() {
   return (
-    <main className="mx-auto flex w-full max-w-3xl flex-1 flex-col justify-center gap-8 px-6 py-16">
+    <div
+      id="content"
+      className="mx-auto flex w-full max-w-3xl flex-1 flex-col justify-center gap-8 px-6 py-16"
+    >
       <div className="flex flex-col gap-3">
         <h1 className="text-heading-large font-semibold tracking-heading text-foreground">
           {siteName}
@@ -27,6 +38,6 @@ export default function HomePage() {
         </Link>{" "}
         for installation, theming, and foundations.
       </p>
-    </main>
+    </div>
   );
 }

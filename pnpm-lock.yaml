@@ -190,6 +190,12 @@ importers:
       '@types/react-dom':
         specifier: 'catalog:'
         version: 19.2.7(@types/react@19.2.18)
+      axe-core:
+        specifier: 'catalog:'
+        version: 4.13.0
+      happy-dom:
+        specifier: 'catalog:'
+        version: 20.14.0
       postcss:
         specifier: 'catalog:'
         version: 8.5.28
