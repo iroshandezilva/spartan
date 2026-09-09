@@ -23,7 +23,7 @@ Individually:
 - `pnpm format:check` / `pnpm format` - Biome formatting, check or write.
 - `pnpm lint` / `pnpm lint:fix` - Biome lint, including accessibility and React hook rules.
 - `pnpm check` / `pnpm check:fix` - format, lint, and import sorting in one pass.
-- `pnpm typecheck` - `tsc -b` across project references, then the test files.
+- `pnpm typecheck` - builds the package, then `tsc -b` across project references, then the test files. The build comes first because `apps/docs` imports the package's published `tokens.json`, which exists only in `dist`; without it a fresh clone fails type checking while a machine that has ever built passes, which is exactly what happened on the first CI run.
 - `pnpm check:docs` - validates relative links in Markdown. External Linear links are shape-checked only, never fetched.
 - `pnpm check:tokens` - validates design token sources against the schema, checks alias resolution, layer rules, naming grammar and deprecation, then proves CSS, JSON and TypeScript emission.
 
@@ -89,7 +89,7 @@ Two consumer paths, both documented in `README.md`: import the precompiled `styl
 
 ## Git
 
-The working directory is still not a Git repository. There is no history, no remote, and no branch. Do not run `git init` or create a remote without being asked.
+The repository is `https://github.com/iroshandezilva/spartan`, public, with `main` as the production branch. A ruleset on `main` blocks direct pushes, force pushes, and deletion, requires a pull request with linear history, and requires the `validate` job to pass on an up-to-date branch. Every change reaches `main` through a pull request. The specification is `.github/BRANCH_PROTECTION.md`; the release path is `.github/RELEASE.md`.
 
 ## Work intake
 
