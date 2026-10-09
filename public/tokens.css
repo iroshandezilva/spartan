@@ -1,5 +1,5 @@
 /* Generated from tokens/source.json. Do not edit. */
-/* Mode attributes: data-sp-mode-primitives = Value; data-sp-mode-primary = Blue | Purple | Orange | Sky; data-sp-mode-semantic-color = Light | Dark | Light High Contrast | Dark High Contrast; data-sp-mode-semantic-foundation = Value; data-sp-mode-component = Value; data-sp-mode-density = Relaxed | Compact */
+/* Mode attributes: data-sp-mode-primitives = Value; data-sp-mode-primary = Blue | Purple | Orange | Sky; data-sp-mode-semantic-color = Light | Dark | Light High Contrast | Dark High Contrast; data-sp-mode-semantic-foundation = Value; data-sp-mode-component = Value; data-sp-mode-density = Relaxed | Compact; data-sp-mode-style = Atlas | Selene | Helios | Ares */
 /* Collections that feed each other (semantic-color <- primary) resolve per element: set their attributes on the same element. */
 :root {
   --sp-prim-border-width-thick: 2px;
@@ -192,9 +192,18 @@
   --sp-color-file-format-gray: var(--sp-prim-color-neutral-500);
   --sp-color-file-format-pink: var(--sp-prim-color-pink-500);
   --sp-color-file-format-yellow: var(--sp-prim-color-warning-400);
+  --sp-color-focus-ring-default: var(--sp-hue-color-primary-600);
   --sp-color-loading-black: var(--sp-prim-color-neutral-1000);
   --sp-color-loading-white: var(--sp-prim-color-neutral-0);
+  --sp-color-primary-active: var(--sp-hue-color-primary-800);
+  --sp-color-primary-default: var(--sp-hue-color-primary-600);
+  --sp-color-primary-hover: var(--sp-hue-color-primary-700);
+  --sp-color-primary-surface: var(--sp-hue-color-primary-100);
+  --sp-color-primary-text: var(--sp-hue-color-primary-700);
   --sp-color-shadow-control-ambient: color-mix(in srgb, var(--sp-prim-color-neutral-1000) var(--sp-opacity-4), transparent);
+  --sp-color-surface-selected: var(--sp-hue-color-primary-100);
+  --sp-color-style-primary-tonal-hover: var(--sp-hue-color-primary-200);
+  --sp-color-style-transparent: rgb(0 0 0 / 0);
   --sp-radius-control: var(--sp-prim-radius-md);
   --sp-radius-surface: var(--sp-prim-radius-lg);
   --sp-radius-pill: var(--sp-prim-radius-full);
@@ -326,6 +335,37 @@
   --sp-density-drawer-width-medium: var(--sp-prim-size-640);
   --sp-density-drawer-width-large: var(--sp-prim-size-860);
   --sp-density-control-radius-large: var(--sp-radius-control);
+  --sp-style-button-danger-subtle-border-default: var(--sp-color-style-transparent);
+  --sp-style-button-danger-subtle-border-hover: var(--sp-color-style-transparent);
+  --sp-style-button-danger-subtle-border-pressed: var(--sp-color-style-transparent);
+  --sp-style-button-danger-border-default: var(--sp-color-style-transparent);
+  --sp-style-button-danger-border-hover: var(--sp-color-style-transparent);
+  --sp-style-button-danger-border-pressed: var(--sp-color-style-transparent);
+  --sp-style-button-ghost-background-default: var(--sp-color-style-transparent);
+  --sp-style-button-ghost-border-default: var(--sp-color-style-transparent);
+  --sp-style-button-ghost-border-hover: var(--sp-color-style-transparent);
+  --sp-style-button-ghost-border-pressed: var(--sp-color-style-transparent);
+  --sp-style-button-primary-border-default: var(--sp-color-style-transparent);
+  --sp-style-button-primary-border-hover: var(--sp-color-style-transparent);
+  --sp-style-button-primary-border-pressed: var(--sp-color-style-transparent);
+  --sp-style-button-secondary-background-default: var(--sp-color-secondary-default);
+  --sp-style-button-secondary-border-default: var(--sp-color-border-default);
+  --sp-style-button-secondary-border-hover: var(--sp-color-border-strong);
+  --sp-style-button-secondary-border-pressed: var(--sp-color-border-strong);
+  --sp-style-button-warning-border-default: var(--sp-color-style-transparent);
+  --sp-style-button-warning-border-hover: var(--sp-color-style-transparent);
+  --sp-style-button-warning-border-pressed: var(--sp-color-style-transparent);
+  --sp-style-field-background-default: var(--sp-color-surface-default);
+  --sp-style-field-background-hover: var(--sp-color-secondary-hover);
+  --sp-style-field-border-width: var(--sp-border-width-default);
+  --sp-style-field-border-default: var(--sp-color-border-default);
+  --sp-style-field-border-hover: var(--sp-color-border-strong);
+  --sp-style-field-shadow: var(--sp-color-style-transparent);
+  --sp-style-field-side-width: var(--sp-border-width-default);
+  --sp-style-field-side-width-error: var(--sp-border-width-emphasis);
+  --sp-style-shadow-control-ambient: var(--sp-color-style-transparent);
+  --sp-style-shadow-control-edge: var(--sp-color-style-transparent);
+  --sp-style-shadow-control-raised: var(--sp-color-style-transparent);
 }
 
 :root,
@@ -342,13 +382,10 @@
   --sp-hue-color-primary-800: rgb(0 58 114 / 1);
   --sp-hue-color-primary-900: rgb(0 33 70 / 1);
   --sp-hue-color-primary-950: rgb(0 19 46 / 1);
-  --sp-color-focus-ring-default: var(--sp-hue-color-primary-600);
-  --sp-color-primary-active: var(--sp-hue-color-primary-800);
-  --sp-color-primary-default: var(--sp-hue-color-primary-600);
-  --sp-color-primary-hover: var(--sp-hue-color-primary-700);
-  --sp-color-primary-surface: var(--sp-hue-color-primary-100);
-  --sp-color-primary-text: var(--sp-hue-color-primary-700);
-  --sp-color-surface-selected: var(--sp-hue-color-primary-100);
+  --sp-style-button-primary-background-default: var(--sp-color-primary-default);
+  --sp-style-button-primary-background-hover: var(--sp-color-primary-hover);
+  --sp-style-button-primary-background-pressed: var(--sp-color-primary-active);
+  --sp-style-field-border-focus: var(--sp-color-focus-ring-default);
 }
 
 [data-sp-mode-primary="Purple"] {
@@ -371,6 +408,12 @@
   --sp-color-primary-surface: var(--sp-hue-color-primary-100);
   --sp-color-primary-text: var(--sp-hue-color-primary-700);
   --sp-color-surface-selected: var(--sp-hue-color-primary-100);
+  --sp-color-style-primary-tonal-hover: var(--sp-hue-color-primary-200);
+  --sp-style-button-primary-background-default: var(--sp-color-primary-default);
+  --sp-style-button-primary-background-hover: var(--sp-color-primary-hover);
+  --sp-style-button-primary-background-pressed: var(--sp-color-primary-active);
+  --sp-style-field-border-focus: var(--sp-color-focus-ring-default);
+  --sp-style-field-border-hover: var(--sp-color-border-strong);
 }
 
 [data-sp-mode-primary="Orange"] {
@@ -393,6 +436,12 @@
   --sp-color-primary-surface: var(--sp-hue-color-primary-100);
   --sp-color-primary-text: var(--sp-hue-color-primary-700);
   --sp-color-surface-selected: var(--sp-hue-color-primary-100);
+  --sp-color-style-primary-tonal-hover: var(--sp-hue-color-primary-200);
+  --sp-style-button-primary-background-default: var(--sp-color-primary-default);
+  --sp-style-button-primary-background-hover: var(--sp-color-primary-hover);
+  --sp-style-button-primary-background-pressed: var(--sp-color-primary-active);
+  --sp-style-field-border-focus: var(--sp-color-focus-ring-default);
+  --sp-style-field-border-hover: var(--sp-color-border-strong);
 }
 
 [data-sp-mode-primary="Sky"] {
@@ -415,6 +464,12 @@
   --sp-color-primary-surface: var(--sp-hue-color-primary-100);
   --sp-color-primary-text: var(--sp-hue-color-primary-700);
   --sp-color-surface-selected: var(--sp-hue-color-primary-100);
+  --sp-color-style-primary-tonal-hover: var(--sp-hue-color-primary-200);
+  --sp-style-button-primary-background-default: var(--sp-color-primary-default);
+  --sp-style-button-primary-background-hover: var(--sp-color-primary-hover);
+  --sp-style-button-primary-background-pressed: var(--sp-color-primary-active);
+  --sp-style-field-border-focus: var(--sp-color-focus-ring-default);
+  --sp-style-field-border-hover: var(--sp-color-border-strong);
 }
 
 :root,
@@ -482,8 +537,53 @@
   --sp-color-warning-text: var(--sp-prim-color-warning-700);
   --sp-contrast-border-width-default: 1px;
   --sp-contrast-border-width-emphasis: 2px;
+  --sp-color-style-danger-tonal-hover: var(--sp-prim-color-danger-200);
+  --sp-color-style-field-soft-border: var(--sp-color-style-transparent);
+  --sp-color-style-warning-tonal-hover: var(--sp-prim-color-warning-200);
   --sp-border-width-default: var(--sp-contrast-border-width-default);
   --sp-border-width-emphasis: var(--sp-contrast-border-width-emphasis);
+  --sp-style-button-border-width: var(--sp-border-width-default);
+  --sp-style-button-danger-subtle-background-default: var(--sp-color-danger-subtle-default);
+  --sp-style-button-danger-subtle-background-hover: var(--sp-color-danger-subtle-hover);
+  --sp-style-button-danger-subtle-background-pressed: var(--sp-color-danger-subtle-active);
+  --sp-style-button-danger-subtle-foreground-default: var(--sp-color-danger-text);
+  --sp-style-button-danger-subtle-foreground-hover: var(--sp-color-danger-text);
+  --sp-style-button-danger-subtle-foreground-pressed: var(--sp-color-danger-text);
+  --sp-style-button-danger-background-default: var(--sp-color-danger-default);
+  --sp-style-button-danger-background-hover: var(--sp-color-danger-hover);
+  --sp-style-button-danger-background-pressed: var(--sp-color-danger-active);
+  --sp-style-button-danger-foreground-default: var(--sp-color-danger-foreground);
+  --sp-style-button-danger-foreground-hover: var(--sp-color-danger-foreground);
+  --sp-style-button-danger-foreground-pressed: var(--sp-color-danger-foreground);
+  --sp-style-button-dashed-background-default: var(--sp-color-dashed-default);
+  --sp-style-button-dashed-background-hover: var(--sp-color-dashed-hover);
+  --sp-style-button-dashed-background-pressed: var(--sp-color-dashed-active);
+  --sp-style-button-dashed-border-default: var(--sp-color-dashed-border);
+  --sp-style-button-dashed-border-hover: var(--sp-color-dashed-border);
+  --sp-style-button-dashed-border-pressed: var(--sp-color-dashed-border);
+  --sp-style-button-dashed-foreground-default: var(--sp-color-secondary-foreground);
+  --sp-style-button-dashed-foreground-hover: var(--sp-color-secondary-foreground);
+  --sp-style-button-dashed-foreground-pressed: var(--sp-color-secondary-foreground);
+  --sp-style-button-ghost-background-hover: var(--sp-color-secondary-hover);
+  --sp-style-button-ghost-background-pressed: var(--sp-color-secondary-active);
+  --sp-style-button-ghost-foreground-default: var(--sp-color-foreground-default);
+  --sp-style-button-ghost-foreground-hover: var(--sp-color-foreground-default);
+  --sp-style-button-ghost-foreground-pressed: var(--sp-color-foreground-default);
+  --sp-style-button-primary-foreground-default: var(--sp-color-primary-foreground);
+  --sp-style-button-primary-foreground-hover: var(--sp-color-primary-foreground);
+  --sp-style-button-primary-foreground-pressed: var(--sp-color-primary-foreground);
+  --sp-style-button-secondary-background-hover: var(--sp-color-secondary-hover);
+  --sp-style-button-secondary-background-pressed: var(--sp-color-secondary-active);
+  --sp-style-button-secondary-foreground-default: var(--sp-color-secondary-foreground);
+  --sp-style-button-secondary-foreground-hover: var(--sp-color-secondary-foreground);
+  --sp-style-button-secondary-foreground-pressed: var(--sp-color-secondary-foreground);
+  --sp-style-button-warning-background-default: var(--sp-color-warning-default);
+  --sp-style-button-warning-background-hover: var(--sp-color-warning-hover);
+  --sp-style-button-warning-background-pressed: var(--sp-color-warning-active);
+  --sp-style-button-warning-foreground-default: var(--sp-color-warning-foreground);
+  --sp-style-button-warning-foreground-hover: var(--sp-color-warning-foreground);
+  --sp-style-button-warning-foreground-pressed: var(--sp-color-warning-foreground);
+  --sp-style-field-border-error: var(--sp-color-danger-default);
 }
 
 [data-sp-mode-semantic-color="Dark"] {
@@ -514,7 +614,6 @@
   --sp-color-dashed-border: color-mix(in srgb, var(--sp-prim-color-neutral-0) var(--sp-opacity-6), transparent);
   --sp-color-dashed-default: color-mix(in srgb, var(--sp-prim-color-neutral-0) var(--sp-opacity-2), transparent);
   --sp-color-dashed-hover: color-mix(in srgb, var(--sp-prim-color-neutral-0) var(--sp-opacity-6), transparent);
-  --sp-color-focus-ring-default: var(--sp-hue-color-primary-400);
   --sp-color-foreground-default: var(--sp-prim-color-neutral-50);
   --sp-color-foreground-disabled: var(--sp-prim-color-neutral-600);
   --sp-color-foreground-inverse: var(--sp-prim-color-neutral-1000);
@@ -523,12 +622,7 @@
   --sp-color-information-foreground: var(--sp-prim-color-neutral-0);
   --sp-color-information-surface: var(--sp-prim-color-information-950);
   --sp-color-information-text: var(--sp-prim-color-information-300);
-  --sp-color-primary-active: var(--sp-hue-color-primary-800);
-  --sp-color-primary-default: var(--sp-hue-color-primary-600);
   --sp-color-primary-foreground: var(--sp-prim-color-neutral-0);
-  --sp-color-primary-hover: var(--sp-hue-color-primary-700);
-  --sp-color-primary-surface: var(--sp-hue-color-primary-950);
-  --sp-color-primary-text: var(--sp-hue-color-primary-300);
   --sp-color-secondary-active: var(--sp-prim-color-neutral-700);
   --sp-color-secondary-default: var(--sp-prim-color-neutral-900);
   --sp-color-secondary-foreground: var(--sp-prim-color-neutral-50);
@@ -545,7 +639,6 @@
   --sp-color-surface-elevated: var(--sp-prim-color-neutral-900);
   --sp-color-surface-faint: color-mix(in srgb, var(--sp-prim-color-neutral-950) var(--sp-opacity-50), transparent);
   --sp-color-surface-muted: var(--sp-prim-color-neutral-900);
-  --sp-color-surface-selected: var(--sp-hue-color-primary-800);
   --sp-color-surface-subtle: var(--sp-prim-color-neutral-950);
   --sp-color-switch-thumb: var(--sp-prim-color-neutral-50);
   --sp-color-warning-active: var(--sp-prim-color-yellow-500);
@@ -557,8 +650,69 @@
   --sp-color-warning-text: var(--sp-prim-color-warning-300);
   --sp-contrast-border-width-default: 1px;
   --sp-contrast-border-width-emphasis: 2px;
+  --sp-color-style-danger-tonal-hover: var(--sp-prim-color-danger-900);
+  --sp-color-style-field-soft-border: var(--sp-color-style-transparent);
+  --sp-color-style-warning-tonal-hover: var(--sp-prim-color-warning-900);
   --sp-border-width-default: var(--sp-contrast-border-width-default);
   --sp-border-width-emphasis: var(--sp-contrast-border-width-emphasis);
+  --sp-style-button-border-width: var(--sp-border-width-default);
+  --sp-style-button-danger-subtle-background-default: var(--sp-color-danger-subtle-default);
+  --sp-style-button-danger-subtle-background-hover: var(--sp-color-danger-subtle-hover);
+  --sp-style-button-danger-subtle-background-pressed: var(--sp-color-danger-subtle-active);
+  --sp-style-button-danger-subtle-foreground-default: var(--sp-color-danger-text);
+  --sp-style-button-danger-subtle-foreground-hover: var(--sp-color-danger-text);
+  --sp-style-button-danger-subtle-foreground-pressed: var(--sp-color-danger-text);
+  --sp-style-button-danger-background-default: var(--sp-color-danger-default);
+  --sp-style-button-danger-background-hover: var(--sp-color-danger-hover);
+  --sp-style-button-danger-background-pressed: var(--sp-color-danger-active);
+  --sp-style-button-danger-foreground-default: var(--sp-color-danger-foreground);
+  --sp-style-button-danger-foreground-hover: var(--sp-color-danger-foreground);
+  --sp-style-button-danger-foreground-pressed: var(--sp-color-danger-foreground);
+  --sp-style-button-dashed-background-default: var(--sp-color-dashed-default);
+  --sp-style-button-dashed-background-hover: var(--sp-color-dashed-hover);
+  --sp-style-button-dashed-background-pressed: var(--sp-color-dashed-active);
+  --sp-style-button-dashed-border-default: var(--sp-color-dashed-border);
+  --sp-style-button-dashed-border-hover: var(--sp-color-dashed-border);
+  --sp-style-button-dashed-border-pressed: var(--sp-color-dashed-border);
+  --sp-style-button-dashed-foreground-default: var(--sp-color-secondary-foreground);
+  --sp-style-button-dashed-foreground-hover: var(--sp-color-secondary-foreground);
+  --sp-style-button-dashed-foreground-pressed: var(--sp-color-secondary-foreground);
+  --sp-style-button-ghost-background-hover: var(--sp-color-secondary-hover);
+  --sp-style-button-ghost-background-pressed: var(--sp-color-secondary-active);
+  --sp-style-button-ghost-foreground-default: var(--sp-color-foreground-default);
+  --sp-style-button-ghost-foreground-hover: var(--sp-color-foreground-default);
+  --sp-style-button-ghost-foreground-pressed: var(--sp-color-foreground-default);
+  --sp-style-button-primary-background-default: var(--sp-color-primary-default);
+  --sp-style-button-primary-background-hover: var(--sp-color-primary-hover);
+  --sp-style-button-primary-background-pressed: var(--sp-color-primary-active);
+  --sp-style-button-primary-foreground-default: var(--sp-color-primary-foreground);
+  --sp-style-button-primary-foreground-hover: var(--sp-color-primary-foreground);
+  --sp-style-button-primary-foreground-pressed: var(--sp-color-primary-foreground);
+  --sp-style-button-secondary-background-default: var(--sp-color-secondary-default);
+  --sp-style-button-secondary-background-hover: var(--sp-color-secondary-hover);
+  --sp-style-button-secondary-background-pressed: var(--sp-color-secondary-active);
+  --sp-style-button-secondary-border-default: var(--sp-color-border-default);
+  --sp-style-button-secondary-border-hover: var(--sp-color-border-strong);
+  --sp-style-button-secondary-border-pressed: var(--sp-color-border-strong);
+  --sp-style-button-secondary-foreground-default: var(--sp-color-secondary-foreground);
+  --sp-style-button-secondary-foreground-hover: var(--sp-color-secondary-foreground);
+  --sp-style-button-secondary-foreground-pressed: var(--sp-color-secondary-foreground);
+  --sp-style-button-warning-background-default: var(--sp-color-warning-default);
+  --sp-style-button-warning-background-hover: var(--sp-color-warning-hover);
+  --sp-style-button-warning-background-pressed: var(--sp-color-warning-active);
+  --sp-style-button-warning-foreground-default: var(--sp-color-warning-foreground);
+  --sp-style-button-warning-foreground-hover: var(--sp-color-warning-foreground);
+  --sp-style-button-warning-foreground-pressed: var(--sp-color-warning-foreground);
+  --sp-style-field-background-default: var(--sp-color-surface-default);
+  --sp-style-field-background-hover: var(--sp-color-secondary-hover);
+  --sp-style-field-border-width: var(--sp-border-width-default);
+  --sp-style-field-border-default: var(--sp-color-border-default);
+  --sp-style-field-border-error: var(--sp-color-danger-default);
+  --sp-style-field-border-focus: var(--sp-color-focus-ring-default);
+  --sp-style-field-border-hover: var(--sp-color-border-strong);
+  --sp-style-field-shadow: var(--sp-color-style-transparent);
+  --sp-style-field-side-width: var(--sp-border-width-default);
+  --sp-style-field-side-width-error: var(--sp-border-width-emphasis);
 }
 
 [data-sp-mode-semantic-color="Light High Contrast"] {
@@ -589,7 +743,6 @@
   --sp-color-dashed-border: color-mix(in srgb, var(--sp-prim-color-neutral-1000) var(--sp-opacity-6), transparent);
   --sp-color-dashed-default: color-mix(in srgb, var(--sp-prim-color-neutral-1000) var(--sp-opacity-2), transparent);
   --sp-color-dashed-hover: color-mix(in srgb, var(--sp-prim-color-neutral-1000) var(--sp-opacity-6), transparent);
-  --sp-color-focus-ring-default: var(--sp-hue-color-primary-700);
   --sp-color-foreground-default: var(--sp-prim-color-neutral-1000);
   --sp-color-foreground-disabled: var(--sp-prim-color-neutral-700);
   --sp-color-foreground-inverse: var(--sp-prim-color-neutral-0);
@@ -598,12 +751,7 @@
   --sp-color-information-foreground: var(--sp-prim-color-neutral-0);
   --sp-color-information-surface: var(--sp-prim-color-information-100);
   --sp-color-information-text: var(--sp-prim-color-information-800);
-  --sp-color-primary-active: var(--sp-hue-color-primary-950);
-  --sp-color-primary-default: var(--sp-hue-color-primary-800);
   --sp-color-primary-foreground: var(--sp-prim-color-neutral-0);
-  --sp-color-primary-hover: var(--sp-hue-color-primary-900);
-  --sp-color-primary-surface: var(--sp-hue-color-primary-100);
-  --sp-color-primary-text: var(--sp-hue-color-primary-800);
   --sp-color-secondary-active: var(--sp-prim-color-neutral-200);
   --sp-color-secondary-default: var(--sp-prim-color-neutral-0);
   --sp-color-secondary-foreground: var(--sp-prim-color-neutral-1000);
@@ -620,7 +768,6 @@
   --sp-color-surface-elevated: var(--sp-prim-color-neutral-0);
   --sp-color-surface-faint: color-mix(in srgb, var(--sp-prim-color-neutral-50) var(--sp-opacity-50), transparent);
   --sp-color-surface-muted: var(--sp-prim-color-neutral-50);
-  --sp-color-surface-selected: var(--sp-hue-color-primary-100);
   --sp-color-surface-subtle: var(--sp-prim-color-neutral-100);
   --sp-color-switch-thumb: var(--sp-prim-color-neutral-0);
   --sp-color-warning-active: var(--sp-prim-color-warning-950);
@@ -632,8 +779,69 @@
   --sp-color-warning-text: var(--sp-prim-color-warning-800);
   --sp-contrast-border-width-default: 2px;
   --sp-contrast-border-width-emphasis: 3px;
+  --sp-color-style-danger-tonal-hover: var(--sp-prim-color-danger-200);
+  --sp-color-style-field-soft-border: var(--sp-color-border-default);
+  --sp-color-style-warning-tonal-hover: var(--sp-prim-color-warning-200);
   --sp-border-width-default: var(--sp-contrast-border-width-default);
   --sp-border-width-emphasis: var(--sp-contrast-border-width-emphasis);
+  --sp-style-button-border-width: var(--sp-border-width-default);
+  --sp-style-button-danger-subtle-background-default: var(--sp-color-danger-subtle-default);
+  --sp-style-button-danger-subtle-background-hover: var(--sp-color-danger-subtle-hover);
+  --sp-style-button-danger-subtle-background-pressed: var(--sp-color-danger-subtle-active);
+  --sp-style-button-danger-subtle-foreground-default: var(--sp-color-danger-text);
+  --sp-style-button-danger-subtle-foreground-hover: var(--sp-color-danger-text);
+  --sp-style-button-danger-subtle-foreground-pressed: var(--sp-color-danger-text);
+  --sp-style-button-danger-background-default: var(--sp-color-danger-default);
+  --sp-style-button-danger-background-hover: var(--sp-color-danger-hover);
+  --sp-style-button-danger-background-pressed: var(--sp-color-danger-active);
+  --sp-style-button-danger-foreground-default: var(--sp-color-danger-foreground);
+  --sp-style-button-danger-foreground-hover: var(--sp-color-danger-foreground);
+  --sp-style-button-danger-foreground-pressed: var(--sp-color-danger-foreground);
+  --sp-style-button-dashed-background-default: var(--sp-color-dashed-default);
+  --sp-style-button-dashed-background-hover: var(--sp-color-dashed-hover);
+  --sp-style-button-dashed-background-pressed: var(--sp-color-dashed-active);
+  --sp-style-button-dashed-border-default: var(--sp-color-dashed-border);
+  --sp-style-button-dashed-border-hover: var(--sp-color-dashed-border);
+  --sp-style-button-dashed-border-pressed: var(--sp-color-dashed-border);
+  --sp-style-button-dashed-foreground-default: var(--sp-color-secondary-foreground);
+  --sp-style-button-dashed-foreground-hover: var(--sp-color-secondary-foreground);
+  --sp-style-button-dashed-foreground-pressed: var(--sp-color-secondary-foreground);
+  --sp-style-button-ghost-background-hover: var(--sp-color-secondary-hover);
+  --sp-style-button-ghost-background-pressed: var(--sp-color-secondary-active);
+  --sp-style-button-ghost-foreground-default: var(--sp-color-foreground-default);
+  --sp-style-button-ghost-foreground-hover: var(--sp-color-foreground-default);
+  --sp-style-button-ghost-foreground-pressed: var(--sp-color-foreground-default);
+  --sp-style-button-primary-background-default: var(--sp-color-primary-default);
+  --sp-style-button-primary-background-hover: var(--sp-color-primary-hover);
+  --sp-style-button-primary-background-pressed: var(--sp-color-primary-active);
+  --sp-style-button-primary-foreground-default: var(--sp-color-primary-foreground);
+  --sp-style-button-primary-foreground-hover: var(--sp-color-primary-foreground);
+  --sp-style-button-primary-foreground-pressed: var(--sp-color-primary-foreground);
+  --sp-style-button-secondary-background-default: var(--sp-color-secondary-default);
+  --sp-style-button-secondary-background-hover: var(--sp-color-secondary-hover);
+  --sp-style-button-secondary-background-pressed: var(--sp-color-secondary-active);
+  --sp-style-button-secondary-border-default: var(--sp-color-border-default);
+  --sp-style-button-secondary-border-hover: var(--sp-color-border-strong);
+  --sp-style-button-secondary-border-pressed: var(--sp-color-border-strong);
+  --sp-style-button-secondary-foreground-default: var(--sp-color-secondary-foreground);
+  --sp-style-button-secondary-foreground-hover: var(--sp-color-secondary-foreground);
+  --sp-style-button-secondary-foreground-pressed: var(--sp-color-secondary-foreground);
+  --sp-style-button-warning-background-default: var(--sp-color-warning-default);
+  --sp-style-button-warning-background-hover: var(--sp-color-warning-hover);
+  --sp-style-button-warning-background-pressed: var(--sp-color-warning-active);
+  --sp-style-button-warning-foreground-default: var(--sp-color-warning-foreground);
+  --sp-style-button-warning-foreground-hover: var(--sp-color-warning-foreground);
+  --sp-style-button-warning-foreground-pressed: var(--sp-color-warning-foreground);
+  --sp-style-field-background-default: var(--sp-color-surface-default);
+  --sp-style-field-background-hover: var(--sp-color-secondary-hover);
+  --sp-style-field-border-width: var(--sp-border-width-default);
+  --sp-style-field-border-default: var(--sp-color-border-default);
+  --sp-style-field-border-error: var(--sp-color-danger-default);
+  --sp-style-field-border-focus: var(--sp-color-focus-ring-default);
+  --sp-style-field-border-hover: var(--sp-color-border-strong);
+  --sp-style-field-shadow: var(--sp-color-style-transparent);
+  --sp-style-field-side-width: var(--sp-border-width-default);
+  --sp-style-field-side-width-error: var(--sp-border-width-emphasis);
 }
 
 [data-sp-mode-semantic-color="Dark High Contrast"] {
@@ -664,7 +872,6 @@
   --sp-color-dashed-border: color-mix(in srgb, var(--sp-prim-color-neutral-0) var(--sp-opacity-6), transparent);
   --sp-color-dashed-default: color-mix(in srgb, var(--sp-prim-color-neutral-0) var(--sp-opacity-2), transparent);
   --sp-color-dashed-hover: color-mix(in srgb, var(--sp-prim-color-neutral-0) var(--sp-opacity-6), transparent);
-  --sp-color-focus-ring-default: var(--sp-hue-color-primary-300);
   --sp-color-foreground-default: var(--sp-prim-color-neutral-0);
   --sp-color-foreground-disabled: var(--sp-prim-color-neutral-300);
   --sp-color-foreground-inverse: var(--sp-prim-color-neutral-1000);
@@ -673,12 +880,7 @@
   --sp-color-information-foreground: var(--sp-prim-color-neutral-1000);
   --sp-color-information-surface: var(--sp-prim-color-information-900);
   --sp-color-information-text: var(--sp-prim-color-information-200);
-  --sp-color-primary-active: var(--sp-hue-color-primary-100);
-  --sp-color-primary-default: var(--sp-hue-color-primary-300);
   --sp-color-primary-foreground: var(--sp-prim-color-neutral-1000);
-  --sp-color-primary-hover: var(--sp-hue-color-primary-200);
-  --sp-color-primary-surface: var(--sp-hue-color-primary-900);
-  --sp-color-primary-text: var(--sp-hue-color-primary-200);
   --sp-color-secondary-active: var(--sp-prim-color-neutral-700);
   --sp-color-secondary-default: var(--sp-prim-color-neutral-900);
   --sp-color-secondary-foreground: var(--sp-prim-color-neutral-0);
@@ -695,7 +897,6 @@
   --sp-color-surface-elevated: var(--sp-prim-color-neutral-950);
   --sp-color-surface-faint: color-mix(in srgb, var(--sp-prim-color-neutral-950) var(--sp-opacity-50), transparent);
   --sp-color-surface-muted: var(--sp-prim-color-neutral-900);
-  --sp-color-surface-selected: var(--sp-hue-color-primary-900);
   --sp-color-surface-subtle: var(--sp-prim-color-neutral-950);
   --sp-color-switch-thumb: var(--sp-prim-color-neutral-50);
   --sp-color-warning-active: var(--sp-prim-color-warning-100);
@@ -707,11 +908,72 @@
   --sp-color-warning-text: var(--sp-prim-color-warning-200);
   --sp-contrast-border-width-default: 2px;
   --sp-contrast-border-width-emphasis: 3px;
+  --sp-color-style-danger-tonal-hover: var(--sp-prim-color-danger-900);
+  --sp-color-style-field-soft-border: var(--sp-color-border-default);
+  --sp-color-style-warning-tonal-hover: var(--sp-prim-color-warning-900);
   --sp-border-width-default: var(--sp-contrast-border-width-default);
   --sp-border-width-emphasis: var(--sp-contrast-border-width-emphasis);
+  --sp-style-button-border-width: var(--sp-border-width-default);
+  --sp-style-button-danger-subtle-background-default: var(--sp-color-danger-subtle-default);
+  --sp-style-button-danger-subtle-background-hover: var(--sp-color-danger-subtle-hover);
+  --sp-style-button-danger-subtle-background-pressed: var(--sp-color-danger-subtle-active);
+  --sp-style-button-danger-subtle-foreground-default: var(--sp-color-danger-text);
+  --sp-style-button-danger-subtle-foreground-hover: var(--sp-color-danger-text);
+  --sp-style-button-danger-subtle-foreground-pressed: var(--sp-color-danger-text);
+  --sp-style-button-danger-background-default: var(--sp-color-danger-default);
+  --sp-style-button-danger-background-hover: var(--sp-color-danger-hover);
+  --sp-style-button-danger-background-pressed: var(--sp-color-danger-active);
+  --sp-style-button-danger-foreground-default: var(--sp-color-danger-foreground);
+  --sp-style-button-danger-foreground-hover: var(--sp-color-danger-foreground);
+  --sp-style-button-danger-foreground-pressed: var(--sp-color-danger-foreground);
+  --sp-style-button-dashed-background-default: var(--sp-color-dashed-default);
+  --sp-style-button-dashed-background-hover: var(--sp-color-dashed-hover);
+  --sp-style-button-dashed-background-pressed: var(--sp-color-dashed-active);
+  --sp-style-button-dashed-border-default: var(--sp-color-dashed-border);
+  --sp-style-button-dashed-border-hover: var(--sp-color-dashed-border);
+  --sp-style-button-dashed-border-pressed: var(--sp-color-dashed-border);
+  --sp-style-button-dashed-foreground-default: var(--sp-color-secondary-foreground);
+  --sp-style-button-dashed-foreground-hover: var(--sp-color-secondary-foreground);
+  --sp-style-button-dashed-foreground-pressed: var(--sp-color-secondary-foreground);
+  --sp-style-button-ghost-background-hover: var(--sp-color-secondary-hover);
+  --sp-style-button-ghost-background-pressed: var(--sp-color-secondary-active);
+  --sp-style-button-ghost-foreground-default: var(--sp-color-foreground-default);
+  --sp-style-button-ghost-foreground-hover: var(--sp-color-foreground-default);
+  --sp-style-button-ghost-foreground-pressed: var(--sp-color-foreground-default);
+  --sp-style-button-primary-background-default: var(--sp-color-primary-default);
+  --sp-style-button-primary-background-hover: var(--sp-color-primary-hover);
+  --sp-style-button-primary-background-pressed: var(--sp-color-primary-active);
+  --sp-style-button-primary-foreground-default: var(--sp-color-primary-foreground);
+  --sp-style-button-primary-foreground-hover: var(--sp-color-primary-foreground);
+  --sp-style-button-primary-foreground-pressed: var(--sp-color-primary-foreground);
+  --sp-style-button-secondary-background-default: var(--sp-color-secondary-default);
+  --sp-style-button-secondary-background-hover: var(--sp-color-secondary-hover);
+  --sp-style-button-secondary-background-pressed: var(--sp-color-secondary-active);
+  --sp-style-button-secondary-border-default: var(--sp-color-border-default);
+  --sp-style-button-secondary-border-hover: var(--sp-color-border-strong);
+  --sp-style-button-secondary-border-pressed: var(--sp-color-border-strong);
+  --sp-style-button-secondary-foreground-default: var(--sp-color-secondary-foreground);
+  --sp-style-button-secondary-foreground-hover: var(--sp-color-secondary-foreground);
+  --sp-style-button-secondary-foreground-pressed: var(--sp-color-secondary-foreground);
+  --sp-style-button-warning-background-default: var(--sp-color-warning-default);
+  --sp-style-button-warning-background-hover: var(--sp-color-warning-hover);
+  --sp-style-button-warning-background-pressed: var(--sp-color-warning-active);
+  --sp-style-button-warning-foreground-default: var(--sp-color-warning-foreground);
+  --sp-style-button-warning-foreground-hover: var(--sp-color-warning-foreground);
+  --sp-style-button-warning-foreground-pressed: var(--sp-color-warning-foreground);
+  --sp-style-field-background-default: var(--sp-color-surface-default);
+  --sp-style-field-background-hover: var(--sp-color-secondary-hover);
+  --sp-style-field-border-width: var(--sp-border-width-default);
+  --sp-style-field-border-default: var(--sp-color-border-default);
+  --sp-style-field-border-error: var(--sp-color-danger-default);
+  --sp-style-field-border-focus: var(--sp-color-focus-ring-default);
+  --sp-style-field-border-hover: var(--sp-color-border-strong);
+  --sp-style-field-shadow: var(--sp-color-style-transparent);
+  --sp-style-field-side-width: var(--sp-border-width-default);
+  --sp-style-field-side-width-error: var(--sp-border-width-emphasis);
 }
 
-[data-sp-mode-semantic-color="Light"] {
+[data-sp-mode-primary="Blue"] {
   --sp-color-focus-ring-default: var(--sp-hue-color-primary-600);
   --sp-color-primary-active: var(--sp-hue-color-primary-800);
   --sp-color-primary-default: var(--sp-hue-color-primary-600);
@@ -719,6 +981,8 @@
   --sp-color-primary-surface: var(--sp-hue-color-primary-100);
   --sp-color-primary-text: var(--sp-hue-color-primary-700);
   --sp-color-surface-selected: var(--sp-hue-color-primary-100);
+  --sp-color-style-primary-tonal-hover: var(--sp-hue-color-primary-200);
+  --sp-style-field-border-hover: var(--sp-color-border-strong);
 }
 
 :root,
@@ -834,37 +1098,55 @@
   --sp-density-select-padding-y-base: var(--sp-density-space-1);
 }
 
-[data-sp-mode-primary="Blue"][data-sp-mode-semantic-color="Dark"] {
-  --sp-color-focus-ring-default: var(--sp-hue-color-primary-400);
-  --sp-color-primary-active: var(--sp-hue-color-primary-800);
-  --sp-color-primary-default: var(--sp-hue-color-primary-600);
-  --sp-color-primary-hover: var(--sp-hue-color-primary-700);
-  --sp-color-primary-surface: var(--sp-hue-color-primary-950);
-  --sp-color-primary-text: var(--sp-hue-color-primary-300);
-  --sp-color-surface-selected: var(--sp-hue-color-primary-800);
+[data-sp-mode-semantic-color="Light"] {
+  --sp-style-button-primary-background-default: var(--sp-color-primary-default);
+  --sp-style-button-primary-background-hover: var(--sp-color-primary-hover);
+  --sp-style-button-primary-background-pressed: var(--sp-color-primary-active);
+  --sp-style-button-secondary-background-default: var(--sp-color-secondary-default);
+  --sp-style-button-secondary-border-default: var(--sp-color-border-default);
+  --sp-style-button-secondary-border-hover: var(--sp-color-border-strong);
+  --sp-style-button-secondary-border-pressed: var(--sp-color-border-strong);
+  --sp-style-field-background-default: var(--sp-color-surface-default);
+  --sp-style-field-background-hover: var(--sp-color-secondary-hover);
+  --sp-style-field-border-width: var(--sp-border-width-default);
+  --sp-style-field-border-default: var(--sp-color-border-default);
+  --sp-style-field-border-focus: var(--sp-color-focus-ring-default);
+  --sp-style-field-border-hover: var(--sp-color-border-strong);
+  --sp-style-field-shadow: var(--sp-color-style-transparent);
+  --sp-style-field-side-width: var(--sp-border-width-default);
+  --sp-style-field-side-width-error: var(--sp-border-width-emphasis);
 }
 
-[data-sp-mode-primary="Blue"][data-sp-mode-semantic-color="Light High Contrast"] {
-  --sp-color-focus-ring-default: var(--sp-hue-color-primary-700);
-  --sp-color-primary-active: var(--sp-hue-color-primary-950);
-  --sp-color-primary-default: var(--sp-hue-color-primary-800);
-  --sp-color-primary-hover: var(--sp-hue-color-primary-900);
-  --sp-color-primary-surface: var(--sp-hue-color-primary-100);
-  --sp-color-primary-text: var(--sp-hue-color-primary-800);
-  --sp-color-surface-selected: var(--sp-hue-color-primary-100);
+:root,
+[data-sp-mode-style="Atlas"] {
+  --sp-style-button-radius: var(--sp-radius-control);
+  --sp-style-field-focus-radius: var(--sp-prim-radius-lg);
+  --sp-style-field-radius: var(--sp-radius-control);
+  --sp-style-surface-radius: var(--sp-radius-surface);
 }
 
-[data-sp-mode-primary="Blue"][data-sp-mode-semantic-color="Dark High Contrast"] {
-  --sp-color-focus-ring-default: var(--sp-hue-color-primary-300);
-  --sp-color-primary-active: var(--sp-hue-color-primary-100);
-  --sp-color-primary-default: var(--sp-hue-color-primary-300);
-  --sp-color-primary-hover: var(--sp-hue-color-primary-200);
-  --sp-color-primary-surface: var(--sp-hue-color-primary-900);
-  --sp-color-primary-text: var(--sp-hue-color-primary-200);
-  --sp-color-surface-selected: var(--sp-hue-color-primary-900);
+[data-sp-mode-style="Selene"] {
+  --sp-style-button-radius: var(--sp-prim-radius-lg);
+  --sp-style-field-focus-radius: var(--sp-prim-radius-xl);
+  --sp-style-field-radius: var(--sp-prim-radius-lg);
+  --sp-style-surface-radius: var(--sp-radius-surface);
 }
 
-[data-sp-mode-primary="Purple"][data-sp-mode-semantic-color="Light"] {
+[data-sp-mode-style="Helios"] {
+  --sp-style-button-radius: var(--sp-radius-pill);
+  --sp-style-field-focus-radius: var(--sp-radius-pill);
+  --sp-style-field-radius: var(--sp-radius-pill);
+  --sp-style-surface-radius: var(--sp-prim-radius-xl);
+}
+
+[data-sp-mode-style="Ares"] {
+  --sp-style-button-radius: var(--sp-prim-radius-none);
+  --sp-style-field-focus-radius: var(--sp-prim-radius-sm);
+  --sp-style-field-radius: var(--sp-prim-radius-none);
+  --sp-style-surface-radius: var(--sp-prim-radius-none);
+}
+
+[data-sp-mode-semantic-color="Light"][data-sp-mode-semantic-color="Light"] {
   --sp-color-focus-ring-default: var(--sp-hue-color-primary-600);
   --sp-color-primary-active: var(--sp-hue-color-primary-800);
   --sp-color-primary-default: var(--sp-hue-color-primary-600);
@@ -872,9 +1154,10 @@
   --sp-color-primary-surface: var(--sp-hue-color-primary-100);
   --sp-color-primary-text: var(--sp-hue-color-primary-700);
   --sp-color-surface-selected: var(--sp-hue-color-primary-100);
+  --sp-color-style-primary-tonal-hover: var(--sp-hue-color-primary-200);
 }
 
-[data-sp-mode-primary="Purple"][data-sp-mode-semantic-color="Dark"] {
+[data-sp-mode-semantic-color="Dark"][data-sp-mode-semantic-color="Dark"] {
   --sp-color-focus-ring-default: var(--sp-hue-color-primary-400);
   --sp-color-primary-active: var(--sp-hue-color-primary-800);
   --sp-color-primary-default: var(--sp-hue-color-primary-600);
@@ -882,9 +1165,10 @@
   --sp-color-primary-surface: var(--sp-hue-color-primary-950);
   --sp-color-primary-text: var(--sp-hue-color-primary-300);
   --sp-color-surface-selected: var(--sp-hue-color-primary-800);
+  --sp-color-style-primary-tonal-hover: var(--sp-hue-color-primary-900);
 }
 
-[data-sp-mode-primary="Purple"][data-sp-mode-semantic-color="Light High Contrast"] {
+[data-sp-mode-semantic-color="Light High Contrast"][data-sp-mode-semantic-color="Light High Contrast"] {
   --sp-color-focus-ring-default: var(--sp-hue-color-primary-700);
   --sp-color-primary-active: var(--sp-hue-color-primary-950);
   --sp-color-primary-default: var(--sp-hue-color-primary-800);
@@ -892,9 +1176,10 @@
   --sp-color-primary-surface: var(--sp-hue-color-primary-100);
   --sp-color-primary-text: var(--sp-hue-color-primary-800);
   --sp-color-surface-selected: var(--sp-hue-color-primary-100);
+  --sp-color-style-primary-tonal-hover: var(--sp-hue-color-primary-200);
 }
 
-[data-sp-mode-primary="Purple"][data-sp-mode-semantic-color="Dark High Contrast"] {
+[data-sp-mode-semantic-color="Dark High Contrast"][data-sp-mode-semantic-color="Dark High Contrast"] {
   --sp-color-focus-ring-default: var(--sp-hue-color-primary-300);
   --sp-color-primary-active: var(--sp-hue-color-primary-100);
   --sp-color-primary-default: var(--sp-hue-color-primary-300);
@@ -902,84 +1187,65 @@
   --sp-color-primary-surface: var(--sp-hue-color-primary-900);
   --sp-color-primary-text: var(--sp-hue-color-primary-200);
   --sp-color-surface-selected: var(--sp-hue-color-primary-900);
+  --sp-color-style-primary-tonal-hover: var(--sp-hue-color-primary-900);
 }
 
-[data-sp-mode-primary="Orange"][data-sp-mode-semantic-color="Light"] {
-  --sp-color-focus-ring-default: var(--sp-hue-color-primary-600);
-  --sp-color-primary-active: var(--sp-hue-color-primary-800);
-  --sp-color-primary-default: var(--sp-hue-color-primary-600);
-  --sp-color-primary-hover: var(--sp-hue-color-primary-700);
-  --sp-color-primary-surface: var(--sp-hue-color-primary-100);
-  --sp-color-primary-text: var(--sp-hue-color-primary-700);
-  --sp-color-surface-selected: var(--sp-hue-color-primary-100);
+[data-sp-mode-style="Atlas"][data-sp-mode-style="Atlas"] {
+  --sp-style-button-secondary-background-default: var(--sp-color-secondary-default);
+  --sp-style-button-secondary-border-default: var(--sp-color-border-default);
+  --sp-style-button-secondary-border-hover: var(--sp-color-border-strong);
+  --sp-style-button-secondary-border-pressed: var(--sp-color-border-strong);
+  --sp-style-field-background-default: var(--sp-color-surface-default);
+  --sp-style-field-background-hover: var(--sp-color-secondary-hover);
+  --sp-style-field-border-width: var(--sp-border-width-default);
+  --sp-style-field-border-default: var(--sp-color-border-default);
+  --sp-style-field-border-hover: var(--sp-color-border-strong);
+  --sp-style-field-shadow: var(--sp-color-style-transparent);
+  --sp-style-field-side-width: var(--sp-border-width-default);
+  --sp-style-field-side-width-error: var(--sp-border-width-emphasis);
 }
 
-[data-sp-mode-primary="Orange"][data-sp-mode-semantic-color="Dark"] {
-  --sp-color-focus-ring-default: var(--sp-hue-color-primary-400);
-  --sp-color-primary-active: var(--sp-hue-color-primary-800);
-  --sp-color-primary-default: var(--sp-hue-color-primary-600);
-  --sp-color-primary-hover: var(--sp-hue-color-primary-700);
-  --sp-color-primary-surface: var(--sp-hue-color-primary-950);
-  --sp-color-primary-text: var(--sp-hue-color-primary-300);
-  --sp-color-surface-selected: var(--sp-hue-color-primary-800);
+[data-sp-mode-style="Selene"][data-sp-mode-style="Selene"] {
+  --sp-style-button-secondary-background-default: var(--sp-color-surface-muted);
+  --sp-style-button-secondary-border-default: var(--sp-color-style-field-soft-border);
+  --sp-style-button-secondary-border-hover: var(--sp-color-style-field-soft-border);
+  --sp-style-button-secondary-border-pressed: var(--sp-color-style-field-soft-border);
+  --sp-style-field-background-default: var(--sp-color-surface-muted);
+  --sp-style-field-background-hover: var(--sp-color-secondary-active);
+  --sp-style-field-border-width: var(--sp-border-width-default);
+  --sp-style-field-border-default: var(--sp-color-style-field-soft-border);
+  --sp-style-field-border-hover: var(--sp-color-style-field-soft-border);
+  --sp-style-field-shadow: var(--sp-color-style-transparent);
+  --sp-style-field-side-width: var(--sp-border-width-default);
+  --sp-style-field-side-width-error: var(--sp-border-width-emphasis);
 }
 
-[data-sp-mode-primary="Orange"][data-sp-mode-semantic-color="Light High Contrast"] {
-  --sp-color-focus-ring-default: var(--sp-hue-color-primary-700);
-  --sp-color-primary-active: var(--sp-hue-color-primary-950);
-  --sp-color-primary-default: var(--sp-hue-color-primary-800);
-  --sp-color-primary-hover: var(--sp-hue-color-primary-900);
-  --sp-color-primary-surface: var(--sp-hue-color-primary-100);
-  --sp-color-primary-text: var(--sp-hue-color-primary-800);
-  --sp-color-surface-selected: var(--sp-hue-color-primary-100);
+[data-sp-mode-style="Helios"][data-sp-mode-style="Helios"] {
+  --sp-style-button-secondary-background-default: var(--sp-color-secondary-default);
+  --sp-style-button-secondary-border-default: var(--sp-color-border-default);
+  --sp-style-button-secondary-border-hover: var(--sp-color-border-strong);
+  --sp-style-button-secondary-border-pressed: var(--sp-color-border-strong);
+  --sp-style-field-background-default: var(--sp-color-surface-elevated);
+  --sp-style-field-background-hover: var(--sp-color-surface-elevated);
+  --sp-style-field-border-width: var(--sp-border-width-emphasis);
+  --sp-style-field-border-default: var(--sp-color-border-strong);
+  --sp-style-field-border-hover: var(--sp-color-primary-text);
+  --sp-style-field-shadow: var(--sp-color-shadow-overlay-contact);
+  --sp-style-field-side-width: var(--sp-border-width-emphasis);
+  --sp-style-field-side-width-error: var(--sp-border-width-emphasis);
 }
 
-[data-sp-mode-primary="Orange"][data-sp-mode-semantic-color="Dark High Contrast"] {
-  --sp-color-focus-ring-default: var(--sp-hue-color-primary-300);
-  --sp-color-primary-active: var(--sp-hue-color-primary-100);
-  --sp-color-primary-default: var(--sp-hue-color-primary-300);
-  --sp-color-primary-hover: var(--sp-hue-color-primary-200);
-  --sp-color-primary-surface: var(--sp-hue-color-primary-900);
-  --sp-color-primary-text: var(--sp-hue-color-primary-200);
-  --sp-color-surface-selected: var(--sp-hue-color-primary-900);
-}
-
-[data-sp-mode-primary="Sky"][data-sp-mode-semantic-color="Light"] {
-  --sp-color-focus-ring-default: var(--sp-hue-color-primary-600);
-  --sp-color-primary-active: var(--sp-hue-color-primary-800);
-  --sp-color-primary-default: var(--sp-hue-color-primary-600);
-  --sp-color-primary-hover: var(--sp-hue-color-primary-700);
-  --sp-color-primary-surface: var(--sp-hue-color-primary-100);
-  --sp-color-primary-text: var(--sp-hue-color-primary-700);
-  --sp-color-surface-selected: var(--sp-hue-color-primary-100);
-}
-
-[data-sp-mode-primary="Sky"][data-sp-mode-semantic-color="Dark"] {
-  --sp-color-focus-ring-default: var(--sp-hue-color-primary-400);
-  --sp-color-primary-active: var(--sp-hue-color-primary-800);
-  --sp-color-primary-default: var(--sp-hue-color-primary-600);
-  --sp-color-primary-hover: var(--sp-hue-color-primary-700);
-  --sp-color-primary-surface: var(--sp-hue-color-primary-950);
-  --sp-color-primary-text: var(--sp-hue-color-primary-300);
-  --sp-color-surface-selected: var(--sp-hue-color-primary-800);
-}
-
-[data-sp-mode-primary="Sky"][data-sp-mode-semantic-color="Light High Contrast"] {
-  --sp-color-focus-ring-default: var(--sp-hue-color-primary-700);
-  --sp-color-primary-active: var(--sp-hue-color-primary-950);
-  --sp-color-primary-default: var(--sp-hue-color-primary-800);
-  --sp-color-primary-hover: var(--sp-hue-color-primary-900);
-  --sp-color-primary-surface: var(--sp-hue-color-primary-100);
-  --sp-color-primary-text: var(--sp-hue-color-primary-800);
-  --sp-color-surface-selected: var(--sp-hue-color-primary-100);
-}
-
-[data-sp-mode-primary="Sky"][data-sp-mode-semantic-color="Dark High Contrast"] {
-  --sp-color-focus-ring-default: var(--sp-hue-color-primary-300);
-  --sp-color-primary-active: var(--sp-hue-color-primary-100);
-  --sp-color-primary-default: var(--sp-hue-color-primary-300);
-  --sp-color-primary-hover: var(--sp-hue-color-primary-200);
-  --sp-color-primary-surface: var(--sp-hue-color-primary-900);
-  --sp-color-primary-text: var(--sp-hue-color-primary-200);
-  --sp-color-surface-selected: var(--sp-hue-color-primary-900);
+[data-sp-mode-style="Ares"][data-sp-mode-style="Ares"] {
+  --sp-style-button-secondary-background-default: var(--sp-color-secondary-default);
+  --sp-style-button-secondary-border-default: var(--sp-color-border-strong);
+  --sp-style-button-secondary-border-hover: var(--sp-color-border-strong);
+  --sp-style-button-secondary-border-pressed: var(--sp-color-border-strong);
+  --sp-style-field-background-default: var(--sp-color-style-transparent);
+  --sp-style-field-background-hover: var(--sp-color-surface-muted);
+  --sp-style-field-border-width: var(--sp-border-width-emphasis);
+  --sp-style-field-border-default: var(--sp-color-border-strong);
+  --sp-style-field-border-hover: var(--sp-color-primary-text);
+  --sp-style-field-shadow: var(--sp-color-style-transparent);
+  --sp-style-field-side-width: var(--sp-prim-space-0);
+  --sp-style-field-side-width-error: var(--sp-prim-space-0);
 }

@@ -1,23 +1,27 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
-import { diffExports, hasDrift, importFigmaExport, modeDependencies, renderCSSV2, resolveToken, validateTokensV2, type FigmaExport, type Rgba, type TokenSourceV2 } from '../lib/figma-tokens';
+import { diffExports, hasDrift, importFigmaExport, modeDependencies, renderCSSV2, resolveToken, resolvedCss, validateTokensV2, type FigmaExport, type Rgba, type TokenSourceV2 } from '../lib/figma-tokens';
 import { stringifySource } from '../scripts/import-figma-tokens';
 
 const snapshot = (): FigmaExport => JSON.parse(readFileSync('tokens/figma/spartan-ds.export.json', 'utf8'));
 const production = (): TokenSourceV2 => JSON.parse(readFileSync('tokens/source.json', 'utf8'));
 const clone = <T>(v: T): T => JSON.parse(JSON.stringify(v));
 
-test('the Figma snapshot holds the six collections, modes, and variable counts audited in Spartan DS', () => {
+test('the Figma snapshot holds the seven collections, modes, and variable counts in Spartan DS', () => {
   const ex = snapshot();
-  assert.deepEqual(ex.collections.map(c => [c.name, c.variables.length]).sort(), [['01 Primitives', 183], ['02 Primary', 13], ['03 Semantic Color', 79], ['04 Semantic Foundation', 58], ['05 Component', 66], ['06 Density', 62]]);
+  assert.deepEqual(ex.collections.map(c => [c.name, c.variables.length]).sort(), [['01 Primitives', 183], ['02 Primary', 13], ['03 Semantic Color', 84], ['04 Semantic Foundation', 58], ['05 Component', 66], ['06 Density', 62], ['07 Style', 81]]);
   const modes = Object.fromEntries(ex.collections.map(c => [c.name, c.modes.map(m => m.name)]));
   assert.deepEqual(modes['02 Primary'], ['Blue', 'Purple', 'Orange', 'Sky']);
   assert.deepEqual(modes['03 Semantic Color'], ['Light', 'Dark', 'Light High Contrast', 'Dark High Contrast']);
   assert.deepEqual(modes['06 Density'], ['Relaxed', 'Compact']);
+  assert.deepEqual(modes['07 Style'], ['Atlas', 'Selene', 'Helios', 'Ares']);
+  const style = ex.collections.find(c => c.name === '07 Style')!;
+  assert.equal(style.id, '848:16');
+  assert.deepEqual(style.modes.map(m => m.id), ['848:0', '848:1', '848:2', '848:3']);
   const ids = ex.collections.flatMap(c => c.variables.map(v => v.id));
-  assert.equal(new Set(ids).size, 461);
-  assert.equal(new Set(ex.collections.flatMap(c => c.variables.map(v => v.key))).size, 461);
+  assert.equal(new Set(ids).size, 547);
+  assert.equal(new Set(ex.collections.flatMap(c => c.variables.map(v => v.key))).size, 547);
 });
 
 test('committed source.json and tokens.css match the snapshot (drift gate)', () => {
@@ -66,7 +70,11 @@ test('mode dependencies are detected per token, including aliases that cross col
   assert.deepEqual(deps.get('semantic-color.color.primary.default'), ['primary', 'semantic-color']);
   assert.deepEqual(deps.get('semantic-color.color.surface.default'), ['semantic-color']);
   assert.deepEqual(deps.get('semantic-foundation.border-width.default'), ['semantic-color']);
-  assert.ok([...deps.values()].every(d => d.length <= 2));
+  // Style, Semantic Color, and Primary can all matter to one token.
+  assert.deepEqual(deps.get('style.style.field.border.hover'), ['primary', 'semantic-color', 'style']);
+  assert.deepEqual(deps.get('style.style.button.radius'), ['style']);
+  assert.deepEqual(deps.get('style.style.button.secondary.border.default'), ['semantic-color', 'style']);
+  assert.equal(Math.max(...[...deps.values()].map(d => d.length)), 3);
 });
 
 // ---- A small cascade simulator, independent of the generator ----
@@ -113,27 +121,18 @@ function computeChain(rules: Rule[], chain: Record<string, string>[]) {
   }
   return inherited;
 }
-const rgbText = (c: Rgba) => `rgb(${+(c.r * 255).toFixed(3)} ${+(c.g * 255).toFixed(3)} ${+(c.b * 255).toFixed(3)} / ${c.a})`;
-const literal = (s: TokenSourceV2, key: string, assign: Record<string, string>) => {
-  const t = s.tokens.find(x => x.key === key)!;
-  const v = resolveToken(s, key, assign);
-  if (typeof v === 'number') return `${v}${t.unit === 'px' ? 'px' : t.unit === 'percent' ? '%' : ''}`;
-  if (typeof v === 'string') return JSON.stringify(v);
-  if (typeof v === 'boolean') return v ? '1' : '0';
-  if ('alpha' in v) return `color-mix(in srgb, ${rgbText(v.alpha.color)} ${v.alpha.opacity}%, transparent)`;
-  return rgbText(v);
-};
+const literal = resolvedCss;
 const cssVar = (s: TokenSourceV2, key: string) => {
   const t = s.tokens.find(x => x.key === key)!, c = s.collections.find(x => x.key === t.collection)!;
   return '--sp-' + (c.cssPrefix ? c.cssPrefix + '-' : '') + key.split('.').slice(1).join('-');
 };
 function combos(s: TokenSourceV2) {
-  const keys = ['primary', 'semantic-color', 'density'];
+  const keys = ['style', 'primary', 'semantic-color', 'density'];
   const modes = keys.map(k => s.collections.find(c => c.key === k)!.modes.map(m => m.name));
-  return modes[0].flatMap(a => modes[1].flatMap(b => modes[2].map(c => ({ [keys[0]]: a, [keys[1]]: b, [keys[2]]: c }))));
+  return modes[0].flatMap(a => modes[1].flatMap(b => modes[2].flatMap(c => modes[3].map(d => ({ [keys[0]]: a, [keys[1]]: b, [keys[2]]: c, [keys[3]]: d })))));
 }
 
-test('generated CSS resolves every token to the Figma-resolved value for every mode combination on one element', () => {
+test('generated CSS resolves every token to the Figma-resolved value for all 128 style, hue, theme, and density combinations on one element', () => {
   const s = production(), rules = parseCSS(renderCSSV2(s));
   for (const assign of combos(s)) {
     const got = computeChain(rules, [assign]);
@@ -241,4 +240,137 @@ test('assembling saved Figma outputs verifies every line against its hash', asyn
   assert.throws(() => assemble([{ name: 'a.txt', text: corrupt }], info, '2026-01-01'), /does not match its hash/);
   assert.throws(() => assemble([{ name: 'a.txt', text: out([head, row(3)], 2) }], info, '2026-01-01'), /expected 2 variables, assembled 1/);
   assert.throws(() => assemble([{ name: 'a.txt', text: head }], info, '2026-01-01'), /missing #HASHES/);
+});
+
+// ---- 07 Style ----
+
+const STYLES = ['Atlas', 'Selene', 'Helios', 'Ares'];
+const styleValues = (key: string, extra: Record<string, string> = {}) => STYLES.map(style => resolveToken(production(), key, { style, ...extra }));
+
+test('style radius, border, and side widths match the Figma style specification', () => {
+  // Atlas 8 px, Selene 12 px, Helios pill (9999), Ares 0, per the Style modes document.
+  assert.deepEqual(styleValues('style.style.button.radius'), [8, 12, 9999, 0]);
+  assert.deepEqual(styleValues('style.style.field.radius'), [8, 12, 9999, 0]);
+  assert.deepEqual(styleValues('style.style.field.focus-radius'), [12, 16, 9999, 4]);
+  assert.deepEqual(styleValues('style.style.surface.radius'), [12, 12, 16, 0]);
+  // Ares draws an underline: no side borders. Helios borders are stronger (2 px in normal themes).
+  assert.deepEqual(styleValues('style.style.field.side-width', { 'semantic-color': 'Light' }), [1, 1, 2, 0]);
+  assert.deepEqual(styleValues('style.style.field.side-width-error', { 'semantic-color': 'Light' }), [2, 2, 2, 0]);
+  assert.deepEqual(styleValues('style.style.field.border-width', { 'semantic-color': 'Light' }), [1, 1, 2, 2]);
+  assert.deepEqual(styleValues('style.style.button.border-width', { 'semantic-color': 'Light' }), [1, 1, 1, 1]);
+});
+
+test('style colors: Selene hides the secondary border until high contrast, Ares strengthens it, Button has no shadows', () => {
+  const s = production();
+  const border = (style: string, theme: string) => resolveToken(s, 'style.style.button.secondary.border.default', { style, 'semantic-color': theme });
+  const rule = (theme: string, name: string) => resolveToken(s, `semantic-color.color.border.${name}`, { 'semantic-color': theme });
+  assert.deepEqual(border('Atlas', 'Light'), rule('Light', 'default'));
+  assert.deepEqual(border('Selene', 'Light'), { r: 0, g: 0, b: 0, a: 0 });
+  assert.deepEqual(border('Selene', 'Dark'), { r: 0, g: 0, b: 0, a: 0 });
+  assert.deepEqual(border('Selene', 'Light High Contrast'), rule('Light High Contrast', 'default'));
+  assert.deepEqual(border('Helios', 'Light'), rule('Light', 'default'));
+  assert.deepEqual(border('Ares', 'Dark'), rule('Dark', 'strong'));
+  // Primary, Danger, and Warning keep their solid semantic fills in every style.
+  for (const variant of ['primary', 'danger', 'warning']) for (const state of ['default', 'hover', 'pressed']) {
+    const fills = styleValues(`style.style.button.${variant}.background.${state}`, { 'semantic-color': 'Dark', primary: 'Purple' });
+    assert.ok(fills.every(f => JSON.stringify(f) === JSON.stringify(fills[0])), `${variant}/${state} changes with style`);
+  }
+  // Button shadows are transparent in all four styles.
+  for (const name of ['ambient', 'edge', 'raised']) for (const theme of ['Light', 'Dark']) {
+    for (const v of styleValues(`style.style.shadow.control.${name}`, { 'semantic-color': theme })) assert.equal((v as Rgba).a, 0, `${name} shadow`);
+  }
+  // Only Helios shows the Input shadow.
+  const shadow = styleValues('style.style.field.shadow', { 'semantic-color': 'Light' });
+  assert.deepEqual(shadow.map(v => (typeof v === 'object' && 'alpha' in v ? 'alpha' : 'none')), ['none', 'none', 'alpha', 'none']);
+});
+
+test('the style selector is its own attribute, Atlas is the default, and generated names match Figma code syntax', () => {
+  const s = production(), css = renderCSSV2(s);
+  assert.deepEqual(s.collections.find(c => c.key === 'style')!.modes.map(m => m.name), STYLES);
+  for (const mode of STYLES) assert.match(css, new RegExp(`\\[data-sp-mode-style="${mode}"\\]`));
+  assert.match(css, /:root,\n\[data-sp-mode-style="Atlas"\] \{[^}]*--sp-style-button-radius: var\(--sp-radius-control\);/);
+  assert.match(css, /\[data-sp-mode-style="Helios"\] \{[^}]*--sp-style-button-radius: var\(--sp-radius-pill\);/);
+  // The names Figma already gives the 07 Style variables are the names the code generates.
+  const named = s.tokens.filter(t => t.figma.codeSyntax?.startsWith('var(--sp-'));
+  assert.equal(named.length, 86, '81 style variables and 5 color/style helpers');
+  assert.ok(named.every(t => t.collection === 'style' || t.key.startsWith('semantic-color.color.style.')));
+  for (const t of named) assert.equal(`var(${cssVar(s, t.key)})`, t.figma.codeSyntax, t.key);
+});
+
+test('a token that depends on style, theme, and hue is declared without combination selectors', () => {
+  const css = renderCSSV2(production());
+  // Only the same attribute may repeat (the specificity boost); two different collections never combine.
+  assert.doesNotMatch(css, /\[data-sp-mode-([a-z-]+)="[^"]+"\]\[data-sp-mode-(?!\1=)/);
+  // Own-mode rules repeat the attribute, so they outrank the foreign-mode rules for the same token.
+  assert.match(css, /\[data-sp-mode-style="Ares"\]\[data-sp-mode-style="Ares"\] \{[^}]*--sp-style-field-border-hover: var\(--sp-color-primary-text\);/s);
+  assert.match(css, /\[data-sp-mode-primary="Purple"\] \{[^}]*--sp-style-field-border-hover: /s);
+});
+
+test('nested style overrides re-resolve style tokens and keep the outer theme, hue, and density', () => {
+  const s = production(), rules = parseCSS(renderCSSV2(s)), deps = modeDependencies(s);
+  const outer = { style: 'Atlas', primary: 'Orange', 'semantic-color': 'Dark', density: 'Compact' };
+  for (const inner of ['Selene', 'Helios', 'Ares']) {
+    const got = computeChain(rules, [outer, { style: inner }]);
+    for (const t of s.tokens) {
+      const d = deps.get(t.key)!;
+      if (d.length !== 1 || d[0] !== 'style') continue;
+      assert.equal(got.get(cssVar(s, t.key)), literal(s, t.key, { ...outer, style: inner }), `${t.key} in ${inner}`);
+    }
+    assert.equal(got.get('--sp-style-button-radius'), literal(s, 'style.style.button.radius', { style: inner }));
+  }
+});
+
+test('independent attributes on one element resolve the style tokens that depend on three collections', () => {
+  const s = production(), rules = parseCSS(renderCSSV2(s));
+  for (const style of STYLES) for (const primary of ['Blue', 'Sky']) for (const theme of ['Light', 'Dark High Contrast']) {
+    const assign = { style, primary, 'semantic-color': theme, density: 'Relaxed' };
+    assert.equal(computeChain(rules, [assign]).get('--sp-style-field-border-hover'), literal(s, 'style.style.field.border.hover', assign), JSON.stringify(assign));
+  }
+});
+
+// ---- Refresh tooling ----
+
+test('the manifest diff finds added, changed, and removed variables without a full export', async () => {
+  const { manifestDiff, hasManifestDrift } = await import('../scripts/diff-figma-manifest');
+  const { fnv } = await import('../scripts/assemble-figma-export');
+  const snap = snapshot();
+  const manifest = (ex: FigmaExport) => ex.collections.map(c => {
+    const head = fnv(JSON.stringify({ collection: { id: c.id, key: c.key, name: c.name, modes: c.modes } }));
+    return `${c.name}|${head}|${c.variables.length}|` + c.variables.map(v => `${v.id}:${fnv(JSON.stringify({ id: v.id, key: v.key, name: v.name, type: v.type, css: v.css, values: v.values }))}`).join(',');
+  }).join('\n');
+  assert.equal(hasManifestDrift(manifestDiff(snap, manifest(snap))), false);
+  const next = clone(snap);
+  const density = next.collections.find(c => c.name === '06 Density')!;
+  density.variables.find(v => v.name === 'density/control/height/base')!.values = [44, 32];
+  density.variables.pop();
+  next.collections.find(c => c.name === '05 Component')!.variables.push({ id: '10:999', key: 'k', name: 'chip/height', type: 'FLOAT', values: [28] });
+  next.collections.pop();
+  const diff = manifestDiff(snap, manifest(next));
+  const by = Object.fromEntries(diff.map(d => [d.collection, d]));
+  assert.deepEqual(by['06 Density'].changed, ['53:6']);
+  assert.equal(by['06 Density'].removed.length, 1);
+  assert.deepEqual(by['05 Component'].added, ['10:999']);
+  assert.equal(by['07 Style'].removed.length, 81);
+  assert.ok(hasManifestDrift(diff));
+});
+
+test('a partial refresh merges changed variables into the base snapshot and a full header replaces a collection', async () => {
+  const { assemble, fnv } = await import('../scripts/assemble-figma-export');
+  const base = snapshot();
+  const density = base.collections.find(c => c.name === '06 Density')!;
+  const out = (lines: string[], total?: number) => (total ? `total=${total}\n` : '') + lines.join('\n') + '\n#HASHES ' + lines.map(fnv).join(',');
+  const row = (id: string, value: number) => JSON.stringify({ id, key: `k${id}`, name: `density/new/${id}`, type: 'FLOAT', values: [value, value] });
+  const head = JSON.stringify({ collection: { id: density.id, key: density.key, name: density.name, modes: density.modes, partial: true } });
+  const existing = density.variables[0];
+  const changed = JSON.stringify({ ...existing, values: [99, 98] });
+  const merged = assemble([{ name: 'a.txt', text: out([head, changed, row('53:900', 5)], 2) }], base.file, '2026-02-02', base);
+  const after = merged.collections.find(c => c.name === '06 Density')!;
+  assert.equal(after.variables.length, density.variables.length + 1);
+  assert.deepEqual(after.variables.find(v => v.id === existing.id)!.values, [99, 98]);
+  assert.equal(merged.collections.length, base.collections.length, 'untouched collections stay');
+  assert.deepEqual(merged.collections.map(c => c.name), base.collections.map(c => c.name), 'base order is kept');
+  assert.throws(() => assemble([{ name: 'a.txt', text: out([JSON.stringify({ collection: { id: '999:9', key: 'x', name: 'ghost', modes: [], partial: true } })]) }], base.file, '2026-02-02', base), /not in the base snapshot/);
+  const full = JSON.stringify({ collection: { id: density.id, key: density.key, name: density.name, modes: density.modes } });
+  const replaced = assemble([{ name: 'a.txt', text: out([full, row('53:901', 7)], 1) }], base.file, '2026-02-02', base);
+  assert.equal(replaced.collections.find(c => c.name === '06 Density')!.variables.length, 1);
 });
