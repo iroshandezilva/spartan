@@ -1,5 +1,13 @@
 # Button and Icon Button variable bindings
 
+> **Revision note (2026-10-09, after 07 Style).** Figma has since removed the Button Shape property
+> (84 variants, no Rounded and Pill masters) and rebound Button to 07 Style: corner radius is
+> `style/button/radius` (8 Atlas, 12 Selene, 9999 Helios, 0 Ares), and fills, text, and borders by
+> variant and state are `style/button/<variant>/<role>/<state>`, which alias the Semantic Color roles
+> listed below. Button shadows are gone. The tables below describe the earlier 168-variant master and
+> are not re-audited, so treat radius, shadow, and the color roles as superseded. Sizes, paddings,
+> density, and type bindings are unchanged. Component work is on HAUX-77.
+
 Read from Spartan DS with the Figma MCP (`use_figma`, read-only) on 2026-10-09. Component sets:
 Button `21:27` (168 variants) and Icon Button `326:63` (15 variants). Variable names are the Figma
 names; the code name is `--sp-` plus the collection prefix (none for 03 to 06) plus the name with
