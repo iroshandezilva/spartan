@@ -172,6 +172,16 @@ describe('all 16 style, color scheme, and contrast combinations', () => {
       assert.ok(close(parseColor(visible.secondary), expectedColor(source, 'semantic-color.color.secondary.default', assign)), `secondary fill ${JSON.stringify(attrs)}`);
       assert.ok(close(parseColor(visible.text), expectedColor(source, 'semantic-color.color.primary.foreground', assign)), `primary text ${JSON.stringify(attrs)}`);
       assert.equal(visible.dashed, high ? '2px' : '1px', `dashed border width, high contrast ${high}`);
+      // Focus stays visible in every combination: a real Tab lands on the first button and draws the
+      // 2 px ring in the focus-ring color of that style, scheme, and contrast.
+      await page.keyboard.press('Tab');
+      const ring = await page.evaluate(() => {
+        const inner = (document.activeElement as HTMLElement & { shadowRoot: ShadowRoot }).shadowRoot.activeElement!;
+        const cs = getComputedStyle(inner);
+        return { style: cs.outlineStyle, width: cs.outlineWidth, color: cs.outlineColor, matches: inner.matches(':focus-visible') };
+      });
+      assert.deepEqual([ring.style, ring.width, ring.matches], ['solid', '2px', true], `focus ring ${JSON.stringify(attrs)}`);
+      assert.ok(close(parseColor(ring.color), expectedColor(source, 'semantic-color.color.focus-ring.default', assign)), `focus ring color ${ring.color} ${JSON.stringify(attrs)}`);
       combos++;
     }
     assert.equal(combos, 16);
