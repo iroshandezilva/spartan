@@ -1,5 +1,5 @@
 // Production token pipeline: a verified export of the Spartan DS Figma variables
-// becomes `spartant.tokens.v2` (tokens/source.json), then mode-aware CSS.
+// becomes `spartan.tokens.v2` (tokens/source.json), then mode-aware CSS.
 // Unlike v1 (lib/token-contract.ts, kept for the plugin and its fixture), v2 allows
 // aliases across collections and resolves them per mode.
 
@@ -26,7 +26,7 @@ export type CollectionV2 = {
   modes: { name: string; figmaId: string }[];
 };
 export type TokenSourceV2 = {
-  schema: 'spartant.tokens.v2';
+  schema: 'spartan.tokens.v2';
   version: string;
   source: { figmaFileKey: string; figmaFileName: string; exportedAt: string };
   collections: CollectionV2[];
@@ -38,7 +38,7 @@ export type FigmaValue = number | string | boolean | [number, number, number, nu
 export type FigmaVariable = { id: string; key: string; name: string; type: TokenType; css?: string; values: FigmaValue[] };
 export type FigmaCollection = { id: string; key: string; name: string; modes: { id: string; name: string }[]; variables: FigmaVariable[] };
 export type FigmaExport = {
-  schema: 'spartant.figma-export.v1';
+  schema: 'spartan.figma-export.v1';
   file: { key: string; name: string };
   exportedAt: string;
   collections: FigmaCollection[];
@@ -90,7 +90,7 @@ const figmaId = (id: string) => id.replace(/^VariableID:/, '');
 
 export function importFigmaExport(raw: unknown): TokenSourceV2 {
   const ex = raw as FigmaExport;
-  if (!ex || ex.schema !== 'spartant.figma-export.v1' || !Array.isArray(ex.collections)) throw new Error('Expected a spartant.figma-export.v1 file.');
+  if (!ex || ex.schema !== 'spartan.figma-export.v1' || !Array.isArray(ex.collections)) throw new Error('Expected a spartan.figma-export.v1 file.');
   const collections: CollectionV2[] = [];
   const tokens: TokenV2[] = [];
   const byFigmaId = new Map<string, TokenV2>();
@@ -146,7 +146,7 @@ export function importFigmaExport(raw: unknown): TokenSourceV2 {
   }
 
   const source: TokenSourceV2 = {
-    schema: 'spartant.tokens.v2',
+    schema: 'spartan.tokens.v2',
     version: `figma-${ex.exportedAt}`,
     source: { figmaFileKey: ex.file.key, figmaFileName: ex.file.name, exportedAt: ex.exportedAt },
     collections,
@@ -186,7 +186,7 @@ function assignUnits(s: TokenSourceV2) {
 
 export function validateTokensV2(input: unknown): TokenSourceV2 {
   const s = input as TokenSourceV2;
-  if (!s || s.schema !== 'spartant.tokens.v2' || !Array.isArray(s.collections) || !Array.isArray(s.tokens) || typeof s.version !== 'string' || !s.version.trim()) throw new Error('Expected a spartant.tokens.v2 file with a version, collections, and tokens.');
+  if (!s || s.schema !== 'spartan.tokens.v2' || !Array.isArray(s.collections) || !Array.isArray(s.tokens) || typeof s.version !== 'string' || !s.version.trim()) throw new Error('Expected a spartan.tokens.v2 file with a version, collections, and tokens.');
   const collections = new Map<string, CollectionV2>();
   for (const c of s.collections) {
     if (!/^[a-z][a-z0-9-]*$/.test(c.key) || collections.has(c.key)) throw new Error(`Collection keys must be unique slugs: ${c.key}`);

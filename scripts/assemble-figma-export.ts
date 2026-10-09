@@ -1,4 +1,4 @@
-// Builds a spartant.figma-export.v1 file from saved outputs of scripts/figma-export.js.
+// Builds a spartan.figma-export.v1 file from saved outputs of scripts/figma-export.js.
 //   node --import tsx scripts/assemble-figma-export.ts <dir-of-outputs> <out.json> [YYYY-MM-DD]
 // Files are read in name order. Each line is checked against its hash, so a
 // mistyped or truncated copy fails here instead of becoming a wrong token.
@@ -33,7 +33,7 @@ export function assemble(files: { name: string; text: string }[], fileInfo: Figm
   for (const c of collections) {
     if (expected.has(c.name) && expected.get(c.name) !== c.variables.length) throw new Error(`${c.name}: expected ${expected.get(c.name)} variables, assembled ${c.variables.length}. A slice is missing or repeated.`);
   }
-  return { schema: 'spartant.figma-export.v1', file: fileInfo, exportedAt, collections };
+  return { schema: 'spartan.figma-export.v1', file: fileInfo, exportedAt, collections };
 }
 
 if (import.meta.url === `file://${process.argv[1]}`) {

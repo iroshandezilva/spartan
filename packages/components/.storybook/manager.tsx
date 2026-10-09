@@ -81,8 +81,8 @@ const Picker = () => {
   );
 };
 
-addons.register('spartant/icon-picker', () => {
-  addons.add('spartant/icon-picker/panel', {
+addons.register('spartan/icon-picker', () => {
+  addons.add('spartan/icon-picker/panel', {
     type: types.PANEL,
     title: 'Icons',
     match: ({ viewMode }) => viewMode === 'story',

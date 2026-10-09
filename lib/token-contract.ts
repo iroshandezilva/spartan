@@ -1,11 +1,11 @@
 export type TokenValue = number | string | boolean | { r: number; g: number; b: number; a: number } | { alias: string };
 export type Token = { key: string; name: string; collection: string; type: 'COLOR' | 'FLOAT' | 'STRING' | 'BOOLEAN'; unit?: 'px'; values: Record<string, TokenValue> };
-export type TokenSource = { schema: 'spartant.tokens.v1'; version: string; collections: { key: string; name: string; modes: string[] }[]; tokens: Token[] };
+export type TokenSource = { schema: 'spartan.tokens.v1'; version: string; collections: { key: string; name: string; modes: string[] }[]; tokens: Token[] };
 export const isAlias = (v: TokenValue): v is { alias: string } => typeof v === 'object' && v !== null && 'alias' in v;
 export const cssName = (key: string) => '--sp-' + key.replace(/[._]/g, '-');
 export function validateTokens(input: unknown): TokenSource {
   const s = input as TokenSource;
-  if (!s || s.schema !== 'spartant.tokens.v1' || typeof s.version !== 'string' || !s.version.trim() || !Array.isArray(s.collections) || !Array.isArray(s.tokens) || s.tokens.length > 5000) throw new Error('Expected a spartant.tokens.v1 file with a version, collections, and tokens.');
+  if (!s || s.schema !== 'spartan.tokens.v1' || typeof s.version !== 'string' || !s.version.trim() || !Array.isArray(s.collections) || !Array.isArray(s.tokens) || s.tokens.length > 5000) throw new Error('Expected a spartan.tokens.v1 file with a version, collections, and tokens.');
   const collections = new Map<string, TokenSource['collections'][number]>();
   const names = new Set<string>();
   for (const c of s.collections) {

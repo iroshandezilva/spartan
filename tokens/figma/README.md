@@ -4,7 +4,7 @@
 [Spartan DS](https://www.figma.com/design/PhcMPmdpkpgxH3N83SvpBY/Spartan-DS) file:
 six collections, 461 variables, with Figma's own variable IDs and keys, every mode, and
 aliases by variable ID. It is the input to `pnpm tokens:import`, which writes
-`tokens/source.json` (`spartant.tokens.v2`), and `pnpm tokens:build`, which writes
+`tokens/source.json` (`spartan.tokens.v2`), and `pnpm tokens:build`, which writes
 `public/tokens.css`.
 
 | Figma collection | Modes | Code key | CSS prefix |
