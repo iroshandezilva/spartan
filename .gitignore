@@ -22,3 +22,8 @@ bun.lockb
 .env
 .env.*
 !.env.example
+
+# Next.js and generated sources
+.source/
+plugin/dist/
+.pnpm-store/

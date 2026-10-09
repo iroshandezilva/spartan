@@ -1,0 +1,28 @@
+---
+title: "Validation"
+description: "What we check before marking work complete."
+---
+
+## Automated checks
+
+`pnpm test` checks component completion rules, duplicate prevention, task-file persistence and revision conflicts, and token graph validation. `pnpm typecheck` checks application TypeScript. `pnpm build` generates tokens, bundles the plugin, and builds the Fumadocs site.
+
+## Browser checks
+
+Verify task creation, both status fields, reopening a completed component, duplicate rejection, search and filters, reload persistence, and documentation navigation. Check desktop and mobile layouts, keyboard focus, modal dismissal, and readable empty and error states.
+
+## Plugin checks
+
+The bundled plugin must still be imported into Figma and tested in a disposable file. Test aliases, modes, existing bindings, stable IDs after rename, and stale previews. The plugin task remains in Review until this evidence exists.
+
+## Release evidence
+
+Keep the task's notes and links specific. Record the command or scenario, result, and any remaining limitation. Do not turn an unverified state into Done just to make the board look complete.
+
+## Current limitations
+
+- Initial component inventory is not a live audit of the full library.
+- Storybook and Lit implementations are planned, not delivered by the documentation hub.
+- Token data is an isolated fixture, not migrated production data.
+- Plugin runtime has not been verified in Figma.
+- Task persistence supports one local server; online collaboration needs additional infrastructure.

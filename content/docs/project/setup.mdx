@@ -1,0 +1,49 @@
+---
+title: "Local setup"
+description: "Run the documentation hub, work tracker, and token plugin."
+---
+
+## Run the hub
+
+From the repository root:
+
+```sh
+cd experiment
+pnpm install
+pnpm dev
+```
+
+Open http://127.0.0.1:4310/docs. The task manager is at `/docs/project/tasks`.
+
+## Verify the project
+
+```sh
+pnpm test
+pnpm build
+pnpm typecheck
+```
+
+`pnpm build` generates the CSS tokens, packages the plugin, and builds the documentation application. `pnpm start` serves the production build on the same local port.
+
+## Import the plugin
+
+Run `pnpm plugin:build`. In the Figma desktop app, use Plugins > Development > Import plugin from manifest and choose `experiment/plugin/manifest.json`. Run **Spartant token sync** in a disposable design file first. Select `experiment/tokens/source.json`, preview the plan, then apply it.
+
+The initial plugin uses a local JSON file. It needs no MCP server, repository credentials, or network access. Direct Git fetching is future work tracked separately.
+
+## Where changes live
+
+| Location | Purpose |
+| --- | --- |
+| `content/docs/` | Fumadocs MDX subpages |
+| `data/tasks.json` | Shared local task record |
+| `tokens/source.json` | Isolated token fixture |
+| `public/tokens.css` | Generated CSS output |
+| `plugin/` | Custom Figma plugin source and manifest |
+| `tests/` | Status, persistence, and token validation checks |
+
+The previous React workspace has pending deletions. This experiment is additive and does not restore that implementation.
+
+## Local editing boundary
+
+Task editing runs on one local Node server and persists to a file. A static or serverless deployment would need a durable database and authentication before enabling writes. File-backed writes are not a multi-server collaboration backend.

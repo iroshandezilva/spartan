@@ -4,14 +4,14 @@
     {
       "name": "storybook",
       "runtimeExecutable": "pnpm",
-      "runtimeArgs": ["dev:storybook"],
+      "runtimeArgs": ["storybook"],
       "port": 6006
     },
     {
       "name": "docs",
       "runtimeExecutable": "pnpm",
-      "runtimeArgs": ["dev:docs"],
-      "port": 3100
+      "runtimeArgs": ["dev"],
+      "port": 4310
     }
   ]
 }

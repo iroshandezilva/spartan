@@ -1,0 +1,17 @@
+// Canonical Linear destinations. Local MDX and task JSON are migration snapshots.
+export const linearDocs: Record<string, string> = {
+  "": "https://linear.app/wearehaux/document/lit-project-home-5730425b4e0d",
+  "project/tasks": "https://linear.app/wearehaux/project/spartant-design-system-b4328c010ac8/overview",
+  "project/workflow": "https://linear.app/wearehaux/document/lit-task-workflow-7ba734cb718b",
+  "project/setup": "https://linear.app/wearehaux/document/lit-local-setup-c85200d11fbd",
+  "architecture": "https://linear.app/wearehaux/document/lit-architecture-cae5b78432d0",
+  "sync/token-contract": "https://linear.app/wearehaux/document/lit-variables-and-token-contract-697f5cc75214",
+  "sync/plugin": "https://linear.app/wearehaux/document/lit-custom-figma-plugin-634833fa2f31",
+  "development/components": "https://linear.app/wearehaux/document/lit-component-development-0defea3912bc",
+  "development/storybook": "https://linear.app/wearehaux/document/lit-storybook-playground-8e8f87c88535",
+  "development/validation": "https://linear.app/wearehaux/document/lit-validation-and-evidence-85d258828d04",
+  "project/decisions": "https://linear.app/wearehaux/document/lit-decisions-8f82a07d85ac",
+  "project/changelog": "https://linear.app/wearehaux/document/lit-changelog-81baa6f6ff0f"
+};
+
+export const linearProjectIssues = linearDocs['project/tasks'];

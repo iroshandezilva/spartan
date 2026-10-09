@@ -1,0 +1,24 @@
+---
+title: "Component workflow"
+description: "Build and verify each component across code and Figma."
+---
+
+## Start with one task
+
+Create or reuse the canonical component task. Record the intended API, Figma link, and acceptance criteria in its notes. Use related Documentation tasks when substantial writing needs its own work item.
+
+## Define the contract
+
+Map Figma properties to Lit attributes and properties. Use named slots for interchangeable content. States like hover and focus are implemented as interactions, even if Figma represents them as variants. Keep the public API independent of implementation helpers.
+
+## Development track
+
+Build the Lit element with native semantics where possible. Consume generated semantic tokens. Implement keyboard, focus, disabled, loading, and form behavior as applicable. Add stories for variants, themes, density, long content, and smaller widths. Record accessibility and interaction evidence.
+
+## Figma track
+
+Follow the existing repository Figma guidelines. Preserve component links and overrides, bind design values to variables, use semantic nested Auto Layout, and verify content slots and resizing. Audit the intended modes against the same contract used by code.
+
+## Finish
+
+Mark each track Done only after its checks pass. Overall completion is calculated. If a later change invalidates one side, reopen that track on the existing task instead of creating a duplicate component task.

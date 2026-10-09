@@ -1,0 +1,17 @@
+---
+title: "Changelog"
+description: "A factual record of what changed and what still needs verification."
+---
+
+## 2026-10-09: Establish the experiment
+
+- Added a Fumadocs project hub with architecture, workflow, plugin, and validation subpages.
+- Added editable tasks with separate development and Figma statuses for components.
+- Enforced one task per component and computed completion from both tracks.
+- Added local file persistence, duplicate validation, and stale-revision protection.
+- Added an initial code-owned token fixture, CSS output, and custom plugin preview/apply flow.
+- Preserved the existing checkout's deleted React files and current Figma designs.
+
+## Verification boundary
+
+Automated checks are recorded in [Validation](/docs/development/validation). A successful JavaScript build does not prove Figma runtime compatibility. The plugin's real import, alias, re-run, and binding checks remain a tracked acceptance gate until performed in Figma.

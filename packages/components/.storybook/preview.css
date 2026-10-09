@@ -1,0 +1,10 @@
+html,
+body,
+.docs-story {
+  background: var(--sp-color-background-default);
+  color: var(--sp-color-foreground-default);
+}
+
+body {
+  font-family: var(--sp-font-family-body), system-ui, sans-serif;
+}

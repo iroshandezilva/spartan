@@ -1,0 +1,64 @@
+{
+  "name": "@spartant-lab/components",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Lit Web Components for the Spartant Lab design system experiment.",
+  "type": "module",
+  "sideEffects": [
+    "./src/index.ts",
+    "./src/components/**/define.ts",
+    "./dist/index.js",
+    "./dist/components/**/define.js",
+    "./dist/tokens.css"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./button": {
+      "types": "./dist/components/button/define.d.ts",
+      "default": "./dist/components/button/define.js"
+    },
+    "./button/class": {
+      "types": "./dist/components/button/sp-button.d.ts",
+      "default": "./dist/components/button/sp-button.js"
+    },
+    "./icon-button": {
+      "types": "./dist/components/icon-button/define.d.ts",
+      "default": "./dist/components/icon-button/define.js"
+    },
+    "./icon-button/class": {
+      "types": "./dist/components/icon-button/sp-icon-button.d.ts",
+      "default": "./dist/components/icon-button/sp-icon-button.js"
+    },
+    "./tokens.css": "./dist/tokens.css",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "rm -rf dist && tsc -p tsconfig.build.json && cp ../../public/tokens.css dist/tokens.css",
+    "typecheck": "pnpm icons:generate && tsc --noEmit",
+    "storybook": "pnpm icons:generate && storybook dev --port 6006 --host 127.0.0.1 --no-open",
+    "build-storybook": "pnpm icons:generate && storybook build --output-dir storybook-static",
+    "icons:generate": "node scripts/generate-story-icons.mjs"
+  },
+  "dependencies": {
+    "lit": "3.3.3"
+  },
+  "devDependencies": {
+    "@storybook/addon-docs": "10.6.1",
+    "@storybook/web-components-vite": "10.6.1",
+    "@types/react": "^19.3.0",
+    "react": "19.2.0",
+    "react-dom": "19.2.0",
+    "storybook": "10.6.1",
+    "typescript": "~5.9.3",
+    "vite": "8.2.2"
+  },
+  "optionalDependencies": {
+    "@central-icons-react/round-outlined-radius-2-stroke-1.5": "1.2.8"
+  }
+}
