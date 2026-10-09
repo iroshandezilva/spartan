@@ -1,22 +1,22 @@
-# Lit experiment workflow
+# Spartant project workflow
 
-Collaborative copy: [Agent workflow in Linear](https://linear.app/wearehaux/document/lit-agent-workflow-3b7ab59c7144).
+Collaborative copy: [Agent workflow in Linear](https://linear.app/wearehaux/document/agent-workflow-3b7ab59c7144).
 
 The user selected Lit, Storybook as the component playground, and a custom code-to-Figma token plugin without MCP. Project documentation and task tracking belong in Linear. These choices apply to the code at the repository root. Preserve the previous React implementation's pending deletions.
 
 ## Canonical Linear records
 
-Track the Lit experiment in the Spartant Design System Linear project. Use the `Lit experiment` label and `[Lit]` issue prefix to distinguish it from the older React work. Keep the code workspace independent.
+Track current work in the Spartant Design System Linear project. The older React issues remain historical.
 
-- [Documentation home](https://linear.app/wearehaux/document/lit-project-home-5730425b4e0d)
+- [Documentation home](https://linear.app/wearehaux/document/spartant-design-system-project-home-5730425b4e0d)
 - [Project issues](https://linear.app/wearehaux/project/spartant-design-system-b4328c010ac8/overview)
 
 Use Linear to fetch, update, and verify project documentation and issues. Do not maintain a parallel local tracker. Local MDX and `data/tasks.json` are preserved migration snapshots. Local documentation routes redirect to Linear documents; the local task API returns 410 with the Linear project URL. The previous Notion pages remain historical references.
 
 ## Task contract
 
-- Reuse one canonical Linear issue per component. Search the `Lit experiment` issues and source ID before creating a record.
-- Update Development and Figma independently through the `Lit Development` and `Lit Figma` label groups. Keep one label from each group and mirror both values in the issue description. Both must be Done for overall completion; reopening either track reopens the issue.
+- Reuse one canonical Linear issue per component. Search the project issues and source ID before creating a record.
+- Update Development and Figma independently through the `Development track` and `Figma track` label groups. Keep one label from each group and mirror both values in the issue description. Both must be Done for overall completion; reopening either track reopens the issue.
 - Move a component issue to Done only when its Development and Figma tracks are both Done.
 - Documentation, Plugin, Infrastructure, and Research work uses normal Linear issue status.
 - Preserve unverified work as Needs verification, with evidence and remaining acceptance gates in the task body.

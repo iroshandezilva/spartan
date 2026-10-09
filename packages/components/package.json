@@ -1,8 +1,8 @@
 {
-  "name": "@spartant-lab/components",
+  "name": "@spartant/components",
   "version": "0.1.0",
   "private": true,
-  "description": "Lit Web Components for the Spartant Lab design system experiment.",
+  "description": "Lit Web Components for the Spartant Design System.",
   "type": "module",
   "sideEffects": [
     "./src/index.ts",

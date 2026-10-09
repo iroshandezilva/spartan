@@ -1,6 +1,6 @@
 # Figma guideline
 
-Collaborative copy: [Figma component guideline in Linear](https://linear.app/wearehaux/document/lit-figma-component-guideline-a6670f4b71f3).
+Collaborative copy: [Figma component guideline in Linear](https://linear.app/wearehaux/document/figma-component-guideline-a6670f4b71f3).
 
 This guideline is part of the project instructions in [AGENTS.md](../AGENTS.md). Apply it when creating, editing, or reviewing Figma designs.
 

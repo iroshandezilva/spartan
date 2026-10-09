@@ -36,7 +36,7 @@ importers:
       '@figma/plugin-typings':
         specifier: 1.141.0
         version: 1.141.0
-      '@spartant-lab/components':
+      '@spartant/components':
         specifier: workspace:*
         version: link:packages/components
       '@tailwindcss/postcss':
