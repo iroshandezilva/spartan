@@ -54,6 +54,7 @@
     "lit": "3.3.3"
   },
   "devDependencies": {
+    "@storybook/addon-designs": "11.1.4",
     "@storybook/addon-docs": "10.6.1",
     "@storybook/web-components-vite": "10.6.1",
     "@types/react": "^19.3.0",

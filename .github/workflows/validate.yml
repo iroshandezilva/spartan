@@ -3,9 +3,9 @@ name: validate
 on:
   # Runs only for releases into main. Pull requests into dev are not gated by it.
   pull_request:
-    branches: [main]
+    branches: [main, dev]
   push:
-    branches: [main]
+    branches: [main, dev]
 
 permissions:
   contents: read
