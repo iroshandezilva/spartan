@@ -17,7 +17,8 @@ Use Linear to fetch, update, and verify project documentation and issues. Do not
 
 - Reuse one canonical Linear issue per component. Search the project issues and source ID before creating a record.
 - Update Development and Figma independently through the `Development track` and `Figma track` label groups. Keep one label from each group and mirror both values in the issue description. Both must be Done for overall completion; reopening either track reopens the issue.
-- Move a component issue to Done only when its Development and Figma tracks are both Done.
+- When an agent finishes work on an issue, set the issue status to **Agent Done** and record the evidence in the issue: what changed, the verification run, and the remaining gaps. Do this for every issue type, and also when only part of the issue is complete.
+- Agent Done is not Done. Move a component issue to Done only when its Development and Figma tracks are both Done.
 - Documentation, Plugin, Infrastructure, and Research work uses normal Linear issue status.
 - Preserve unverified work as Needs verification, with evidence and remaining acceptance gates in the task body.
 - Do not infer current completion from old screenshots or the historical Notion state.

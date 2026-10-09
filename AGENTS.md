@@ -7,6 +7,7 @@ This repository is the Spartant Design System. Its Lit components, Storybook, to
 - Project documentation: [Spartant project home](https://linear.app/wearehaux/document/spartant-design-system-project-home-5730425b4e0d).
 - Work tracking: [Spartant Design System in Linear](https://linear.app/wearehaux/project/spartant-design-system-b4328c010ac8/overview). Use Linear to read and update the current issues. The previous Notion hub is migration history.
 - Agent-facing guides: [Figma component guideline](https://linear.app/wearehaux/document/figma-component-guideline-a6670f4b71f3) and [agent workflow](https://linear.app/wearehaux/document/agent-workflow-3b7ab59c7144). Their `.doc/` files remain local entry points.
+- When you finish work on a Linear issue, set its status to **Agent Done** and add the evidence to the issue: what changed, the verification run, and the remaining gaps. Do this every time, including when only part of the issue is complete. Agent Done is separate from Done: the issue moves to Done only under the rules below.
 - Keep one issue per component. Update its `Dev: ...` and `Figma: ...` labels separately and mirror them in the issue description. A component is Done only when both tracks are Done. Track documentation, plugin, research, and infrastructure as separate issues.
 
 ## Components
