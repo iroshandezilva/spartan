@@ -1,0 +1,10 @@
+{
+  "title": "Project",
+  "pages": [
+    "tasks",
+    "setup",
+    "workflow",
+    "decisions",
+    "changelog"
+  ]
+}

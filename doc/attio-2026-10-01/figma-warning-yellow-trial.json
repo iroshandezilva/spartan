@@ -1,0 +1,111 @@
+{
+  "source": "https://atlassian.design/foundations/color/color-palette",
+  "before": [
+    {
+      "id": "VariableID:7:34",
+      "name": "color/warning/default",
+      "values": {
+        "4:5": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:6:67"
+        },
+        "4:6": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:6:67"
+        },
+        "53:0": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:6:69"
+        },
+        "53:1": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:6:63"
+        }
+      }
+    },
+    {
+      "id": "VariableID:7:37",
+      "name": "color/warning/foreground",
+      "values": {
+        "4:5": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:6:20"
+        },
+        "4:6": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:6:20"
+        },
+        "53:0": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:6:20"
+        },
+        "53:1": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:6:22"
+        }
+      }
+    }
+  ],
+  "after": [
+    {
+      "id": "VariableID:7:34",
+      "name": "color/warning/default",
+      "values": {
+        "4:5": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:616:2275"
+        },
+        "4:6": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:616:2275"
+        },
+        "53:0": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:6:69"
+        },
+        "53:1": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:6:63"
+        }
+      }
+    },
+    {
+      "id": "VariableID:7:37",
+      "name": "color/warning/foreground",
+      "values": {
+        "4:5": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:6:22"
+        },
+        "4:6": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:6:22"
+        },
+        "53:0": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:6:20"
+        },
+        "53:1": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:6:22"
+        }
+      }
+    }
+  ],
+  "createdVariableIds": [
+    "VariableID:616:2275"
+  ],
+  "yellow": {
+    "id": "VariableID:616:2275",
+    "name": "color/yellow/300",
+    "hex": "#EED12B"
+  },
+  "contrast": {
+    "nearBlack": 13.316806613884596,
+    "white": 1.5227876605976063
+  },
+  "protectedUnchanged": true,
+  "highContrastUnchanged": true,
+  "reviewId": "614:2207",
+  "mutatedNodeIds": []
+}

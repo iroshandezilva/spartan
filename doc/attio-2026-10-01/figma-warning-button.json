@@ -1,0 +1,2538 @@
+{
+  "warningButtonBuild": {
+    "createdNodeIds": [
+      "620:2280",
+      "620:2281",
+      "620:2282",
+      "620:2283",
+      "620:2284",
+      "620:2285",
+      "620:2286",
+      "620:2287",
+      "620:2288",
+      "620:2289",
+      "620:2290",
+      "620:2291",
+      "620:2292",
+      "620:2293",
+      "620:2294",
+      "620:2295",
+      "620:2296",
+      "620:2297",
+      "620:2298",
+      "620:2299",
+      "620:2300",
+      "620:2301",
+      "620:2302",
+      "620:2303",
+      "620:2304",
+      "620:2305",
+      "620:2306",
+      "620:2307",
+      "620:2308",
+      "620:2309",
+      "620:2310",
+      "620:2311",
+      "620:2312",
+      "620:2313",
+      "620:2314",
+      "620:2315",
+      "620:2316",
+      "620:2317",
+      "620:2318",
+      "620:2319",
+      "620:2320",
+      "620:2321",
+      "620:2322",
+      "620:2323",
+      "620:2324",
+      "620:2325",
+      "620:2326",
+      "620:2327",
+      "620:2328",
+      "620:2329",
+      "620:2330",
+      "620:2331",
+      "620:2332",
+      "620:2333",
+      "620:2334",
+      "620:2335",
+      "620:2336",
+      "620:2337",
+      "620:2338",
+      "620:2339",
+      "620:2340",
+      "620:2341",
+      "620:2342",
+      "620:2343",
+      "620:2344",
+      "620:2345",
+      "620:2346",
+      "620:2347",
+      "620:2348",
+      "620:2349",
+      "620:2350",
+      "620:2351",
+      "620:2352",
+      "620:2353",
+      "620:2354",
+      "620:2355",
+      "620:2356",
+      "620:2357",
+      "620:2358",
+      "620:2359",
+      "620:2360",
+      "620:2361",
+      "620:2362",
+      "620:2363",
+      "620:2364",
+      "620:2365",
+      "620:2366",
+      "620:2367",
+      "620:2368",
+      "620:2369",
+      "620:2389",
+      "620:2390",
+      "620:2391",
+      "620:2392",
+      "620:2393",
+      "620:2394",
+      "620:2395",
+      "620:2396",
+      "620:2397",
+      "620:2398",
+      "620:2399",
+      "620:2400",
+      "620:2401",
+      "620:2402",
+      "620:2403",
+      "620:2404",
+      "620:2405",
+      "620:2406",
+      "620:2407",
+      "620:2408",
+      "620:2409",
+      "620:2410",
+      "620:2411",
+      "620:2412",
+      "620:2413",
+      "620:2414",
+      "620:2415",
+      "620:2416",
+      "620:2417",
+      "620:2418",
+      "620:2419",
+      "620:2420",
+      "620:2421",
+      "620:2422",
+      "620:2423",
+      "620:2424",
+      "620:2425",
+      "620:2426",
+      "620:2427",
+      "620:2428",
+      "620:2429",
+      "620:2430",
+      "620:2431",
+      "620:2432",
+      "620:2433",
+      "620:2434",
+      "620:2435",
+      "620:2436",
+      "620:2437",
+      "620:2438",
+      "620:2439",
+      "620:2440",
+      "620:2441",
+      "620:2442",
+      "620:2443",
+      "620:2444",
+      "620:2445",
+      "620:2465",
+      "620:2466",
+      "620:2467",
+      "620:2468",
+      "620:2469",
+      "620:2470",
+      "620:2471",
+      "620:2472",
+      "620:2473",
+      "620:2474",
+      "620:2475",
+      "620:2476",
+      "620:2477",
+      "620:2478",
+      "620:2479",
+      "620:2480",
+      "620:2481",
+      "620:2482",
+      "620:2483",
+      "620:2484",
+      "620:2485",
+      "620:2486",
+      "620:2487",
+      "620:2488",
+      "620:2489",
+      "620:2490",
+      "620:2491",
+      "620:2492",
+      "620:2493",
+      "620:2494",
+      "620:2495",
+      "620:2496",
+      "620:2497",
+      "620:2498",
+      "620:2499",
+      "620:2500",
+      "620:2501",
+      "620:2502",
+      "620:2503",
+      "620:2504",
+      "620:2505",
+      "620:2506",
+      "620:2507",
+      "620:2508",
+      "620:2509",
+      "620:2510",
+      "620:2511",
+      "620:2512",
+      "620:2513",
+      "620:2514",
+      "620:2515",
+      "620:2516",
+      "620:2517",
+      "620:2518",
+      "620:2519",
+      "620:2520",
+      "620:2521"
+    ],
+    "mutatedNodeIds": [
+      "21:27"
+    ],
+    "createdVariableIds": [
+      "VariableID:620:2275",
+      "VariableID:620:2276",
+      "VariableID:620:2277",
+      "VariableID:620:2278",
+      "VariableID:620:2279"
+    ],
+    "variants": [
+      {
+        "id": "620:2280",
+        "name": "Variant=Warning, Size=Small, State=Default",
+        "size": "Small",
+        "state": "Default",
+        "width": 71,
+        "height": 32
+      },
+      {
+        "id": "620:2291",
+        "name": "Variant=Warning, Size=Base, State=Default",
+        "size": "Base",
+        "state": "Default",
+        "width": 85,
+        "height": 40
+      },
+      {
+        "id": "620:2302",
+        "name": "Variant=Warning, Size=Large, State=Default",
+        "size": "Large",
+        "state": "Default",
+        "width": 93,
+        "height": 48
+      },
+      {
+        "id": "620:2313",
+        "name": "Variant=Warning, Size=Small, State=Hover",
+        "size": "Small",
+        "state": "Hover",
+        "width": 71,
+        "height": 32
+      },
+      {
+        "id": "620:2324",
+        "name": "Variant=Warning, Size=Small, State=Pressed",
+        "size": "Small",
+        "state": "Pressed",
+        "width": 71,
+        "height": 32
+      },
+      {
+        "id": "620:2335",
+        "name": "Variant=Warning, Size=Small, State=Focus",
+        "size": "Small",
+        "state": "Focus",
+        "width": 71,
+        "height": 32
+      },
+      {
+        "id": "620:2347",
+        "name": "Variant=Warning, Size=Small, State=Disabled",
+        "size": "Small",
+        "state": "Disabled",
+        "width": 69,
+        "height": 32
+      },
+      {
+        "id": "620:2358",
+        "name": "Variant=Warning, Size=Small, State=Loading",
+        "size": "Small",
+        "state": "Loading",
+        "width": 71,
+        "height": 32
+      },
+      {
+        "id": "620:2389",
+        "name": "Variant=Warning, Size=Base, State=Hover",
+        "size": "Base",
+        "state": "Hover",
+        "width": 85,
+        "height": 40
+      },
+      {
+        "id": "620:2400",
+        "name": "Variant=Warning, Size=Base, State=Pressed",
+        "size": "Base",
+        "state": "Pressed",
+        "width": 85,
+        "height": 40
+      },
+      {
+        "id": "620:2411",
+        "name": "Variant=Warning, Size=Base, State=Focus",
+        "size": "Base",
+        "state": "Focus",
+        "width": 85,
+        "height": 40
+      },
+      {
+        "id": "620:2423",
+        "name": "Variant=Warning, Size=Base, State=Disabled",
+        "size": "Base",
+        "state": "Disabled",
+        "width": 83,
+        "height": 40
+      },
+      {
+        "id": "620:2434",
+        "name": "Variant=Warning, Size=Base, State=Loading",
+        "size": "Base",
+        "state": "Loading",
+        "width": 85,
+        "height": 40
+      },
+      {
+        "id": "620:2465",
+        "name": "Variant=Warning, Size=Large, State=Hover",
+        "size": "Large",
+        "state": "Hover",
+        "width": 93,
+        "height": 48
+      },
+      {
+        "id": "620:2476",
+        "name": "Variant=Warning, Size=Large, State=Pressed",
+        "size": "Large",
+        "state": "Pressed",
+        "width": 93,
+        "height": 48
+      },
+      {
+        "id": "620:2487",
+        "name": "Variant=Warning, Size=Large, State=Focus",
+        "size": "Large",
+        "state": "Focus",
+        "width": 93,
+        "height": 48
+      },
+      {
+        "id": "620:2499",
+        "name": "Variant=Warning, Size=Large, State=Disabled",
+        "size": "Large",
+        "state": "Disabled",
+        "width": 91,
+        "height": 48
+      },
+      {
+        "id": "620:2510",
+        "name": "Variant=Warning, Size=Large, State=Loading",
+        "size": "Large",
+        "state": "Loading",
+        "width": 93,
+        "height": 48
+      }
+    ],
+    "iconErrors": [],
+    "refErrors": [],
+    "contrast": [
+      {
+        "mode": "Light",
+        "state": "default",
+        "ratio": 13.316806909360526
+      },
+      {
+        "mode": "Light",
+        "state": "hover",
+        "ratio": 10.167156646652275
+      },
+      {
+        "mode": "Light",
+        "state": "active",
+        "ratio": 8.317355362393036
+      },
+      {
+        "mode": "Dark",
+        "state": "default",
+        "ratio": 13.316806909360526
+      },
+      {
+        "mode": "Dark",
+        "state": "hover",
+        "ratio": 10.167156646652275
+      },
+      {
+        "mode": "Dark",
+        "state": "active",
+        "ratio": 8.317355362393036
+      },
+      {
+        "mode": "Light High Contrast",
+        "state": "default",
+        "ratio": 11.512899991868997
+      },
+      {
+        "mode": "Light High Contrast",
+        "state": "hover",
+        "ratio": 16.132458311024354
+      },
+      {
+        "mode": "Light High Contrast",
+        "state": "active",
+        "ratio": 18.545049422813086
+      },
+      {
+        "mode": "Dark High Contrast",
+        "state": "default",
+        "ratio": 12.24829767349121
+      },
+      {
+        "mode": "Dark High Contrast",
+        "state": "hover",
+        "ratio": 15.442105409370448
+      },
+      {
+        "mode": "Dark High Contrast",
+        "state": "active",
+        "ratio": 17.474844772369742
+      }
+    ],
+    "allContrastPass": true,
+    "propertyOptions": [
+      "Primary",
+      "Secondary",
+      "Danger",
+      "Ghost",
+      "Dashed",
+      "Danger Subtle",
+      "Warning"
+    ]
+  },
+  "warningReview": {
+    "createdNodeIds": [
+      "621:2332",
+      "621:2333",
+      "621:2334",
+      "621:2335",
+      "621:2336",
+      "621:2337",
+      "621:2338",
+      "621:2353",
+      "621:2354",
+      "621:2355",
+      "621:2370",
+      "621:2371",
+      "621:2372",
+      "621:2387",
+      "621:2388",
+      "621:2389",
+      "621:2405",
+      "621:2406",
+      "621:2407",
+      "621:2422",
+      "621:2423",
+      "621:2424",
+      "621:2459",
+      "621:2460",
+      "621:2461",
+      "621:2476",
+      "621:2489",
+      "621:2504",
+      "621:2505",
+      "621:2518",
+      "621:2519",
+      "621:2520",
+      "621:2521",
+      "621:2522",
+      "621:2523",
+      "621:2536",
+      "621:2537",
+      "621:2538",
+      "621:2551",
+      "621:2552",
+      "621:2553",
+      "621:2566",
+      "621:2567",
+      "621:2568",
+      "621:2582",
+      "621:2583",
+      "621:2584",
+      "621:2597",
+      "621:2598",
+      "621:2599",
+      "621:2632",
+      "621:2633",
+      "621:2634",
+      "621:2647",
+      "621:2660",
+      "621:2673",
+      "621:2674",
+      "621:2687",
+      "621:2688",
+      "621:2689",
+      "621:2690",
+      "621:2691",
+      "621:2692",
+      "621:2705",
+      "621:2706",
+      "621:2707",
+      "621:2720",
+      "621:2721",
+      "621:2722",
+      "621:2735",
+      "621:2736",
+      "621:2737",
+      "621:2751",
+      "621:2752",
+      "621:2753",
+      "621:2766",
+      "621:2767",
+      "621:2768",
+      "621:2801",
+      "621:2802",
+      "621:2803",
+      "621:2816",
+      "621:2829",
+      "621:2842",
+      "621:2843",
+      "621:2856",
+      "621:2857",
+      "621:2858",
+      "621:2859",
+      "621:2860",
+      "621:2861",
+      "621:2874",
+      "621:2875",
+      "621:2876",
+      "621:2889",
+      "621:2890",
+      "621:2891",
+      "621:2904",
+      "621:2905",
+      "621:2906",
+      "621:2920",
+      "621:2921",
+      "621:2922",
+      "621:2935",
+      "621:2936",
+      "621:2937",
+      "621:2970",
+      "621:2971",
+      "621:2972",
+      "621:2985",
+      "621:2998",
+      "621:3011",
+      "621:3012"
+    ],
+    "mutatedNodeIds": [
+      "620:2280",
+      "620:2291",
+      "620:2302",
+      "620:2313",
+      "620:2324",
+      "620:2335",
+      "620:2347",
+      "620:2358",
+      "620:2389",
+      "620:2400",
+      "620:2411",
+      "620:2423",
+      "620:2434",
+      "620:2465",
+      "620:2476",
+      "620:2487",
+      "620:2499",
+      "620:2510"
+    ],
+    "reviewId": "621:2332",
+    "samples": [
+      {
+        "id": "621:2338",
+        "component": "620:2291",
+        "size": "Base",
+        "state": "Default"
+      },
+      {
+        "id": "621:2355",
+        "component": "620:2389",
+        "size": "Base",
+        "state": "Hover"
+      },
+      {
+        "id": "621:2372",
+        "component": "620:2400",
+        "size": "Base",
+        "state": "Pressed"
+      },
+      {
+        "id": "621:2389",
+        "component": "620:2411",
+        "size": "Base",
+        "state": "Focus"
+      },
+      {
+        "id": "621:2407",
+        "component": "620:2423",
+        "size": "Base",
+        "state": "Disabled"
+      },
+      {
+        "id": "621:2424",
+        "component": "620:2434",
+        "size": "Base",
+        "state": "Loading"
+      },
+      {
+        "id": "621:2461",
+        "component": "620:2280",
+        "size": "Small",
+        "state": "Default"
+      },
+      {
+        "id": "621:2476",
+        "component": "620:2291",
+        "size": "Base",
+        "state": "Default"
+      },
+      {
+        "id": "621:2489",
+        "component": "620:2302",
+        "size": "Large",
+        "state": "Default"
+      },
+      {
+        "id": "621:2505",
+        "component": "620:2291",
+        "size": "Base",
+        "state": "Default"
+      },
+      {
+        "id": "621:2523",
+        "component": "620:2291",
+        "size": "Base",
+        "state": "Default"
+      },
+      {
+        "id": "621:2538",
+        "component": "620:2389",
+        "size": "Base",
+        "state": "Hover"
+      },
+      {
+        "id": "621:2553",
+        "component": "620:2400",
+        "size": "Base",
+        "state": "Pressed"
+      },
+      {
+        "id": "621:2568",
+        "component": "620:2411",
+        "size": "Base",
+        "state": "Focus"
+      },
+      {
+        "id": "621:2584",
+        "component": "620:2423",
+        "size": "Base",
+        "state": "Disabled"
+      },
+      {
+        "id": "621:2599",
+        "component": "620:2434",
+        "size": "Base",
+        "state": "Loading"
+      },
+      {
+        "id": "621:2634",
+        "component": "620:2280",
+        "size": "Small",
+        "state": "Default"
+      },
+      {
+        "id": "621:2647",
+        "component": "620:2291",
+        "size": "Base",
+        "state": "Default"
+      },
+      {
+        "id": "621:2660",
+        "component": "620:2302",
+        "size": "Large",
+        "state": "Default"
+      },
+      {
+        "id": "621:2674",
+        "component": "620:2291",
+        "size": "Base",
+        "state": "Default"
+      },
+      {
+        "id": "621:2692",
+        "component": "620:2291",
+        "size": "Base",
+        "state": "Default"
+      },
+      {
+        "id": "621:2707",
+        "component": "620:2389",
+        "size": "Base",
+        "state": "Hover"
+      },
+      {
+        "id": "621:2722",
+        "component": "620:2400",
+        "size": "Base",
+        "state": "Pressed"
+      },
+      {
+        "id": "621:2737",
+        "component": "620:2411",
+        "size": "Base",
+        "state": "Focus"
+      },
+      {
+        "id": "621:2753",
+        "component": "620:2423",
+        "size": "Base",
+        "state": "Disabled"
+      },
+      {
+        "id": "621:2768",
+        "component": "620:2434",
+        "size": "Base",
+        "state": "Loading"
+      },
+      {
+        "id": "621:2803",
+        "component": "620:2280",
+        "size": "Small",
+        "state": "Default"
+      },
+      {
+        "id": "621:2816",
+        "component": "620:2291",
+        "size": "Base",
+        "state": "Default"
+      },
+      {
+        "id": "621:2829",
+        "component": "620:2302",
+        "size": "Large",
+        "state": "Default"
+      },
+      {
+        "id": "621:2843",
+        "component": "620:2291",
+        "size": "Base",
+        "state": "Default"
+      },
+      {
+        "id": "621:2861",
+        "component": "620:2291",
+        "size": "Base",
+        "state": "Default"
+      },
+      {
+        "id": "621:2876",
+        "component": "620:2389",
+        "size": "Base",
+        "state": "Hover"
+      },
+      {
+        "id": "621:2891",
+        "component": "620:2400",
+        "size": "Base",
+        "state": "Pressed"
+      },
+      {
+        "id": "621:2906",
+        "component": "620:2411",
+        "size": "Base",
+        "state": "Focus"
+      },
+      {
+        "id": "621:2922",
+        "component": "620:2423",
+        "size": "Base",
+        "state": "Disabled"
+      },
+      {
+        "id": "621:2937",
+        "component": "620:2434",
+        "size": "Base",
+        "state": "Loading"
+      },
+      {
+        "id": "621:2972",
+        "component": "620:2280",
+        "size": "Small",
+        "state": "Default"
+      },
+      {
+        "id": "621:2985",
+        "component": "620:2291",
+        "size": "Base",
+        "state": "Default"
+      },
+      {
+        "id": "621:2998",
+        "component": "620:2302",
+        "size": "Large",
+        "state": "Default"
+      },
+      {
+        "id": "621:3012",
+        "component": "620:2291",
+        "size": "Base",
+        "state": "Default"
+      }
+    ],
+    "sizing": [
+      {
+        "id": "620:2280",
+        "size": "Small",
+        "state": "Default",
+        "width": 69,
+        "height": 32,
+        "matchesSource": true
+      },
+      {
+        "id": "620:2291",
+        "size": "Base",
+        "state": "Default",
+        "width": 83,
+        "height": 40,
+        "matchesSource": true
+      },
+      {
+        "id": "620:2302",
+        "size": "Large",
+        "state": "Default",
+        "width": 91,
+        "height": 48,
+        "matchesSource": true
+      },
+      {
+        "id": "620:2313",
+        "size": "Small",
+        "state": "Hover",
+        "width": 69,
+        "height": 32,
+        "matchesSource": true
+      },
+      {
+        "id": "620:2324",
+        "size": "Small",
+        "state": "Pressed",
+        "width": 69,
+        "height": 32,
+        "matchesSource": true
+      },
+      {
+        "id": "620:2335",
+        "size": "Small",
+        "state": "Focus",
+        "width": 69,
+        "height": 32,
+        "matchesSource": true
+      },
+      {
+        "id": "620:2347",
+        "size": "Small",
+        "state": "Disabled",
+        "width": 69,
+        "height": 32,
+        "matchesSource": true
+      },
+      {
+        "id": "620:2358",
+        "size": "Small",
+        "state": "Loading",
+        "width": 69,
+        "height": 32,
+        "matchesSource": true
+      },
+      {
+        "id": "620:2389",
+        "size": "Base",
+        "state": "Hover",
+        "width": 83,
+        "height": 40,
+        "matchesSource": true
+      },
+      {
+        "id": "620:2400",
+        "size": "Base",
+        "state": "Pressed",
+        "width": 83,
+        "height": 40,
+        "matchesSource": true
+      },
+      {
+        "id": "620:2411",
+        "size": "Base",
+        "state": "Focus",
+        "width": 83,
+        "height": 40,
+        "matchesSource": true
+      },
+      {
+        "id": "620:2423",
+        "size": "Base",
+        "state": "Disabled",
+        "width": 83,
+        "height": 40,
+        "matchesSource": true
+      },
+      {
+        "id": "620:2434",
+        "size": "Base",
+        "state": "Loading",
+        "width": 83,
+        "height": 40,
+        "matchesSource": true
+      },
+      {
+        "id": "620:2465",
+        "size": "Large",
+        "state": "Hover",
+        "width": 91,
+        "height": 48,
+        "matchesSource": true
+      },
+      {
+        "id": "620:2476",
+        "size": "Large",
+        "state": "Pressed",
+        "width": 91,
+        "height": 48,
+        "matchesSource": true
+      },
+      {
+        "id": "620:2487",
+        "size": "Large",
+        "state": "Focus",
+        "width": 91,
+        "height": 48,
+        "matchesSource": true
+      },
+      {
+        "id": "620:2499",
+        "size": "Large",
+        "state": "Disabled",
+        "width": 91,
+        "height": 48,
+        "matchesSource": true
+      },
+      {
+        "id": "620:2510",
+        "size": "Large",
+        "state": "Loading",
+        "width": 91,
+        "height": 48,
+        "matchesSource": true
+      }
+    ],
+    "allSizesMatch": true,
+    "iconPass": true,
+    "iconCount": 0,
+    "dangerBindingLeaks": [
+      "I620:2369;530:96",
+      "I620:2445;530:96",
+      "I620:2521;530:96"
+    ],
+    "reviewBounds": {
+      "width": 1344,
+      "height": 647
+    }
+  },
+  "warningRepair": {
+    "mutatedNodeIds": [
+      "620:2286",
+      "620:2281",
+      "620:2283",
+      "620:2287",
+      "620:2289",
+      "620:2297",
+      "620:2292",
+      "620:2294",
+      "620:2298",
+      "620:2300",
+      "620:2308",
+      "620:2303",
+      "620:2305",
+      "620:2309",
+      "620:2311",
+      "620:2319",
+      "620:2314",
+      "620:2316",
+      "620:2320",
+      "620:2322",
+      "620:2330",
+      "620:2325",
+      "620:2327",
+      "620:2331",
+      "620:2333",
+      "620:2341",
+      "620:2336",
+      "620:2338",
+      "620:2342",
+      "620:2344",
+      "620:2335",
+      "620:2346",
+      "620:2353",
+      "620:2348",
+      "620:2350",
+      "620:2354",
+      "620:2356",
+      "620:2364",
+      "620:2359",
+      "620:2361",
+      "620:2365",
+      "620:2367",
+      "I620:2369;530:96",
+      "620:2395",
+      "620:2390",
+      "620:2392",
+      "620:2396",
+      "620:2398",
+      "620:2406",
+      "620:2401",
+      "620:2403",
+      "620:2407",
+      "620:2409",
+      "620:2417",
+      "620:2412",
+      "620:2414",
+      "620:2418",
+      "620:2420",
+      "620:2411",
+      "620:2422",
+      "620:2429",
+      "620:2424",
+      "620:2426",
+      "620:2430",
+      "620:2432",
+      "620:2440",
+      "620:2435",
+      "620:2437",
+      "620:2441",
+      "620:2443",
+      "I620:2445;530:96",
+      "620:2471",
+      "620:2466",
+      "620:2468",
+      "620:2472",
+      "620:2474",
+      "620:2482",
+      "620:2477",
+      "620:2479",
+      "620:2483",
+      "620:2485",
+      "620:2493",
+      "620:2488",
+      "620:2490",
+      "620:2494",
+      "620:2496",
+      "620:2487",
+      "620:2498",
+      "620:2505",
+      "620:2500",
+      "620:2502",
+      "620:2506",
+      "620:2508",
+      "620:2516",
+      "620:2511",
+      "620:2513",
+      "620:2517",
+      "620:2519",
+      "I620:2521;530:96",
+      "621:2338",
+      "621:2355",
+      "621:2372",
+      "621:2389",
+      "621:2407",
+      "621:2424",
+      "621:2461",
+      "621:2476",
+      "621:2489",
+      "621:2505",
+      "621:2523",
+      "621:2538",
+      "621:2553",
+      "621:2568",
+      "621:2584",
+      "621:2599",
+      "621:2634",
+      "621:2647",
+      "621:2660",
+      "621:2674",
+      "621:2692",
+      "621:2707",
+      "621:2722",
+      "621:2737",
+      "621:2753",
+      "621:2768",
+      "621:2803",
+      "621:2816",
+      "621:2829",
+      "621:2843",
+      "621:2861",
+      "621:2876",
+      "621:2891",
+      "621:2906",
+      "621:2922",
+      "621:2937",
+      "621:2972",
+      "621:2985",
+      "621:2998",
+      "621:3012"
+    ],
+    "variantCount": 18,
+    "checks": [
+      {
+        "id": "620:2280",
+        "labelRef": "Label#21:2",
+        "icons": [
+          {
+            "id": "620:2283",
+            "props": {
+              "Shape": {
+                "value": "Round",
+                "type": "VARIANT",
+                "boundVariables": {}
+              },
+              "Style": {
+                "value": "Outlined",
+                "type": "VARIANT",
+                "boundVariables": {}
+              },
+              "Radius": {
+                "value": "2",
+                "type": "VARIANT",
+                "boundVariables": {}
+              },
+              "Stroke": {
+                "value": "1.5",
+                "type": "VARIANT",
+                "boundVariables": {}
+              }
+            },
+            "ref": "Left icon#238:13"
+          },
+          {
+            "id": "620:2289",
+            "props": {
+              "Shape": {
+                "value": "Round",
+                "type": "VARIANT",
+                "boundVariables": {}
+              },
+              "Style": {
+                "value": "Outlined",
+                "type": "VARIANT",
+                "boundVariables": {}
+              },
+              "Radius": {
+                "value": "2",
+                "type": "VARIANT",
+                "boundVariables": {}
+              },
+              "Stroke": {
+                "value": "1.5",
+                "type": "VARIANT",
+                "boundVariables": {}
+              }
+            },
+            "ref": "Right icon#238:39"
+          }
+        ]
+      },
+      {
+        "id": "620:2291",
+        "labelRef": "Label#21:2",
+        "icons": [
+          {
+            "id": "620:2294",
+            "props": {
+              "Shape": {
+                "value": "Round",
+                "type": "VARIANT",
+                "boundVariables": {}
+              },
+              "Style": {
+                "value": "Outlined",
+                "type": "VARIANT",
+                "boundVariables": {}
+              },
+              "Radius": {
+                "value": "2",
+                "type": "VARIANT",
+                "boundVariables": {}
+              },
+              "Stroke": {
+                "value": "1.5",
+                "type": "VARIANT",
+                "boundVariables": {}
+              }
+            },
+            "ref": "Left icon#238:13"
+          },
+          {
+            "id": "620:2300",
+            "props": {
+              "Shape": {
+                "value": "Round",
+                "type": "VARIANT",
+                "boundVariables": {}
+              },
+              "Style": {
+                "value": "Outlined",
+                "type": "VARIANT",
+                "boundVariables": {}
+              },
+              "Radius": {
+                "value": "2",
+                "type": "VARIANT",
+                "boundVariables": {}
+              },
+              "Stroke": {
+                "value": "1.5",
+                "type": "VARIANT",
+                "boundVariables": {}
+              }
+            },
+            "ref": "Right icon#238:39"
+          }
+        ]
+      },
+      {
+        "id": "620:2302",
+        "labelRef": "Label#21:2",
+        "icons": [
+          {
+            "id": "620:2305",
+            "props": {
+              "Shape": {
+                "value": "Round",
+                "type": "VARIANT",
+                "boundVariables": {}
+              },
+              "Style": {
+                "value": "Outlined",
+                "type": "VARIANT",
+                "boundVariables": {}
+              },
+              "Radius": {
+                "value": "2",
+                "type": "VARIANT",
+                "boundVariables": {}
+              },
+              "Stroke": {
+                "value": "1.5",
+                "type": "VARIANT",
+                "boundVariables": {}
+              }
+            },
+            "ref": "Left icon#238:13"
+          },
+          {
+            "id": "620:2311",
+            "props": {
+              "Shape": {
+                "value": "Round",
+                "type": "VARIANT",
+                "boundVariables": {}
+              },
+              "Style": {
+                "value": "Outlined",
+                "type": "VARIANT",
+                "boundVariables": {}
+              },
+              "Radius": {
+                "value": "2",
+                "type": "VARIANT",
+                "boundVariables": {}
+              },
+              "Stroke": {
+                "value": "1.5",
+                "type": "VARIANT",
+                "boundVariables": {}
+              }
+            },
+            "ref": "Right icon#238:39"
+          }
+        ]
+      },
+      {
+        "id": "620:2313",
+        "labelRef": "Label#21:2",
+        "icons": [
+          {
+            "id": "620:2316",
+            "props": {
+              "Shape": {
+                "value": "Round",
+                "type": "VARIANT",
+                "boundVariables": {}
+              },
+              "Style": {
+                "value": "Outlined",
+                "type": "VARIANT",
+                "boundVariables": {}
+              },
+              "Radius": {
+                "value": "2",
+                "type": "VARIANT",
+                "boundVariables": {}
+              },
+              "Stroke": {
+                "value": "1.5",
+                "type": "VARIANT",
+                "boundVariables": {}
+              }
+            },
+            "ref": "Left icon#238:13"
+          },
+          {
+            "id": "620:2322",
+            "props": {
+              "Shape": {
+                "value": "Round",
+                "type": "VARIANT",
+                "boundVariables": {}
+              },
+              "Style": {
+                "value": "Outlined",
+                "type": "VARIANT",
+                "boundVariables": {}
+              },
+              "Radius": {
+                "value": "2",
+                "type": "VARIANT",
+                "boundVariables": {}
+              },
+              "Stroke": {
+                "value": "1.5",
+                "type": "VARIANT",
+                "boundVariables": {}
+              }
+            },
+            "ref": "Right icon#238:39"
+          }
+        ]
+      },
+      {
+        "id": "620:2324",
+        "labelRef": "Label#21:2",
+        "icons": [
+          {
+            "id": "620:2327",
+            "props": {
+              "Shape": {
+                "value": "Round",
+                "type": "VARIANT",
+                "boundVariables": {}
+              },
+              "Style": {
+                "value": "Outlined",
+                "type": "VARIANT",
+                "boundVariables": {}
+              },
+              "Radius": {
+                "value": "2",
+                "type": "VARIANT",
+                "boundVariables": {}
+              },
+              "Stroke": {
+                "value": "1.5",
+                "type": "VARIANT",
+                "boundVariables": {}
+              }
+            },
+            "ref": "Left icon#238:13"
+          },
+          {
+            "id": "620:2333",
+            "props": {
+              "Shape": {
+                "value": "Round",
+                "type": "VARIANT",
+                "boundVariables": {}
+              },
+              "Style": {
+                "value": "Outlined",
+                "type": "VARIANT",
+                "boundVariables": {}
+              },
+              "Radius": {
+                "value": "2",
+                "type": "VARIANT",
+                "boundVariables": {}
+              },
+              "Stroke": {
+                "value": "1.5",
+                "type": "VARIANT",
+                "boundVariables": {}
+              }
+            },
+            "ref": "Right icon#238:39"
+          }
+        ]
+      },
+      {
+        "id": "620:2335",
+        "labelRef": "Label#21:2",
+        "icons": [
+          {
+            "id": "620:2338",
+            "props": {
+              "Shape": {
+                "value": "Round",
+                "type": "VARIANT",
+                "boundVariables": {}
+              },
+              "Style": {
+                "value": "Outlined",
+                "type": "VARIANT",
+                "boundVariables": {}
+              },
+              "Radius": {
+                "value": "2",
+                "type": "VARIANT",
+                "boundVariables": {}
+              },
+              "Stroke": {
+                "value": "1.5",
+                "type": "VARIANT",
+                "boundVariables": {}
+              }
+            },
+            "ref": "Left icon#238:13"
+          },
+          {
+            "id": "620:2344",
+            "props": {
+              "Shape": {
+                "value": "Round",
+                "type": "VARIANT",
+                "boundVariables": {}
+              },
+              "Style": {
+                "value": "Outlined",
+                "type": "VARIANT",
+                "boundVariables": {}
+              },
+              "Radius": {
+                "value": "2",
+                "type": "VARIANT",
+                "boundVariables": {}
+              },
+              "Stroke": {
+                "value": "1.5",
+                "type": "VARIANT",
+                "boundVariables": {}
+              }
+            },
+            "ref": "Right icon#238:39"
+          }
+        ]
+      },
+      {
+        "id": "620:2347",
+        "labelRef": "Label#21:2",
+        "icons": [
+          {
+            "id": "620:2350",
+            "props": {
+              "Shape": {
+                "value": "Round",
+                "type": "VARIANT",
+                "boundVariables": {}
+              },
+              "Style": {
+                "value": "Outlined",
+                "type": "VARIANT",
+                "boundVariables": {}
+              },
+              "Radius": {
+                "value": "2",
+                "type": "VARIANT",
+                "boundVariables": {}
+              },
+              "Stroke": {
+                "value": "1.5",
+                "type": "VARIANT",
+                "boundVariables": {}
+              }
+            },
+            "ref": "Left icon#238:13"
+          },
+          {
+            "id": "620:2356",
+            "props": {
+              "Shape": {
+                "value": "Round",
+                "type": "VARIANT",
+                "boundVariables": {}
+              },
+              "Style": {
+                "value": "Outlined",
+                "type": "VARIANT",
+                "boundVariables": {}
+              },
+              "Radius": {
+                "value": "2",
+                "type": "VARIANT",
+                "boundVariables": {}
+              },
+              "Stroke": {
+                "value": "1.5",
+                "type": "VARIANT",
+                "boundVariables": {}
+              }
+            },
+            "ref": "Right icon#238:39"
+          }
+        ]
+      },
+      {
+        "id": "620:2358",
+        "labelRef": "Label#21:2",
+        "icons": [
+          {
+            "id": "620:2361",
+            "props": {
+              "Shape": {
+                "value": "Round",
+                "type": "VARIANT",
+                "boundVariables": {}
+              },
+              "Style": {
+                "value": "Outlined",
+                "type": "VARIANT",
+                "boundVariables": {}
+              },
+              "Radius": {
+                "value": "2",
+                "type": "VARIANT",
+                "boundVariables": {}
+              },
+              "Stroke": {
+                "value": "1.5",
+                "type": "VARIANT",
+                "boundVariables": {}
+              }
+            },
+            "ref": "Left icon#238:13"
+          },
+          {
+            "id": "620:2367",
+            "props": {
+              "Shape": {
+                "value": "Round",
+                "type": "VARIANT",
+                "boundVariables": {}
+              },
+              "Style": {
+                "value": "Outlined",
+                "type": "VARIANT",
+                "boundVariables": {}
+              },
+              "Radius": {
+                "value": "2",
+                "type": "VARIANT",
+                "boundVariables": {}
+              },
+              "Stroke": {
+                "value": "1.5",
+                "type": "VARIANT",
+                "boundVariables": {}
+              }
+            },
+            "ref": "Right icon#238:39"
+          }
+        ]
+      },
+      {
+        "id": "620:2389",
+        "labelRef": "Label#21:2",
+        "icons": [
+          {
+            "id": "620:2392",
+            "props": {
+              "Shape": {
+                "value": "Round",
+                "type": "VARIANT",
+                "boundVariables": {}
+              },
+              "Style": {
+                "value": "Outlined",
+                "type": "VARIANT",
+                "boundVariables": {}
+              },
+              "Radius": {
+                "value": "2",
+                "type": "VARIANT",
+                "boundVariables": {}
+              },
+              "Stroke": {
+                "value": "1.5",
+                "type": "VARIANT",
+                "boundVariables": {}
+              }
+            },
+            "ref": "Left icon#238:13"
+          },
+          {
+            "id": "620:2398",
+            "props": {
+              "Shape": {
+                "value": "Round",
+                "type": "VARIANT",
+                "boundVariables": {}
+              },
+              "Style": {
+                "value": "Outlined",
+                "type": "VARIANT",
+                "boundVariables": {}
+              },
+              "Radius": {
+                "value": "2",
+                "type": "VARIANT",
+                "boundVariables": {}
+              },
+              "Stroke": {
+                "value": "1.5",
+                "type": "VARIANT",
+                "boundVariables": {}
+              }
+            },
+            "ref": "Right icon#238:39"
+          }
+        ]
+      },
+      {
+        "id": "620:2400",
+        "labelRef": "Label#21:2",
+        "icons": [
+          {
+            "id": "620:2403",
+            "props": {
+              "Shape": {
+                "value": "Round",
+                "type": "VARIANT",
+                "boundVariables": {}
+              },
+              "Style": {
+                "value": "Outlined",
+                "type": "VARIANT",
+                "boundVariables": {}
+              },
+              "Radius": {
+                "value": "2",
+                "type": "VARIANT",
+                "boundVariables": {}
+              },
+              "Stroke": {
+                "value": "1.5",
+                "type": "VARIANT",
+                "boundVariables": {}
+              }
+            },
+            "ref": "Left icon#238:13"
+          },
+          {
+            "id": "620:2409",
+            "props": {
+              "Shape": {
+                "value": "Round",
+                "type": "VARIANT",
+                "boundVariables": {}
+              },
+              "Style": {
+                "value": "Outlined",
+                "type": "VARIANT",
+                "boundVariables": {}
+              },
+              "Radius": {
+                "value": "2",
+                "type": "VARIANT",
+                "boundVariables": {}
+              },
+              "Stroke": {
+                "value": "1.5",
+                "type": "VARIANT",
+                "boundVariables": {}
+              }
+            },
+            "ref": "Right icon#238:39"
+          }
+        ]
+      },
+      {
+        "id": "620:2411",
+        "labelRef": "Label#21:2",
+        "icons": [
+          {
+            "id": "620:2414",
+            "props": {
+              "Shape": {
+                "value": "Round",
+                "type": "VARIANT",
+                "boundVariables": {}
+              },
+              "Style": {
+                "value": "Outlined",
+                "type": "VARIANT",
+                "boundVariables": {}
+              },
+              "Radius": {
+                "value": "2",
+                "type": "VARIANT",
+                "boundVariables": {}
+              },
+              "Stroke": {
+                "value": "1.5",
+                "type": "VARIANT",
+                "boundVariables": {}
+              }
+            },
+            "ref": "Left icon#238:13"
+          },
+          {
+            "id": "620:2420",
+            "props": {
+              "Shape": {
+                "value": "Round",
+                "type": "VARIANT",
+                "boundVariables": {}
+              },
+              "Style": {
+                "value": "Outlined",
+                "type": "VARIANT",
+                "boundVariables": {}
+              },
+              "Radius": {
+                "value": "2",
+                "type": "VARIANT",
+                "boundVariables": {}
+              },
+              "Stroke": {
+                "value": "1.5",
+                "type": "VARIANT",
+                "boundVariables": {}
+              }
+            },
+            "ref": "Right icon#238:39"
+          }
+        ]
+      },
+      {
+        "id": "620:2423",
+        "labelRef": "Label#21:2",
+        "icons": [
+          {
+            "id": "620:2426",
+            "props": {
+              "Shape": {
+                "value": "Round",
+                "type": "VARIANT",
+                "boundVariables": {}
+              },
+              "Style": {
+                "value": "Outlined",
+                "type": "VARIANT",
+                "boundVariables": {}
+              },
+              "Radius": {
+                "value": "2",
+                "type": "VARIANT",
+                "boundVariables": {}
+              },
+              "Stroke": {
+                "value": "1.5",
+                "type": "VARIANT",
+                "boundVariables": {}
+              }
+            },
+            "ref": "Left icon#238:13"
+          },
+          {
+            "id": "620:2432",
+            "props": {
+              "Shape": {
+                "value": "Round",
+                "type": "VARIANT",
+                "boundVariables": {}
+              },
+              "Style": {
+                "value": "Outlined",
+                "type": "VARIANT",
+                "boundVariables": {}
+              },
+              "Radius": {
+                "value": "2",
+                "type": "VARIANT",
+                "boundVariables": {}
+              },
+              "Stroke": {
+                "value": "1.5",
+                "type": "VARIANT",
+                "boundVariables": {}
+              }
+            },
+            "ref": "Right icon#238:39"
+          }
+        ]
+      },
+      {
+        "id": "620:2434",
+        "labelRef": "Label#21:2",
+        "icons": [
+          {
+            "id": "620:2437",
+            "props": {
+              "Shape": {
+                "value": "Round",
+                "type": "VARIANT",
+                "boundVariables": {}
+              },
+              "Style": {
+                "value": "Outlined",
+                "type": "VARIANT",
+                "boundVariables": {}
+              },
+              "Radius": {
+                "value": "2",
+                "type": "VARIANT",
+                "boundVariables": {}
+              },
+              "Stroke": {
+                "value": "1.5",
+                "type": "VARIANT",
+                "boundVariables": {}
+              }
+            },
+            "ref": "Left icon#238:13"
+          },
+          {
+            "id": "620:2443",
+            "props": {
+              "Shape": {
+                "value": "Round",
+                "type": "VARIANT",
+                "boundVariables": {}
+              },
+              "Style": {
+                "value": "Outlined",
+                "type": "VARIANT",
+                "boundVariables": {}
+              },
+              "Radius": {
+                "value": "2",
+                "type": "VARIANT",
+                "boundVariables": {}
+              },
+              "Stroke": {
+                "value": "1.5",
+                "type": "VARIANT",
+                "boundVariables": {}
+              }
+            },
+            "ref": "Right icon#238:39"
+          }
+        ]
+      },
+      {
+        "id": "620:2465",
+        "labelRef": "Label#21:2",
+        "icons": [
+          {
+            "id": "620:2468",
+            "props": {
+              "Shape": {
+                "value": "Round",
+                "type": "VARIANT",
+                "boundVariables": {}
+              },
+              "Style": {
+                "value": "Outlined",
+                "type": "VARIANT",
+                "boundVariables": {}
+              },
+              "Radius": {
+                "value": "2",
+                "type": "VARIANT",
+                "boundVariables": {}
+              },
+              "Stroke": {
+                "value": "1.5",
+                "type": "VARIANT",
+                "boundVariables": {}
+              }
+            },
+            "ref": "Left icon#238:13"
+          },
+          {
+            "id": "620:2474",
+            "props": {
+              "Shape": {
+                "value": "Round",
+                "type": "VARIANT",
+                "boundVariables": {}
+              },
+              "Style": {
+                "value": "Outlined",
+                "type": "VARIANT",
+                "boundVariables": {}
+              },
+              "Radius": {
+                "value": "2",
+                "type": "VARIANT",
+                "boundVariables": {}
+              },
+              "Stroke": {
+                "value": "1.5",
+                "type": "VARIANT",
+                "boundVariables": {}
+              }
+            },
+            "ref": "Right icon#238:39"
+          }
+        ]
+      },
+      {
+        "id": "620:2476",
+        "labelRef": "Label#21:2",
+        "icons": [
+          {
+            "id": "620:2479",
+            "props": {
+              "Shape": {
+                "value": "Round",
+                "type": "VARIANT",
+                "boundVariables": {}
+              },
+              "Style": {
+                "value": "Outlined",
+                "type": "VARIANT",
+                "boundVariables": {}
+              },
+              "Radius": {
+                "value": "2",
+                "type": "VARIANT",
+                "boundVariables": {}
+              },
+              "Stroke": {
+                "value": "1.5",
+                "type": "VARIANT",
+                "boundVariables": {}
+              }
+            },
+            "ref": "Left icon#238:13"
+          },
+          {
+            "id": "620:2485",
+            "props": {
+              "Shape": {
+                "value": "Round",
+                "type": "VARIANT",
+                "boundVariables": {}
+              },
+              "Style": {
+                "value": "Outlined",
+                "type": "VARIANT",
+                "boundVariables": {}
+              },
+              "Radius": {
+                "value": "2",
+                "type": "VARIANT",
+                "boundVariables": {}
+              },
+              "Stroke": {
+                "value": "1.5",
+                "type": "VARIANT",
+                "boundVariables": {}
+              }
+            },
+            "ref": "Right icon#238:39"
+          }
+        ]
+      },
+      {
+        "id": "620:2487",
+        "labelRef": "Label#21:2",
+        "icons": [
+          {
+            "id": "620:2490",
+            "props": {
+              "Shape": {
+                "value": "Round",
+                "type": "VARIANT",
+                "boundVariables": {}
+              },
+              "Style": {
+                "value": "Outlined",
+                "type": "VARIANT",
+                "boundVariables": {}
+              },
+              "Radius": {
+                "value": "2",
+                "type": "VARIANT",
+                "boundVariables": {}
+              },
+              "Stroke": {
+                "value": "1.5",
+                "type": "VARIANT",
+                "boundVariables": {}
+              }
+            },
+            "ref": "Left icon#238:13"
+          },
+          {
+            "id": "620:2496",
+            "props": {
+              "Shape": {
+                "value": "Round",
+                "type": "VARIANT",
+                "boundVariables": {}
+              },
+              "Style": {
+                "value": "Outlined",
+                "type": "VARIANT",
+                "boundVariables": {}
+              },
+              "Radius": {
+                "value": "2",
+                "type": "VARIANT",
+                "boundVariables": {}
+              },
+              "Stroke": {
+                "value": "1.5",
+                "type": "VARIANT",
+                "boundVariables": {}
+              }
+            },
+            "ref": "Right icon#238:39"
+          }
+        ]
+      },
+      {
+        "id": "620:2499",
+        "labelRef": "Label#21:2",
+        "icons": [
+          {
+            "id": "620:2502",
+            "props": {
+              "Shape": {
+                "value": "Round",
+                "type": "VARIANT",
+                "boundVariables": {}
+              },
+              "Style": {
+                "value": "Outlined",
+                "type": "VARIANT",
+                "boundVariables": {}
+              },
+              "Radius": {
+                "value": "2",
+                "type": "VARIANT",
+                "boundVariables": {}
+              },
+              "Stroke": {
+                "value": "1.5",
+                "type": "VARIANT",
+                "boundVariables": {}
+              }
+            },
+            "ref": "Left icon#238:13"
+          },
+          {
+            "id": "620:2508",
+            "props": {
+              "Shape": {
+                "value": "Round",
+                "type": "VARIANT",
+                "boundVariables": {}
+              },
+              "Style": {
+                "value": "Outlined",
+                "type": "VARIANT",
+                "boundVariables": {}
+              },
+              "Radius": {
+                "value": "2",
+                "type": "VARIANT",
+                "boundVariables": {}
+              },
+              "Stroke": {
+                "value": "1.5",
+                "type": "VARIANT",
+                "boundVariables": {}
+              }
+            },
+            "ref": "Right icon#238:39"
+          }
+        ]
+      },
+      {
+        "id": "620:2510",
+        "labelRef": "Label#21:2",
+        "icons": [
+          {
+            "id": "620:2513",
+            "props": {
+              "Shape": {
+                "value": "Round",
+                "type": "VARIANT",
+                "boundVariables": {}
+              },
+              "Style": {
+                "value": "Outlined",
+                "type": "VARIANT",
+                "boundVariables": {}
+              },
+              "Radius": {
+                "value": "2",
+                "type": "VARIANT",
+                "boundVariables": {}
+              },
+              "Stroke": {
+                "value": "1.5",
+                "type": "VARIANT",
+                "boundVariables": {}
+              }
+            },
+            "ref": "Left icon#238:13"
+          },
+          {
+            "id": "620:2519",
+            "props": {
+              "Shape": {
+                "value": "Round",
+                "type": "VARIANT",
+                "boundVariables": {}
+              },
+              "Style": {
+                "value": "Outlined",
+                "type": "VARIANT",
+                "boundVariables": {}
+              },
+              "Radius": {
+                "value": "2",
+                "type": "VARIANT",
+                "boundVariables": {}
+              },
+              "Stroke": {
+                "value": "1.5",
+                "type": "VARIANT",
+                "boundVariables": {}
+              }
+            },
+            "ref": "Right icon#238:39"
+          }
+        ]
+      }
+    ],
+    "reviewId": "621:2332",
+    "loadingLeaks": [],
+    "reviewLabels": [
+      {
+        "id": "621:2338",
+        "expected": "Continue",
+        "actual": [
+          "Continue"
+        ]
+      },
+      {
+        "id": "621:2355",
+        "expected": "Continue",
+        "actual": [
+          "Continue"
+        ]
+      },
+      {
+        "id": "621:2372",
+        "expected": "Continue",
+        "actual": [
+          "Continue"
+        ]
+      },
+      {
+        "id": "621:2389",
+        "expected": "Continue",
+        "actual": [
+          "Continue"
+        ]
+      },
+      {
+        "id": "621:2407",
+        "expected": "Continue",
+        "actual": [
+          "Continue"
+        ]
+      },
+      {
+        "id": "621:2424",
+        "expected": "Processing",
+        "actual": [
+          "Processing"
+        ]
+      },
+      {
+        "id": "621:2461",
+        "expected": "Warn",
+        "actual": [
+          "Warn"
+        ]
+      },
+      {
+        "id": "621:2476",
+        "expected": "Warn",
+        "actual": [
+          "Warn"
+        ]
+      },
+      {
+        "id": "621:2489",
+        "expected": "Warn",
+        "actual": [
+          "Warn"
+        ]
+      },
+      {
+        "id": "621:2505",
+        "expected": "Review changes",
+        "actual": [
+          "Review changes"
+        ]
+      },
+      {
+        "id": "621:2523",
+        "expected": "Continue",
+        "actual": [
+          "Continue"
+        ]
+      },
+      {
+        "id": "621:2538",
+        "expected": "Continue",
+        "actual": [
+          "Continue"
+        ]
+      },
+      {
+        "id": "621:2553",
+        "expected": "Continue",
+        "actual": [
+          "Continue"
+        ]
+      },
+      {
+        "id": "621:2568",
+        "expected": "Continue",
+        "actual": [
+          "Continue"
+        ]
+      },
+      {
+        "id": "621:2584",
+        "expected": "Continue",
+        "actual": [
+          "Continue"
+        ]
+      },
+      {
+        "id": "621:2599",
+        "expected": "Processing",
+        "actual": [
+          "Processing"
+        ]
+      },
+      {
+        "id": "621:2634",
+        "expected": "Warn",
+        "actual": [
+          "Warn"
+        ]
+      },
+      {
+        "id": "621:2647",
+        "expected": "Warn",
+        "actual": [
+          "Warn"
+        ]
+      },
+      {
+        "id": "621:2660",
+        "expected": "Warn",
+        "actual": [
+          "Warn"
+        ]
+      },
+      {
+        "id": "621:2674",
+        "expected": "Review changes",
+        "actual": [
+          "Review changes"
+        ]
+      },
+      {
+        "id": "621:2692",
+        "expected": "Continue",
+        "actual": [
+          "Continue"
+        ]
+      },
+      {
+        "id": "621:2707",
+        "expected": "Continue",
+        "actual": [
+          "Continue"
+        ]
+      },
+      {
+        "id": "621:2722",
+        "expected": "Continue",
+        "actual": [
+          "Continue"
+        ]
+      },
+      {
+        "id": "621:2737",
+        "expected": "Continue",
+        "actual": [
+          "Continue"
+        ]
+      },
+      {
+        "id": "621:2753",
+        "expected": "Continue",
+        "actual": [
+          "Continue"
+        ]
+      },
+      {
+        "id": "621:2768",
+        "expected": "Processing",
+        "actual": [
+          "Processing"
+        ]
+      },
+      {
+        "id": "621:2803",
+        "expected": "Warn",
+        "actual": [
+          "Warn"
+        ]
+      },
+      {
+        "id": "621:2816",
+        "expected": "Warn",
+        "actual": [
+          "Warn"
+        ]
+      },
+      {
+        "id": "621:2829",
+        "expected": "Warn",
+        "actual": [
+          "Warn"
+        ]
+      },
+      {
+        "id": "621:2843",
+        "expected": "Review changes",
+        "actual": [
+          "Review changes"
+        ]
+      },
+      {
+        "id": "621:2861",
+        "expected": "Continue",
+        "actual": [
+          "Continue"
+        ]
+      },
+      {
+        "id": "621:2876",
+        "expected": "Continue",
+        "actual": [
+          "Continue"
+        ]
+      },
+      {
+        "id": "621:2891",
+        "expected": "Continue",
+        "actual": [
+          "Continue"
+        ]
+      },
+      {
+        "id": "621:2906",
+        "expected": "Continue",
+        "actual": [
+          "Continue"
+        ]
+      },
+      {
+        "id": "621:2922",
+        "expected": "Continue",
+        "actual": [
+          "Continue"
+        ]
+      },
+      {
+        "id": "621:2937",
+        "expected": "Processing",
+        "actual": [
+          "Processing"
+        ]
+      },
+      {
+        "id": "621:2972",
+        "expected": "Warn",
+        "actual": [
+          "Warn"
+        ]
+      },
+      {
+        "id": "621:2985",
+        "expected": "Warn",
+        "actual": [
+          "Warn"
+        ]
+      },
+      {
+        "id": "621:2998",
+        "expected": "Warn",
+        "actual": [
+          "Warn"
+        ]
+      },
+      {
+        "id": "621:3012",
+        "expected": "Review changes",
+        "actual": [
+          "Review changes"
+        ]
+      }
+    ]
+  },
+  "warningFinal": {
+    "mutatedNodeIds": [
+      "621:2332",
+      "621:2333",
+      "621:2336",
+      "I621:2338;620:2296",
+      "621:2353",
+      "I621:2355;620:2394",
+      "621:2370",
+      "I621:2372;620:2405",
+      "621:2387",
+      "I621:2389;620:2416",
+      "I621:2389;620:2422",
+      "621:2405",
+      "I621:2407;620:2428",
+      "621:2422",
+      "I621:2424;620:2439",
+      "621:2460",
+      "I621:2461;620:2285",
+      "I621:2476;620:2296",
+      "I621:2489;620:2307",
+      "I621:2505;620:2296",
+      "621:2518",
+      "621:2521",
+      "I621:2523;620:2296",
+      "621:2536",
+      "I621:2538;620:2394",
+      "621:2551",
+      "I621:2553;620:2405",
+      "621:2566",
+      "I621:2568;620:2416",
+      "I621:2568;620:2422",
+      "621:2582",
+      "I621:2584;620:2428",
+      "621:2597",
+      "I621:2599;620:2439",
+      "621:2633",
+      "I621:2634;620:2285",
+      "I621:2647;620:2296",
+      "I621:2660;620:2307",
+      "I621:2674;620:2296",
+      "621:2687",
+      "621:2690",
+      "I621:2692;620:2296",
+      "621:2705",
+      "I621:2707;620:2394",
+      "621:2720",
+      "I621:2722;620:2405",
+      "621:2735",
+      "I621:2737;620:2416",
+      "I621:2737;620:2422",
+      "621:2751",
+      "I621:2753;620:2428",
+      "621:2766",
+      "I621:2768;620:2439",
+      "621:2802",
+      "I621:2803;620:2285",
+      "I621:2816;620:2296",
+      "I621:2829;620:2307",
+      "I621:2843;620:2296",
+      "621:2856",
+      "621:2859",
+      "I621:2861;620:2296",
+      "621:2874",
+      "I621:2876;620:2394",
+      "621:2889",
+      "I621:2891;620:2405",
+      "621:2904",
+      "I621:2906;620:2416",
+      "I621:2906;620:2422",
+      "621:2920",
+      "I621:2922;620:2428",
+      "621:2935",
+      "I621:2937;620:2439",
+      "621:2971",
+      "I621:2972;620:2285",
+      "I621:2985;620:2296",
+      "I621:2998;620:2307",
+      "I621:3012;620:2296"
+    ],
+    "reviewId": "621:2332",
+    "variantCount": 18,
+    "iconCount": 36,
+    "iconsPass": true,
+    "focusRingContainersUnclipped": true
+  }
+}

@@ -1,0 +1,39 @@
+---
+title: "Custom Figma plugin"
+description: "Preview and apply code-owned tokens without MCP."
+---
+
+## What the plugin does
+
+The plugin reads a JSON file, validates it, compares it with local variables, and presents a change plan. It identifies new tokens, changed values or names, unchanged tokens, and managed tokens missing from the new source. Removed source tokens are reported and retained in Figma.
+
+## Use it
+
+1. Run `pnpm tokens:build` and `pnpm plugin:build` from `experiment/`.
+2. Import `plugin/manifest.json` through Figma's development plugin menu.
+3. Run the plugin in a disposable design file.
+4. Upload `tokens/source.json`.
+5. Review the plan. Apply only after the intended file and changes are confirmed.
+6. Re-run with the same file. The plan should report no value changes.
+7. Change one token, sync again, and confirm bound component layers still reference the original variable IDs.
+
+## Preserving existing work
+
+The plugin updates matched variables in place. It rejects incompatible types and ambiguous collection or variable matches. Tokens whose existing mapped IDs were deleted require an explicit repair rather than automatic recreation. Variables absent from the source are not deleted.
+
+## Failure handling
+
+The plugin rechecks the document before applying a preview and rejects stale plans. Figma mutations are not database transactions. If Figma rejects a mode or operation midway, the plugin reports failure and leaves the last-sync marker unchanged. Use Figma Undo to revert that apply group before retrying.
+
+## Runtime acceptance gate
+
+A real Figma run must verify create, update, rename with stable identity, alias resolution, light/dark modes, repeat sync, stale-plan detection, removed-token reporting, and retained bindings. Do not mark the plugin task Done from a successful bundle build alone.
+
+## Next improvements
+
+Git transport, richer token formats, conflict detection against unsynced design-side edits, and a migration assistant are tracked separately. V1 is an on-demand local-file workflow, not a background sync service.
+
+## References
+
+- [Figma: Working with variables](https://developers.figma.com/docs/plugins/working-with-variables/)
+- [Figma: Variable API](https://developers.figma.com/docs/plugins/api/Variable/)

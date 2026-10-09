@@ -1,0 +1,7094 @@
+{
+ "schema": "spartant.figma-export.v1",
+ "file": {
+  "key": "PhcMPmdpkpgxH3N83SvpBY",
+  "name": "Spartan DS"
+ },
+ "exportedAt": "2026-10-09",
+ "collections": [
+  {
+   "id": "4:2",
+   "key": "cac44078aef9c00c63e806efd2922f62c605b5c3",
+   "name": "02 Primary",
+   "modes": [
+    {
+     "id": "4:0",
+     "name": "Blue"
+    },
+    {
+     "id": "4:1",
+     "name": "Purple"
+    },
+    {
+     "id": "4:2",
+     "name": "Orange"
+    },
+    {
+     "id": "4:3",
+     "name": "Sky"
+    }
+   ],
+   "variables": [
+    {
+     "id": "6:72",
+     "key": "1bafa4c5244bb3f8185fe092c1c2c8bc542878a6",
+     "name": "color/primary/0",
+     "type": "COLOR",
+     "css": "var(--spartant-figma-color-primary-0)",
+     "values": [
+      [
+       1,
+       1,
+       1,
+       1
+      ],
+      [
+       1,
+       1,
+       1,
+       1
+      ],
+      [
+       1,
+       1,
+       1,
+       1
+      ],
+      [
+       1,
+       1,
+       1,
+       1
+      ]
+     ]
+    },
+    {
+     "id": "6:73",
+     "key": "01a804844110b8d626e3db479ce2223d2c525181",
+     "name": "color/primary/100",
+     "type": "COLOR",
+     "css": "var(--spartant-figma-color-primary-100)",
+     "values": [
+      [
+       0.894118,
+       0.941176,
+       0.996078,
+       1
+      ],
+      [
+       0.945098,
+       0.921569,
+       1,
+       1
+      ],
+      [
+       1,
+       0.917647,
+       0.870588,
+       1
+      ],
+      [
+       0.862745,
+       0.952941,
+       0.992157,
+       1
+      ]
+     ]
+    },
+    {
+     "id": "6:74",
+     "key": "f9558196220d8a8ead50ad104c7ad41129ad7e16",
+     "name": "color/primary/1000",
+     "type": "COLOR",
+     "css": "var(--spartant-figma-color-primary-1000)",
+     "values": [
+      [
+       0,
+       0.023529,
+       0.070588,
+       1
+      ],
+      [
+       0.031373,
+       0.007843,
+       0.078431,
+       1
+      ],
+      [
+       0.058824,
+       0.011765,
+       0,
+       1
+      ],
+      [
+       0,
+       0.027451,
+       0.047059,
+       1
+      ]
+     ]
+    },
+    {
+     "id": "6:75",
+     "key": "008d2021cf436287a88a5abe7a52b34b803b8a5a",
+     "name": "color/primary/200",
+     "type": "COLOR",
+     "css": "var(--spartant-figma-color-primary-200)",
+     "values": [
+      [
+       0.807843,
+       0.894118,
+       1,
+       1
+      ],
+      [
+       0.901961,
+       0.854902,
+       1,
+       1
+      ],
+      [
+       1,
+       0.847059,
+       0.764706,
+       1
+      ],
+      [
+       0.733333,
+       0.917647,
+       0.992157,
+       1
+      ]
+     ]
+    },
+    {
+     "id": "6:76",
+     "key": "4033de11a0dbbd0611ae6494b84f5900ba8de18a",
+     "name": "color/primary/300",
+     "type": "COLOR",
+     "css": "var(--spartant-figma-color-primary-300)",
+     "values": [
+      [
+       0.65098,
+       0.807843,
+       1,
+       1
+      ],
+      [
+       0.831373,
+       0.741176,
+       1,
+       1
+      ],
+      [
+       1,
+       0.721569,
+       0.568627,
+       1
+      ],
+      [
+       0.486275,
+       0.85098,
+       0.988235,
+       1
+      ]
+     ]
+    },
+    {
+     "id": "6:77",
+     "key": "bb87f245c2bf52db913691a0e23d17962352c796",
+     "name": "color/primary/400",
+     "type": "COLOR",
+     "css": "var(--spartant-figma-color-primary-400)",
+     "values": [
+      [
+       0.415686,
+       0.682353,
+       1,
+       1
+      ],
+      [
+       0.733333,
+       0.568627,
+       1,
+       1
+      ],
+      [
+       1,
+       0.517647,
+       0.196078,
+       1
+      ],
+      [
+       0,
+       0.737255,
+       0.929412,
+       1
+      ]
+     ]
+    },
+    {
+     "id": "6:78",
+     "key": "8f333a5d10fe80b79278ae68d890e1e6d86a6f04",
+     "name": "color/primary/50",
+     "type": "COLOR",
+     "css": "var(--spartant-figma-color-primary-50)",
+     "values": [
+      [
+       0.956863,
+       0.976471,
+       1,
+       1
+      ],
+      [
+       0.976471,
+       0.968627,
+       1,
+       1
+      ],
+      [
+       1,
+       0.968627,
+       0.94902,
+       1
+      ],
+      [
+       0.941176,
+       0.980392,
+       1,
+       1
+      ]
+     ]
+    },
+    {
+     "id": "6:79",
+     "key": "c5c44f88ca3265d964a6324cbd021a9563c4edad",
+     "name": "color/primary/500",
+     "type": "COLOR",
+     "css": "var(--spartant-figma-color-primary-500)",
+     "values": [
+      [
+       0.015686,
+       0.521569,
+       0.968627,
+       1
+      ],
+      [
+       0.627451,
+       0.321569,
+       1,
+       1
+      ],
+      [
+       0.819608,
+       0.380392,
+       0,
+       1
+      ],
+      [
+       0,
+       0.580392,
+       0.733333,
+       1
+      ]
+     ]
+    },
+    {
+     "id": "6:80",
+     "key": "2c14889fd2ca4ae0f17acd7106fd16d25053256d",
+     "name": "color/primary/600",
+     "type": "COLOR",
+     "css": "var(--spartant-figma-color-primary-600)",
+     "values": [
+      [
+       0,
+       0.427451,
+       0.807843,
+       1
+      ],
+      [
+       0.537255,
+       0.2,
+       0.894118,
+       1
+      ],
+      [
+       0.678431,
+       0.313726,
+       0,
+       1
+      ],
+      [
+       0,
+       0.478431,
+       0.607843,
+       1
+      ]
+     ]
+    },
+    {
+     "id": "6:81",
+     "key": "16f7b0d12162e03260718141bc3a3b89b4f63394",
+     "name": "color/primary/700",
+     "type": "COLOR",
+     "css": "var(--spartant-figma-color-primary-700)",
+     "values": [
+      [
+       0,
+       0.329412,
+       0.631373,
+       1
+      ],
+      [
+       0.419608,
+       0.121569,
+       0.717647,
+       1
+      ],
+      [
+       0.529412,
+       0.239216,
+       0,
+       1
+      ],
+      [
+       0,
+       0.372549,
+       0.47451,
+       1
+      ]
+     ]
+    },
+    {
+     "id": "6:82",
+     "key": "3439e11b00788d57c55fb84efd2a916717d52cc0",
+     "name": "color/primary/800",
+     "type": "COLOR",
+     "css": "var(--spartant-figma-color-primary-800)",
+     "values": [
+      [
+       0,
+       0.227451,
+       0.447059,
+       1
+      ],
+      [
+       0.290196,
+       0.078431,
+       0.505882,
+       1
+      ],
+      [
+       0.372549,
+       0.160784,
+       0,
+       1
+      ],
+      [
+       0,
+       0.254902,
+       0.329412,
+       1
+      ]
+     ]
+    },
+    {
+     "id": "6:83",
+     "key": "e933d298a2b0cdfbf11325eb85cd16406f3f591d",
+     "name": "color/primary/900",
+     "type": "COLOR",
+     "css": "var(--spartant-figma-color-primary-900)",
+     "values": [
+      [
+       0,
+       0.129412,
+       0.27451,
+       1
+      ],
+      [
+       0.172549,
+       0.039216,
+       0.309804,
+       1
+      ],
+      [
+       0.227451,
+       0.086275,
+       0,
+       1
+      ],
+      [
+       0,
+       0.14902,
+       0.2,
+       1
+      ]
+     ]
+    },
+    {
+     "id": "6:84",
+     "key": "1ff5dceba3948a670118d6971180576f4cd81f8e",
+     "name": "color/primary/950",
+     "type": "COLOR",
+     "css": "var(--spartant-figma-color-primary-950)",
+     "values": [
+      [
+       0,
+       0.07451,
+       0.180392,
+       1
+      ],
+      [
+       0.105882,
+       0.019608,
+       0.2,
+       1
+      ],
+      [
+       0.145098,
+       0.043137,
+       0,
+       1
+      ],
+      [
+       0,
+       0.090196,
+       0.12549,
+       1
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "id": "4:3",
+   "key": "73255d169518702c66e76c5c0ec95ebab6455aa5",
+   "name": "01 Primitives",
+   "modes": [
+    {
+     "id": "4:4",
+     "name": "Value"
+    }
+   ],
+   "variables": [
+    {
+     "id": "8:21",
+     "key": "ea7d24b111d8d2ecf99b2ea960ca8af64ae2647d",
+     "name": "border-width/thick",
+     "type": "FLOAT",
+     "css": "var(--spartant-figma-primitive-border-width-thick)",
+     "values": [
+      2
+     ]
+    },
+    {
+     "id": "8:20",
+     "key": "b5485f9a6a1cebfe5d958f5246f8edcf33ae5fa1",
+     "name": "border-width/thin",
+     "type": "FLOAT",
+     "css": "var(--spartant-figma-primitive-border-width-thin)",
+     "values": [
+      1
+     ]
+    },
+    {
+     "id": "6:33",
+     "key": "f650a01869c92734b2d439f47fffbda8579f472d",
+     "name": "color/accent/0",
+     "type": "COLOR",
+     "css": "var(--spartant-figma-color-accent-0)",
+     "values": [
+      [
+       1,
+       1,
+       1,
+       1
+      ]
+     ]
+    },
+    {
+     "id": "6:34",
+     "key": "5700e6c188f52605ed0b53dbf5aa391a982d9ff5",
+     "name": "color/accent/100",
+     "type": "COLOR",
+     "css": "var(--spartant-figma-color-accent-100)",
+     "values": [
+      [
+       0.941176,
+       0.92549,
+       0.984314,
+       1
+      ]
+     ]
+    },
+    {
+     "id": "6:35",
+     "key": "88c57949261cb461012572d3b9190b351bbbb275",
+     "name": "color/accent/1000",
+     "type": "COLOR",
+     "css": "var(--spartant-figma-color-accent-1000)",
+     "values": [
+      [
+       0.027451,
+       0.011765,
+       0.062745,
+       1
+      ]
+     ]
+    },
+    {
+     "id": "6:36",
+     "key": "a1efbd49d56c59184beca23af77cf425940079aa",
+     "name": "color/accent/200",
+     "type": "COLOR",
+     "css": "var(--spartant-figma-color-accent-200)",
+     "values": [
+      [
+       0.898039,
+       0.858824,
+       0.984314,
+       1
+      ]
+     ]
+    },
+    {
+     "id": "6:37",
+     "key": "df8f36067c1f7cb43e9980e39ec2ad5c5baa934d",
+     "name": "color/accent/300",
+     "type": "COLOR",
+     "css": "var(--spartant-figma-color-accent-300)",
+     "values": [
+      [
+       0.823529,
+       0.74902,
+       0.968627,
+       1
+      ]
+     ]
+    },
+    {
+     "id": "6:38",
+     "key": "3ac3486ff6f859f32a93c2caf7ac02c28a927041",
+     "name": "color/accent/400",
+     "type": "COLOR",
+     "css": "var(--spartant-figma-color-accent-400)",
+     "values": [
+      [
+       0.721569,
+       0.592157,
+       0.941176,
+       1
+      ]
+     ]
+    },
+    {
+     "id": "6:39",
+     "key": "bbba20ab5f82e0c439a7fcd9582e8dc419884b5e",
+     "name": "color/accent/50",
+     "type": "COLOR",
+     "css": "var(--spartant-figma-color-accent-50)",
+     "values": [
+      [
+       0.976471,
+       0.968627,
+       1,
+       1
+      ]
+     ]
+    },
+    {
+     "id": "6:40",
+     "key": "bf27dea95e61392ad4b04ccd0b55720d923e7e74",
+     "name": "color/accent/500",
+     "type": "COLOR",
+     "css": "var(--spartant-figma-color-accent-500)",
+     "values": [
+      [
+       0.596078,
+       0.403922,
+       0.882353,
+       1
+      ]
+     ]
+    },
+    {
+     "id": "6:41",
+     "key": "d0d95d5d754792ff6a7448b1e790b7c005329fd1",
+     "name": "color/accent/600",
+     "type": "COLOR",
+     "css": "var(--spartant-figma-color-accent-600)",
+     "values": [
+      [
+       0.501961,
+       0.309804,
+       0.768627,
+       1
+      ]
+     ]
+    },
+    {
+     "id": "6:42",
+     "key": "ec3069047552aca1238fd3565ea5b2b4293c4eb3",
+     "name": "color/accent/700",
+     "type": "COLOR",
+     "css": "var(--spartant-figma-color-accent-700)",
+     "values": [
+      [
+       0.392157,
+       0.227451,
+       0.615686,
+       1
+      ]
+     ]
+    },
+    {
+     "id": "6:43",
+     "key": "66f09360efec7ca40fb61de71ced2bd3733bf7bb",
+     "name": "color/accent/800",
+     "type": "COLOR",
+     "css": "var(--spartant-figma-color-accent-800)",
+     "values": [
+      [
+       0.270588,
+       0.152941,
+       0.431373,
+       1
+      ]
+     ]
+    },
+    {
+     "id": "6:44",
+     "key": "71a119c6fc339f8b9ea785c56a74c47ec3f3c0a3",
+     "name": "color/accent/900",
+     "type": "COLOR",
+     "css": "var(--spartant-figma-color-accent-900)",
+     "values": [
+      [
+       0.156863,
+       0.082353,
+       0.262745,
+       1
+      ]
+     ]
+    },
+    {
+     "id": "6:45",
+     "key": "dc28ff70b9e9f12c14d6dc191e54412b85bf3986",
+     "name": "color/accent/950",
+     "type": "COLOR",
+     "css": "var(--spartant-figma-color-accent-950)",
+     "values": [
+      [
+       0.094118,
+       0.043137,
+       0.168627,
+       1
+      ]
+     ]
+    },
+    {
+     "id": "110:2",
+     "key": "31943410961d4d1e4c509b1ecc6dd783e1668ac1",
+     "name": "color/blue/0",
+     "type": "COLOR",
+     "css": "var(--spartant-color-blue-0)",
+     "values": [
+      [
+       1,
+       1,
+       1,
+       1
+      ]
+     ]
+    },
+    {
+     "id": "110:4",
+     "key": "8455db26475b792b4a09effafff9a54ad4a43381",
+     "name": "color/blue/100",
+     "type": "COLOR",
+     "css": "var(--spartant-color-blue-100)",
+     "values": [
+      [
+       0.894118,
+       0.941176,
+       0.996078,
+       1
+      ]
+     ]
+    },
+    {
+     "id": "110:14",
+     "key": "ee4b522b7c8973a5b020a682b997723820f56945",
+     "name": "color/blue/1000",
+     "type": "COLOR",
+     "css": "var(--spartant-color-blue-1000)",
+     "values": [
+      [
+       0,
+       0.023529,
+       0.070588,
+       1
+      ]
+     ]
+    },
+    {
+     "id": "110:5",
+     "key": "5b52df01f9890cbac1a51dee998589ccf36657b1",
+     "name": "color/blue/200",
+     "type": "COLOR",
+     "css": "var(--spartant-color-blue-200)",
+     "values": [
+      [
+       0.807843,
+       0.894118,
+       1,
+       1
+      ]
+     ]
+    },
+    {
+     "id": "110:6",
+     "key": "050c3da403886cbb9e5688c2b51d9831b197b271",
+     "name": "color/blue/300",
+     "type": "COLOR",
+     "css": "var(--spartant-color-blue-300)",
+     "values": [
+      [
+       0.65098,
+       0.807843,
+       1,
+       1
+      ]
+     ]
+    },
+    {
+     "id": "110:7",
+     "key": "85ff964fea28d0603ab9365c04f8b0380e279b11",
+     "name": "color/blue/400",
+     "type": "COLOR",
+     "css": "var(--spartant-color-blue-400)",
+     "values": [
+      [
+       0.415686,
+       0.682353,
+       1,
+       1
+      ]
+     ]
+    },
+    {
+     "id": "110:3",
+     "key": "8cf0f16cc1c8752eba4f8d9e98d0a13868c1c382",
+     "name": "color/blue/50",
+     "type": "COLOR",
+     "css": "var(--spartant-color-blue-50)",
+     "values": [
+      [
+       0.956863,
+       0.976471,
+       1,
+       1
+      ]
+     ]
+    },
+    {
+     "id": "110:8",
+     "key": "0e3cdaf12b3419b2319f9986b50d5121a67ce556",
+     "name": "color/blue/500",
+     "type": "COLOR",
+     "css": "var(--spartant-color-blue-500)",
+     "values": [
+      [
+       0.015686,
+       0.521569,
+       0.968627,
+       1
+      ]
+     ]
+    },
+    {
+     "id": "110:9",
+     "key": "73a39de884be0c09068de5c9353c66d8771064b9",
+     "name": "color/blue/600",
+     "type": "COLOR",
+     "css": "var(--spartant-color-blue-600)",
+     "values": [
+      [
+       0,
+       0.427451,
+       0.807843,
+       1
+      ]
+     ]
+    },
+    {
+     "id": "110:10",
+     "key": "a841b2ab3263807581bd2b83ba623f09036075d0",
+     "name": "color/blue/700",
+     "type": "COLOR",
+     "css": "var(--spartant-color-blue-700)",
+     "values": [
+      [
+       0,
+       0.329412,
+       0.631373,
+       1
+      ]
+     ]
+    },
+    {
+     "id": "110:11",
+     "key": "cda526e7c2f19561d3eab532ecac2ee4405a1cc6",
+     "name": "color/blue/800",
+     "type": "COLOR",
+     "css": "var(--spartant-color-blue-800)",
+     "values": [
+      [
+       0,
+       0.227451,
+       0.447059,
+       1
+      ]
+     ]
+    },
+    {
+     "id": "110:12",
+     "key": "d82380257c6560d4b3aab5b95a2a1a1d257c460e",
+     "name": "color/blue/900",
+     "type": "COLOR",
+     "css": "var(--spartant-color-blue-900)",
+     "values": [
+      [
+       0,
+       0.129412,
+       0.27451,
+       1
+      ]
+     ]
+    },
+    {
+     "id": "110:13",
+     "key": "903265b3e1a725b7e7a8e0e74577a4931884a762",
+     "name": "color/blue/950",
+     "type": "COLOR",
+     "css": "var(--spartant-color-blue-950)",
+     "values": [
+      [
+       0,
+       0.07451,
+       0.180392,
+       1
+      ]
+     ]
+    },
+    {
+     "id": "5:2",
+     "key": "64d58f8b75cecfde31f61d4c4f228e2d3884b969",
+     "name": "color/danger/0",
+     "type": "COLOR",
+     "css": "var(--spartant-figma-color-danger-0)",
+     "values": [
+      [
+       1,
+       1,
+       1,
+       1
+      ]
+     ]
+    },
+    {
+     "id": "5:3",
+     "key": "038b19346d0a6553a2cfc38e3f673050e68792b7",
+     "name": "color/danger/100",
+     "type": "COLOR",
+     "css": "var(--spartant-figma-color-danger-100)",
+     "values": [
+      [
+       1,
+       0.913725,
+       0.901961,
+       1
+      ]
+     ]
+    },
+    {
+     "id": "5:4",
+     "key": "8d78994232ac5891b79676ef070a1a0aec2a4746",
+     "name": "color/danger/1000",
+     "type": "COLOR",
+     "css": "var(--spartant-figma-color-danger-1000)",
+     "values": [
+      [
+       0.070588,
+       0.003922,
+       0.003922,
+       1
+      ]
+     ]
+    },
+    {
+     "id": "5:5",
+     "key": "70a61d4f9db433cf3ede0f3169905c8deab079a9",
+     "name": "color/danger/200",
+     "type": "COLOR",
+     "css": "var(--spartant-figma-color-danger-200)",
+     "values": [
+      [
+       1,
+       0.839216,
+       0.823529,
+       1
+      ]
+     ]
+    },
+    {
+     "id": "5:6",
+     "key": "f67f69c4dd8f3a5267155c9b49876df5db743f29",
+     "name": "color/danger/300",
+     "type": "COLOR",
+     "css": "var(--spartant-figma-color-danger-300)",
+     "values": [
+      [
+       1,
+       0.709804,
+       0.682353,
+       1
+      ]
+     ]
+    },
+    {
+     "id": "5:7",
+     "key": "4fb29452def1fac5ca7624f5c155bb7d649d21d4",
+     "name": "color/danger/400",
+     "type": "COLOR",
+     "css": "var(--spartant-figma-color-danger-400)",
+     "values": [
+      [
+       1,
+       0.494118,
+       0.466667,
+       1
+      ]
+     ]
+    },
+    {
+     "id": "5:8",
+     "key": "c5634444aee4a52bdd51f3257e0f5f067fac4a60",
+     "name": "color/danger/50",
+     "type": "COLOR",
+     "css": "var(--spartant-figma-color-danger-50)",
+     "values": [
+      [
+       1,
+       0.964706,
+       0.960784,
+       1
+      ]
+     ]
+    },
+    {
+     "id": "5:9",
+     "key": "4bfc213b7f721e03adb1b7b5afc5f243912fc33b",
+     "name": "color/danger/500",
+     "type": "COLOR",
+     "css": "var(--spartant-figma-color-danger-500)",
+     "values": [
+      [
+       0.960784,
+       0.113725,
+       0.192157,
+       1
+      ]
+     ]
+    },
+    {
+     "id": "6:2",
+     "key": "14f3dce1c542afd3c93046e3deb829288b80ac9c",
+     "name": "color/danger/600",
+     "type": "COLOR",
+     "css": "var(--spartant-figma-color-danger-600)",
+     "values": [
+      [
+       0.815686,
+       0,
+       0.129412,
+       1
+      ]
+     ]
+    },
+    {
+     "id": "6:3",
+     "key": "250ac1073b0dfabdd7e6a599afbbb7ecd8d27479",
+     "name": "color/danger/700",
+     "type": "COLOR",
+     "css": "var(--spartant-figma-color-danger-700)",
+     "values": [
+      [
+       0.639216,
+       0,
+       0.094118,
+       1
+      ]
+     ]
+    },
+    {
+     "id": "6:4",
+     "key": "14822a8e42c07bccf9a5b2aab47f2e0e266289c6",
+     "name": "color/danger/800",
+     "type": "COLOR",
+     "css": "var(--spartant-figma-color-danger-800)",
+     "values": [
+      [
+       0.45098,
+       0,
+       0.054902,
+       1
+      ]
+     ]
+    },
+    {
+     "id": "6:5",
+     "key": "c298a0824838704b3a42c5cef3f75b92a243e0e6",
+     "name": "color/danger/900",
+     "type": "COLOR",
+     "css": "var(--spartant-figma-color-danger-900)",
+     "values": [
+      [
+       0.278431,
+       0,
+       0.019608,
+       1
+      ]
+     ]
+    },
+    {
+     "id": "6:6",
+     "key": "80cc1f67af8329e1b594d1f052d60d06e33cf13b",
+     "name": "color/danger/950",
+     "type": "COLOR",
+     "css": "var(--spartant-figma-color-danger-950)",
+     "values": [
+      [
+       0.180392,
+       0,
+       0.007843,
+       1
+      ]
+     ]
+    },
+    {
+     "id": "6:7",
+     "key": "d839387b46ca511cf73173a16c0c2a4d377d029b",
+     "name": "color/information/0",
+     "type": "COLOR",
+     "css": "var(--spartant-figma-color-information-0)",
+     "values": [
+      [
+       1,
+       1,
+       1,
+       1
+      ]
+     ]
+    },
+    {
+     "id": "6:8",
+     "key": "7055577b09681ebfb2e645c4bc22465b852fd8ca",
+     "name": "color/information/100",
+     "type": "COLOR",
+     "css": "var(--spartant-figma-color-information-100)",
+     "values": [
+      [
+       0.882353,
+       0.945098,
+       0.992157,
+       1
+      ]
+     ]
+    },
+    {
+     "id": "6:9",
+     "key": "3b174e9601b90042803df65634a57ec18bcc28ea",
+     "name": "color/information/1000",
+     "type": "COLOR",
+     "css": "var(--spartant-figma-color-information-1000)",
+     "values": [
+      [
+       0,
+       0.027451,
+       0.058824,
+       1
+      ]
+     ]
+    },
+    {
+     "id": "6:10",
+     "key": "370e83269fd9a5a2634b5733bc5b973724e2574e",
+     "name": "color/information/200",
+     "type": "COLOR",
+     "css": "var(--spartant-figma-color-information-200)",
+     "values": [
+      [
+       0.776471,
+       0.901961,
+       0.996078,
+       1
+      ]
+     ]
+    },
+    {
+     "id": "6:11",
+     "key": "986a305492322e164adb707a307a34b2fe087475",
+     "name": "color/information/300",
+     "type": "COLOR",
+     "css": "var(--spartant-figma-color-information-300)",
+     "values": [
+      [
+       0.592157,
+       0.827451,
+       0.992157,
+       1
+      ]
+     ]
+    },
+    {
+     "id": "6:12",
+     "key": "9aed3fc3235d413f28146dd219aac653c0545b42",
+     "name": "color/information/400",
+     "type": "COLOR",
+     "css": "var(--spartant-figma-color-information-400)",
+     "values": [
+      [
+       0.27451,
+       0.709804,
+       0.980392,
+       1
+      ]
+     ]
+    },
+    {
+     "id": "6:13",
+     "key": "cfcb14e9f4349d7cd4163f07e69bf8acac7ae916",
+     "name": "color/information/50",
+     "type": "COLOR",
+     "css": "var(--spartant-figma-color-information-50)",
+     "values": [
+      [
+       0.94902,
+       0.980392,
+       1,
+       1
+      ]
+     ]
+    },
+    {
+     "id": "6:14",
+     "key": "877d6ab5608fe45350dd8f7d3ce84f39989f03f8",
+     "name": "color/information/500",
+     "type": "COLOR",
+     "css": "var(--spartant-figma-color-information-500)",
+     "values": [
+      [
+       0,
+       0.560784,
+       0.823529,
+       1
+      ]
+     ]
+    },
+    {
+     "id": "6:15",
+     "key": "7d2507c3bad10b27cd7f635b627f9f7d387d7b6f",
+     "name": "color/information/600",
+     "type": "COLOR",
+     "css": "var(--spartant-figma-color-information-600)",
+     "values": [
+      [
+       0,
+       0.462745,
+       0.686275,
+       1
+      ]
+     ]
+    },
+    {
+     "id": "6:16",
+     "key": "da507da9b289732e0030c420517aaf5464c25091",
+     "name": "color/information/700",
+     "type": "COLOR",
+     "css": "var(--spartant-figma-color-information-700)",
+     "values": [
+      [
+       0,
+       0.356863,
+       0.533333,
+       1
+      ]
+     ]
+    },
+    {
+     "id": "6:17",
+     "key": "3128ce4744e5b992d969f116dbe18d3badbd2896",
+     "name": "color/information/800",
+     "type": "COLOR",
+     "css": "var(--spartant-figma-color-information-800)",
+     "values": [
+      [
+       0,
+       0.247059,
+       0.376471,
+       1
+      ]
+     ]
+    },
+    {
+     "id": "6:18",
+     "key": "7bfe1b661b87c402a5042eb8994137d3873ef716",
+     "name": "color/information/900",
+     "type": "COLOR",
+     "css": "var(--spartant-figma-color-information-900)",
+     "values": [
+      [
+       0,
+       0.141176,
+       0.227451,
+       1
+      ]
+     ]
+    },
+    {
+     "id": "6:19",
+     "key": "5e8e48dc0834c9e648ee02520804644f93450781",
+     "name": "color/information/950",
+     "type": "COLOR",
+     "css": "var(--spartant-figma-color-information-950)",
+     "values": [
+      [
+       0,
+       0.086275,
+       0.145098,
+       1
+      ]
+     ]
+    },
+    {
+     "id": "6:20",
+     "key": "3f040b4b2e0ecb02b04b49e1790ce985293d320a",
+     "name": "color/neutral/0",
+     "type": "COLOR",
+     "css": "var(--spartant-figma-color-neutral-0)",
+     "values": [
+      [
+       1,
+       1,
+       1,
+       1
+      ]
+     ]
+    },
+    {
+     "id": "6:21",
+     "key": "e0dea8584d64bd6bd9bdc117d1c3a52ded958996",
+     "name": "color/neutral/100",
+     "type": "COLOR",
+     "css": "var(--spartant-figma-color-neutral-100)",
+     "values": [
+      [
+       0.929412,
+       0.933333,
+       0.941176,
+       1
+      ]
+     ]
+    },
+    {
+     "id": "6:22",
+     "key": "9a758c1ba70b9d4bf8360c87dc1e79f8fb901746",
+     "name": "color/neutral/1000",
+     "type": "COLOR",
+     "css": "var(--spartant-figma-color-neutral-1000)",
+     "values": [
+      [
+       0.019608,
+       0.023529,
+       0.027451,
+       1
+      ]
+     ]
+    },
+    {
+     "id": "6:23",
+     "key": "f71cbe4b6e0e3cc1777f4ca7bdee6b3a26a01e58",
+     "name": "color/neutral/200",
+     "type": "COLOR",
+     "css": "var(--spartant-figma-color-neutral-200)",
+     "values": [
+      [
+       0.87451,
+       0.882353,
+       0.898039,
+       1
+      ]
+     ]
+    },
+    {
+     "id": "6:24",
+     "key": "aba86a7f33b7839729440c562f9792608ffce1a9",
+     "name": "color/neutral/300",
+     "type": "COLOR",
+     "css": "var(--spartant-figma-color-neutral-300)",
+     "values": [
+      [
+       0.776471,
+       0.796078,
+       0.819608,
+       1
+      ]
+     ]
+    },
+    {
+     "id": "6:25",
+     "key": "468e48df316d3dd8c3cb715e8a8e056c99b373b0",
+     "name": "color/neutral/400",
+     "type": "COLOR",
+     "css": "var(--spartant-figma-color-neutral-400)",
+     "values": [
+      [
+       0.643137,
+       0.67451,
+       0.713726,
+       1
+      ]
+     ]
+    },
+    {
+     "id": "6:26",
+     "key": "f4fdfb38eccfb827509813bf3b2fc2467ff7f17a",
+     "name": "color/neutral/50",
+     "type": "COLOR",
+     "css": "var(--spartant-figma-color-neutral-50)",
+     "values": [
+      [
+       0.972549,
+       0.972549,
+       0.976471,
+       1
+      ]
+     ]
+    },
+    {
+     "id": "6:27",
+     "key": "5351157ad8c213bd9120c43dfb7d57cc481ac3b5",
+     "name": "color/neutral/500",
+     "type": "COLOR",
+     "css": "var(--spartant-figma-color-neutral-500)",
+     "values": [
+      [
+       0.490196,
+       0.529412,
+       0.584314,
+       1
+      ]
+     ]
+    },
+    {
+     "id": "6:28",
+     "key": "3fdf9b88c88df6acb6a67af259a426369f794faa",
+     "name": "color/neutral/600",
+     "type": "COLOR",
+     "css": "var(--spartant-figma-color-neutral-600)",
+     "values": [
+      [
+       0.4,
+       0.439216,
+       0.490196,
+       1
+      ]
+     ]
+    },
+    {
+     "id": "6:29",
+     "key": "bc37fdab8929a08201c78f50f041bb46074cd3d8",
+     "name": "color/neutral/700",
+     "type": "COLOR",
+     "css": "var(--spartant-figma-color-neutral-700)",
+     "values": [
+      [
+       0.305882,
+       0.337255,
+       0.380392,
+       1
+      ]
+     ]
+    },
+    {
+     "id": "6:30",
+     "key": "80afacc230290a4d1b18a7b43ffc7e9428da78da",
+     "name": "color/neutral/800",
+     "type": "COLOR",
+     "css": "var(--spartant-figma-color-neutral-800)",
+     "values": [
+      [
+       0.207843,
+       0.231373,
+       0.262745,
+       1
+      ]
+     ]
+    },
+    {
+     "id": "6:31",
+     "key": "828521b0c4b1f79ac2091960b3b99714b369fcbd",
+     "name": "color/neutral/900",
+     "type": "COLOR",
+     "css": "var(--spartant-figma-color-neutral-900)",
+     "values": [
+      [
+       0.117647,
+       0.133333,
+       0.152941,
+       1
+      ]
+     ]
+    },
+    {
+     "id": "6:32",
+     "key": "fb97c03938295a81a53658d39eccb25b865ab9d8",
+     "name": "color/neutral/950",
+     "type": "COLOR",
+     "css": "var(--spartant-figma-color-neutral-950)",
+     "values": [
+      [
+       0.066667,
+       0.078431,
+       0.090196,
+       1
+      ]
+     ]
+    },
+    {
+     "id": "489:1182",
+     "key": "bf50773ec264626ca42e84b69820604634ae1443",
+     "name": "color/pink/500",
+     "type": "COLOR",
+     "css": "var(--spartan-figma-color-pink-500)",
+     "values": [
+      [
+       0.984314,
+       0.294118,
+       0.639216,
+       1
+      ]
+     ]
+    },
+    {
+     "id": "6:46",
+     "key": "2b04d7e24551f6aa91bb6dab26b27852875fabff",
+     "name": "color/success/0",
+     "type": "COLOR",
+     "css": "var(--spartant-figma-color-success-0)",
+     "values": [
+      [
+       1,
+       1,
+       1,
+       1
+      ]
+     ]
+    },
+    {
+     "id": "6:47",
+     "key": "ece567cff0419f16a7c7daf3ee8a83ad50819c5c",
+     "name": "color/success/100",
+     "type": "COLOR",
+     "css": "var(--spartant-figma-color-success-100)",
+     "values": [
+      [
+       0.886275,
+       0.956863,
+       0.898039,
+       1
+      ]
+     ]
+    },
+    {
+     "id": "6:48",
+     "key": "8b87eb92be9e6af51b76f05e544e353233cd521a",
+     "name": "color/success/1000",
+     "type": "COLOR",
+     "css": "var(--spartant-figma-color-success-1000)",
+     "values": [
+      [
+       0,
+       0.035294,
+       0.007843,
+       1
+      ]
+     ]
+    },
+    {
+     "id": "6:49",
+     "key": "dbed50821d95ed3b985b4a5a6fa77620940e9338",
+     "name": "color/success/200",
+     "type": "COLOR",
+     "css": "var(--spartant-figma-color-success-200)",
+     "values": [
+      [
+       0.784314,
+       0.92549,
+       0.807843,
+       1
+      ]
+     ]
+    },
+    {
+     "id": "6:50",
+     "key": "080119b74a5a4928d974697ebb1ac684767586c6",
+     "name": "color/success/300",
+     "type": "COLOR",
+     "css": "var(--spartant-figma-color-success-300)",
+     "values": [
+      [
+       0.603922,
+       0.870588,
+       0.658824,
+       1
+      ]
+     ]
+    },
+    {
+     "id": "6:51",
+     "key": "184b9b4864334051dbf93c87bf34e5f2577282da",
+     "name": "color/success/400",
+     "type": "COLOR",
+     "css": "var(--spartant-figma-color-success-400)",
+     "values": [
+      [
+       0.298039,
+       0.780392,
+       0.439216,
+       1
+      ]
+     ]
+    },
+    {
+     "id": "6:52",
+     "key": "4f6c5dcb75e4e650fc76f529fbd0e09eaaf77924",
+     "name": "color/success/50",
+     "type": "COLOR",
+     "css": "var(--spartant-figma-color-success-50)",
+     "values": [
+      [
+       0.94902,
+       0.984314,
+       0.956863,
+       1
+      ]
+     ]
+    },
+    {
+     "id": "6:53",
+     "key": "5b7c57310cbc2f072c9e19fcc7be0729f62f45c1",
+     "name": "color/success/500",
+     "type": "COLOR",
+     "css": "var(--spartant-figma-color-success-500)",
+     "values": [
+      [
+       0,
+       0.631373,
+       0.286275,
+       1
+      ]
+     ]
+    },
+    {
+     "id": "6:54",
+     "key": "b60cf8725e44acdd42aecfe77a5382e51311cef2",
+     "name": "color/success/600",
+     "type": "COLOR",
+     "css": "var(--spartant-figma-color-success-600)",
+     "values": [
+      [
+       0,
+       0.521569,
+       0.235294,
+       1
+      ]
+     ]
+    },
+    {
+     "id": "6:55",
+     "key": "7fd173c5c888b6e6d50ec0b0ea11097f1ac245a5",
+     "name": "color/success/700",
+     "type": "COLOR",
+     "css": "var(--spartant-figma-color-success-700)",
+     "values": [
+      [
+       0,
+       0.403922,
+       0.176471,
+       1
+      ]
+     ]
+    },
+    {
+     "id": "6:56",
+     "key": "0844dca0bc75c939c53829cb749bbdd1e2ca3a85",
+     "name": "color/success/800",
+     "type": "COLOR",
+     "css": "var(--spartant-figma-color-success-800)",
+     "values": [
+      [
+       0,
+       0.282353,
+       0.113725,
+       1
+      ]
+     ]
+    },
+    {
+     "id": "6:57",
+     "key": "9ae09d00689cb8d99ff703120f762c7d6dfb0a3b",
+     "name": "color/success/900",
+     "type": "COLOR",
+     "css": "var(--spartant-figma-color-success-900)",
+     "values": [
+      [
+       0,
+       0.164706,
+       0.054902,
+       1
+      ]
+     ]
+    },
+    {
+     "id": "6:58",
+     "key": "eab1d861d481aa0fdbd5653076316c081cb18683",
+     "name": "color/success/950",
+     "type": "COLOR",
+     "css": "var(--spartant-figma-color-success-950)",
+     "values": [
+      [
+       0,
+       0.101961,
+       0.023529,
+       1
+      ]
+     ]
+    },
+    {
+     "id": "6:59",
+     "key": "1eaa8544c93de8725f4ba05a0ffbc297a8f2f1ae",
+     "name": "color/warning/0",
+     "type": "COLOR",
+     "css": "var(--spartant-figma-color-warning-0)",
+     "values": [
+      [
+       1,
+       1,
+       1,
+       1
+      ]
+     ]
+    },
+    {
+     "id": "6:60",
+     "key": "49e489afbe6669325540cf796f471c2383f216c0",
+     "name": "color/warning/100",
+     "type": "COLOR",
+     "css": "var(--spartant-figma-color-warning-100)",
+     "values": [
+      [
+       0.980392,
+       0.92549,
+       0.862745,
+       1
+      ]
+     ]
+    },
+    {
+     "id": "6:61",
+     "key": "6974265b522ff7db78ad8d988dab528594a11d90",
+     "name": "color/warning/1000",
+     "type": "COLOR",
+     "css": "var(--spartant-figma-color-warning-1000)",
+     "values": [
+      [
+       0.043137,
+       0.015686,
+       0,
+       1
+      ]
+     ]
+    },
+    {
+     "id": "6:62",
+     "key": "da42a8fa3002085e3d37824122fcbb144d90abab",
+     "name": "color/warning/200",
+     "type": "COLOR",
+     "css": "var(--spartant-figma-color-warning-200)",
+     "values": [
+      [
+       0.976471,
+       0.862745,
+       0.737255,
+       1
+      ]
+     ]
+    },
+    {
+     "id": "6:63",
+     "key": "33b003b6c37b903221361646b3c9e06c7aed0891",
+     "name": "color/warning/300",
+     "type": "COLOR",
+     "css": "var(--spartant-figma-color-warning-300)",
+     "values": [
+      [
+       0.952941,
+       0.752941,
+       0.517647,
+       1
+      ]
+     ]
+    },
+    {
+     "id": "6:64",
+     "key": "f29adee348a3d301daf6f41ca7ec3272b27f3543",
+     "name": "color/warning/400",
+     "type": "COLOR",
+     "css": "var(--spartant-figma-color-warning-400)",
+     "values": [
+      [
+       0.913725,
+       0.588235,
+       0.043137,
+       1
+      ]
+     ]
+    },
+    {
+     "id": "6:65",
+     "key": "af023e8a62aacd599fa5c28f8a4a04afefc8128a",
+     "name": "color/warning/50",
+     "type": "COLOR",
+     "css": "var(--spartant-figma-color-warning-50)",
+     "values": [
+      [
+       0.996078,
+       0.968627,
+       0.937255,
+       1
+      ]
+     ]
+    },
+    {
+     "id": "6:66",
+     "key": "531c7d39e68f28a3729e5d75f7cc066e7f1c6882",
+     "name": "color/warning/500",
+     "type": "COLOR",
+     "css": "var(--spartant-figma-color-warning-500)",
+     "values": [
+      [
+       0.72549,
+       0.458824,
+       0,
+       1
+      ]
+     ]
+    },
+    {
+     "id": "6:67",
+     "key": "78b9e87251626d4060aa7199c8dbe3f6429d6a5f",
+     "name": "color/warning/600",
+     "type": "COLOR",
+     "css": "var(--spartant-figma-color-warning-600)",
+     "values": [
+      [
+       0.6,
+       0.376471,
+       0,
+       1
+      ]
+     ]
+    },
+    {
+     "id": "6:68",
+     "key": "32bb9d0c93dc6c1aba26c33d793bfc3b96cb0317",
+     "name": "color/warning/700",
+     "type": "COLOR",
+     "css": "var(--spartant-figma-color-warning-700)",
+     "values": [
+      [
+       0.466667,
+       0.290196,
+       0,
+       1
+      ]
+     ]
+    },
+    {
+     "id": "6:69",
+     "key": "6b15118b677a8d9560dd309dc60ed28e6448aeda",
+     "name": "color/warning/800",
+     "type": "COLOR",
+     "css": "var(--spartant-figma-color-warning-800)",
+     "values": [
+      [
+       0.32549,
+       0.196078,
+       0,
+       1
+      ]
+     ]
+    },
+    {
+     "id": "6:70",
+     "key": "1e6c5588f0b29cb9f9cbb4f04c034fb4a6aaa7b6",
+     "name": "color/warning/900",
+     "type": "COLOR",
+     "css": "var(--spartant-figma-color-warning-900)",
+     "values": [
+      [
+       0.196078,
+       0.109804,
+       0,
+       1
+      ]
+     ]
+    },
+    {
+     "id": "6:71",
+     "key": "270448d40a972d9768a11c93893c2a8c9a004503",
+     "name": "color/warning/950",
+     "type": "COLOR",
+     "css": "var(--spartant-figma-color-warning-950)",
+     "values": [
+      [
+       0.121569,
+       0.062745,
+       0,
+       1
+      ]
+     ]
+    },
+    {
+     "id": "616:2275",
+     "key": "c57b4bb8b5c638b55036ee9c561fcceee830bae5",
+     "name": "color/yellow/300",
+     "type": "COLOR",
+     "css": "var(--spartant-figma-color-yellow-300)",
+     "values": [
+      [
+       0.933333,
+       0.819608,
+       0.168627,
+       1
+      ]
+     ]
+    },
+    {
+     "id": "620:2275",
+     "key": "0f3c93c04eae33ab3a70d4a845db1459d50e0341",
+     "name": "color/yellow/400",
+     "type": "COLOR",
+     "css": "var(--spartant-figma-color-yellow-400)",
+     "values": [
+      [
+       0.866667,
+       0.701961,
+       0.054902,
+       1
+      ]
+     ]
+    },
+    {
+     "id": "620:2276",
+     "key": "442d3b502cc06356da8ce4ca20c69cf334734866",
+     "name": "color/yellow/500",
+     "type": "COLOR",
+     "css": "var(--spartant-figma-color-yellow-500)",
+     "values": [
+      [
+       0.811765,
+       0.623529,
+       0.007843,
+       1
+      ]
+     ]
+    },
+    {
+     "id": "8:23",
+     "key": "7f1a8c9a5e5fb0284b3bcf45288332f3ec7138b3",
+     "name": "font/family/mono",
+     "type": "STRING",
+     "css": "var(--spartant-figma-primitive-font-family-mono)",
+     "values": [
+      "IBM Plex Mono"
+     ]
+    },
+    {
+     "id": "8:22",
+     "key": "81e2d35c5b031b3cbe2d947a8de52b7fe2e29042",
+     "name": "font/family/sans",
+     "type": "STRING",
+     "css": "var(--spartant-figma-primitive-font-family-sans)",
+     "values": [
+      "Inter"
+     ]
+    },
+    {
+     "id": "255:5",
+     "key": "f0e73d1a8e92ba068ae1c543490643e604137887",
+     "name": "font/line-height/12px",
+     "type": "FLOAT",
+     "css": "var(--spartant-figma-primitive-line-height-12)",
+     "values": [
+      12
+     ]
+    },
+    {
+     "id": "255:6",
+     "key": "cfd863de8bfb64cd525667ca76272d34c92e6380",
+     "name": "font/line-height/14px",
+     "type": "FLOAT",
+     "css": "var(--spartant-figma-primitive-line-height-14)",
+     "values": [
+      14
+     ]
+    },
+    {
+     "id": "255:7",
+     "key": "51e6aa62ee3fc23367993d28cd7f4ae9acf565e6",
+     "name": "font/line-height/16px",
+     "type": "FLOAT",
+     "css": "var(--spartant-figma-primitive-line-height-16)",
+     "values": [
+      16
+     ]
+    },
+    {
+     "id": "255:8",
+     "key": "a611843574f609f3ac9834b1be278f9e32cf74f4",
+     "name": "font/line-height/24px",
+     "type": "FLOAT",
+     "css": "var(--spartant-figma-primitive-line-height-24)",
+     "values": [
+      24
+     ]
+    },
+    {
+     "id": "8:38",
+     "key": "25f504f3b6eb8284540ebc82f119e59b14fc1de2",
+     "name": "font/line-height/normal",
+     "type": "FLOAT",
+     "css": "var(--spartant-figma-primitive-font-line-height-normal)",
+     "values": [
+      1.5
+     ]
+    },
+    {
+     "id": "8:39",
+     "key": "9e045d90d819216eeead95f7e33dce1485e90305",
+     "name": "font/line-height/relaxed",
+     "type": "FLOAT",
+     "css": "var(--spartant-figma-primitive-font-line-height-relaxed)",
+     "values": [
+      1.7000000476837158
+     ]
+    },
+    {
+     "id": "8:37",
+     "key": "2958ace1e82e480a934032e744a3d503141b6b7b",
+     "name": "font/line-height/snug",
+     "type": "FLOAT",
+     "css": "var(--spartant-figma-primitive-font-line-height-snug)",
+     "values": [
+      1.350000023841858
+     ]
+    },
+    {
+     "id": "8:36",
+     "key": "915ff3368d30035641a84a2afc40d9380fffaef0",
+     "name": "font/line-height/tight",
+     "type": "FLOAT",
+     "css": "var(--spartant-figma-primitive-font-line-height-tight)",
+     "values": [
+      1.2000000476837158
+     ]
+    },
+    {
+     "id": "255:4",
+     "key": "709c13afc70a7429606227f8f57b3c30370dc74b",
+     "name": "font/size/10",
+     "type": "FLOAT",
+     "css": "var(--spartant-figma-primitive-font-size-10)",
+     "values": [
+      10
+     ]
+    },
+    {
+     "id": "8:29",
+     "key": "2bbee065393e1d10b50b5bbe17d7b22eaffa27a1",
+     "name": "font/size/2xl",
+     "type": "FLOAT",
+     "css": "var(--spartant-figma-primitive-font-size-2xl)",
+     "values": [
+      24
+     ]
+    },
+    {
+     "id": "8:30",
+     "key": "b0d1279f3bb2c222b18c81373f5490bb7bc8ffbe",
+     "name": "font/size/3xl",
+     "type": "FLOAT",
+     "css": "var(--spartant-figma-primitive-font-size-3xl)",
+     "values": [
+      30
+     ]
+    },
+    {
+     "id": "8:31",
+     "key": "d01b64cb1e830ecd2200c9576478800834dfd7e7",
+     "name": "font/size/4xl",
+     "type": "FLOAT",
+     "css": "var(--spartant-figma-primitive-font-size-4xl)",
+     "values": [
+      36
+     ]
+    },
+    {
+     "id": "259:68",
+     "key": "5d396ccb9649670998c223d9b904c19e24326ffd",
+     "name": "font/size/7",
+     "type": "FLOAT",
+     "css": "var(--spartant-figma-primitive-font-size-7)",
+     "values": [
+      7
+     ]
+    },
+    {
+     "id": "255:2",
+     "key": "f9084be7ff46b901b0e9006fe3e8afcb22985cc8",
+     "name": "font/size/8",
+     "type": "FLOAT",
+     "css": "var(--spartant-figma-primitive-font-size-8)",
+     "values": [
+      8
+     ]
+    },
+    {
+     "id": "255:3",
+     "key": "3119a39fd3dc0d8721d65922c40aae5dae88f7f5",
+     "name": "font/size/9",
+     "type": "FLOAT",
+     "css": "var(--spartant-figma-primitive-font-size-9)",
+     "values": [
+      9
+     ]
+    },
+    {
+     "id": "8:27",
+     "key": "933daea98683e1b0f5083ecbe3e9f981829921b1",
+     "name": "font/size/lg",
+     "type": "FLOAT",
+     "css": "var(--spartant-figma-primitive-font-size-lg)",
+     "values": [
+      18
+     ]
+    },
+    {
+     "id": "8:26",
+     "key": "22e2ffd4d30b3012d8a4933d2b938f476b2a2497",
+     "name": "font/size/md",
+     "type": "FLOAT",
+     "css": "var(--spartant-figma-primitive-font-size-md)",
+     "values": [
+      16
+     ]
+    },
+    {
+     "id": "8:25",
+     "key": "76d2520e5628b21cecb03543ab65f5fb8d876701",
+     "name": "font/size/sm",
+     "type": "FLOAT",
+     "css": "var(--spartant-figma-primitive-font-size-sm)",
+     "values": [
+      14
+     ]
+    },
+    {
+     "id": "8:28",
+     "key": "58a102b5e82f1d6b4f49a499441489422499ac69",
+     "name": "font/size/xl",
+     "type": "FLOAT",
+     "css": "var(--spartant-figma-primitive-font-size-xl)",
+     "values": [
+      20
+     ]
+    },
+    {
+     "id": "8:24",
+     "key": "e537493689da5868d057962addbb39c2739de160",
+     "name": "font/size/xs",
+     "type": "FLOAT",
+     "css": "var(--spartant-figma-primitive-font-size-xs)",
+     "values": [
+      12
+     ]
+    },
+    {
+     "id": "8:41",
+     "key": "c0a317fd0370e3cd8264d3d8db2e020604170294",
+     "name": "font/tracking/normal",
+     "type": "STRING",
+     "css": "var(--spartant-figma-primitive-font-tracking-normal)",
+     "values": [
+      "0em"
+     ]
+    },
+    {
+     "id": "8:40",
+     "key": "b25d64e259294cca5368cff58bfc4b938ce6c17a",
+     "name": "font/tracking/tight",
+     "type": "STRING",
+     "css": "var(--spartant-figma-primitive-font-tracking-tight)",
+     "values": [
+      "-0.02em"
+     ]
+    },
+    {
+     "id": "8:42",
+     "key": "4e0b8fcf35c3b056b1bec793b212699c086cd3c1",
+     "name": "font/tracking/wide",
+     "type": "STRING",
+     "css": "var(--spartant-figma-primitive-font-tracking-wide)",
+     "values": [
+      "0.02em"
+     ]
+    },
+    {
+     "id": "8:35",
+     "key": "18630b71f2577a7097972126c9067d36abb614ef",
+     "name": "font/weight/bold",
+     "type": "FLOAT",
+     "css": "var(--spartant-figma-primitive-font-weight-bold)",
+     "values": [
+      700
+     ]
+    },
+    {
+     "id": "8:33",
+     "key": "187f255c89a00069592b7bc78ac4d595e767c978",
+     "name": "font/weight/medium",
+     "type": "FLOAT",
+     "css": "var(--spartant-figma-primitive-font-weight-medium)",
+     "values": [
+      500
+     ]
+    },
+    {
+     "id": "8:32",
+     "key": "53713bd319e6c2a7bbe24795feba2681dfc7ab33",
+     "name": "font/weight/regular",
+     "type": "FLOAT",
+     "css": "var(--spartant-figma-primitive-font-weight-regular)",
+     "values": [
+      400
+     ]
+    },
+    {
+     "id": "8:34",
+     "key": "7aca77b0e0d30ef268dde6a426e61bd913c65d42",
+     "name": "font/weight/semibold",
+     "type": "FLOAT",
+     "css": "var(--spartant-figma-primitive-font-weight-semibold)",
+     "values": [
+      600
+     ]
+    },
+    {
+     "id": "316:2",
+     "key": "105849ace5dbb285acf1ba79f718c0a80c33dd57",
+     "name": "opacity/0",
+     "type": "FLOAT",
+     "css": "var(--spartant-figma-primitive-opacity-0)",
+     "values": [
+      0
+     ]
+    },
+    {
+     "id": "316:6",
+     "key": "4474dfb7019976a042be181f2547b283c372b4d0",
+     "name": "opacity/10",
+     "type": "FLOAT",
+     "css": "var(--spartant-figma-primitive-opacity-10)",
+     "values": [
+      10
+     ]
+    },
+    {
+     "id": "316:39",
+     "key": "f71d57604f11e5e11f39a6745533f4ff9e8041c5",
+     "name": "opacity/100",
+     "type": "FLOAT",
+     "css": "var(--spartant-figma-primitive-opacity-100)",
+     "values": [
+      100
+     ]
+    },
+    {
+     "id": "316:8",
+     "key": "32611b304dab59e08bfc3a8bb8a8da73a317c39a",
+     "name": "opacity/15",
+     "type": "FLOAT",
+     "css": "var(--spartant-figma-primitive-opacity-15)",
+     "values": [
+      15
+     ]
+    },
+    {
+     "id": "425:683",
+     "key": "15bb1d55c630869d5c0ee8c8e0988fee5ff5c538",
+     "name": "opacity/18",
+     "type": "FLOAT",
+     "values": [
+      18
+     ]
+    },
+    {
+     "id": "335:341",
+     "key": "8ce3fca6114e845b03496bec5d6b525fd897dba1",
+     "name": "opacity/2",
+     "type": "FLOAT",
+     "values": [
+      2
+     ]
+    },
+    {
+     "id": "316:10",
+     "key": "f252ae5b548c2e5b521637b14f61c6b7cbbdf752",
+     "name": "opacity/20",
+     "type": "FLOAT",
+     "css": "var(--spartant-figma-primitive-opacity-20)",
+     "values": [
+      20
+     ]
+    },
+    {
+     "id": "316:12",
+     "key": "0e1c4dfd80e22cf5056afd23cacf816c92db8b33",
+     "name": "opacity/25",
+     "type": "FLOAT",
+     "css": "var(--spartant-figma-primitive-opacity-25)",
+     "values": [
+      25
+     ]
+    },
+    {
+     "id": "316:14",
+     "key": "bd31e6e5ce19b9a6ecf5818e0f02c0fca7f33cba",
+     "name": "opacity/30",
+     "type": "FLOAT",
+     "css": "var(--spartant-figma-primitive-opacity-30)",
+     "values": [
+      30
+     ]
+    },
+    {
+     "id": "316:16",
+     "key": "83db5ac0e48299167221ae1005f887095b4b90ef",
+     "name": "opacity/35",
+     "type": "FLOAT",
+     "css": "var(--spartant-figma-primitive-opacity-35)",
+     "values": [
+      35
+     ]
+    },
+    {
+     "id": "425:681",
+     "key": "fb99e865f2733de1272f27d654781f6cddf0a01f",
+     "name": "opacity/4",
+     "type": "FLOAT",
+     "values": [
+      4
+     ]
+    },
+    {
+     "id": "8:43",
+     "key": "ee355bb61358ae1ed2b80f65085e207fb46a76f8",
+     "name": "opacity/40",
+     "type": "FLOAT",
+     "css": "var(--spartant-figma-primitive-opacity-40)",
+     "values": [
+      40
+     ]
+    },
+    {
+     "id": "316:19",
+     "key": "37296bbe53f1146d62a42858c4769a0d5ea30907",
+     "name": "opacity/45",
+     "type": "FLOAT",
+     "css": "var(--spartant-figma-primitive-opacity-45)",
+     "values": [
+      45
+     ]
+    },
+    {
+     "id": "316:4",
+     "key": "f46e4de4787ad8a513b5b694b6f73a3a04e2ddee",
+     "name": "opacity/5",
+     "type": "FLOAT",
+     "css": "var(--spartant-figma-primitive-opacity-5)",
+     "values": [
+      5
+     ]
+    },
+    {
+     "id": "8:44",
+     "key": "e3987bb542f750f1fceedf2bec7191f6a6e395d1",
+     "name": "opacity/50",
+     "type": "FLOAT",
+     "css": "var(--spartant-figma-primitive-opacity-50)",
+     "values": [
+      50
+     ]
+    },
+    {
+     "id": "316:22",
+     "key": "5eaec5db74cbd3764b3fae50b6604f0a4f19d38e",
+     "name": "opacity/55",
+     "type": "FLOAT",
+     "css": "var(--spartant-figma-primitive-opacity-55)",
+     "values": [
+      55
+     ]
+    },
+    {
+     "id": "335:343",
+     "key": "fc3ba24d19216929a59e4583639c8df45196373b",
+     "name": "opacity/6",
+     "type": "FLOAT",
+     "values": [
+      6
+     ]
+    },
+    {
+     "id": "316:24",
+     "key": "9d48f09ac4d02eb8ae2daa76a90941d383b73128",
+     "name": "opacity/60",
+     "type": "FLOAT",
+     "css": "var(--spartant-figma-primitive-opacity-60)",
+     "values": [
+      60
+     ]
+    },
+    {
+     "id": "316:26",
+     "key": "6ded2d7851f27f215b32f4b05a1f69e26cd510ba",
+     "name": "opacity/65",
+     "type": "FLOAT",
+     "css": "var(--spartant-figma-primitive-opacity-65)",
+     "values": [
+      65
+     ]
+    },
+    {
+     "id": "8:45",
+     "key": "284738ddeb8308977f6571944a3e20da4a4d0571",
+     "name": "opacity/70",
+     "type": "FLOAT",
+     "css": "var(--spartant-figma-primitive-opacity-70)",
+     "values": [
+      70
+     ]
+    },
+    {
+     "id": "316:29",
+     "key": "a7e4de0982a3da282b61688a9e359c843dbab6dc",
+     "name": "opacity/75",
+     "type": "FLOAT",
+     "css": "var(--spartant-figma-primitive-opacity-75)",
+     "values": [
+      75
+     ]
+    },
+    {
+     "id": "316:31",
+     "key": "b482ec00b6ce9ab9a3f53ed7631a771ea07139b0",
+     "name": "opacity/80",
+     "type": "FLOAT",
+     "css": "var(--spartant-figma-primitive-opacity-80)",
+     "values": [
+      80
+     ]
+    },
+    {
+     "id": "316:33",
+     "key": "755cf6b5286be1559d68a95056b8f87048fa7f45",
+     "name": "opacity/85",
+     "type": "FLOAT",
+     "css": "var(--spartant-figma-primitive-opacity-85)",
+     "values": [
+      85
+     ]
+    },
+    {
+     "id": "316:35",
+     "key": "ac72719e03476460c24cff05f87435fe483f6ebd",
+     "name": "opacity/90",
+     "type": "FLOAT",
+     "css": "var(--spartant-figma-primitive-opacity-90)",
+     "values": [
+      90
+     ]
+    },
+    {
+     "id": "316:37",
+     "key": "5289475f3ab1ccc402f664234a396aa138b33dc1",
+     "name": "opacity/95",
+     "type": "FLOAT",
+     "css": "var(--spartant-figma-primitive-opacity-95)",
+     "values": [
+      95
+     ]
+    },
+    {
+     "id": "357:8",
+     "key": "6ce7d16997e1e1e3939ffc3ea5a342ad74664f5e",
+     "name": "radius/14",
+     "type": "FLOAT",
+     "values": [
+      14
+     ]
+    },
+    {
+     "id": "8:19",
+     "key": "6626d98ac5781599504612e808a45803c1684f54",
+     "name": "radius/full",
+     "type": "FLOAT",
+     "css": "var(--spartant-figma-primitive-radius-full)",
+     "values": [
+      9999
+     ]
+    },
+    {
+     "id": "8:17",
+     "key": "596d60b94cad87a100e253b49583508a1da43f7f",
+     "name": "radius/lg",
+     "type": "FLOAT",
+     "css": "var(--spartant-figma-primitive-radius-lg)",
+     "values": [
+      12
+     ]
+    },
+    {
+     "id": "8:16",
+     "key": "80d19ed0a2749f862284da1a90668df5a50a9804",
+     "name": "radius/md",
+     "type": "FLOAT",
+     "css": "var(--spartant-figma-primitive-radius-md)",
+     "values": [
+      8
+     ]
+    },
+    {
+     "id": "8:14",
+     "key": "4c295b4d10d62b89cef6b0600c0c4a2e1e89ad41",
+     "name": "radius/none",
+     "type": "FLOAT",
+     "css": "var(--spartant-figma-primitive-radius-none)",
+     "values": [
+      0
+     ]
+    },
+    {
+     "id": "8:15",
+     "key": "8935f55ddabe7ea6b2d384b19fea6de7d355deac",
+     "name": "radius/sm",
+     "type": "FLOAT",
+     "css": "var(--spartant-figma-primitive-radius-sm)",
+     "values": [
+      4
+     ]
+    },
+    {
+     "id": "232:1914",
+     "key": "4027ef64f4b110d76a77041c21bbe3b10ed0380d",
+     "name": "radius/sm 2",
+     "type": "FLOAT",
+     "css": "var(--spartant-figma-primitive-radius-sm)",
+     "values": [
+      6
+     ]
+    },
+    {
+     "id": "8:18",
+     "key": "3b054d4c0c1aa1e7797553a92a9512a56a2a68d9",
+     "name": "radius/xl",
+     "type": "FLOAT",
+     "css": "var(--spartant-figma-primitive-radius-xl)",
+     "values": [
+      16
+     ]
+    },
+    {
+     "id": "383:2",
+     "key": "0a33bade818eb29db751572bbad69891cc811a9e",
+     "name": "size/16",
+     "type": "FLOAT",
+     "css": "var(--spartant-figma-primitive-size-16)",
+     "values": [
+      16
+     ]
+    },
+    {
+     "id": "383:3",
+     "key": "e76fdad8a33949729f6da922ce1f96ba6ae05818",
+     "name": "size/22",
+     "type": "FLOAT",
+     "css": "var(--spartant-figma-primitive-size-22)",
+     "values": [
+      22
+     ]
+    },
+    {
+     "id": "383:4",
+     "key": "6f0c7748795b261ab08c6ea98cff76a7cf6df2da",
+     "name": "size/28",
+     "type": "FLOAT",
+     "css": "var(--spartant-figma-primitive-size-28)",
+     "values": [
+      28
+     ]
+    },
+    {
+     "id": "357:2",
+     "key": "e8fa428f27d27558bbb5d98f0a6a40100e897cfc",
+     "name": "size/420",
+     "type": "FLOAT",
+     "values": [
+      420
+     ]
+    },
+    {
+     "id": "8:46",
+     "key": "eb438d505393e140d9e0f9c313ae43614677c276",
+     "name": "size/44",
+     "type": "FLOAT",
+     "css": "var(--spartant-figma-primitive-size-44)",
+     "values": [
+      44
+     ]
+    },
+    {
+     "id": "357:4",
+     "key": "63f59c805e1bd9683af752709b08db6d0e17dc67",
+     "name": "size/640",
+     "type": "FLOAT",
+     "values": [
+      640
+     ]
+    },
+    {
+     "id": "357:6",
+     "key": "674d9a44896cadb7e47e1bfb536974b7a7fb8643",
+     "name": "size/860",
+     "type": "FLOAT",
+     "values": [
+      860
+     ]
+    },
+    {
+     "id": "8:2",
+     "key": "bc631261ec8078de6d71bfbfd836b586d9d0f182",
+     "name": "space/0",
+     "type": "FLOAT",
+     "css": "var(--spartant-figma-primitive-space-0)",
+     "values": [
+      0
+     ]
+    },
+    {
+     "id": "232:1907",
+     "key": "046b995fb82e10a966f150f6cac71c3656571374",
+     "name": "space/0-5",
+     "type": "FLOAT",
+     "css": "var(--spartant-figma-primitive-space-0-5)",
+     "values": [
+      2
+     ]
+    },
+    {
+     "id": "8:3",
+     "key": "dd02c4d7cf3f2a8842d4bee5678baa92ac271746",
+     "name": "space/1",
+     "type": "FLOAT",
+     "css": "var(--spartant-figma-primitive-space-1)",
+     "values": [
+      4
+     ]
+    },
+    {
+     "id": "8:10",
+     "key": "fb0bbe9efab77d3771c06594026083560111d028",
+     "name": "space/10",
+     "type": "FLOAT",
+     "css": "var(--spartant-figma-primitive-space-10)",
+     "values": [
+      40
+     ]
+    },
+    {
+     "id": "8:11",
+     "key": "c77c55ee4f2c4e8b0cbd791e05a742ca6b440c95",
+     "name": "space/12",
+     "type": "FLOAT",
+     "css": "var(--spartant-figma-primitive-space-12)",
+     "values": [
+      48
+     ]
+    },
+    {
+     "id": "8:12",
+     "key": "99793329eb1b68547250c53e6ae7ac41a481005d",
+     "name": "space/16",
+     "type": "FLOAT",
+     "css": "var(--spartant-figma-primitive-space-16)",
+     "values": [
+      64
+     ]
+    },
+    {
+     "id": "666:16",
+     "key": "a71b42d2a483a68f0acf67eb6dbdf97eabe17d1f",
+     "name": "space/18",
+     "type": "FLOAT",
+     "css": "var(--space-18)",
+     "values": [
+      72
+     ]
+    },
+    {
+     "id": "8:4",
+     "key": "8b0a81ad465a75358a4b980a8650c8aa09dca31a",
+     "name": "space/2",
+     "type": "FLOAT",
+     "css": "var(--spartant-figma-primitive-space-2)",
+     "values": [
+      8
+     ]
+    },
+    {
+     "id": "8:5",
+     "key": "44636b511a869bcc3573b1a77da58f513b193916",
+     "name": "space/3",
+     "type": "FLOAT",
+     "css": "var(--spartant-figma-primitive-space-3)",
+     "values": [
+      12
+     ]
+    },
+    {
+     "id": "8:6",
+     "key": "ad1c02bd942043666c729747d48e7d72fc65f019",
+     "name": "space/4",
+     "type": "FLOAT",
+     "css": "var(--spartant-figma-primitive-space-4)",
+     "values": [
+      16
+     ]
+    },
+    {
+     "id": "8:7",
+     "key": "2dd9ba4e95abdc48fcfab223bdc70cb016cba67c",
+     "name": "space/5",
+     "type": "FLOAT",
+     "css": "var(--spartant-figma-primitive-space-5)",
+     "values": [
+      20
+     ]
+    },
+    {
+     "id": "8:8",
+     "key": "1bc1b804ab83aeddac5a041f20975b2edb377768",
+     "name": "space/6",
+     "type": "FLOAT",
+     "css": "var(--spartant-figma-primitive-space-6)",
+     "values": [
+      24
+     ]
+    },
+    {
+     "id": "8:9",
+     "key": "fc366bea8ae4fad30aad0b0fcb45fa778b8da399",
+     "name": "space/8",
+     "type": "FLOAT",
+     "css": "var(--spartant-figma-primitive-space-8)",
+     "values": [
+      32
+     ]
+    },
+    {
+     "id": "306:346",
+     "key": "998505d1b3dd696bff10abf7a1d8b26d1913b2ce",
+     "name": "space/9",
+     "type": "FLOAT",
+     "css": "var(--spartant-space-9)",
+     "values": [
+      36
+     ]
+    },
+    {
+     "id": "237:3",
+     "key": "f90c51219882afab9ef2de55fcc73400f99418dc",
+     "name": "space/optical/10",
+     "type": "FLOAT",
+     "css": "var(--spartant-figma-space-optical-10)",
+     "values": [
+      10
+     ]
+    },
+    {
+     "id": "237:2",
+     "key": "fa615f277b6f697bdb7e3794bb378e7803c1a762",
+     "name": "space/optical/6",
+     "type": "FLOAT",
+     "css": "var(--spartant-figma-space-optical-6)",
+     "values": [
+      6
+     ]
+    },
+    {
+     "id": "8:13",
+     "key": "01164a5ed3b262e78e005853bbe068d565fb6ee4",
+     "name": "space/px",
+     "type": "FLOAT",
+     "css": "var(--spartant-figma-primitive-space-px)",
+     "values": [
+      1
+     ]
+    }
+   ]
+  },
+  {
+   "id": "4:4",
+   "key": "1db949ec9abcb8a15bcb42b900c87ffdca95552a",
+   "name": "03 Semantic Color",
+   "modes": [
+    {
+     "id": "4:5",
+     "name": "Light"
+    },
+    {
+     "id": "4:6",
+     "name": "Dark"
+    },
+    {
+     "id": "53:0",
+     "name": "Light High Contrast"
+    },
+    {
+     "id": "53:1",
+     "name": "Dark High Contrast"
+    }
+   ],
+   "variables": [
+    {
+     "id": "7:26",
+     "key": "10aaf2c8df8267bddd05d9dc944eac1785dd6224",
+     "name": "color/accent/default",
+     "type": "COLOR",
+     "css": "var(--spartant-color-accent)",
+     "values": [
+      {
+       "a": "6:41"
+      },
+      {
+       "a": "6:41"
+      },
+      {
+       "a": "6:43"
+      },
+      {
+       "a": "6:37"
+      }
+     ]
+    },
+    {
+     "id": "7:29",
+     "key": "37ea6649dbf32c7db82a6cfd233f921e57b1e023",
+     "name": "color/accent/foreground",
+     "type": "COLOR",
+     "css": "var(--spartant-color-accent-foreground)",
+     "values": [
+      {
+       "a": "6:20"
+      },
+      {
+       "a": "6:20"
+      },
+      {
+       "a": "6:20"
+      },
+      {
+       "a": "6:22"
+      }
+     ]
+    },
+    {
+     "id": "7:28",
+     "key": "fed8d1c83cf5d7bd27e83e5ec561acbb30b5342d",
+     "name": "color/accent/surface",
+     "type": "COLOR",
+     "css": "var(--spartant-color-accent-surface)",
+     "values": [
+      {
+       "a": "6:34"
+      },
+      {
+       "a": "6:45"
+      },
+      {
+       "a": "6:34"
+      },
+      {
+       "a": "6:44"
+      }
+     ]
+    },
+    {
+     "id": "7:27",
+     "key": "02cfd2107b7c90a103eb1640f511a6dce590a63f",
+     "name": "color/accent/text",
+     "type": "COLOR",
+     "css": "var(--spartant-color-accent-text)",
+     "values": [
+      {
+       "a": "6:42"
+      },
+      {
+       "a": "6:37"
+      },
+      {
+       "a": "6:43"
+      },
+      {
+       "a": "6:36"
+      }
+     ]
+    },
+    {
+     "id": "357:10",
+     "key": "06fe59cec445cdd63c780fa2c618e8dd0e04fe54",
+     "name": "color/backdrop/drawer",
+     "type": "COLOR",
+     "values": [
+      {
+       "color": {
+        "type": "VARIABLE_ALIAS",
+        "id": "VariableID:6:22"
+       },
+       "opacity": {
+        "type": "VARIABLE_ALIAS",
+        "id": "VariableID:316:11"
+       }
+      },
+      {
+       "color": {
+        "type": "VARIABLE_ALIAS",
+        "id": "VariableID:6:22"
+       },
+       "opacity": {
+        "type": "VARIABLE_ALIAS",
+        "id": "VariableID:316:11"
+       }
+      },
+      {
+       "color": {
+        "type": "VARIABLE_ALIAS",
+        "id": "VariableID:6:22"
+       },
+       "opacity": {
+        "type": "VARIABLE_ALIAS",
+        "id": "VariableID:316:11"
+       }
+      },
+      {
+       "color": {
+        "type": "VARIABLE_ALIAS",
+        "id": "VariableID:6:22"
+       },
+       "opacity": {
+        "type": "VARIABLE_ALIAS",
+        "id": "VariableID:316:11"
+       }
+      }
+     ]
+    },
+    {
+     "id": "7:2",
+     "key": "2ed9e77e4062d68254988c615ce6f126c8277988",
+     "name": "color/background/default",
+     "type": "COLOR",
+     "css": "var(--spartant-color-background)",
+     "values": [
+      {
+       "a": "6:26"
+      },
+      {
+       "a": "6:22"
+      },
+      {
+       "a": "6:20"
+      },
+      {
+       "a": "6:22"
+      }
+     ]
+    },
+    {
+     "id": "7:12",
+     "key": "491ecc95570e6ddfae1454d5a6b9e90fcb79d598",
+     "name": "color/border/default",
+     "type": "COLOR",
+     "css": "var(--spartant-color-border)",
+     "values": [
+      {
+       "a": "6:23"
+      },
+      {
+       "a": "6:30"
+      },
+      {
+       "a": "6:29"
+      },
+      {
+       "a": "6:24"
+      }
+     ]
+    },
+    {
+     "id": "250:2871",
+     "key": "3efab4c16d063ce8ecd774be217c1be016bffec4",
+     "name": "color/border/overlay",
+     "type": "COLOR",
+     "css": "var(--spartant-color-border-overlay)",
+     "values": [
+      {
+       "color": {
+        "type": "VARIABLE_ALIAS",
+        "id": "VariableID:6:32"
+       },
+       "opacity": {
+        "type": "VARIABLE_ALIAS",
+        "id": "VariableID:316:41"
+       }
+      },
+      {
+       "a": "6:30"
+      },
+      {
+       "a": "6:31"
+      },
+      {
+       "a": "6:21"
+      }
+     ]
+    },
+    {
+     "id": "7:14",
+     "key": "99cc030382fd68eedafb066545b2b9cd680fe6eb",
+     "name": "color/border/strong",
+     "type": "COLOR",
+     "css": "var(--spartant-color-border-strong)",
+     "values": [
+      {
+       "a": "6:27"
+      },
+      {
+       "a": "6:28"
+      },
+      {
+       "a": "6:31"
+      },
+      {
+       "a": "6:21"
+      }
+     ]
+    },
+    {
+     "id": "7:13",
+     "key": "8a83f16b58939c0d0ed446b7159ecc1d4f971095",
+     "name": "color/border/subtle",
+     "type": "COLOR",
+     "css": "var(--spartant-color-border-subtle)",
+     "values": [
+      {
+       "a": "6:21"
+      },
+      {
+       "a": "6:31"
+      },
+      {
+       "a": "6:27"
+      },
+      {
+       "a": "6:27"
+      }
+     ]
+    },
+    {
+     "id": "110:17",
+     "key": "1e3588ed32250756d6cd90015fd83f18d34602dd",
+     "name": "color/control/active",
+     "type": "COLOR",
+     "css": "var(--spartant-color-control-active)",
+     "values": [
+      {
+       "a": "110:10"
+      },
+      {
+       "a": "110:10"
+      },
+      {
+       "a": "110:12"
+      },
+      {
+       "a": "110:4"
+      }
+     ]
+    },
+    {
+     "id": "110:15",
+     "key": "e3e5ffe4b887ce31cae2c762cda3d9b342a48dde",
+     "name": "color/control/default",
+     "type": "COLOR",
+     "css": "var(--spartant-color-control)",
+     "values": [
+      {
+       "a": "110:8"
+      },
+      {
+       "a": "110:8"
+      },
+      {
+       "a": "110:10"
+      },
+      {
+       "a": "110:6"
+      }
+     ]
+    },
+    {
+     "id": "110:18",
+     "key": "5d702bdab7f74da5e45cfe9c64c15e98b9ad1a0c",
+     "name": "color/control/foreground",
+     "type": "COLOR",
+     "css": "var(--spartant-color-control-foreground)",
+     "values": [
+      {
+       "a": "6:20"
+      },
+      {
+       "a": "6:20"
+      },
+      {
+       "a": "6:20"
+      },
+      {
+       "a": "6:22"
+      }
+     ]
+    },
+    {
+     "id": "110:16",
+     "key": "10b7c70b1a58563445244c30f601fbe60ec34585",
+     "name": "color/control/hover",
+     "type": "COLOR",
+     "css": "var(--spartant-color-control-hover)",
+     "values": [
+      {
+       "a": "110:9"
+      },
+      {
+       "a": "110:9"
+      },
+      {
+       "a": "110:11"
+      },
+      {
+       "a": "110:5"
+      }
+     ]
+    },
+    {
+     "id": "110:19",
+     "key": "794069e28b2b8447cd07c16e54257548c069e525",
+     "name": "color/control/track",
+     "type": "COLOR",
+     "css": "var(--spartant-color-control-track)",
+     "values": [
+      {
+       "a": "6:21"
+      },
+      {
+       "a": "6:30"
+      },
+      {
+       "a": "6:24"
+      },
+      {
+       "a": "6:29"
+      }
+     ]
+    },
+    {
+     "id": "7:42",
+     "key": "e95349c9ba644afb905f10f7db492bb6a71c6c31",
+     "name": "color/danger/active",
+     "type": "COLOR",
+     "css": "var(--spartant-color-danger-active)",
+     "values": [
+      {
+       "a": "6:4"
+      },
+      {
+       "a": "6:4"
+      },
+      {
+       "a": "6:6"
+      },
+      {
+       "a": "5:3"
+      }
+     ]
+    },
+    {
+     "id": "7:38",
+     "key": "7dff380077f962983170653dc04f44d34db26db7",
+     "name": "color/danger/default",
+     "type": "COLOR",
+     "css": "var(--spartant-color-danger)",
+     "values": [
+      {
+       "a": "6:2"
+      },
+      {
+       "a": "6:2"
+      },
+      {
+       "a": "6:4"
+      },
+      {
+       "a": "5:6"
+      }
+     ]
+    },
+    {
+     "id": "7:43",
+     "key": "d515f21d442156a75637c4055e80e6406bdcc959",
+     "name": "color/danger/foreground",
+     "type": "COLOR",
+     "css": "var(--spartant-color-danger-foreground)",
+     "values": [
+      {
+       "a": "6:20"
+      },
+      {
+       "a": "6:20"
+      },
+      {
+       "a": "6:20"
+      },
+      {
+       "a": "6:22"
+      }
+     ]
+    },
+    {
+     "id": "7:41",
+     "key": "d4ed66a6f646bd713b8c4aa4c7d6516a2c12dbd7",
+     "name": "color/danger/hover",
+     "type": "COLOR",
+     "css": "var(--spartant-color-danger-hover)",
+     "values": [
+      {
+       "a": "6:3"
+      },
+      {
+       "a": "6:3"
+      },
+      {
+       "a": "6:5"
+      },
+      {
+       "a": "5:5"
+      }
+     ]
+    },
+    {
+     "id": "521:772",
+     "key": "373063648b93959daac72b9493af6033f7c62db7",
+     "name": "color/danger/subtle/active",
+     "type": "COLOR",
+     "css": "var(--color-danger-subtle-active)",
+     "values": [
+      {
+       "color": {
+        "type": "VARIABLE_ALIAS",
+        "id": "VariableID:5:9"
+       },
+       "opacity": {
+        "type": "VARIABLE_ALIAS",
+        "id": "VariableID:316:15"
+       }
+      },
+      {
+       "color": {
+        "type": "VARIABLE_ALIAS",
+        "id": "VariableID:5:7"
+       },
+       "opacity": {
+        "type": "VARIABLE_ALIAS",
+        "id": "VariableID:316:15"
+       }
+      },
+      {
+       "color": {
+        "type": "VARIABLE_ALIAS",
+        "id": "VariableID:6:2"
+       },
+       "opacity": {
+        "type": "VARIABLE_ALIAS",
+        "id": "VariableID:316:15"
+       }
+      },
+      {
+       "color": {
+        "type": "VARIABLE_ALIAS",
+        "id": "VariableID:5:6"
+       },
+       "opacity": {
+        "type": "VARIABLE_ALIAS",
+        "id": "VariableID:316:15"
+       }
+      }
+     ]
+    },
+    {
+     "id": "391:2",
+     "key": "8b3ae14793a0cd67a918a0996a4da9935fefaf07",
+     "name": "color/danger/subtle/default",
+     "type": "COLOR",
+     "css": "var(--spartant-color-danger-subtle-default)",
+     "values": [
+      {
+       "color": {
+        "type": "VARIABLE_ALIAS",
+        "id": "VariableID:5:9"
+       },
+       "opacity": {
+        "type": "VARIABLE_ALIAS",
+        "id": "VariableID:316:9"
+       }
+      },
+      {
+       "color": {
+        "type": "VARIABLE_ALIAS",
+        "id": "VariableID:5:7"
+       },
+       "opacity": {
+        "type": "VARIABLE_ALIAS",
+        "id": "VariableID:316:11"
+       }
+      },
+      {
+       "color": {
+        "type": "VARIABLE_ALIAS",
+        "id": "VariableID:6:2"
+       },
+       "opacity": {
+        "type": "VARIABLE_ALIAS",
+        "id": "VariableID:316:13"
+       }
+      },
+      {
+       "color": {
+        "type": "VARIABLE_ALIAS",
+        "id": "VariableID:5:6"
+       },
+       "opacity": {
+        "type": "VARIABLE_ALIAS",
+        "id": "VariableID:316:13"
+       }
+      }
+     ]
+    },
+    {
+     "id": "391:3",
+     "key": "12bd310af082c1778a06160a8434f8cbe80a2421",
+     "name": "color/danger/subtle/hover",
+     "type": "COLOR",
+     "css": "var(--spartant-color-danger-subtle-hover)",
+     "values": [
+      {
+       "color": {
+        "type": "VARIABLE_ALIAS",
+        "id": "VariableID:5:9"
+       },
+       "opacity": {
+        "type": "VARIABLE_ALIAS",
+        "id": "VariableID:316:11"
+       }
+      },
+      {
+       "color": {
+        "type": "VARIABLE_ALIAS",
+        "id": "VariableID:5:7"
+       },
+       "opacity": {
+        "type": "VARIABLE_ALIAS",
+        "id": "VariableID:316:13"
+       }
+      },
+      {
+       "color": {
+        "type": "VARIABLE_ALIAS",
+        "id": "VariableID:6:2"
+       },
+       "opacity": {
+        "type": "VARIABLE_ALIAS",
+        "id": "VariableID:316:15"
+       }
+      },
+      {
+       "color": {
+        "type": "VARIABLE_ALIAS",
+        "id": "VariableID:5:6"
+       },
+       "opacity": {
+        "type": "VARIABLE_ALIAS",
+        "id": "VariableID:316:15"
+       }
+      }
+     ]
+    },
+    {
+     "id": "7:40",
+     "key": "ae8e9c7812cf7a8c8b197030fb596daed7ed463c",
+     "name": "color/danger/surface",
+     "type": "COLOR",
+     "css": "var(--spartant-color-danger-surface)",
+     "values": [
+      {
+       "a": "5:3"
+      },
+      {
+       "a": "6:6"
+      },
+      {
+       "a": "5:3"
+      },
+      {
+       "a": "6:5"
+      }
+     ]
+    },
+    {
+     "id": "7:39",
+     "key": "e73dd0e9310084f4809ebb77059992c4174200a7",
+     "name": "color/danger/text",
+     "type": "COLOR",
+     "css": "var(--spartant-color-danger-text)",
+     "values": [
+      {
+       "a": "6:3"
+      },
+      {
+       "a": "5:6"
+      },
+      {
+       "a": "6:4"
+      },
+      {
+       "a": "5:5"
+      }
+     ]
+    },
+    {
+     "id": "521:771",
+     "key": "0667dc699bf976819af6cbfdb7665b89a7b15df3",
+     "name": "color/dashed/active",
+     "type": "COLOR",
+     "css": "var(--color-dashed-active)",
+     "values": [
+      {
+       "color": {
+        "type": "VARIABLE_ALIAS",
+        "id": "VariableID:6:22"
+       },
+       "opacity": {
+        "type": "VARIABLE_ALIAS",
+        "id": "VariableID:316:7"
+       }
+      },
+      {
+       "color": {
+        "type": "VARIABLE_ALIAS",
+        "id": "VariableID:6:20"
+       },
+       "opacity": {
+        "type": "VARIABLE_ALIAS",
+        "id": "VariableID:316:7"
+       }
+      },
+      {
+       "color": {
+        "type": "VARIABLE_ALIAS",
+        "id": "VariableID:6:22"
+       },
+       "opacity": {
+        "type": "VARIABLE_ALIAS",
+        "id": "VariableID:316:7"
+       }
+      },
+      {
+       "color": {
+        "type": "VARIABLE_ALIAS",
+        "id": "VariableID:6:20"
+       },
+       "opacity": {
+        "type": "VARIABLE_ALIAS",
+        "id": "VariableID:316:7"
+       }
+      }
+     ]
+    },
+    {
+     "id": "335:346",
+     "key": "cd4469f056fb4b867389ec21740131c2cb472548",
+     "name": "color/dashed/border",
+     "type": "COLOR",
+     "values": [
+      {
+       "color": {
+        "type": "VARIABLE_ALIAS",
+        "id": "VariableID:6:22"
+       },
+       "opacity": {
+        "type": "VARIABLE_ALIAS",
+        "id": "VariableID:335:344"
+       }
+      },
+      {
+       "color": {
+        "type": "VARIABLE_ALIAS",
+        "id": "VariableID:6:20"
+       },
+       "opacity": {
+        "type": "VARIABLE_ALIAS",
+        "id": "VariableID:335:344"
+       }
+      },
+      {
+       "color": {
+        "type": "VARIABLE_ALIAS",
+        "id": "VariableID:6:22"
+       },
+       "opacity": {
+        "type": "VARIABLE_ALIAS",
+        "id": "VariableID:335:344"
+       }
+      },
+      {
+       "color": {
+        "type": "VARIABLE_ALIAS",
+        "id": "VariableID:6:20"
+       },
+       "opacity": {
+        "type": "VARIABLE_ALIAS",
+        "id": "VariableID:335:344"
+       }
+      }
+     ]
+    },
+    {
+     "id": "335:345",
+     "key": "45f9b2398c84ee8e27b037abc443bdcedb8b85a8",
+     "name": "color/dashed/default",
+     "type": "COLOR",
+     "values": [
+      {
+       "color": {
+        "type": "VARIABLE_ALIAS",
+        "id": "VariableID:6:22"
+       },
+       "opacity": {
+        "type": "VARIABLE_ALIAS",
+        "id": "VariableID:335:342"
+       }
+      },
+      {
+       "color": {
+        "type": "VARIABLE_ALIAS",
+        "id": "VariableID:6:20"
+       },
+       "opacity": {
+        "type": "VARIABLE_ALIAS",
+        "id": "VariableID:335:342"
+       }
+      },
+      {
+       "color": {
+        "type": "VARIABLE_ALIAS",
+        "id": "VariableID:6:22"
+       },
+       "opacity": {
+        "type": "VARIABLE_ALIAS",
+        "id": "VariableID:335:342"
+       }
+      },
+      {
+       "color": {
+        "type": "VARIABLE_ALIAS",
+        "id": "VariableID:6:20"
+       },
+       "opacity": {
+        "type": "VARIABLE_ALIAS",
+        "id": "VariableID:335:342"
+       }
+      }
+     ]
+    },
+    {
+     "id": "521:770",
+     "key": "b89d0202fb1cb948b317d029146580adaed9adf1",
+     "name": "color/dashed/hover",
+     "type": "COLOR",
+     "css": "var(--color-dashed-hover)",
+     "values": [
+      {
+       "color": {
+        "type": "VARIABLE_ALIAS",
+        "id": "VariableID:6:22"
+       },
+       "opacity": {
+        "type": "VARIABLE_ALIAS",
+        "id": "VariableID:335:344"
+       }
+      },
+      {
+       "color": {
+        "type": "VARIABLE_ALIAS",
+        "id": "VariableID:6:20"
+       },
+       "opacity": {
+        "type": "VARIABLE_ALIAS",
+        "id": "VariableID:335:344"
+       }
+      },
+      {
+       "color": {
+        "type": "VARIABLE_ALIAS",
+        "id": "VariableID:6:22"
+       },
+       "opacity": {
+        "type": "VARIABLE_ALIAS",
+        "id": "VariableID:335:344"
+       }
+      },
+      {
+       "color": {
+        "type": "VARIABLE_ALIAS",
+        "id": "VariableID:6:20"
+       },
+       "opacity": {
+        "type": "VARIABLE_ALIAS",
+        "id": "VariableID:335:344"
+       }
+      }
+     ]
+    },
+    {
+     "id": "489:1186",
+     "key": "ce47c13f3c0e9d67286de50823a4bdb0d1c97dea",
+     "name": "color/file-format/foreground/dark",
+     "type": "COLOR",
+     "css": "var(--spartan-figma-color-file-format-foreground-dark)",
+     "values": [
+      {
+       "a": "6:32"
+      },
+      {
+       "a": "6:32"
+      },
+      {
+       "a": "6:32"
+      },
+      {
+       "a": "6:32"
+      }
+     ]
+    },
+    {
+     "id": "489:1187",
+     "key": "51de83b8838a903906691e842686049f1eccb3d4",
+     "name": "color/file-format/foreground/light",
+     "type": "COLOR",
+     "css": "var(--spartan-figma-color-file-format-foreground-light)",
+     "values": [
+      {
+       "a": "6:20"
+      },
+      {
+       "a": "6:20"
+      },
+      {
+       "a": "6:20"
+      },
+      {
+       "a": "6:20"
+      }
+     ]
+    },
+    {
+     "id": "489:1183",
+     "key": "85f468cbc1cecdf02a71376c16ededc13acfc637",
+     "name": "color/file-format/gray",
+     "type": "COLOR",
+     "css": "var(--spartan-figma-color-file-format-gray)",
+     "values": [
+      {
+       "a": "6:27"
+      },
+      {
+       "a": "6:27"
+      },
+      {
+       "a": "6:27"
+      },
+      {
+       "a": "6:27"
+      }
+     ]
+    },
+    {
+     "id": "489:1185",
+     "key": "2cb672da41f6fec6f5b817e7f560417c94f8fbe2",
+     "name": "color/file-format/pink",
+     "type": "COLOR",
+     "css": "var(--spartan-figma-color-file-format-pink)",
+     "values": [
+      {
+       "a": "489:1182"
+      },
+      {
+       "a": "489:1182"
+      },
+      {
+       "a": "489:1182"
+      },
+      {
+       "a": "489:1182"
+      }
+     ]
+    },
+    {
+     "id": "489:1184",
+     "key": "ab4620c5f0a313696ed08094076c0eea19d151f5",
+     "name": "color/file-format/yellow",
+     "type": "COLOR",
+     "css": "var(--spartan-figma-color-file-format-yellow)",
+     "values": [
+      {
+       "a": "6:64"
+      },
+      {
+       "a": "6:64"
+      },
+      {
+       "a": "6:64"
+      },
+      {
+       "a": "6:64"
+      }
+     ]
+    },
+    {
+     "id": "7:15",
+     "key": "5d6758d51e33495da5e2812096b20354d8891cf1",
+     "name": "color/focus-ring/default",
+     "type": "COLOR",
+     "css": "var(--spartant-color-focus-ring)",
+     "values": [
+      {
+       "a": "6:80"
+      },
+      {
+       "a": "6:77"
+      },
+      {
+       "a": "6:81"
+      },
+      {
+       "a": "6:76"
+      }
+     ]
+    },
+    {
+     "id": "7:8",
+     "key": "323a04b87216e8ff93a5823a6ac238529e305b1c",
+     "name": "color/foreground/default",
+     "type": "COLOR",
+     "css": "var(--spartant-color-foreground)",
+     "values": [
+      {
+       "a": "6:31"
+      },
+      {
+       "a": "6:26"
+      },
+      {
+       "a": "6:22"
+      },
+      {
+       "a": "6:20"
+      }
+     ]
+    },
+    {
+     "id": "7:11",
+     "key": "52066f3b597da7eab09b774f1640ecba16ac046a",
+     "name": "color/foreground/disabled",
+     "type": "COLOR",
+     "css": "var(--spartant-color-foreground-disabled)",
+     "values": [
+      {
+       "a": "6:27"
+      },
+      {
+       "a": "6:28"
+      },
+      {
+       "a": "6:29"
+      },
+      {
+       "a": "6:24"
+      }
+     ]
+    },
+    {
+     "id": "7:10",
+     "key": "4d7da85ace1fa0eff64696051ca69e0fe71eb89d",
+     "name": "color/foreground/inverse",
+     "type": "COLOR",
+     "css": "var(--spartant-color-foreground-inverse)",
+     "values": [
+      {
+       "a": "6:26"
+      },
+      {
+       "a": "6:22"
+      },
+      {
+       "a": "6:20"
+      },
+      {
+       "a": "6:22"
+      }
+     ]
+    },
+    {
+     "id": "7:9",
+     "key": "3f0b182b6e898d8d4ffb6919e91bf250d8834921",
+     "name": "color/foreground/muted",
+     "type": "COLOR",
+     "css": "var(--spartant-color-foreground-muted)",
+     "values": [
+      {
+       "a": "6:29"
+      },
+      {
+       "a": "6:25"
+      },
+      {
+       "a": "6:30"
+      },
+      {
+       "a": "6:23"
+      }
+     ]
+    },
+    {
+     "id": "7:44",
+     "key": "ec55d50d936dbe1ff1ba53774416cf58aff0a9a7",
+     "name": "color/information/default",
+     "type": "COLOR",
+     "css": "var(--spartant-color-information)",
+     "values": [
+      {
+       "a": "6:15"
+      },
+      {
+       "a": "6:15"
+      },
+      {
+       "a": "6:17"
+      },
+      {
+       "a": "6:11"
+      }
+     ]
+    },
+    {
+     "id": "7:47",
+     "key": "1fa603a8896674b61c4def60269661a9305bced4",
+     "name": "color/information/foreground",
+     "type": "COLOR",
+     "css": "var(--spartant-color-information-foreground)",
+     "values": [
+      {
+       "a": "6:20"
+      },
+      {
+       "a": "6:20"
+      },
+      {
+       "a": "6:20"
+      },
+      {
+       "a": "6:22"
+      }
+     ]
+    },
+    {
+     "id": "7:46",
+     "key": "413832f779b76712ec66ed402d1fc2d6f168d1ef",
+     "name": "color/information/surface",
+     "type": "COLOR",
+     "css": "var(--spartant-color-information-surface)",
+     "values": [
+      {
+       "a": "6:8"
+      },
+      {
+       "a": "6:19"
+      },
+      {
+       "a": "6:8"
+      },
+      {
+       "a": "6:18"
+      }
+     ]
+    },
+    {
+     "id": "7:45",
+     "key": "67feda62850787833904acde452003add78be00a",
+     "name": "color/information/text",
+     "type": "COLOR",
+     "css": "var(--spartant-color-information-text)",
+     "values": [
+      {
+       "a": "6:16"
+      },
+      {
+       "a": "6:11"
+      },
+      {
+       "a": "6:17"
+      },
+      {
+       "a": "6:10"
+      }
+     ]
+    },
+    {
+     "id": "639:21117",
+     "key": "2153052ee038924937e8c824fd1386c233615aca",
+     "name": "color/loading/black",
+     "type": "COLOR",
+     "css": "var(--spartant-color-loading-black)",
+     "values": [
+      {
+       "a": "6:22"
+      },
+      {
+       "a": "6:22"
+      },
+      {
+       "a": "6:22"
+      },
+      {
+       "a": "6:22"
+      }
+     ]
+    },
+    {
+     "id": "639:21118",
+     "key": "22a82724f8a2813e8f2afacc557a44f6f3500a58",
+     "name": "color/loading/white",
+     "type": "COLOR",
+     "css": "var(--spartant-color-loading-white)",
+     "values": [
+      {
+       "a": "6:20"
+      },
+      {
+       "a": "6:20"
+      },
+      {
+       "a": "6:20"
+      },
+      {
+       "a": "6:20"
+      }
+     ]
+    },
+    {
+     "id": "7:20",
+     "key": "d5ad2472cf069ca4d2137aa4b299e358092073aa",
+     "name": "color/primary/active",
+     "type": "COLOR",
+     "css": "var(--spartant-color-primary-active)",
+     "values": [
+      {
+       "a": "6:82"
+      },
+      {
+       "a": "6:82"
+      },
+      {
+       "a": "6:84"
+      },
+      {
+       "a": "6:73"
+      }
+     ]
+    },
+    {
+     "id": "7:16",
+     "key": "395bd127d6fe0733964d604365ce5abcaf8ac548",
+     "name": "color/primary/default",
+     "type": "COLOR",
+     "css": "var(--spartant-color-primary)",
+     "values": [
+      {
+       "a": "6:80"
+      },
+      {
+       "a": "6:80"
+      },
+      {
+       "a": "6:82"
+      },
+      {
+       "a": "6:76"
+      }
+     ]
+    },
+    {
+     "id": "7:21",
+     "key": "4e9d580d097604a51422c91af52f2b84199263d7",
+     "name": "color/primary/foreground",
+     "type": "COLOR",
+     "css": "var(--spartant-color-primary-foreground)",
+     "values": [
+      {
+       "a": "6:20"
+      },
+      {
+       "a": "6:20"
+      },
+      {
+       "a": "6:20"
+      },
+      {
+       "a": "6:22"
+      }
+     ]
+    },
+    {
+     "id": "7:19",
+     "key": "3f6dab4916e9509c44ea9fd8b710f08c2a132d8c",
+     "name": "color/primary/hover",
+     "type": "COLOR",
+     "css": "var(--spartant-color-primary-hover)",
+     "values": [
+      {
+       "a": "6:81"
+      },
+      {
+       "a": "6:81"
+      },
+      {
+       "a": "6:83"
+      },
+      {
+       "a": "6:75"
+      }
+     ]
+    },
+    {
+     "id": "7:18",
+     "key": "8a0ff5e1d7140f1848797f10fabf1d1d6ecb5cfa",
+     "name": "color/primary/surface",
+     "type": "COLOR",
+     "css": "var(--spartant-color-primary-surface)",
+     "values": [
+      {
+       "a": "6:73"
+      },
+      {
+       "a": "6:84"
+      },
+      {
+       "a": "6:73"
+      },
+      {
+       "a": "6:83"
+      }
+     ]
+    },
+    {
+     "id": "7:17",
+     "key": "8ec1f2d31c9cce40ed986a0d56600f5c382cb481",
+     "name": "color/primary/text",
+     "type": "COLOR",
+     "css": "var(--spartant-color-primary-text)",
+     "values": [
+      {
+       "a": "6:81"
+      },
+      {
+       "a": "6:76"
+      },
+      {
+       "a": "6:82"
+      },
+      {
+       "a": "6:75"
+      }
+     ]
+    },
+    {
+     "id": "7:24",
+     "key": "206394d1e900f7da5ec5f70cbf7c5b74daf38253",
+     "name": "color/secondary/active",
+     "type": "COLOR",
+     "css": "var(--spartant-color-secondary-active)",
+     "values": [
+      {
+       "a": "6:23"
+      },
+      {
+       "a": "6:29"
+      },
+      {
+       "a": "6:23"
+      },
+      {
+       "a": "6:29"
+      }
+     ]
+    },
+    {
+     "id": "7:22",
+     "key": "d27a293dfa99c533b753459fccd33399d92804f5",
+     "name": "color/secondary/default",
+     "type": "COLOR",
+     "css": "var(--spartant-color-secondary)",
+     "values": [
+      {
+       "a": "6:20"
+      },
+      {
+       "a": "6:31"
+      },
+      {
+       "a": "6:20"
+      },
+      {
+       "a": "6:31"
+      }
+     ]
+    },
+    {
+     "id": "7:25",
+     "key": "d0f8f7b33c2b5a300218932d4739bb7bfeb26678",
+     "name": "color/secondary/foreground",
+     "type": "COLOR",
+     "css": "var(--spartant-color-secondary-foreground)",
+     "values": [
+      {
+       "a": "6:31"
+      },
+      {
+       "a": "6:26"
+      },
+      {
+       "a": "6:22"
+      },
+      {
+       "a": "6:20"
+      }
+     ]
+    },
+    {
+     "id": "7:23",
+     "key": "24b140d34f2cb568700d191ccba2897c6db40276",
+     "name": "color/secondary/hover",
+     "type": "COLOR",
+     "css": "var(--spartant-color-secondary-hover)",
+     "values": [
+      {
+       "a": "6:26"
+      },
+      {
+       "a": "6:30"
+      },
+      {
+       "a": "6:26"
+      },
+      {
+       "a": "6:30"
+      }
+     ]
+    },
+    {
+     "id": "425:685",
+     "key": "17f93faeb91876fee6dbff13113676cf625d388f",
+     "name": "color/shadow/control/ambient",
+     "type": "COLOR",
+     "css": "var(--color-shadow-control-ambient)",
+     "values": [
+      {
+       "color": {
+        "type": "VARIABLE_ALIAS",
+        "id": "VariableID:6:22"
+       },
+       "opacity": {
+        "type": "VARIABLE_ALIAS",
+        "id": "VariableID:425:682"
+       }
+      },
+      {
+       "color": {
+        "type": "VARIABLE_ALIAS",
+        "id": "VariableID:6:22"
+       },
+       "opacity": {
+        "type": "VARIABLE_ALIAS",
+        "id": "VariableID:425:682"
+       }
+      },
+      {
+       "color": {
+        "type": "VARIABLE_ALIAS",
+        "id": "VariableID:6:22"
+       },
+       "opacity": {
+        "type": "VARIABLE_ALIAS",
+        "id": "VariableID:425:682"
+       }
+      },
+      {
+       "color": {
+        "type": "VARIABLE_ALIAS",
+        "id": "VariableID:6:22"
+       },
+       "opacity": {
+        "type": "VARIABLE_ALIAS",
+        "id": "VariableID:425:682"
+       }
+      }
+     ]
+    },
+    {
+     "id": "425:686",
+     "key": "575860a68775cf25b4ff710f3fd4f48ddbe853ec",
+     "name": "color/shadow/control/edge",
+     "type": "COLOR",
+     "css": "var(--color-shadow-control-edge)",
+     "values": [
+      {
+       "color": {
+        "type": "VARIABLE_ALIAS",
+        "id": "VariableID:6:31"
+       },
+       "opacity": {
+        "type": "VARIABLE_ALIAS",
+        "id": "VariableID:425:684"
+       }
+      },
+      {
+       "color": {
+        "type": "VARIABLE_ALIAS",
+        "id": "VariableID:6:20"
+       },
+       "opacity": {
+        "type": "VARIABLE_ALIAS",
+        "id": "VariableID:425:684"
+       }
+      },
+      {
+       "color": {
+        "type": "VARIABLE_ALIAS",
+        "id": "VariableID:6:22"
+       },
+       "opacity": {
+        "type": "VARIABLE_ALIAS",
+        "id": "VariableID:425:684"
+       }
+      },
+      {
+       "color": {
+        "type": "VARIABLE_ALIAS",
+        "id": "VariableID:6:20"
+       },
+       "opacity": {
+        "type": "VARIABLE_ALIAS",
+        "id": "VariableID:425:684"
+       }
+      }
+     ]
+    },
+    {
+     "id": "544:16",
+     "key": "f13768912c4411085d7669074422855de0c9a10c",
+     "name": "color/shadow/overlay/ambient",
+     "type": "COLOR",
+     "css": "var(--spartant-color-shadow-overlay-ambient)",
+     "values": [
+      {
+       "color": {
+        "type": "VARIABLE_ALIAS",
+        "id": "VariableID:6:22"
+       },
+       "opacity": {
+        "type": "VARIABLE_ALIAS",
+        "id": "VariableID:316:7"
+       }
+      },
+      {
+       "color": {
+        "type": "VARIABLE_ALIAS",
+        "id": "VariableID:6:22"
+       },
+       "opacity": {
+        "type": "VARIABLE_ALIAS",
+        "id": "VariableID:316:17"
+       }
+      },
+      {
+       "color": {
+        "type": "VARIABLE_ALIAS",
+        "id": "VariableID:6:22"
+       },
+       "opacity": {
+        "type": "VARIABLE_ALIAS",
+        "id": "VariableID:316:7"
+       }
+      },
+      {
+       "color": {
+        "type": "VARIABLE_ALIAS",
+        "id": "VariableID:6:22"
+       },
+       "opacity": {
+        "type": "VARIABLE_ALIAS",
+        "id": "VariableID:316:17"
+       }
+      }
+     ]
+    },
+    {
+     "id": "544:17",
+     "key": "64c38ccc214ceeb7de65dfe1d5a48ae708d45e7d",
+     "name": "color/shadow/overlay/contact",
+     "type": "COLOR",
+     "css": "var(--spartant-color-shadow-overlay-contact)",
+     "values": [
+      {
+       "color": {
+        "type": "VARIABLE_ALIAS",
+        "id": "VariableID:6:22"
+       },
+       "opacity": {
+        "type": "VARIABLE_ALIAS",
+        "id": "VariableID:335:344"
+       }
+      },
+      {
+       "color": {
+        "type": "VARIABLE_ALIAS",
+        "id": "VariableID:6:22"
+       },
+       "opacity": {
+        "type": "VARIABLE_ALIAS",
+        "id": "VariableID:316:7"
+       }
+      },
+      {
+       "color": {
+        "type": "VARIABLE_ALIAS",
+        "id": "VariableID:6:22"
+       },
+       "opacity": {
+        "type": "VARIABLE_ALIAS",
+        "id": "VariableID:335:344"
+       }
+      },
+      {
+       "color": {
+        "type": "VARIABLE_ALIAS",
+        "id": "VariableID:6:22"
+       },
+       "opacity": {
+        "type": "VARIABLE_ALIAS",
+        "id": "VariableID:316:7"
+       }
+      }
+     ]
+    },
+    {
+     "id": "7:30",
+     "key": "00a4f485e9e10223673e2bc01c7a1a3d09fb303c",
+     "name": "color/success/default",
+     "type": "COLOR",
+     "css": "var(--spartant-color-success)",
+     "values": [
+      {
+       "a": "6:54"
+      },
+      {
+       "a": "6:54"
+      },
+      {
+       "a": "6:56"
+      },
+      {
+       "a": "6:50"
+      }
+     ]
+    },
+    {
+     "id": "7:33",
+     "key": "456b632f2b25a0857977a8debaa831dd2cb8e8aa",
+     "name": "color/success/foreground",
+     "type": "COLOR",
+     "css": "var(--spartant-color-success-foreground)",
+     "values": [
+      {
+       "a": "6:20"
+      },
+      {
+       "a": "6:20"
+      },
+      {
+       "a": "6:20"
+      },
+      {
+       "a": "6:22"
+      }
+     ]
+    },
+    {
+     "id": "7:32",
+     "key": "cfb42775f6b4a1fde422c481312cae2b1ac25c15",
+     "name": "color/success/surface",
+     "type": "COLOR",
+     "css": "var(--spartant-color-success-surface)",
+     "values": [
+      {
+       "a": "6:47"
+      },
+      {
+       "a": "6:58"
+      },
+      {
+       "a": "6:47"
+      },
+      {
+       "a": "6:57"
+      }
+     ]
+    },
+    {
+     "id": "7:31",
+     "key": "33243e449d777bda161b8cfcf3fa64d648a0bd16",
+     "name": "color/success/text",
+     "type": "COLOR",
+     "css": "var(--spartant-color-success-text)",
+     "values": [
+      {
+       "a": "6:55"
+      },
+      {
+       "a": "6:50"
+      },
+      {
+       "a": "6:56"
+      },
+      {
+       "a": "6:49"
+      }
+     ]
+    },
+    {
+     "id": "7:3",
+     "key": "ce4380e22bb6ceafebfd49746013634334aeeac5",
+     "name": "color/surface/default",
+     "type": "COLOR",
+     "css": "var(--spartant-color-surface)",
+     "values": [
+      {
+       "a": "6:20"
+      },
+      {
+       "a": "6:32"
+      },
+      {
+       "a": "6:20"
+      },
+      {
+       "a": "6:22"
+      }
+     ]
+    },
+    {
+     "id": "7:6",
+     "key": "426057d65c10ee4c6fade36499829e6bcdff5563",
+     "name": "color/surface/disabled",
+     "type": "COLOR",
+     "css": "var(--spartant-color-surface-disabled)",
+     "values": [
+      {
+       "a": "6:21"
+      },
+      {
+       "a": "6:32"
+      },
+      {
+       "a": "6:21"
+      },
+      {
+       "a": "6:31"
+      }
+     ]
+    },
+    {
+     "id": "7:4",
+     "key": "0baeb10eaf6828401a3746750ab6f795111ff316",
+     "name": "color/surface/elevated",
+     "type": "COLOR",
+     "css": "var(--spartant-color-surface-elevated)",
+     "values": [
+      {
+       "a": "6:20"
+      },
+      {
+       "a": "6:31"
+      },
+      {
+       "a": "6:20"
+      },
+      {
+       "a": "6:32"
+      }
+     ]
+    },
+    {
+     "id": "346:2",
+     "key": "f0d936ef81f073e2e998d72fc1825ea181389643",
+     "name": "color/surface/faint",
+     "type": "COLOR",
+     "css": "var(--spartant-color-surface-faint)",
+     "values": [
+      {
+       "color": {
+        "type": "VARIABLE_ALIAS",
+        "id": "VariableID:6:26"
+       },
+       "opacity": {
+        "type": "VARIABLE_ALIAS",
+        "id": "VariableID:316:21"
+       }
+      },
+      {
+       "color": {
+        "type": "VARIABLE_ALIAS",
+        "id": "VariableID:6:32"
+       },
+       "opacity": {
+        "type": "VARIABLE_ALIAS",
+        "id": "VariableID:316:21"
+       }
+      },
+      {
+       "color": {
+        "type": "VARIABLE_ALIAS",
+        "id": "VariableID:6:26"
+       },
+       "opacity": {
+        "type": "VARIABLE_ALIAS",
+        "id": "VariableID:316:21"
+       }
+      },
+      {
+       "color": {
+        "type": "VARIABLE_ALIAS",
+        "id": "VariableID:6:32"
+       },
+       "opacity": {
+        "type": "VARIABLE_ALIAS",
+        "id": "VariableID:316:21"
+       }
+      }
+     ]
+    },
+    {
+     "id": "7:5",
+     "key": "41e8313781719b7a69dab02d9d956e3ff00085d0",
+     "name": "color/surface/muted",
+     "type": "COLOR",
+     "css": "var(--spartant-color-surface-muted)",
+     "values": [
+      {
+       "a": "6:26"
+      },
+      {
+       "a": "6:31"
+      },
+      {
+       "a": "6:26"
+      },
+      {
+       "a": "6:31"
+      }
+     ]
+    },
+    {
+     "id": "7:7",
+     "key": "d379707eaacce3af8b74b7c63074eeddfce6d421",
+     "name": "color/surface/selected",
+     "type": "COLOR",
+     "css": "var(--spartant-color-surface-selected)",
+     "values": [
+      {
+       "a": "6:73"
+      },
+      {
+       "a": "6:82"
+      },
+      {
+       "a": "6:73"
+      },
+      {
+       "a": "6:83"
+      }
+     ]
+    },
+    {
+     "id": "291:2",
+     "key": "2c3822ebf55eb43e7f4504584cf3da565c7614c8",
+     "name": "color/surface/subtle",
+     "type": "COLOR",
+     "css": "var(--spartant-color-surface-subtle)",
+     "values": [
+      {
+       "a": "6:26"
+      },
+      {
+       "a": "6:32"
+      },
+      {
+       "a": "6:21"
+      },
+      {
+       "a": "6:32"
+      }
+     ]
+    },
+    {
+     "id": "373:76",
+     "key": "3aaaa0c59c17fc9bd4720a60d21ae6c39a198682",
+     "name": "color/switch/thumb",
+     "type": "COLOR",
+     "values": [
+      {
+       "a": "6:20"
+      },
+      {
+       "a": "6:26"
+      },
+      {
+       "a": "6:20"
+      },
+      {
+       "a": "6:26"
+      }
+     ]
+    },
+    {
+     "id": "620:2278",
+     "key": "3d9c510e375543c77fcefc4acc0da9095fa1df07",
+     "name": "color/warning/active",
+     "type": "COLOR",
+     "css": "var(--spartant-color-warning-active)",
+     "values": [
+      {
+       "a": "620:2276"
+      },
+      {
+       "a": "620:2276"
+      },
+      {
+       "a": "6:71"
+      },
+      {
+       "a": "6:60"
+      }
+     ]
+    },
+    {
+     "id": "620:2279",
+     "key": "bba10a0b21767c3c562c115687d63e920ace7165",
+     "name": "color/warning/border",
+     "type": "COLOR",
+     "css": "var(--spartant-color-warning-border)",
+     "values": [
+      {
+       "a": "6:68"
+      },
+      {
+       "a": "6:68"
+      },
+      {
+       "a": "6:69"
+      },
+      {
+       "a": "6:63"
+      }
+     ]
+    },
+    {
+     "id": "7:34",
+     "key": "c9ca0b976005fbc52cc2867916168a5a028eca2c",
+     "name": "color/warning/default",
+     "type": "COLOR",
+     "css": "var(--spartant-color-warning)",
+     "values": [
+      {
+       "a": "616:2275"
+      },
+      {
+       "a": "616:2275"
+      },
+      {
+       "a": "6:69"
+      },
+      {
+       "a": "6:63"
+      }
+     ]
+    },
+    {
+     "id": "7:37",
+     "key": "1e0de8afe64f92ffb027bf4f0f88cc8ab94f36f8",
+     "name": "color/warning/foreground",
+     "type": "COLOR",
+     "css": "var(--spartant-color-warning-foreground)",
+     "values": [
+      {
+       "a": "6:22"
+      },
+      {
+       "a": "6:22"
+      },
+      {
+       "a": "6:20"
+      },
+      {
+       "a": "6:22"
+      }
+     ]
+    },
+    {
+     "id": "620:2277",
+     "key": "99f5c0d26ef80eb31e5ec17ab5707a897dae927c",
+     "name": "color/warning/hover",
+     "type": "COLOR",
+     "css": "var(--spartant-color-warning-hover)",
+     "values": [
+      {
+       "a": "620:2275"
+      },
+      {
+       "a": "620:2275"
+      },
+      {
+       "a": "6:70"
+      },
+      {
+       "a": "6:62"
+      }
+     ]
+    },
+    {
+     "id": "7:36",
+     "key": "105dcb636071e9012b3788754badaf0e689567c3",
+     "name": "color/warning/surface",
+     "type": "COLOR",
+     "css": "var(--spartant-color-warning-surface)",
+     "values": [
+      {
+       "a": "6:60"
+      },
+      {
+       "a": "6:71"
+      },
+      {
+       "a": "6:60"
+      },
+      {
+       "a": "6:70"
+      }
+     ]
+    },
+    {
+     "id": "7:35",
+     "key": "b4c5156b837ded980cc77deeb948755df43d163e",
+     "name": "color/warning/text",
+     "type": "COLOR",
+     "css": "var(--spartant-color-warning-text)",
+     "values": [
+      {
+       "a": "6:68"
+      },
+      {
+       "a": "6:63"
+      },
+      {
+       "a": "6:69"
+      },
+      {
+       "a": "6:62"
+      }
+     ]
+    },
+    {
+     "id": "53:2",
+     "key": "14013cc5749c0345a09f4b7a2b3254b2c35223a8",
+     "name": "contrast/border-width/default",
+     "type": "FLOAT",
+     "css": "var(--spartant-border-width)",
+     "values": [
+      1,
+      1,
+      2,
+      2
+     ]
+    },
+    {
+     "id": "53:3",
+     "key": "9946fba2235322f78c78a4928f653cfd45a18d9f",
+     "name": "contrast/border-width/emphasis",
+     "type": "FLOAT",
+     "css": "var(--spartant-border-width-emphasis)",
+     "values": [
+      2,
+      2,
+      3,
+      3
+     ]
+    }
+   ]
+  },
+  {
+   "id": "4:5",
+   "key": "947e94baf7df2e909f57e16da485a6e8947c7c9c",
+   "name": "04 Semantic Foundation",
+   "modes": [
+    {
+     "id": "4:7",
+     "name": "Value"
+    }
+   ],
+   "variables": [
+    {
+     "id": "9:2",
+     "key": "4512936aad4bb6281708dfabd344082129bae11b",
+     "name": "radius/control",
+     "type": "FLOAT",
+     "css": "var(--spartant-radius-control)",
+     "values": [
+      {
+       "a": "8:16"
+      }
+     ]
+    },
+    {
+     "id": "9:3",
+     "key": "cf734c609be20135fb94922bbe41f05e92a71d00",
+     "name": "radius/surface",
+     "type": "FLOAT",
+     "css": "var(--spartant-radius-surface)",
+     "values": [
+      {
+       "a": "8:17"
+      }
+     ]
+    },
+    {
+     "id": "9:4",
+     "key": "f911fce6203136462d6d4d85aeb662add9b94290",
+     "name": "radius/pill",
+     "type": "FLOAT",
+     "css": "var(--spartant-radius-pill)",
+     "values": [
+      {
+       "a": "8:19"
+      }
+     ]
+    },
+    {
+     "id": "9:5",
+     "key": "5cd739c2ed9ca4be1f786f5de47fe1bed766ece0",
+     "name": "size/min-target",
+     "type": "FLOAT",
+     "css": "var(--spartant-size-min-target)",
+     "values": [
+      {
+       "a": "8:46"
+      }
+     ]
+    },
+    {
+     "id": "9:6",
+     "key": "b89d0d391d8d50b8ea0c115e403754519b416d6f",
+     "name": "space/control-padding-x",
+     "type": "FLOAT",
+     "css": "var(--spartant-space-control-padding-x)",
+     "values": [
+      {
+       "a": "53:9"
+      }
+     ]
+    },
+    {
+     "id": "9:7",
+     "key": "77bceeb8b73dd606f4a94a1807f005cd459a5b0b",
+     "name": "space/control-padding-y",
+     "type": "FLOAT",
+     "css": "var(--spartant-space-control-padding-y)",
+     "values": [
+      {
+       "a": "53:11"
+      }
+     ]
+    },
+    {
+     "id": "9:8",
+     "key": "4ab403c72880a4b600858c7d996cf3e69d1bd856",
+     "name": "space/control-gap",
+     "type": "FLOAT",
+     "css": "var(--spartant-space-control-gap)",
+     "values": [
+      {
+       "a": "53:12"
+      }
+     ]
+    },
+    {
+     "id": "9:9",
+     "key": "c6f979f45d9241c8d5e3a105277ed4551d896ff5",
+     "name": "space/surface-padding",
+     "type": "FLOAT",
+     "css": "var(--spartant-space-surface-padding)",
+     "values": [
+      {
+       "a": "8:8"
+      }
+     ]
+    },
+    {
+     "id": "9:10",
+     "key": "6a12f5e3fe995294a49e53e238a862d4576708f9",
+     "name": "space/stack-gap",
+     "type": "FLOAT",
+     "css": "var(--spartant-space-stack-gap)",
+     "values": [
+      {
+       "a": "8:6"
+      }
+     ]
+    },
+    {
+     "id": "9:11",
+     "key": "c1687a9e63218807f3378831c6f1650e3d4edb79",
+     "name": "space/section-gap",
+     "type": "FLOAT",
+     "css": "var(--spartant-space-section-gap)",
+     "values": [
+      {
+       "a": "8:11"
+      }
+     ]
+    },
+    {
+     "id": "9:12",
+     "key": "dcdbfb77e1fa5b143f7c6f2699531c7a634d8870",
+     "name": "border-width/default",
+     "type": "FLOAT",
+     "css": "var(--spartant-border-width)",
+     "values": [
+      {
+       "a": "53:2"
+      }
+     ]
+    },
+    {
+     "id": "9:13",
+     "key": "194ba948db0f3aa320ac40cfe0b5dc2990ef057f",
+     "name": "border-width/emphasis",
+     "type": "FLOAT",
+     "css": "var(--spartant-border-width-emphasis)",
+     "values": [
+      {
+       "a": "53:3"
+      }
+     ]
+    },
+    {
+     "id": "9:14",
+     "key": "6cabe75ae602305993b64e8cb64bf3c9433fef22",
+     "name": "font/family/body",
+     "type": "STRING",
+     "css": "var(--spartant-font-family-body)",
+     "values": [
+      {
+       "a": "8:22"
+      }
+     ]
+    },
+    {
+     "id": "9:15",
+     "key": "856e04d0d76afb3b4d8adf06e6e627e6c9c57e3c",
+     "name": "font/family/code",
+     "type": "STRING",
+     "css": "var(--spartant-font-family-code)",
+     "values": [
+      {
+       "a": "8:23"
+      }
+     ]
+    },
+    {
+     "id": "9:16",
+     "key": "55077aaa5eec53584ce707e7e62a65c506ec121e",
+     "name": "font/size/caption",
+     "type": "FLOAT",
+     "css": "var(--spartant-font-size-caption)",
+     "values": [
+      {
+       "a": "8:24"
+      }
+     ]
+    },
+    {
+     "id": "9:17",
+     "key": "757608aaa9bd731bafef736802f20fd66dfc8e98",
+     "name": "font/size/body-small",
+     "type": "FLOAT",
+     "css": "var(--spartant-font-size-body-small)",
+     "values": [
+      {
+       "a": "8:24"
+      }
+     ]
+    },
+    {
+     "id": "9:18",
+     "key": "16607aa1ce5d54e59379ae31a2df37e0e75fd764",
+     "name": "font/size/body",
+     "type": "FLOAT",
+     "css": "var(--spartant-font-size-body)",
+     "values": [
+      {
+       "a": "8:25"
+      }
+     ]
+    },
+    {
+     "id": "9:19",
+     "key": "d9b6cf9cce0bddd08a3f40944a5303eabc6cdf60",
+     "name": "font/size/body-large",
+     "type": "FLOAT",
+     "css": "var(--spartant-font-size-body-large)",
+     "values": [
+      {
+       "a": "8:26"
+      }
+     ]
+    },
+    {
+     "id": "9:20",
+     "key": "d442e2eca1cbd18442523a56d52ac42be030ae63",
+     "name": "font/size/heading-small",
+     "type": "FLOAT",
+     "css": "var(--spartant-font-size-heading-small)",
+     "values": [
+      {
+       "a": "8:28"
+      }
+     ]
+    },
+    {
+     "id": "9:21",
+     "key": "60fc977c1207b90b3842596bf82b7f4c16352d94",
+     "name": "font/size/heading",
+     "type": "FLOAT",
+     "css": "var(--spartant-font-size-heading)",
+     "values": [
+      {
+       "a": "8:29"
+      }
+     ]
+    },
+    {
+     "id": "9:22",
+     "key": "8b206e93d878ce10e52df8ab723602dd8b70362b",
+     "name": "font/size/heading-large",
+     "type": "FLOAT",
+     "css": "var(--spartant-font-size-heading-large)",
+     "values": [
+      {
+       "a": "8:30"
+      }
+     ]
+    },
+    {
+     "id": "9:23",
+     "key": "2c5ad343c2ab6dd4c086bb8d2feac302e61c46aa",
+     "name": "font/size/display",
+     "type": "FLOAT",
+     "css": "var(--spartant-font-size-display)",
+     "values": [
+      {
+       "a": "8:31"
+      }
+     ]
+    },
+    {
+     "id": "9:24",
+     "key": "f293dab1b5f349a498247434cc9ae458766aa4b2",
+     "name": "font/weight/body",
+     "type": "FLOAT",
+     "css": "var(--spartant-font-weight-body)",
+     "values": [
+      {
+       "a": "8:32"
+      }
+     ]
+    },
+    {
+     "id": "9:25",
+     "key": "ecab121efe6a2a5c7830e5802cce9d1ab3b47df0",
+     "name": "font/weight/emphasis",
+     "type": "FLOAT",
+     "css": "var(--spartant-font-weight-emphasis)",
+     "values": [
+      {
+       "a": "8:33"
+      }
+     ]
+    },
+    {
+     "id": "9:26",
+     "key": "43d828b50feae8b0f03463961100a32f68476d6f",
+     "name": "font/weight/heading",
+     "type": "FLOAT",
+     "css": "var(--spartant-font-weight-heading)",
+     "values": [
+      {
+       "a": "8:34"
+      }
+     ]
+    },
+    {
+     "id": "9:27",
+     "key": "7c13a69129668c18089adbb0b499368caf8175d3",
+     "name": "font/line-height/body",
+     "type": "FLOAT",
+     "css": "var(--spartant-font-line-height-body)",
+     "values": [
+      {
+       "a": "8:38"
+      }
+     ]
+    },
+    {
+     "id": "9:28",
+     "key": "ea1b9e070ddd86403fa42228881a34e6e83f3c98",
+     "name": "font/line-height/heading",
+     "type": "FLOAT",
+     "css": "var(--spartant-font-line-height-heading)",
+     "values": [
+      {
+       "a": "8:36"
+      }
+     ]
+    },
+    {
+     "id": "9:29",
+     "key": "c2ccfcb4eda3f05fa8c0bab18631edac037a9947",
+     "name": "font/line-height/caption",
+     "type": "FLOAT",
+     "css": "var(--spartant-font-line-height-caption)",
+     "values": [
+      {
+       "a": "8:37"
+      }
+     ]
+    },
+    {
+     "id": "9:30",
+     "key": "294db8b0d849be520e4ada884a25039443133906",
+     "name": "font/tracking/body",
+     "type": "STRING",
+     "css": "var(--spartant-font-tracking-body)",
+     "values": [
+      {
+       "a": "8:41"
+      }
+     ]
+    },
+    {
+     "id": "9:31",
+     "key": "e6f30be270bdc914dc4ab7a6d6dd22503fa29e3e",
+     "name": "font/tracking/heading",
+     "type": "STRING",
+     "css": "var(--spartant-font-tracking-heading)",
+     "values": [
+      {
+       "a": "8:40"
+      }
+     ]
+    },
+    {
+     "id": "9:32",
+     "key": "d018f23d79defaa338ae4332583b2feaf7ed23b1",
+     "name": "opacity/disabled",
+     "type": "FLOAT",
+     "css": "var(--spartant-opacity-disabled)",
+     "values": [
+      {
+       "a": "8:44"
+      }
+     ]
+    },
+    {
+     "id": "316:3",
+     "key": "d3eba79372172fd8dfd4f851d0fe58843e02b1e1",
+     "name": "opacity/0",
+     "type": "FLOAT",
+     "css": "var(--spartant-opacity-0)",
+     "values": [
+      {
+       "a": "316:2"
+      }
+     ]
+    },
+    {
+     "id": "316:5",
+     "key": "06d0e56a70319f5b01c45e02a134048967c55d3a",
+     "name": "opacity/5",
+     "type": "FLOAT",
+     "css": "var(--spartant-opacity-5)",
+     "values": [
+      {
+       "a": "316:4"
+      }
+     ]
+    },
+    {
+     "id": "316:7",
+     "key": "8302135166fc1f6fc223e116b00501cc203d8de8",
+     "name": "opacity/10",
+     "type": "FLOAT",
+     "css": "var(--spartant-opacity-10)",
+     "values": [
+      {
+       "a": "316:6"
+      }
+     ]
+    },
+    {
+     "id": "316:9",
+     "key": "54326732427b3ac7a51e14c28042b181d6890230",
+     "name": "opacity/15",
+     "type": "FLOAT",
+     "css": "var(--spartant-opacity-15)",
+     "values": [
+      {
+       "a": "316:8"
+      }
+     ]
+    },
+    {
+     "id": "316:11",
+     "key": "080fbe99313387e45efe6a4c3e2fd854c3613419",
+     "name": "opacity/20",
+     "type": "FLOAT",
+     "css": "var(--spartant-opacity-20)",
+     "values": [
+      {
+       "a": "316:10"
+      }
+     ]
+    },
+    {
+     "id": "316:13",
+     "key": "ad099f13302f02f6234ed8a15bab8bdeb9ec35e2",
+     "name": "opacity/25",
+     "type": "FLOAT",
+     "css": "var(--spartant-opacity-25)",
+     "values": [
+      {
+       "a": "316:12"
+      }
+     ]
+    },
+    {
+     "id": "316:15",
+     "key": "ee6e8bc5ebaa41b63a5c21701ee09ed093be848f",
+     "name": "opacity/30",
+     "type": "FLOAT",
+     "css": "var(--spartant-opacity-30)",
+     "values": [
+      {
+       "a": "316:14"
+      }
+     ]
+    },
+    {
+     "id": "316:17",
+     "key": "4a7c534f693b7cb08bcf766d4c8b7cad1a26e0d7",
+     "name": "opacity/35",
+     "type": "FLOAT",
+     "css": "var(--spartant-opacity-35)",
+     "values": [
+      {
+       "a": "316:16"
+      }
+     ]
+    },
+    {
+     "id": "316:18",
+     "key": "ec20218d753e6f4ea180e624aab84c85bf808792",
+     "name": "opacity/40",
+     "type": "FLOAT",
+     "css": "var(--spartant-opacity-40)",
+     "values": [
+      {
+       "a": "8:43"
+      }
+     ]
+    },
+    {
+     "id": "316:20",
+     "key": "0763390d137406628a6f30fda0f7e9df867815a9",
+     "name": "opacity/45",
+     "type": "FLOAT",
+     "css": "var(--spartant-opacity-45)",
+     "values": [
+      {
+       "a": "316:19"
+      }
+     ]
+    },
+    {
+     "id": "316:21",
+     "key": "cff48863b61525f3a1b0bb1f3aa9779ce9b8dd9f",
+     "name": "opacity/50",
+     "type": "FLOAT",
+     "css": "var(--spartant-opacity-50)",
+     "values": [
+      {
+       "a": "8:44"
+      }
+     ]
+    },
+    {
+     "id": "316:23",
+     "key": "ccd9305be72be28078c3c34f3df9ec5ed6403de0",
+     "name": "opacity/55",
+     "type": "FLOAT",
+     "css": "var(--spartant-opacity-55)",
+     "values": [
+      {
+       "a": "316:22"
+      }
+     ]
+    },
+    {
+     "id": "316:25",
+     "key": "c1522eb97535f8223bf55473c1d2c2cfcad0fdcc",
+     "name": "opacity/60",
+     "type": "FLOAT",
+     "css": "var(--spartant-opacity-60)",
+     "values": [
+      {
+       "a": "316:24"
+      }
+     ]
+    },
+    {
+     "id": "316:27",
+     "key": "d7bf4feb78326dc4fc20e670e0e958716ff59fe3",
+     "name": "opacity/65",
+     "type": "FLOAT",
+     "css": "var(--spartant-opacity-65)",
+     "values": [
+      {
+       "a": "316:26"
+      }
+     ]
+    },
+    {
+     "id": "316:28",
+     "key": "845d5a4dd5a21878f44134f7fc7fec687b901000",
+     "name": "opacity/70",
+     "type": "FLOAT",
+     "css": "var(--spartant-opacity-70)",
+     "values": [
+      {
+       "a": "8:45"
+      }
+     ]
+    },
+    {
+     "id": "316:30",
+     "key": "b4a2db7cdabb8c3631eadaf19e059c486ce15e02",
+     "name": "opacity/75",
+     "type": "FLOAT",
+     "css": "var(--spartant-opacity-75)",
+     "values": [
+      {
+       "a": "316:29"
+      }
+     ]
+    },
+    {
+     "id": "316:32",
+     "key": "d3ca2a2e41d88dd0bf05f5f140a68e332e1c90e9",
+     "name": "opacity/80",
+     "type": "FLOAT",
+     "css": "var(--spartant-opacity-80)",
+     "values": [
+      {
+       "a": "316:31"
+      }
+     ]
+    },
+    {
+     "id": "316:34",
+     "key": "2a5ad2d7e07b6a3710b77445e269df03d78d7447",
+     "name": "opacity/85",
+     "type": "FLOAT",
+     "css": "var(--spartant-opacity-85)",
+     "values": [
+      {
+       "a": "316:33"
+      }
+     ]
+    },
+    {
+     "id": "316:36",
+     "key": "068c26b5c2253b9b137eb46abc1fd58b36fe6431",
+     "name": "opacity/90",
+     "type": "FLOAT",
+     "css": "var(--spartant-opacity-90)",
+     "values": [
+      {
+       "a": "316:35"
+      }
+     ]
+    },
+    {
+     "id": "316:38",
+     "key": "835697074a900b1b5d0d6c48814473618fc20881",
+     "name": "opacity/95",
+     "type": "FLOAT",
+     "css": "var(--spartant-opacity-95)",
+     "values": [
+      {
+       "a": "316:37"
+      }
+     ]
+    },
+    {
+     "id": "316:40",
+     "key": "5a1c7e06047f1349caf33c0ad1406281fbc24cdb",
+     "name": "opacity/100",
+     "type": "FLOAT",
+     "css": "var(--spartant-opacity-100)",
+     "values": [
+      {
+       "a": "316:39"
+      }
+     ]
+    },
+    {
+     "id": "316:41",
+     "key": "f8cc95ee6e855f20d953c9ac52c1de4255ebc583",
+     "name": "opacity/border/overlay",
+     "type": "FLOAT",
+     "css": "var(--spartant-opacity-border-overlay)",
+     "values": [
+      {
+       "a": "316:4"
+      }
+     ]
+    },
+    {
+     "id": "335:342",
+     "key": "c7c1508a78421f705266cf57feae26c0d2cb42a7",
+     "name": "opacity/2",
+     "type": "FLOAT",
+     "values": [
+      {
+       "a": "335:341"
+      }
+     ]
+    },
+    {
+     "id": "335:344",
+     "key": "a0b82a20a2cd30ff10213c8276ac4292be0bc7cd",
+     "name": "opacity/6",
+     "type": "FLOAT",
+     "values": [
+      {
+       "a": "335:343"
+      }
+     ]
+    },
+    {
+     "id": "357:9",
+     "key": "fbd2001c9707af40c76f65856d97841cf9bcee3c",
+     "name": "radius/drawer",
+     "type": "FLOAT",
+     "values": [
+      {
+       "a": "357:8"
+      }
+     ]
+    },
+    {
+     "id": "425:682",
+     "key": "a93b4e72e945ea0d04aade8096b1aef648245e8c",
+     "name": "opacity/4",
+     "type": "FLOAT",
+     "values": [
+      {
+       "a": "425:681"
+      }
+     ]
+    },
+    {
+     "id": "425:684",
+     "key": "58b76efa159c6f80f079e8edcbb1d4405037bf09",
+     "name": "opacity/18",
+     "type": "FLOAT",
+     "values": [
+      {
+       "a": "425:683"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "4:6",
+   "key": "f397432dfcea215e10d2b8f4468a5cab9dc05066",
+   "name": "05 Component",
+   "modes": [
+    {
+     "id": "4:8",
+     "name": "Value"
+    }
+   ],
+   "variables": [
+    {
+     "id": "10:2",
+     "key": "8ac356b9a8e9c482f1051bd391d868b14ed86b03",
+     "name": "badge/padding-x",
+     "type": "FLOAT",
+     "css": "var(--spartant-badge-padding-x)",
+     "values": [
+      8
+     ]
+    },
+    {
+     "id": "10:3",
+     "key": "b14f81db3ab31083aa11d420aa7bf4e339b68d09",
+     "name": "badge/padding-y",
+     "type": "FLOAT",
+     "css": "var(--spartant-badge-padding-y)",
+     "values": [
+      2
+     ]
+    },
+    {
+     "id": "10:4",
+     "key": "9354e1cd371a8aabc9f9929e6925f5ebe35b4d9a",
+     "name": "badge/gap",
+     "type": "FLOAT",
+     "css": "var(--spartant-badge-gap)",
+     "values": [
+      4
+     ]
+    },
+    {
+     "id": "10:5",
+     "key": "7164fb52e233db2a7ca1efd57769f47f0e57bc93",
+     "name": "button/height/sm",
+     "type": "FLOAT",
+     "css": "var(--spartant-button-height-sm)",
+     "values": [
+      {
+       "a": "53:5"
+      }
+     ]
+    },
+    {
+     "id": "10:6",
+     "key": "0705a256b7f76c3350ad592b6cb136349c22d65d",
+     "name": "button/height/base",
+     "type": "FLOAT",
+     "css": "var(--spartant-button-height-base)",
+     "values": [
+      {
+       "a": "53:6"
+      }
+     ]
+    },
+    {
+     "id": "10:7",
+     "key": "3fffc9207f54648e3a7ce5fea099fd32ffad567c",
+     "name": "button/height/lg",
+     "type": "FLOAT",
+     "css": "var(--spartant-button-height-lg)",
+     "values": [
+      {
+       "a": "10:6"
+      }
+     ]
+    },
+    {
+     "id": "10:8",
+     "key": "17affbe04ad8f98fed27a6203b84af32b549dda9",
+     "name": "button/padding-x/sm",
+     "type": "FLOAT",
+     "css": "var(--spartant-button-padding-x-sm)",
+     "values": [
+      {
+       "a": "53:8"
+      }
+     ]
+    },
+    {
+     "id": "10:9",
+     "key": "42e643a56953457952442e0f91f5e669abf873e1",
+     "name": "button/padding-x/base",
+     "type": "FLOAT",
+     "css": "var(--spartant-button-padding-x-base)",
+     "values": [
+      {
+       "a": "53:9"
+      }
+     ]
+    },
+    {
+     "id": "10:10",
+     "key": "822c1f12a62c42d5901e557af09e3a224e9ae418",
+     "name": "button/padding-x/lg",
+     "type": "FLOAT",
+     "css": "var(--spartant-button-padding-x-lg)",
+     "values": [
+      {
+       "a": "10:9"
+      }
+     ]
+    },
+    {
+     "id": "10:11",
+     "key": "db276038b47346f7db949f7f75c7be55ba1188cb",
+     "name": "dialog/backdrop/default",
+     "type": "COLOR",
+     "css": "var(--spartant-dialog-backdrop)",
+     "values": [
+      [
+       0.125547,
+       0.131864,
+       0.144207,
+       0.5
+      ]
+     ]
+    },
+    {
+     "id": "10:12",
+     "key": "1089232c216ba10ee7f768ac996460602cc6a28a",
+     "name": "dialog/max-width/default",
+     "type": "FLOAT",
+     "css": "var(--spartant-dialog-max-width)",
+     "values": [
+      512
+     ]
+    },
+    {
+     "id": "10:13",
+     "key": "24817745d4b957f544bb0eebdeff99c1a3c1a384",
+     "name": "field/height/base",
+     "type": "FLOAT",
+     "css": "var(--spartant-field-height-base)",
+     "values": [
+      {
+       "a": "53:6"
+      }
+     ]
+    },
+    {
+     "id": "10:14",
+     "key": "0af72a924c248a1214c2fd29a84d4858a381556b",
+     "name": "field/padding-x/default",
+     "type": "FLOAT",
+     "css": "var(--spartant-field-padding-x)",
+     "values": [
+      {
+       "a": "53:9"
+      }
+     ]
+    },
+    {
+     "id": "10:15",
+     "key": "32052e2d0ef3a49ed5e46927ad49cebb18449d86",
+     "name": "field/textarea-min-height/default",
+     "type": "FLOAT",
+     "css": "var(--spartant-field-textarea-min-height)",
+     "values": [
+      {
+       "a": "666:16"
+      }
+     ]
+    },
+    {
+     "id": "10:16",
+     "key": "6ee80d13b7c2617eb3def89499c8783e352a0d43",
+     "name": "popover/width",
+     "type": "FLOAT",
+     "css": "var(--spartant-popover-width)",
+     "values": [
+      288
+     ]
+    },
+    {
+     "id": "10:17",
+     "key": "608de26e77ee0cc411c15a2157bb4b4f29ec5986",
+     "name": "popover/padding",
+     "type": "FLOAT",
+     "css": "var(--spartant-popover-padding)",
+     "values": [
+      16
+     ]
+    },
+    {
+     "id": "10:18",
+     "key": "32d4ff87271c8898eb657e1d1c1069cd84da25ff",
+     "name": "selection/box/default",
+     "type": "FLOAT",
+     "css": "var(--spartant-selection-box)",
+     "values": [
+      20
+     ]
+    },
+    {
+     "id": "10:19",
+     "key": "ba537ab292fb220453a600bbaf774216c46f58c2",
+     "name": "selection/switch/width",
+     "type": "FLOAT",
+     "css": "var(--spartant-selection-switch-width)",
+     "values": [
+      40
+     ]
+    },
+    {
+     "id": "10:20",
+     "key": "df2c8d6353a287f97a20b9f334641cf4db1b658a",
+     "name": "selection/switch/height",
+     "type": "FLOAT",
+     "css": "var(--spartant-selection-switch-height)",
+     "values": [
+      24
+     ]
+    },
+    {
+     "id": "10:21",
+     "key": "afd4d3c0fde69655f7e28b207b3d443eb23a54f3",
+     "name": "selection/switch/thumb",
+     "type": "FLOAT",
+     "css": "var(--spartant-selection-switch-thumb)",
+     "values": [
+      18
+     ]
+    },
+    {
+     "id": "10:22",
+     "key": "91a295421ee665217cce858af5b6552cfcfa7cb2",
+     "name": "tooltip/padding-x",
+     "type": "FLOAT",
+     "css": "var(--spartant-tooltip-padding-x)",
+     "values": [
+      8
+     ]
+    },
+    {
+     "id": "10:23",
+     "key": "b99a3944ec82b7006548e4c9461a48e4e31ff9cd",
+     "name": "tooltip/padding-y",
+     "type": "FLOAT",
+     "css": "var(--spartant-tooltip-padding-y)",
+     "values": [
+      4
+     ]
+    },
+    {
+     "id": "10:24",
+     "key": "2f4b4fb88bf6931a7f1e9862cd988b3343ed026e",
+     "name": "tooltip/max-width",
+     "type": "FLOAT",
+     "css": "var(--spartant-tooltip-max-width)",
+     "values": [
+      288
+     ]
+    },
+    {
+     "id": "237:5",
+     "key": "f26f073774324c9909a3facfdf67479a78ed95ef",
+     "name": "button/outer-padding-x/sm",
+     "type": "FLOAT",
+     "css": "var(--spartant-button-outer-padding-x-sm)",
+     "values": [
+      {
+       "a": "237:4"
+      }
+     ]
+    },
+    {
+     "id": "237:6",
+     "key": "0130db8cea0d16018bbab1eda3f371433908b452",
+     "name": "button/label-padding-x/sm",
+     "type": "FLOAT",
+     "css": "var(--spartant-button-label-padding-x-sm)",
+     "values": [
+      {
+       "a": "8:3"
+      }
+     ]
+    },
+    {
+     "id": "237:8",
+     "key": "0003e269e9722e2d6c5bb3e9cec8a9f3d354acee",
+     "name": "button/outer-padding-x/base",
+     "type": "FLOAT",
+     "css": "var(--spartant-button-outer-padding-x-base)",
+     "values": [
+      {
+       "a": "237:7"
+      }
+     ]
+    },
+    {
+     "id": "237:9",
+     "key": "99714716d7fa9be173111cf7a05ec08c6c925dc8",
+     "name": "button/label-padding-x/base",
+     "type": "FLOAT",
+     "css": "var(--spartant-button-label-padding-x-base)",
+     "values": [
+      {
+       "a": "237:2"
+      }
+     ]
+    },
+    {
+     "id": "237:11",
+     "key": "bc82ae0e822f5ea3ed5985ad04182a00e0c7189a",
+     "name": "button/outer-padding-x/lg",
+     "type": "FLOAT",
+     "css": "var(--spartant-button-outer-padding-x-lg)",
+     "values": [
+      {
+       "a": "237:8"
+      }
+     ]
+    },
+    {
+     "id": "237:12",
+     "key": "db0acc4d44ce024bd414c14da52c84d04ad91e80",
+     "name": "button/label-padding-x/lg",
+     "type": "FLOAT",
+     "css": "var(--spartant-button-label-padding-x-lg)",
+     "values": [
+      {
+       "a": "237:9"
+      }
+     ]
+    },
+    {
+     "id": "255:9",
+     "key": "d6f292ef03b28a00deb96377a061545afb6d6aaf",
+     "name": "avatar/size/16",
+     "type": "FLOAT",
+     "css": "var(--spartant-avatar-size-16)",
+     "values": [
+      {
+       "a": "8:6"
+      }
+     ]
+    },
+    {
+     "id": "255:10",
+     "key": "a6d8de22677abae23f1db20b1154658b54d2ed4a",
+     "name": "avatar/initials-font-size/16",
+     "type": "FLOAT",
+     "css": "var(--spartant-avatar-initials-font-size-16)",
+     "values": [
+      {
+       "a": "259:68"
+      }
+     ]
+    },
+    {
+     "id": "255:11",
+     "key": "099c50904871cda55123e7e298d326f256e74a79",
+     "name": "avatar/initials-line-height/16",
+     "type": "FLOAT",
+     "css": "var(--spartant-avatar-initials-line-height-16)",
+     "values": [
+      {
+       "a": "255:5"
+      }
+     ]
+    },
+    {
+     "id": "255:12",
+     "key": "93d56bca34c58b1b9f9ad53fc94cc1637fe38a8c",
+     "name": "avatar/size/20",
+     "type": "FLOAT",
+     "css": "var(--spartant-avatar-size-20)",
+     "values": [
+      {
+       "a": "8:7"
+      }
+     ]
+    },
+    {
+     "id": "255:13",
+     "key": "d75150c46e26b2d6f586c8305a519c1db9da8473",
+     "name": "avatar/initials-font-size/20",
+     "type": "FLOAT",
+     "css": "var(--spartant-avatar-initials-font-size-20)",
+     "values": [
+      {
+       "a": "255:2"
+      }
+     ]
+    },
+    {
+     "id": "255:14",
+     "key": "2e62c986e3d62885d01863243e5e9a5ce6f8feb2",
+     "name": "avatar/initials-line-height/20",
+     "type": "FLOAT",
+     "css": "var(--spartant-avatar-initials-line-height-20)",
+     "values": [
+      {
+       "a": "255:5"
+      }
+     ]
+    },
+    {
+     "id": "255:15",
+     "key": "a38c3ab0633d3d3d7c61749b00086ded788c3c1a",
+     "name": "avatar/size/24",
+     "type": "FLOAT",
+     "css": "var(--spartant-avatar-size-24)",
+     "values": [
+      {
+       "a": "8:8"
+      }
+     ]
+    },
+    {
+     "id": "255:16",
+     "key": "24898641e4f2ec3ed6a7646a4520a9c2bd9955fd",
+     "name": "avatar/initials-font-size/24",
+     "type": "FLOAT",
+     "css": "var(--spartant-avatar-initials-font-size-24)",
+     "values": [
+      {
+       "a": "255:4"
+      }
+     ]
+    },
+    {
+     "id": "255:17",
+     "key": "10203aa637fb299ea9577f647049b67fe26f2c0a",
+     "name": "avatar/initials-line-height/24",
+     "type": "FLOAT",
+     "css": "var(--spartant-avatar-initials-line-height-24)",
+     "values": [
+      {
+       "a": "255:6"
+      }
+     ]
+    },
+    {
+     "id": "255:18",
+     "key": "136553e6c2afc491106b96a0aea0f86ab5ceb7ae",
+     "name": "avatar/size/32",
+     "type": "FLOAT",
+     "css": "var(--spartant-avatar-size-32)",
+     "values": [
+      {
+       "a": "8:9"
+      }
+     ]
+    },
+    {
+     "id": "255:19",
+     "key": "bbb13412fe5c56698ba6c67556afa02944821e08",
+     "name": "avatar/initials-font-size/32",
+     "type": "FLOAT",
+     "css": "var(--spartant-avatar-initials-font-size-32)",
+     "values": [
+      {
+       "a": "8:24"
+      }
+     ]
+    },
+    {
+     "id": "255:20",
+     "key": "da1d0302ec6b9a6862a717a0a4d749b0272b16bb",
+     "name": "avatar/initials-line-height/32",
+     "type": "FLOAT",
+     "css": "var(--spartant-avatar-initials-line-height-32)",
+     "values": [
+      {
+       "a": "255:7"
+      }
+     ]
+    },
+    {
+     "id": "255:21",
+     "key": "acb0b4b4ea3e6ad4a64e23b11dd6c98caa53e51b",
+     "name": "avatar/size/40",
+     "type": "FLOAT",
+     "css": "var(--spartant-avatar-size-40)",
+     "values": [
+      {
+       "a": "8:10"
+      }
+     ]
+    },
+    {
+     "id": "255:22",
+     "key": "8e35e02b5ba0ee2596c718ecfffbb42824add2a1",
+     "name": "avatar/initials-font-size/40",
+     "type": "FLOAT",
+     "css": "var(--spartant-avatar-initials-font-size-40)",
+     "values": [
+      {
+       "a": "8:26"
+      }
+     ]
+    },
+    {
+     "id": "255:23",
+     "key": "6882ca574d04156fa28192136b55b07cb48aa2fd",
+     "name": "avatar/initials-line-height/40",
+     "type": "FLOAT",
+     "css": "var(--spartant-avatar-initials-line-height-40)",
+     "values": [
+      {
+       "a": "255:8"
+      }
+     ]
+    },
+    {
+     "id": "255:24",
+     "key": "a8e748b4305f69c25ad258f84440b7cd4ea43c4a",
+     "name": "avatar/size/48",
+     "type": "FLOAT",
+     "css": "var(--spartant-avatar-size-48)",
+     "values": [
+      {
+       "a": "8:11"
+      }
+     ]
+    },
+    {
+     "id": "255:25",
+     "key": "3942e14c706ec6efb7d52dbcda2ae98bb1fb7121",
+     "name": "avatar/initials-font-size/48",
+     "type": "FLOAT",
+     "css": "var(--spartant-avatar-initials-font-size-48)",
+     "values": [
+      {
+       "a": "8:26"
+      }
+     ]
+    },
+    {
+     "id": "255:26",
+     "key": "ae807199e07e7af958d0595e5477a6c286f31b4c",
+     "name": "avatar/initials-line-height/48",
+     "type": "FLOAT",
+     "css": "var(--spartant-avatar-initials-line-height-48)",
+     "values": [
+      {
+       "a": "255:8"
+      }
+     ]
+    },
+    {
+     "id": "255:27",
+     "key": "d6c9adeb08fc48212dfa01331f2b7efdec73c1cc",
+     "name": "avatar/size/64",
+     "type": "FLOAT",
+     "css": "var(--spartant-avatar-size-64)",
+     "values": [
+      {
+       "a": "8:12"
+      }
+     ]
+    },
+    {
+     "id": "255:28",
+     "key": "853e8fa27c6e607ba4f079ddef7df8bed4ff3202",
+     "name": "avatar/initials-font-size/64",
+     "type": "FLOAT",
+     "css": "var(--spartant-avatar-initials-font-size-64)",
+     "values": [
+      {
+       "a": "8:28"
+      }
+     ]
+    },
+    {
+     "id": "255:29",
+     "key": "3273065743bbc2c3b6ad24c02cc4a28476cd25e6",
+     "name": "avatar/initials-line-height/64",
+     "type": "FLOAT",
+     "css": "var(--spartant-avatar-initials-line-height-64)",
+     "values": [
+      {
+       "a": "255:8"
+      }
+     ]
+    },
+    {
+     "id": "330:161",
+     "key": "911b46c1dc22668a192ccdcb385b16c4090c541a",
+     "name": "button/height/xs",
+     "type": "FLOAT",
+     "values": [
+      {
+       "a": "330:160"
+      }
+     ]
+    },
+    {
+     "id": "370:2",
+     "key": "ce3c775dac3805c538ab32c6665e4aeaf6d99b78",
+     "name": "switch/control/width/small",
+     "type": "FLOAT",
+     "values": [
+      {
+       "a": "8:9"
+      }
+     ]
+    },
+    {
+     "id": "370:3",
+     "key": "47dc5f94b20ea8fe6794969a9fd9d3d204efcb03",
+     "name": "switch/control/height/small",
+     "type": "FLOAT",
+     "values": [
+      {
+       "a": "8:6"
+      }
+     ]
+    },
+    {
+     "id": "370:4",
+     "key": "389658389b3967b4c1a39764e3d45f086b8d17f0",
+     "name": "switch/control/thumb/height/small",
+     "type": "FLOAT",
+     "values": [
+      {
+       "a": "8:5"
+      }
+     ]
+    },
+    {
+     "id": "370:5",
+     "key": "cacccd9cc3b6abafdc04f517d9f1382ed515e4b7",
+     "name": "switch/control/width/base",
+     "type": "FLOAT",
+     "values": [
+      {
+       "a": "8:10"
+      }
+     ]
+    },
+    {
+     "id": "370:6",
+     "key": "f4c4911ca2203320b4c4157844406b1962345a5d",
+     "name": "switch/control/height/base",
+     "type": "FLOAT",
+     "values": [
+      {
+       "a": "8:7"
+      }
+     ]
+    },
+    {
+     "id": "370:7",
+     "key": "ab37c0d3ca513c4596ed4a69a15936565f978101",
+     "name": "switch/control/thumb/height/base",
+     "type": "FLOAT",
+     "values": [
+      {
+       "a": "8:6"
+      }
+     ]
+    },
+    {
+     "id": "370:8",
+     "key": "a2a274f04efca4264a8791f2b8f16e57c8b4f19d",
+     "name": "switch/control/width/large",
+     "type": "FLOAT",
+     "values": [
+      {
+       "a": "8:11"
+      }
+     ]
+    },
+    {
+     "id": "370:9",
+     "key": "00a77e45c21a01e912af32861af25289b99b8cef",
+     "name": "switch/control/height/large",
+     "type": "FLOAT",
+     "values": [
+      {
+       "a": "8:8"
+      }
+     ]
+    },
+    {
+     "id": "370:10",
+     "key": "07f62c2d72fdabee9438132c1319454255c4d09b",
+     "name": "switch/control/thumb/height/large",
+     "type": "FLOAT",
+     "values": [
+      {
+       "a": "8:7"
+      }
+     ]
+    },
+    {
+     "id": "383:5",
+     "key": "3674f5edbd669975b2f44d0515b42ee7a1f14b79",
+     "name": "switch/control/thumb/width/small",
+     "type": "FLOAT",
+     "css": "var(--spartant-figma-switch-control-thumb-width-small)",
+     "values": [
+      {
+       "a": "383:2"
+      }
+     ]
+    },
+    {
+     "id": "383:6",
+     "key": "dd475fc3321c5ccb9564188e548ddab947e54d1c",
+     "name": "switch/control/thumb/width/base",
+     "type": "FLOAT",
+     "css": "var(--spartant-figma-switch-control-thumb-width-base)",
+     "values": [
+      {
+       "a": "383:3"
+      }
+     ]
+    },
+    {
+     "id": "383:7",
+     "key": "2f28bfbf74d6f1145c71277a35e821e9f0cb4361",
+     "name": "switch/control/thumb/width/large",
+     "type": "FLOAT",
+     "css": "var(--spartant-figma-switch-control-thumb-width-large)",
+     "values": [
+      {
+       "a": "383:4"
+      }
+     ]
+    },
+    {
+     "id": "455:17",
+     "key": "5fae72126c5e1e06b949d70ba501cfed708f5ccb",
+     "name": "badge/height",
+     "type": "FLOAT",
+     "values": [
+      {
+       "a": "276:12"
+      }
+     ]
+    },
+    {
+     "id": "737:476",
+     "key": "b9711dc37a225f8f8d91be16a584e3ab844f9697",
+     "name": "switch/control/radius/square/thumb",
+     "type": "FLOAT",
+     "css": "var(--switch-control-radius-square-thumb)",
+     "values": [
+      {
+       "a": "276:4"
+      }
+     ]
+    },
+    {
+     "id": "737:477",
+     "key": "3514a89654b0be2390730929389e68173b115d63",
+     "name": "switch/control/radius/square/track",
+     "type": "FLOAT",
+     "css": "var(--switch-control-radius-square-track)",
+     "values": [
+      {
+       "a": "8:15"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "53:4",
+   "key": "25d244c60301feaf09b1d7ac680cb13a1d6596a8",
+   "name": "06 Density",
+   "modes": [
+    {
+     "id": "53:2",
+     "name": "Relaxed"
+    },
+    {
+     "id": "53:3",
+     "name": "Compact"
+    }
+   ],
+   "variables": [
+    {
+     "id": "53:5",
+     "key": "d9e977d1af5d4bf55e3f8a52b5656fc8912f4c23",
+     "name": "density/control/height/small",
+     "type": "FLOAT",
+     "css": "var(--spartant-density-control-height-small)",
+     "values": [
+      32,
+      28
+     ]
+    },
+    {
+     "id": "53:6",
+     "key": "323777b0d56acf19d28b78bf545fa3acbbb660f9",
+     "name": "density/control/height/base",
+     "type": "FLOAT",
+     "css": "var(--spartant-density-control-height-base)",
+     "values": [
+      40,
+      32
+     ]
+    },
+    {
+     "id": "53:7",
+     "key": "0e0382c649e8dc929513e6a92014ae8fe7a22b03",
+     "name": "density/control/height/large",
+     "type": "FLOAT",
+     "css": "var(--spartant-density-control-height-large)",
+     "values": [
+      {
+       "a": "53:6"
+      },
+      {
+       "a": "53:6"
+      }
+     ]
+    },
+    {
+     "id": "53:8",
+     "key": "b9173ea93ca89d38a8db19f95b385cf4cd7170ac",
+     "name": "density/control/padding-x/small",
+     "type": "FLOAT",
+     "css": "var(--spartant-density-control-padding-x-small)",
+     "values": [
+      12,
+      10
+     ]
+    },
+    {
+     "id": "53:9",
+     "key": "56d524bba2b162f7e90ac3565ec0cc6e42e69872",
+     "name": "density/control/padding-x/base",
+     "type": "FLOAT",
+     "css": "var(--spartant-density-control-padding-x-base)",
+     "values": [
+      16,
+      12
+     ]
+    },
+    {
+     "id": "53:10",
+     "key": "6a3b5e0ede0edcad28d74b20d649823ac8acc64b",
+     "name": "density/control/padding-x/large",
+     "type": "FLOAT",
+     "css": "var(--spartant-density-control-padding-x-large)",
+     "values": [
+      20,
+      16
+     ]
+    },
+    {
+     "id": "53:11",
+     "key": "0ecc491721a03873d8bb6d76e32d2303ea0f3537",
+     "name": "density/control/padding-y",
+     "type": "FLOAT",
+     "css": "var(--spartant-density-control-padding-y)",
+     "values": [
+      6,
+      4
+     ]
+    },
+    {
+     "id": "53:12",
+     "key": "ce26050a9243482c13226d26badec2cefe089db4",
+     "name": "density/control/gap",
+     "type": "FLOAT",
+     "css": "var(--spartant-density-control-gap)",
+     "values": [
+      8,
+      6
+     ]
+    },
+    {
+     "id": "53:13",
+     "key": "65e992f4a93198aea5632fac2b50de3fba782e58",
+     "name": "density/control/font-size/small",
+     "type": "FLOAT",
+     "css": "var(--spartant-density-control-font-size-small)",
+     "values": [
+      14,
+      13
+     ]
+    },
+    {
+     "id": "53:14",
+     "key": "471144f679ccc9f20b4d41ae9a8b2b421670bb49",
+     "name": "density/control/font-size/base",
+     "type": "FLOAT",
+     "css": "var(--spartant-density-control-font-size-base)",
+     "values": [
+      15,
+      14
+     ]
+    },
+    {
+     "id": "53:15",
+     "key": "0c4b5ac707a185009dd67912694bb7cb6030468e",
+     "name": "density/control/font-size/large",
+     "type": "FLOAT",
+     "css": "var(--spartant-density-control-font-size-large)",
+     "values": [
+      16,
+      15
+     ]
+    },
+    {
+     "id": "53:16",
+     "key": "55406ad1c46c0d3e3ffee77e1682612f96a2f3b4",
+     "name": "density/control/line-height/small",
+     "type": "FLOAT",
+     "css": "var(--spartant-density-control-line-height-small)",
+     "values": [
+      20,
+      18
+     ]
+    },
+    {
+     "id": "53:17",
+     "key": "3cc5edfbbb1cfdcb09883c5d20b00de0d155761f",
+     "name": "density/control/line-height/base",
+     "type": "FLOAT",
+     "css": "var(--spartant-density-control-line-height-base)",
+     "values": [
+      22,
+      20
+     ]
+    },
+    {
+     "id": "53:18",
+     "key": "2b334fa08e27e20864121bf8a21814a7ad28b011",
+     "name": "density/control/line-height/large",
+     "type": "FLOAT",
+     "css": "var(--spartant-density-control-line-height-large)",
+     "values": [
+      24,
+      22
+     ]
+    },
+    {
+     "id": "55:2",
+     "key": "a07ac12099237a5a32b8c95c4793c6d497001bc4",
+     "name": "density/control/icon-size/small",
+     "type": "FLOAT",
+     "css": "var(--spartant-density-control-icon-size-small)",
+     "values": [
+      16,
+      16
+     ]
+    },
+    {
+     "id": "55:3",
+     "key": "9db740593341e92fa5fa1572acaf1cf1bb86ea8b",
+     "name": "density/control/icon-size/base",
+     "type": "FLOAT",
+     "css": "var(--spartant-density-control-icon-size-base)",
+     "values": [
+      20,
+      18
+     ]
+    },
+    {
+     "id": "55:4",
+     "key": "b6d2b1e730e5c8988ec9bc6a3e5f8a44fcad984c",
+     "name": "density/control/icon-size/large",
+     "type": "FLOAT",
+     "css": "var(--spartant-density-control-icon-size-large)",
+     "values": [
+      24,
+      20
+     ]
+    },
+    {
+     "id": "55:5",
+     "key": "4f764c11f04a8ba4c879c2b1c21b9492d230c7e9",
+     "name": "density/chip/height",
+     "type": "FLOAT",
+     "css": "var(--spartant-density-chip-height)",
+     "values": [
+      28,
+      24
+     ]
+    },
+    {
+     "id": "55:6",
+     "key": "a073fcc3b51c7fb983b112e4764da66e6e3958d0",
+     "name": "density/chip/padding-x",
+     "type": "FLOAT",
+     "css": "var(--spartant-density-chip-padding-x)",
+     "values": [
+      8,
+      6
+     ]
+    },
+    {
+     "id": "55:7",
+     "key": "96a4cfdf170379dcea57a21a1fc973d9fd83c966",
+     "name": "density/tag/height",
+     "type": "FLOAT",
+     "css": "var(--spartant-density-tag-height)",
+     "values": [
+      30,
+      26
+     ]
+    },
+    {
+     "id": "57:2",
+     "key": "abb41240e8707e9230ef13e1457f6f1f88c9b76d",
+     "name": "density/chip/padding-right",
+     "type": "FLOAT",
+     "css": "var(--spartant-density-chip-padding-right)",
+     "values": [
+      12,
+      10
+     ]
+    },
+    {
+     "id": "57:3",
+     "key": "b05c7200fa3d0dafb6126f674e1f9d23fe5048d8",
+     "name": "density/tag/padding-x",
+     "type": "FLOAT",
+     "css": "var(--spartant-density-tag-padding-x)",
+     "values": [
+      12,
+      10
+     ]
+    },
+    {
+     "id": "57:4",
+     "key": "e8347677d0b0ded60ee3d9256643a576cbb00989",
+     "name": "density/keycap/padding-x",
+     "type": "FLOAT",
+     "css": "var(--spartant-density-keycap-padding-x)",
+     "values": [
+      12,
+      8
+     ]
+    },
+    {
+     "id": "57:5",
+     "key": "24640551d150a6baa989af610c94426f377964e9",
+     "name": "density/row/height",
+     "type": "FLOAT",
+     "css": "var(--spartant-density-row-height)",
+     "values": [
+      64,
+      56
+     ]
+    },
+    {
+     "id": "57:18",
+     "key": "c021aa1ba073e8837504b93d16ab3da48058a7da",
+     "name": "density/chip/font-size",
+     "type": "FLOAT",
+     "css": "var(--spartant-density-chip-font-size)",
+     "values": [
+      12,
+      11
+     ]
+    },
+    {
+     "id": "57:19",
+     "key": "223ee75fa51705747a6d9c6a1578cd10b1ca0734",
+     "name": "density/chip/line-height",
+     "type": "FLOAT",
+     "css": "var(--spartant-density-chip-line-height)",
+     "values": [
+      18,
+      16
+     ]
+    },
+    {
+     "id": "61:2",
+     "key": "51abfd8b243ce75b54114b32600ae4dd61d5631e",
+     "name": "density/toolbar/height",
+     "type": "FLOAT",
+     "css": "var(--spartant-density-toolbar-height)",
+     "values": [
+      60,
+      52
+     ]
+    },
+    {
+     "id": "61:3",
+     "key": "096a57e5b6556c5e3e81686620d4b4897bbfa4ff",
+     "name": "density/navigation/height",
+     "type": "FLOAT",
+     "css": "var(--spartant-density-navigation-height)",
+     "values": [
+      64,
+      56
+     ]
+    },
+    {
+     "id": "61:4",
+     "key": "9efed9380340e0510a9a5011885829cb45653e74",
+     "name": "density/tabs/height",
+     "type": "FLOAT",
+     "css": "var(--spartant-density-tabs-height)",
+     "values": [
+      60,
+      52
+     ]
+    },
+    {
+     "id": "61:5",
+     "key": "1e4f4ac104923b39e226ec7c3bc2f843a6b94144",
+     "name": "density/assistive-row/height",
+     "type": "FLOAT",
+     "css": "var(--spartant-density-assistive-row-height)",
+     "values": [
+      44,
+      36
+     ]
+    },
+    {
+     "id": "61:6",
+     "key": "d19aa2c3f47d209e7ee82b951ee4e5abbfcbca4b",
+     "name": "density/activity-row/height",
+     "type": "FLOAT",
+     "css": "var(--spartant-density-activity-row-height)",
+     "values": [
+      64,
+      56
+     ]
+    },
+    {
+     "id": "61:7",
+     "key": "fe8191cf11a7ad050bab0f5f013d38e5f5eaa344",
+     "name": "density/banner/height",
+     "type": "FLOAT",
+     "css": "var(--spartant-density-banner-height)",
+     "values": [
+      88,
+      80
+     ]
+    },
+    {
+     "id": "61:8",
+     "key": "4cbe2538125b3922dcb665166e878729c28d4faf",
+     "name": "density/surface/padding",
+     "type": "FLOAT",
+     "css": "var(--spartant-density-surface-padding)",
+     "values": [
+      24,
+      16
+     ]
+    },
+    {
+     "id": "61:9",
+     "key": "3b2879384a7631a68e0bd2bf3d9d69b95dcc9b3a",
+     "name": "density/tooltip/padding-x",
+     "type": "FLOAT",
+     "css": "var(--spartant-density-tooltip-padding-x)",
+     "values": [
+      12,
+      10
+     ]
+    },
+    {
+     "id": "237:4",
+     "key": "fc410f83ff7e2aa40cba9d5bfe81e7cc9f1ae4cc",
+     "name": "density/button/outer-padding-x/small",
+     "type": "FLOAT",
+     "css": "var(--spartant-density-button-outer-padding-x-small)",
+     "values": [
+      {
+       "a": "8:4"
+      },
+      {
+       "a": "237:2"
+      }
+     ]
+    },
+    {
+     "id": "237:7",
+     "key": "56b597bb6266221f1a779de8e36ecb1c2e772f3d",
+     "name": "density/button/outer-padding-x/base",
+     "type": "FLOAT",
+     "css": "var(--spartant-density-button-outer-padding-x-base)",
+     "values": [
+      {
+       "a": "237:3"
+      },
+      {
+       "a": "237:2"
+      }
+     ]
+    },
+    {
+     "id": "237:10",
+     "key": "45159050433662415d850d3415a9e3a83ef67737",
+     "name": "density/button/outer-padding-x/large",
+     "type": "FLOAT",
+     "css": "var(--spartant-density-button-outer-padding-x-large)",
+     "values": [
+      {
+       "a": "237:7"
+      },
+      {
+       "a": "237:7"
+      }
+     ]
+    },
+    {
+     "id": "276:2",
+     "key": "2ea1ece54666f936ab5c26cb240f3acce25682ac",
+     "name": "density/space/0",
+     "type": "FLOAT",
+     "css": "var(--spartant-density-space-0)",
+     "values": [
+      {
+       "a": "8:2"
+      },
+      {
+       "a": "8:2"
+      }
+     ]
+    },
+    {
+     "id": "276:3",
+     "key": "1bd3e060670ebc108cf32e25786e0284d164c493",
+     "name": "density/space/px",
+     "type": "FLOAT",
+     "css": "var(--spartant-density-space-px)",
+     "values": [
+      {
+       "a": "8:13"
+      },
+      {
+       "a": "8:13"
+      }
+     ]
+    },
+    {
+     "id": "276:4",
+     "key": "d978bdbceb436af7517541eeef8ba342d151ad9b",
+     "name": "density/space/0-5",
+     "type": "FLOAT",
+     "css": "var(--spartant-density-space-0-5)",
+     "values": [
+      {
+       "a": "232:1907"
+      },
+      {
+       "a": "232:1907"
+      }
+     ]
+    },
+    {
+     "id": "276:5",
+     "key": "c5896498dcfc1f091ab7147961b4eb3eb2de6c44",
+     "name": "density/space/1",
+     "type": "FLOAT",
+     "css": "var(--spartant-density-space-1)",
+     "values": [
+      {
+       "a": "8:3"
+      },
+      {
+       "a": "8:3"
+      }
+     ]
+    },
+    {
+     "id": "276:6",
+     "key": "6ee6629fc330ac88540bd71099a1b1f448cbba08",
+     "name": "density/space/1-5",
+     "type": "FLOAT",
+     "css": "var(--spartant-density-space-1-5)",
+     "values": [
+      {
+       "a": "237:2"
+      },
+      {
+       "a": "237:2"
+      }
+     ]
+    },
+    {
+     "id": "276:7",
+     "key": "27f0ec1d9f06f117524f9b7954b0dae201148791",
+     "name": "density/space/2",
+     "type": "FLOAT",
+     "css": "var(--spartant-density-space-2)",
+     "values": [
+      {
+       "a": "8:4"
+      },
+      {
+       "a": "8:4"
+      }
+     ]
+    },
+    {
+     "id": "276:8",
+     "key": "f33f2b96e37d39224f7e1c347c8fad808fb11921",
+     "name": "density/space/2-5",
+     "type": "FLOAT",
+     "css": "var(--spartant-density-space-2-5)",
+     "values": [
+      {
+       "a": "237:3"
+      },
+      {
+       "a": "237:3"
+      }
+     ]
+    },
+    {
+     "id": "276:9",
+     "key": "a3ef52f7e508c9cd5ad56bd80c8a18fe100c54dc",
+     "name": "density/space/3",
+     "type": "FLOAT",
+     "css": "var(--spartant-density-space-3)",
+     "values": [
+      {
+       "a": "8:5"
+      },
+      {
+       "a": "8:5"
+      }
+     ]
+    },
+    {
+     "id": "276:10",
+     "key": "3ea11c8e76ba8130f5e155aa9234b08ec7b3b9f3",
+     "name": "density/space/4",
+     "type": "FLOAT",
+     "css": "var(--spartant-density-space-4)",
+     "values": [
+      {
+       "a": "8:6"
+      },
+      {
+       "a": "8:6"
+      }
+     ]
+    },
+    {
+     "id": "276:11",
+     "key": "eee6ccdb59e52d6f135cb2be64710e717cfff1b7",
+     "name": "density/space/5",
+     "type": "FLOAT",
+     "css": "var(--spartant-density-space-5)",
+     "values": [
+      {
+       "a": "8:7"
+      },
+      {
+       "a": "8:7"
+      }
+     ]
+    },
+    {
+     "id": "276:12",
+     "key": "6255bfeb01e8ba391cf6d2ace8c344d5cd10582a",
+     "name": "density/space/6",
+     "type": "FLOAT",
+     "css": "var(--spartant-density-space-6)",
+     "values": [
+      {
+       "a": "8:8"
+      },
+      {
+       "a": "8:8"
+      }
+     ]
+    },
+    {
+     "id": "276:13",
+     "key": "446d24b0c7050e1ab4b3197a96c827ae788a43f4",
+     "name": "density/space/8",
+     "type": "FLOAT",
+     "css": "var(--spartant-density-space-8)",
+     "values": [
+      {
+       "a": "8:9"
+      },
+      {
+       "a": "8:9"
+      }
+     ]
+    },
+    {
+     "id": "276:14",
+     "key": "00df61a21682ded6f1e166d86a140a82fca4c346",
+     "name": "density/space/10",
+     "type": "FLOAT",
+     "css": "var(--spartant-density-space-10)",
+     "values": [
+      {
+       "a": "8:10"
+      },
+      {
+       "a": "8:10"
+      }
+     ]
+    },
+    {
+     "id": "276:15",
+     "key": "9d10819673e7cf64ae5d3b52521b365be8e5b55f",
+     "name": "density/space/12",
+     "type": "FLOAT",
+     "css": "var(--spartant-density-space-12)",
+     "values": [
+      {
+       "a": "8:11"
+      },
+      {
+       "a": "8:11"
+      }
+     ]
+    },
+    {
+     "id": "276:16",
+     "key": "57f468869998b6d6b28d54170e48f35883884781",
+     "name": "density/space/16",
+     "type": "FLOAT",
+     "css": "var(--spartant-density-space-16)",
+     "values": [
+      {
+       "a": "8:12"
+      },
+      {
+       "a": "8:12"
+      }
+     ]
+    },
+    {
+     "id": "306:347",
+     "key": "df5a870ed27e87891f9b9b0cd354c0de52cd5282",
+     "name": "density/sidebar/project-height",
+     "type": "FLOAT",
+     "css": "var(--spartant-density-sidebar-project-height)",
+     "values": [
+      {
+       "a": "306:346"
+      },
+      {
+       "a": "8:9"
+      }
+     ]
+    },
+    {
+     "id": "320:64",
+     "key": "d61e92a68779d1e0309ecb68e558b13aaffadcc4",
+     "name": "density/card/padding-x",
+     "type": "FLOAT",
+     "css": "var(--spartant-density-card-padding-x)",
+     "values": [
+      {
+       "a": "8:6"
+      },
+      {
+       "a": "8:6"
+      }
+     ]
+    },
+    {
+     "id": "320:65",
+     "key": "73da9a3cdaa44bd6485cce1c5bffd6d892ebfb60",
+     "name": "density/card/padding-y",
+     "type": "FLOAT",
+     "css": "var(--spartant-density-card-padding-y)",
+     "values": [
+      {
+       "a": "8:7"
+      },
+      {
+       "a": "8:7"
+      }
+     ]
+    },
+    {
+     "id": "330:160",
+     "key": "7d1ad29316ce45fed8a53a6afa1b39ad4ccb3ac2",
+     "name": "density/control/height/extra-small",
+     "type": "FLOAT",
+     "values": [
+      {
+       "a": "276:12"
+      },
+      {
+       "a": "276:12"
+      }
+     ]
+    },
+    {
+     "id": "357:3",
+     "key": "75e906d84a6bf1d51de584ba7156b1d5c72bb292",
+     "name": "density/drawer/width/small",
+     "type": "FLOAT",
+     "values": [
+      {
+       "a": "357:2"
+      },
+      {
+       "a": "357:2"
+      }
+     ]
+    },
+    {
+     "id": "357:5",
+     "key": "58f22a6a3a94b7b9c6af35af5b9f3136f522fa58",
+     "name": "density/drawer/width/medium",
+     "type": "FLOAT",
+     "values": [
+      {
+       "a": "357:4"
+      },
+      {
+       "a": "357:4"
+      }
+     ]
+    },
+    {
+     "id": "357:7",
+     "key": "ee1cde3c7662631ffd35a054fa78a9b52cddca36",
+     "name": "density/drawer/width/large",
+     "type": "FLOAT",
+     "values": [
+      {
+       "a": "357:6"
+      },
+      {
+       "a": "357:6"
+      }
+     ]
+    },
+    {
+     "id": "450:16",
+     "key": "4c7733a34e55e9f282291cae30cc434b721ae67d",
+     "name": "density/control/radius/large",
+     "type": "FLOAT",
+     "values": [
+      {
+       "a": "9:2"
+      },
+      {
+       "a": "9:2"
+      }
+     ]
+    },
+    {
+     "id": "747:18",
+     "key": "d8d775961b234ad27b790fe0ef8776c83776adb8",
+     "name": "density/select/tag/height",
+     "type": "FLOAT",
+     "css": "var(--select-tag-height)",
+     "values": [
+      {
+       "a": "276:12"
+      },
+      {
+       "a": "276:11"
+      }
+     ]
+    },
+    {
+     "id": "747:19",
+     "key": "153b0b43f1e53e32e2bcf0b52fa26f1303603349",
+     "name": "density/select/padding-y/base",
+     "type": "FLOAT",
+     "css": "var(--select-padding-y-base)",
+     "values": [
+      {
+       "a": "276:7"
+      },
+      {
+       "a": "276:5"
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

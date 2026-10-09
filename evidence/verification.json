@@ -1,0 +1,38 @@
+{
+  "verifiedAt": "2026-10-09T05:57:25.691506Z",
+  "automated": {
+    "tests": 7,
+    "result": "passed",
+    "commands": [
+      "pnpm test",
+      "pnpm build",
+      "pnpm typecheck"
+    ]
+  },
+  "browser": {
+    "routes": 12,
+    "checks": [
+      "Both component tracks must be Done",
+      "Reopening one track changes overall status",
+      "Duplicate component rejected",
+      "Documentation task created",
+      "Saved task persists after reload",
+      "Type filter and search work",
+      "Documentation search returns relevant results",
+      "Mobile viewport 390px has no document overflow",
+      "Mobile task editor opens and scrolls"
+    ]
+  },
+  "plugin": {
+    "bundle": "passed",
+    "mockApiTests": "passed",
+    "figmaRuntime": "not yet verified"
+  },
+  "limitations": [
+    "Local single-server task persistence",
+    "Plugin uses local JSON upload; no direct Git transport yet",
+    "Initial token schema is project-specific, not full DTCG",
+    "Sample tokens are isolated fixtures",
+    "Lit component and Storybook work remain in backlog"
+  ]
+}

@@ -1,0 +1,440 @@
+{
+  "createdNodeIds": [
+    "546:2521",
+    "546:2522",
+    "546:2523",
+    "546:2524",
+    "546:2525",
+    "I546:2525;545:17",
+    "I546:2525;545:17;124:145052",
+    "I546:2525;545:17;124:145053",
+    "I546:2525;545:17;124:145054",
+    "I546:2525;545:17;124:145055",
+    "I546:2525;545:17;124:145056",
+    "I546:2525;545:17;124:145057",
+    "I546:2525;545:17;124:145058",
+    "I546:2525;545:17;124:145059",
+    "I546:2525;545:17;124:145060",
+    "I546:2525;545:27",
+    "I546:2525;545:29",
+    "I546:2525;545:29;124:82747",
+    "546:2544",
+    "I546:2544;545:78",
+    "I546:2544;545:82",
+    "I546:2544;545:82;124:183612",
+    "546:2562",
+    "I546:2562;545:17",
+    "I546:2562;545:17;124:194011",
+    "I546:2562;545:27",
+    "I546:2562;545:28",
+    "546:2580",
+    "I546:2580;545:120",
+    "546:2582",
+    "I546:2582;545:102",
+    "I546:2582;545:102;124:200393",
+    "I546:2582;545:102;124:200394",
+    "I546:2582;545:102;124:200395",
+    "I546:2582;545:112",
+    "546:2604",
+    "546:2605",
+    "546:2606",
+    "546:2607",
+    "546:2608",
+    "546:2609",
+    "I546:2609;545:17",
+    "I546:2609;545:17;124:145052",
+    "I546:2609;545:17;124:145053",
+    "I546:2609;545:17;124:145054",
+    "I546:2609;545:17;124:145055",
+    "I546:2609;545:17;124:145056",
+    "I546:2609;545:17;124:145057",
+    "I546:2609;545:17;124:145058",
+    "I546:2609;545:17;124:145059",
+    "I546:2609;545:17;124:145060",
+    "I546:2609;545:27",
+    "I546:2609;545:29",
+    "I546:2609;545:29;124:82747",
+    "546:2626",
+    "I546:2626;545:78",
+    "I546:2626;545:82",
+    "I546:2626;545:82;124:183612",
+    "546:2643",
+    "I546:2643;545:17",
+    "I546:2643;545:17;124:194011",
+    "I546:2643;545:27",
+    "I546:2643;545:28",
+    "546:2661",
+    "I546:2661;545:120",
+    "546:2663",
+    "I546:2663;545:102",
+    "I546:2663;545:102;124:200393",
+    "I546:2663;545:102;124:200394",
+    "I546:2663;545:102;124:200395",
+    "I546:2663;545:112",
+    "546:2683",
+    "546:2684",
+    "546:2685",
+    "546:2686",
+    "546:2687",
+    "546:2688",
+    "I546:2688;545:17",
+    "I546:2688;545:17;124:145052",
+    "I546:2688;545:17;124:145053",
+    "I546:2688;545:17;124:145054",
+    "I546:2688;545:17;124:145055",
+    "I546:2688;545:17;124:145056",
+    "I546:2688;545:17;124:145057",
+    "I546:2688;545:17;124:145058",
+    "I546:2688;545:17;124:145059",
+    "I546:2688;545:17;124:145060",
+    "I546:2688;545:27",
+    "I546:2688;545:29",
+    "I546:2688;545:29;124:82747",
+    "546:2705",
+    "I546:2705;545:78",
+    "I546:2705;545:82",
+    "I546:2705;545:82;124:183612",
+    "546:2722",
+    "I546:2722;545:17",
+    "I546:2722;545:17;124:194011",
+    "I546:2722;545:27",
+    "I546:2722;545:28",
+    "546:2740",
+    "I546:2740;545:120",
+    "546:2742",
+    "I546:2742;545:102",
+    "I546:2742;545:102;124:200393",
+    "I546:2742;545:102;124:200394",
+    "I546:2742;545:102;124:200395",
+    "I546:2742;545:112",
+    "546:2762",
+    "546:2763"
+  ],
+  "mutatedNodeIds": [
+    "545:16",
+    "545:33",
+    "545:50",
+    "545:67",
+    "545:84",
+    "545:101",
+    "34:51",
+    "34:48",
+    "546:2521",
+    "34:54"
+  ],
+  "removedNodeIds": [
+    "34:52",
+    "34:53",
+    "34:49",
+    "34:50"
+  ],
+  "setId": "34:54",
+  "properties": {
+    "Show header#546:25": {
+      "type": "BOOLEAN",
+      "defaultValue": true
+    },
+    "Show footer#546:28": {
+      "type": "BOOLEAN",
+      "defaultValue": false
+    },
+    "Header#546:31": {
+      "type": "SLOT",
+      "description": "Optional header content. Replace the title with editable text, search, or connected library components.",
+      "slotSettings": {
+        "stretchChildOnInsert": true,
+        "displayEmptyByDefault": false,
+        "minChildren": null,
+        "maxChildren": null,
+        "allowPreferredValuesOnly": false
+      },
+      "preferredValues": []
+    },
+    "Menu items#546:34": {
+      "type": "SLOT",
+      "description": "Add, remove, replace and reorder connected Menu Item instances or editable layers without detaching the shell.",
+      "slotSettings": {
+        "stretchChildOnInsert": true,
+        "displayEmptyByDefault": false,
+        "minChildren": null,
+        "maxChildren": null,
+        "allowPreferredValuesOnly": false
+      },
+      "preferredValues": [
+        {
+          "type": "COMPONENT_SET",
+          "key": "752f2b2d987bb8b2ad3815bf0e58d212f542bdbb"
+        },
+        {
+          "type": "COMPONENT",
+          "key": "d85c7784e0cd380a164fd63910794ace17fd29a6"
+        }
+      ]
+    },
+    "Footer#546:37": {
+      "type": "SLOT",
+      "description": "Optional actions or supporting content.",
+      "slotSettings": {
+        "stretchChildOnInsert": true,
+        "displayEmptyByDefault": false,
+        "minChildren": null,
+        "maxChildren": null,
+        "allowPreferredValuesOnly": false
+      },
+      "preferredValues": []
+    },
+    "Header#546:46": {
+      "type": "SLOT",
+      "description": null,
+      "preferredValues": []
+    },
+    "Menu items#546:50": {
+      "type": "SLOT",
+      "description": null,
+      "preferredValues": []
+    },
+    "Footer#546:54": {
+      "type": "SLOT",
+      "description": null,
+      "preferredValues": []
+    },
+    "Header#546:58": {
+      "type": "SLOT",
+      "description": null,
+      "preferredValues": []
+    },
+    "Menu items#546:62": {
+      "type": "SLOT",
+      "description": null,
+      "preferredValues": []
+    },
+    "Footer#546:66": {
+      "type": "SLOT",
+      "description": null,
+      "preferredValues": []
+    },
+    "Header#546:70": {
+      "type": "SLOT",
+      "description": null,
+      "preferredValues": []
+    },
+    "Menu items#546:74": {
+      "type": "SLOT",
+      "description": null,
+      "preferredValues": []
+    },
+    "Footer#546:78": {
+      "type": "SLOT",
+      "description": null,
+      "preferredValues": []
+    },
+    "Size": {
+      "type": "VARIANT",
+      "defaultValue": "Small",
+      "variantOptions": [
+        "Small",
+        "Base",
+        "Large"
+      ]
+    }
+  },
+  "variants": [
+    {
+      "id": "34:51",
+      "name": "Size=Small",
+      "width": 240,
+      "height": 183,
+      "slots": [
+        {
+          "id": "546:2522",
+          "name": "Header",
+          "children": 1,
+          "violations": [],
+          "refs": {
+            "visible": "Show header#546:25",
+            "slotContentId": "Header#546:31"
+          }
+        },
+        {
+          "id": "546:2524",
+          "name": "Menu items",
+          "children": 5,
+          "violations": [],
+          "refs": {
+            "slotContentId": "Menu items#546:34"
+          }
+        },
+        {
+          "id": "546:2604",
+          "name": "Footer",
+          "children": 1,
+          "violations": [],
+          "refs": {
+            "visible": "Show footer#546:28",
+            "slotContentId": "Footer#546:37"
+          }
+        }
+      ],
+      "effectStyle": "S:7b91da60d77eed59f0cc152fc17e96a7805ad26c,",
+      "strokes": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 0.05000000074505806,
+          "blendMode": "NORMAL",
+          "color": {
+            "r": 0.06666667014360428,
+            "g": 0.0784313753247261,
+            "b": 0.09019608050584793
+          },
+          "boundVariables": {
+            "color": {
+              "type": "VARIABLE_ALIAS",
+              "id": "VariableID:250:2871"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "34:48",
+      "name": "Size=Base",
+      "width": 280,
+      "height": 183,
+      "slots": [
+        {
+          "id": "546:2606",
+          "name": "Header",
+          "children": 1,
+          "violations": [],
+          "refs": {
+            "visible": "Show header#546:25",
+            "slotContentId": "Header#546:31"
+          }
+        },
+        {
+          "id": "546:2608",
+          "name": "Menu items",
+          "children": 5,
+          "violations": [],
+          "refs": {
+            "slotContentId": "Menu items#546:34"
+          }
+        },
+        {
+          "id": "546:2683",
+          "name": "Footer",
+          "children": 1,
+          "violations": [],
+          "refs": {
+            "visible": "Show footer#546:28",
+            "slotContentId": "Footer#546:37"
+          }
+        }
+      ],
+      "effectStyle": "S:7b91da60d77eed59f0cc152fc17e96a7805ad26c,",
+      "strokes": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 0.05000000074505806,
+          "blendMode": "NORMAL",
+          "color": {
+            "r": 0.06666667014360428,
+            "g": 0.0784313753247261,
+            "b": 0.09019608050584793
+          },
+          "boundVariables": {
+            "color": {
+              "type": "VARIABLE_ALIAS",
+              "id": "VariableID:250:2871"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "546:2521",
+      "name": "Size=Large",
+      "width": 320,
+      "height": 183,
+      "slots": [
+        {
+          "id": "546:2685",
+          "name": "Header",
+          "children": 1,
+          "violations": [],
+          "refs": {
+            "visible": "Show header#546:25",
+            "slotContentId": "Header#546:31"
+          }
+        },
+        {
+          "id": "546:2687",
+          "name": "Menu items",
+          "children": 5,
+          "violations": [],
+          "refs": {
+            "slotContentId": "Menu items#546:34"
+          }
+        },
+        {
+          "id": "546:2762",
+          "name": "Footer",
+          "children": 1,
+          "violations": [],
+          "refs": {
+            "visible": "Show footer#546:28",
+            "slotContentId": "Footer#546:37"
+          }
+        }
+      ],
+      "effectStyle": "S:7b91da60d77eed59f0cc152fc17e96a7805ad26c,",
+      "strokes": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 0.05000000074505806,
+          "blendMode": "NORMAL",
+          "color": {
+            "r": 0.06666667014360428,
+            "g": 0.0784313753247261,
+            "b": 0.09019608050584793
+          },
+          "boundVariables": {
+            "color": {
+              "type": "VARIABLE_ALIAS",
+              "id": "VariableID:250:2871"
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "docTexts": [
+    {
+      "id": "34:42",
+      "text": "Dropdown Menu"
+    },
+    {
+      "id": "34:43",
+      "text": "A compact popup list of contextual commands."
+    },
+    {
+      "id": "34:44",
+      "text": "Content: Short / Long. Compact and Relaxed modes adjust popup padding and type."
+    },
+    {
+      "id": "34:45",
+      "text": "Default interaction state only. Visual variants remain theme-aware through semantic variables."
+    },
+    {
+      "id": "34:46",
+      "text": "References: Align UI   |   shadcn Figma   |   HeroUI"
+    },
+    {
+      "id": "34:47",
+      "text": "COMPONENT VARIANTS"
+    }
+  ]
+}

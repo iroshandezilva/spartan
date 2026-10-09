@@ -1,0 +1,35 @@
+---
+title: "Decision record"
+description: "Accepted choices and the reasoning behind this experiment."
+---
+
+## 2026-10-09: Use Lit for the experiment
+
+**Accepted.** This is an experiment project. Use Lit to explore Web Components rather than retaining React as the component implementation requirement. Fumadocs can still use React internally.
+
+## 2026-10-09: Git owns token definitions
+
+**Accepted direction.** Edit canonical token data in code and distribute it to CSS and Figma. Figma stays editable, but design-side token changes need to return to the canonical token source before the next sync.
+
+## 2026-10-09: Build a custom Figma plugin
+
+**Accepted.** Use the Plugin API without MCP. Start with a local file and a preview/apply workflow. Preserve variable IDs, aliases, and modes. Do not silently remove variables or collections.
+
+## 2026-10-09: Keep documentation and tasks together
+
+**Accepted.** Use clear Fumadocs subpages for architecture, token sync, component workflow, testing, decisions, and progress. Use Storybook for the component playground when that workspace is built.
+
+## 2026-10-09: One component task, two statuses
+
+**Accepted.** Development and Figma are marked independently. Overall Done requires both. Other work, including documentation, has separate ordinary tasks.
+
+## Implementation choices in this initial version
+
+Local JSON persistence keeps the experiment inspectable and versionable. A file-upload plugin avoids credential storage. The plugin's first schema is deliberately small and project-specific; adding DTCG input is a tracked follow-up, not an existing capability.
+
+## Open decisions
+
+- Complete component inventory and implementation order after a live Figma audit.
+- Repository transport and authentication if direct fetching is added to the plugin.
+- A durable database and user access model if the hub becomes shared online.
+- DTCG normalization and typography/effect composition.

@@ -1,0 +1,32 @@
+---
+title: "Work and completion rules"
+description: "How to track components, documentation, and other project work."
+---
+
+## One component, one task
+
+A component has one canonical task. Do not create separate Button development and Button Figma tasks. The same task holds both statuses, acceptance notes, and evidence links. Component names are normalized to prevent duplicate records.
+
+## Two independent tracks
+
+Development and Figma each support Not started, In progress, Review, Blocked, Needs verification, and Done. Overall status is computed and cannot be manually overridden.
+
+A component is Done only when development is Done AND Figma is Done. Reopening either track reopens the overall task. A blocked track keeps the task Blocked. Finishing only one track leaves the task open.
+
+## What Done means
+
+**Development:** the Lit API and slots are implemented, generated tokens are used, Storybook examples cover applicable variants, interaction and accessibility checks have been run, and evidence is linked.
+
+**Figma:** the component anatomy and variants match the intended contract, appropriate variable bindings resolve across modes, resizing and content replacement are checked, and the current component is linked.
+
+**Other work:** documentation, research, plugin, and infrastructure tasks use one status. Their notes must state their own acceptance criteria. Documentation may be related to a component without creating another Component task.
+
+## Evidence and uncertainty
+
+Existing Figma designs start at Needs verification. This is not a claim that they are broken. It means they have not been checked against this new Lit experiment. The initial component backlog is a starting tranche, not a full audit of the Figma catalog.
+
+## Persisting work
+
+Open a task, update its fields, and save. The API validates the record and writes `data/tasks.json` atomically. If another browser has saved a newer revision, the older save is rejected; reload the board and retry. Commit the JSON file to version control to share the latest state. Browser local storage is not used as the task source.
+
+Before merging Git changes, resolve task-file conflicts explicitly. The server's revision check coordinates browsers on one server, not concurrent external file editors.

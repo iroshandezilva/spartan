@@ -1,0 +1,410 @@
+{
+  "before": [
+    {
+      "id": "VariableID:7:3",
+      "name": "color/surface/default",
+      "values": {
+        "4:5": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:6:20"
+        },
+        "4:6": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:6:31"
+        },
+        "53:0": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:6:20"
+        },
+        "53:1": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:6:22"
+        }
+      }
+    },
+    {
+      "id": "VariableID:7:4",
+      "name": "color/surface/elevated",
+      "values": {
+        "4:5": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:6:20"
+        },
+        "4:6": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:6:30"
+        },
+        "53:0": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:6:20"
+        },
+        "53:1": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:6:32"
+        }
+      }
+    },
+    {
+      "id": "VariableID:7:16",
+      "name": "color/primary/default",
+      "values": {
+        "4:5": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:6:80"
+        },
+        "4:6": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:6:77"
+        },
+        "53:0": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:6:82"
+        },
+        "53:1": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:6:76"
+        }
+      }
+    },
+    {
+      "id": "VariableID:7:19",
+      "name": "color/primary/hover",
+      "values": {
+        "4:5": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:6:81"
+        },
+        "4:6": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:6:76"
+        },
+        "53:0": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:6:83"
+        },
+        "53:1": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:6:75"
+        }
+      }
+    },
+    {
+      "id": "VariableID:7:20",
+      "name": "color/primary/active",
+      "values": {
+        "4:5": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:6:82"
+        },
+        "4:6": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:6:75"
+        },
+        "53:0": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:6:84"
+        },
+        "53:1": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:6:73"
+        }
+      }
+    },
+    {
+      "id": "VariableID:7:21",
+      "name": "color/primary/foreground",
+      "values": {
+        "4:5": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:6:20"
+        },
+        "4:6": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:6:22"
+        },
+        "53:0": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:6:20"
+        },
+        "53:1": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:6:22"
+        }
+      }
+    },
+    {
+      "id": "VariableID:110:16",
+      "name": "color/control/hover",
+      "values": {
+        "4:5": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:110:9"
+        },
+        "4:6": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:110:7"
+        },
+        "53:0": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:110:11"
+        },
+        "53:1": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:110:5"
+        }
+      }
+    },
+    {
+      "id": "VariableID:110:17",
+      "name": "color/control/active",
+      "values": {
+        "4:5": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:110:10"
+        },
+        "4:6": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:110:6"
+        },
+        "53:0": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:110:12"
+        },
+        "53:1": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:110:4"
+        }
+      }
+    },
+    {
+      "id": "VariableID:110:18",
+      "name": "color/control/foreground",
+      "values": {
+        "4:5": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:6:20"
+        },
+        "4:6": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:6:22"
+        },
+        "53:0": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:6:20"
+        },
+        "53:1": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:6:22"
+        }
+      }
+    },
+    {
+      "id": "VariableID:250:2871",
+      "name": "color/border/overlay",
+      "values": {
+        "4:5": {
+          "color": {
+            "type": "VARIABLE_ALIAS",
+            "id": "VariableID:6:32"
+          },
+          "opacity": {
+            "type": "VARIABLE_ALIAS",
+            "id": "VariableID:316:41"
+          }
+        },
+        "4:6": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:6:28"
+        },
+        "53:0": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:6:31"
+        },
+        "53:1": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:6:21"
+        }
+      }
+    }
+  ],
+  "primary": [
+    {
+      "id": "21:2",
+      "name": "Variant=Primary, Size=Base, State=Default",
+      "parent": "Button",
+      "fills": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 1,
+          "blendMode": "NORMAL",
+          "color": {
+            "r": 0,
+            "g": 0.4274509847164154,
+            "b": 0.8078431487083435
+          },
+          "boundVariables": {
+            "color": {
+              "type": "VARIABLE_ALIAS",
+              "id": "VariableID:7:16"
+            }
+          }
+        }
+      ],
+      "strokes": []
+    },
+    {
+      "id": "521:773",
+      "name": "Variant=Primary, Size=Base, State=Hover",
+      "parent": "Button",
+      "fills": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 1,
+          "blendMode": "NORMAL",
+          "color": {
+            "r": 0,
+            "g": 0.3294117748737335,
+            "b": 0.6313725709915161
+          },
+          "boundVariables": {
+            "color": {
+              "type": "VARIABLE_ALIAS",
+              "id": "VariableID:7:19"
+            }
+          }
+        }
+      ],
+      "strokes": []
+    },
+    {
+      "id": "521:784",
+      "name": "Variant=Primary, Size=Base, State=Pressed",
+      "parent": "Button",
+      "fills": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 1,
+          "blendMode": "NORMAL",
+          "color": {
+            "r": 0,
+            "g": 0.22745098173618317,
+            "b": 0.4470588266849518
+          },
+          "boundVariables": {
+            "color": {
+              "type": "VARIABLE_ALIAS",
+              "id": "VariableID:7:20"
+            }
+          }
+        }
+      ],
+      "strokes": []
+    },
+    {
+      "id": "521:795",
+      "name": "Variant=Primary, Size=Base, State=Focus",
+      "parent": "Button",
+      "fills": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 1,
+          "blendMode": "NORMAL",
+          "color": {
+            "r": 0,
+            "g": 0.4274509847164154,
+            "b": 0.8078431487083435
+          },
+          "boundVariables": {
+            "color": {
+              "type": "VARIABLE_ALIAS",
+              "id": "VariableID:7:16"
+            }
+          }
+        }
+      ],
+      "strokes": []
+    },
+    {
+      "id": "521:806",
+      "name": "Variant=Primary, Size=Base, State=Disabled",
+      "parent": "Button",
+      "fills": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 1,
+          "blendMode": "NORMAL",
+          "color": {
+            "r": 0.929411768913269,
+            "g": 0.9333333373069763,
+            "b": 0.9411764740943909
+          },
+          "boundVariables": {
+            "color": {
+              "type": "VARIABLE_ALIAS",
+              "id": "VariableID:7:6"
+            }
+          }
+        }
+      ],
+      "strokes": []
+    },
+    {
+      "id": "521:817",
+      "name": "Variant=Primary, Size=Base, State=Loading",
+      "parent": "Button",
+      "fills": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 1,
+          "blendMode": "NORMAL",
+          "color": {
+            "r": 0,
+            "g": 0.4274509847164154,
+            "b": 0.8078431487083435
+          },
+          "boundVariables": {
+            "color": {
+              "type": "VARIABLE_ALIAS",
+              "id": "VariableID:7:16"
+            }
+          }
+        }
+      ],
+      "strokes": []
+    },
+    {
+      "id": "428:682",
+      "name": "Variant=Primary, Size=Base",
+      "parent": "Button Pill",
+      "fills": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 1,
+          "blendMode": "NORMAL",
+          "color": {
+            "r": 0,
+            "g": 0.4274509847164154,
+            "b": 0.8078431487083435
+          },
+          "boundVariables": {
+            "color": {
+              "type": "VARIABLE_ALIAS",
+              "id": "VariableID:7:16"
+            }
+          }
+        }
+      ],
+      "strokes": []
+    }
+  ],
+  "slotReference": {
+    "slotContentId": "Content#357:6"
+  }
+}

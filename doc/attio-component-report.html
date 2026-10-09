@@ -1,0 +1,231 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>Attio component study · Spartant</title>
+  <style>
+    :root { --paper:#fafaf8; --ink:#252622; --muted:#686a62; --line:#dedfd8; --green:#254b36; --green-bg:#eaf1eb; --amber:#765818; --amber-bg:#faf1db; }
+    * { box-sizing:border-box; }
+    body { margin:0; background:var(--paper); color:var(--ink); font:15px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; }
+    a { color:var(--green); text-underline-offset:3px; }
+    a:hover { text-decoration-thickness:2px; }
+    :focus-visible { outline:3px solid #7b997f; outline-offset:4px; }
+    .wrap { max-width:1160px; margin:0 auto; padding:0 40px; }
+    .masthead { display:flex; justify-content:space-between; gap:20px; padding:27px 0; border-bottom:1px solid var(--line); font-size:12px; letter-spacing:.07em; text-transform:uppercase; }
+    .masthead span:last-child { color:var(--muted); }
+    header { padding:60px 0 34px; }
+    .eyebrow { margin:0 0 15px; color:var(--green); font-size:12px; letter-spacing:.12em; text-transform:uppercase; font-weight:650; }
+    h1 { margin:0; max-width:780px; font:normal clamp(40px,6vw,66px)/1.05 Georgia,"Times New Roman",serif; letter-spacing:-.035em; }
+    .intro { margin:24px 0 0; max-width:690px; color:var(--muted); font-size:18px; line-height:1.65; }
+    .notice { border:1px solid #e8d9b6; background:var(--amber-bg); padding:18px 22px; margin:0 0 36px; border-radius:8px; }
+    .notice strong { color:var(--amber); }
+    .notice.live { border-color:#cfddcf; background:var(--green-bg); }
+    .notice.live strong { color:var(--green); }
+    .notice p { margin:6px 0 0; font-size:14px; }
+    nav { display:flex; flex-wrap:wrap; gap:10px 26px; padding:19px 0; border-top:1px solid var(--line); border-bottom:1px solid var(--line); }
+    nav a { font-size:13px; color:var(--muted); text-decoration:none; }
+    section { padding:42px 0; border-bottom:1px solid var(--line); scroll-margin-top:20px; }
+    .section-head { display:flex; gap:22px; align-items:baseline; margin-bottom:18px; }
+    .number { color:var(--muted); font-size:12px; font-variant-numeric:tabular-nums; }
+    h2 { font:normal 30px/1.2 Georgia,"Times New Roman",serif; letter-spacing:-.02em; margin:0; }
+    h3 { font-size:15px; margin:0 0 10px; }
+    .lede { max-width:820px; color:var(--muted); margin:0 0 22px; }
+    .legend { display:flex; flex-wrap:wrap; gap:8px; margin:20px 0; }
+    .badge { display:inline-block; padding:3px 8px; border-radius:4px; font-size:11px; font-weight:600; white-space:nowrap; background:#efefeb; color:#5d5f57; }
+    .badge.verified { background:var(--green-bg); color:var(--green); }
+    .badge.pending { background:var(--amber-bg); color:var(--amber); }
+    .tools { display:flex; gap:10px; margin:18px 0 12px; }
+    input,select { border:1px solid #cccfc5; border-radius:6px; min-height:38px; padding:8px 12px; color:var(--ink); background:white; font:inherit; font-size:13px; }
+    input { flex:1; min-width:0; }
+    .table-wrap { overflow-x:auto; border:1px solid var(--line); border-radius:8px; background:#fff; }
+    table { width:100%; border-collapse:collapse; text-align:left; font-size:13px; }
+    th { padding:12px 16px; color:var(--muted); font-size:11px; letter-spacing:.055em; text-transform:uppercase; background:#f5f5f1; font-weight:600; }
+    td { padding:15px 16px; border-top:1px solid #e8e9e2; vertical-align:top; }
+    td:first-child { font-weight:600; min-width:165px; }
+    td:last-child { min-width:125px; }
+    .evidence-cell { min-width:158px; }
+    .footnote { color:var(--muted); font-size:12px; margin:12px 0 0; }
+    .grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:18px; }
+    .card { border:1px solid var(--line); border-radius:8px; padding:21px; background:#fff; }
+    .card p { margin:0; color:var(--muted); font-size:13px; }
+    .card .badge { margin-bottom:13px; }
+    .actions { display:flex; flex-wrap:wrap; gap:10px; margin:22px 0 0; }
+    .action { display:inline-flex; padding:10px 15px; border:1px solid var(--green); border-radius:6px; font-size:13px; font-weight:600; text-decoration:none; }
+    .action.primary { color:#fff; background:var(--green); }
+    .preview-grid { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin:24px 0; }
+    figure { margin:0; border:1px solid var(--line); border-radius:8px; overflow:hidden; background:#fff; }
+    figure.wide { grid-column:1/-1; }
+    figure img { display:block; width:100%; height:auto; }
+    figure.wide img { max-height:440px; object-fit:contain; object-position:top; }
+    figcaption { padding:12px 15px; border-top:1px solid var(--line); color:var(--muted); font-size:12px; }
+    .validation { padding:16px 20px; background:var(--green-bg); border-radius:8px; color:var(--green); font-size:13px; margin:20px 0; }
+    ul { padding-left:20px; }
+    li { margin:7px 0; }
+    .plain-list { margin:0; max-width:880px; font-size:14px; }
+    .pending-panel { border:1px dashed #b8baa9; background:#f4f4ee; padding:22px; border-radius:8px; }
+    .pending-panel p { margin:8px 0 0; font-size:14px; }
+    .pending-panel + .table-wrap { margin-top:18px; }
+    .source-list { display:grid; grid-template-columns:1fr 1fr; gap:10px 24px; padding:0; list-style:none; margin:0; }
+    .source-list li { margin:0; font-size:13px; }
+    .source-list small { display:block; color:var(--muted); margin-top:3px; }
+    footer { padding:24px 0 42px; display:flex; justify-content:space-between; gap:20px; color:var(--muted); font-size:12px; }
+    .sr-only { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }
+    [hidden] { display:none!important; }
+    @media(max-width:760px) { .wrap { padding:0 20px; } header { padding-top:40px; } .grid,.source-list,.preview-grid { grid-template-columns:1fr; } .tools { flex-direction:column; } .masthead,footer { flex-wrap:wrap; } td,th { padding:12px; } .section-head { gap:13px; } }
+    @media print { .wrap { max-width:none; padding:0; } body { background:white; } nav,.tools { display:none; } header { padding-top:25px; } section { padding:24px 0; break-inside:avoid; } .table-wrap { overflow:visible; } a { color:inherit; } }
+  </style>
+</head>
+<body>
+<div class="wrap">
+  <div class="masthead"><strong>Spartant / component research</strong><span>02 October 2026 · Attio</span></div>
+  <header>
+    <p class="eyebrow">Reference study · tables &amp; filters</p>
+    <h1>A reusable system for working with records.</h1>
+    <p class="intro">Attio table and filter patterns, rebuilt as reusable Spartant components. This report records the delivered library, verified source interactions, design-token exceptions and the limits of the prototype.</p>
+    <div class="actions"><a class="action primary" href="https://www.figma.com/design/PhcMPmdpkpgxH3N83SvpBY?node-id=556-66">Open Attio page in Figma ↗</a><a class="action" href="https://www.figma.com/proto/PhcMPmdpkpgxH3N83SvpBY?node-id=573-16748&amp;page-id=556-66">Open the prototype ↗</a></div>
+  </header>
+  <aside class="notice live" aria-label="Research status">
+    <strong>28 component families delivered, with structural and visual checks.</strong>
+    <p>The listed source interactions were inspected in the signed-in <a href="https://app.attio.com/ss-5-sg">ss-5-sg Companies workspace</a> through Dia. Temporary filters were discarded and the original view restored; no records were altered. The Figma build uses synthetic sample data. Its navigation was checked structurally, without a full traversal in the Figma player.</p>
+  </aside>
+  <nav aria-label="Report sections"><a href="#inventory">Behavior inventory</a><a href="#coverage">State coverage</a><a href="#exceptions">Token exceptions</a><a href="#limitations">Limitations</a><a href="#sources">Sources</a></nav>
+
+  <section id="inventory">
+    <div class="section-head"><span class="number">01</span><h2>Behavior inventory</h2></div>
+    <p class="lede">Live findings take precedence for the inspected controls. Documentation broadens the scope, while screenshots provide visual references. Each evidence label applies only to the behavior described in its row.</p>
+    <div class="legend"><span class="badge verified">Verified live</span><span class="badge">Official documentation</span><span class="badge pending">Provisional</span></div>
+    <div class="tools"><label class="sr-only" for="search">Search the behavior inventory</label><input id="search" type="search" placeholder="Search a component or behavior"><label class="sr-only" for="evidence">Filter by evidence</label><select id="evidence"><option value="all">All evidence</option><option value="live">Verified live</option><option value="documentation">Documentation only</option></select></div>
+    <div class="table-wrap">
+      <table id="inventory-table">
+        <thead><tr><th scope="col">Component family</th><th scope="col">Behavior to represent</th><th scope="col">Evidence</th><th scope="col">Reference</th></tr></thead>
+        <tbody>
+          <tr data-evidence="live"><td>Attribute picker</td><td>Searchable attribute list with type icons. Relationship rows show counts and chevrons. An unmatched search displays an empty-results message.</td><td class="evidence-cell"><span class="badge verified">Verified live</span></td><td><a href="#source-live">Companies workspace ↗</a></td></tr>
+          <tr data-evidence="live"><td>Typed comparison menu</td><td>Name supports contains, does not contain, starts with, ends with, is, is not, empty and not empty. Twitter follower count supports is, is not, less than, greater than, empty and not empty. Foundation date supports is, is not, before, after, empty and not empty. Categories supports contains, does not contain, empty and not empty. Inclusive numeric comparisons were absent.</td><td><span class="badge verified">Verified live</span></td><td><a href="#source-live">Companies workspace ↗</a></td></tr>
+          <tr data-evidence="live"><td>Category value picker</td><td>Searchable options with colored category labels. A search for software produced an empty-options state; clearing the query restored the list. Choosing Accounting closed the picker and applied the condition.</td><td><span class="badge verified">Verified live</span></td><td><a href="#source-live">Companies workspace ↗</a></td></tr>
+          <tr data-evidence="live"><td>Relative date picker</td><td>Presets cover the current day, adjacent days, a week or month before or ahead, a custom day offset, and a specific date.</td><td><span class="badge verified">Verified live</span></td><td><a href="#source-live">Companies workspace ↗</a></td></tr>
+          <tr data-evidence="live"><td>Exact date calendar</td><td>Back navigation, natural-language entry, month arrows and year display. The calendar starts on Monday, marks the current day with a dot, and has a bottom date input using month/day/year order.</td><td><span class="badge verified">Verified live</span></td><td><a href="#source-live">Companies workspace ↗</a></td></tr>
+          <tr data-evidence="live"><td>Condition actions</td><td>The simple condition menu offers conversion to an advanced filter or deletion of the filter. Inside the advanced form, the row menu offers group conversion or deletion of the condition.</td><td><span class="badge verified">Verified live</span></td><td><a href="#source-live">Companies workspace ↗</a></td></tr>
+          <tr data-evidence="live"><td>Nested filter group</td><td>Outer and inner condition prefixes, a field/comparison/value row and an overflow menu. The group includes add and delete controls; the overall builder includes adding a filter and clearing all filters.</td><td><span class="badge verified">Verified live</span></td><td><a href="#source-live">Companies workspace ↗</a></td></tr>
+          <tr data-evidence="live"><td>Results / view changes</td><td>A Name condition containing Attio returned one record after transient loading feedback. The view exposed discard and a split save-for-everyone control. Discarding restored the original view. Saving was not executed.</td><td><span class="badge verified">Verified live</span></td><td><a href="#source-live">Companies workspace ↗</a></td></tr>
+          <tr data-evidence="live"><td>No matching records</td><td>The Accounting category condition loaded, then returned zero companies. Table headings and the footer remained visible around a centered icon, no-match heading, explanatory text and a control to clear the filter.</td><td><span class="badge verified">Verified live</span></td><td><a href="#source-live">Companies workspace ↗</a></td></tr>
+          <tr data-evidence="live"><td>Sort rule list</td><td>Two rules with drag handles, attribute breadcrumbs, a direction selector, individual removal and an add-rule control. A descending choice and help footer were visible. Drag reordering was not exercised.</td><td><span class="badge verified">Verified live</span></td><td><a href="#source-live">Companies workspace ↗</a></td></tr>
+          <tr data-evidence="live"><td>View column settings</td><td>Reorderable attribute rows and an add-attribute control. Each settings-row submenu offers label changes or column removal. This menu is distinct from the table-header menu.</td><td><span class="badge verified">Verified live</span></td><td><a href="#source-live">Companies workspace ↗</a></td></tr>
+          <tr data-evidence="live"><td>Column header / label</td><td>The header menu offers both sort directions, movement left or right, label editing and hiding. Label editing opens a modal with an input and cancel/save actions. No label change was saved.</td><td><span class="badge verified">Verified live</span></td><td><a href="#source-live">Companies workspace ↗</a></td></tr>
+          <tr data-evidence="live"><td>Selected-row toolbar</td><td>One selected record exposes a count, selection clearing, list assignment, email, workflow and overflow actions. The overflow contained only record deletion for this single-selection state. No record action was executed.</td><td><span class="badge verified">Verified live</span></td><td><a href="#source-live">Companies workspace ↗</a></td></tr>
+          <tr data-evidence="live"><td>Multiline cell editor</td><td>Enter on a Description cell opened a multiline editor anchored at the cell’s upper-left, approximately 350 × 136 pixels, without footer controls. Escape cancelled editing and left the value unchanged. The size is a visual estimate, not a measured token.</td><td><span class="badge verified">Verified live</span></td><td><a href="#source-live">Companies workspace ↗</a></td></tr>
+          <tr data-evidence="documentation"><td>Additional cell interactions</td><td>Record-hover actions, keyboard cell movement, rectangular selection and compatible-value paste are documented. Column-edge resizing and date/currency display formatting are also documented, but these behaviors were not exercised live.</td><td><span class="badge">Official documentation</span></td><td><a href="#source-table">Table views ↗</a></td></tr>
+          <tr data-evidence="documentation"><td>Additional filter logic</td><td>Documentation describes conjunction/disjunction, filtering through linked records, status history, list membership, current-member values and saving a separate view. These behaviors extend beyond the live checks listed above.</td><td><span class="badge">Official documentation</span></td><td><a href="#source-filters">Filters &amp; sorts ↗</a></td></tr>
+          <tr data-evidence="documentation"><td>Typed editor</td><td>Text, numeric, currency, date, status, selection, checkbox, rating, member, record, relationship, location and phone values require suitable editors. Text permits line breaks; phone values require valid formatting.</td><td><span class="badge">Official documentation</span></td><td><a href="#source-attributes">Attribute types ↗</a></td></tr>
+          <tr data-evidence="live"><td>Numeric aggregation menu</td><td>The menu offers counts and percentages for empty or filled cells, plus sum, average, minimum and maximum. Only the menu contents were inspected; no calculation option was selected.</td><td><span class="badge verified">Verified live</span></td><td><a href="#source-live">Companies workspace ↗</a></td></tr>
+          <tr data-evidence="documentation"><td>Value history</td><td>A cell menu can expose attribute-value history, subject to plan availability. The history panel and its behavior were not inspected live.</td><td><span class="badge">Official documentation</span></td><td><a href="#source-table">Table views ↗</a></td></tr>
+          <tr data-evidence="documentation"><td>Read-only state</td><td>Object permissions can allow viewing while preventing data changes. The component system should represent that distinction; its exact presentation remains unverified.</td><td><span class="badge">Official documentation</span></td><td><a href="#source-permissions">Permissions ↗</a></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="footnote" id="match-count" aria-live="polite">20 component families shown.</p>
+    <p class="footnote">Official visual references reviewed: recruiting table, advanced filter groups, sort settings and column-label editing. Earlier local evidence includes <a href="attio-2026-10-01/evidence/companies-light.png">Companies in light mode</a>, <a href="attio-2026-10-01/evidence/companies-dark.png">Companies in dark mode</a> and <a href="attio-2026-10-01/evidence/view-menu-light.png">the view menu</a>. These dated captures supplement the live findings above.</p>
+  </section>
+
+  <section id="coverage">
+    <div class="section-head"><span class="number">02</span><h2 id="coverage-title">Delivered coverage</h2></div>
+    <p class="lede" id="coverage-intro">The Attio page contains editable component families, connected table compositions and bounded interaction examples. Source coverage and component completeness are distinguished below.</p>
+    <div class="table-wrap"><table><thead><tr><th scope="col">Build area</th><th scope="col">Verified result</th><th scope="col">What was checked</th></tr></thead><tbody id="build-totals">
+      <tr><td>Component library</td><td>28 families</td><td>26 component sets with 97 variants, plus two standalone components: Header row and Multiline editor.</td></tr>
+      <tr><td>Review &amp; prototype screens</td><td>27 screens</td><td>25 prototype screens and two light/dark review frames. Tables contain six synthetic companies.</td></tr>
+      <tr><td>Prototype navigation</td><td>232 connections</td><td>All navigation destinations are valid. Structural inspection and screenshot review completed; the complete graph was not traversed in the Figma player.</td></tr>
+      <tr><td>Native content slots</td><td>79 master slots</td><td>1,318 including instance occurrences. No slot fill violations. Table bodies preserve connected row instances when their order changes.</td></tr>
+      <tr><td>Color &amp; icon audit</td><td>No audit violations</td><td>10,012 solid paints inspected with zero unbound paints. All 885 inspected icons use the required style, radius and stroke configuration.</td></tr>
+    </tbody></table></div>
+    <p class="validation">Verified sample outcomes: the Attio text filter displays one company; the Accounting category displays no matches; the sorted sample changes row order while retaining connected row instances. <a href="attio-build-audit.json">Open the build audit ↗</a></p>
+    <div class="preview-grid" aria-label="Delivered Figma previews">
+      <figure><a href="attio-built-assets/light-table.png"><img src="attio-built-assets/light-table.png" width="1240" height="560" loading="lazy" alt="Built Spartant Attio table in light mode with six synthetic companies"></a><figcaption>Light review · editable table composition</figcaption></figure>
+      <figure><a href="attio-built-assets/dark-table.png"><img src="attio-built-assets/dark-table.png" width="1240" height="560" loading="lazy" alt="Built Spartant Attio table in dark mode with the same six synthetic companies"></a><figcaption>Dark review · semantic theme bindings</figcaption></figure>
+      <figure class="wide"><a href="attio-built-assets/advanced-filter.png"><img src="attio-built-assets/advanced-filter.png" width="1240" height="720" loading="lazy" alt="Built advanced filter panel over the table showing connected Name and Description conditions"></a><figcaption>Advanced filter · component instances inside the table flow. Also inspect <a href="attio-built-assets/applied-filter.png">the applied filter</a> and <a href="attio-built-assets/no-results.png">the no-results state</a>.</figcaption></figure>
+    </div>
+    <div class="grid">
+      <article class="card"><span class="badge verified">Connected sample flow</span><h3>Build a text filter</h3><p>Choose an attribute, choose a comparison, then press Return to apply the fixed sample value. The applied screen shows the matching row and change controls.</p></article>
+      <article class="card"><span class="badge verified">Connected sample flow</span><h3>Build a nested group</h3><p>Open filter actions, convert to advanced conditions, open the condition actions, then convert to a nested group.</p></article>
+      <article class="card"><span class="badge verified">Connected sample flow</span><h3>Recover from no results</h3><p>Choose Categories and Accounting, review the no-match table, then clear the filter to return to the default companies screen.</p></article>
+      <article class="card"><span class="badge verified">Connected sample flow</span><h3>Sort &amp; edit</h3><p>Choose a sort direction to reach the reordered sample. Enter opens the multiline cell editor; Escape returns without changing sample content.</p></article>
+      <article class="card"><span class="badge verified">Connected sample flow</span><h3>Choose a date</h3><p>Move from relative date choices into the exact-date calendar, then follow a fixed date selection to the applied sample.</p></article>
+      <article class="card"><span class="badge pending">Supplementary specimens</span><h3>Extend system coverage</h3><p>Empty, error, read-only and range-selected tables; member/multi-select editors; hidden/dragging columns; and saving/saved controls are illustrative extensions, not verified copies of current Attio rendering.</p></article>
+    </div>
+    <p class="footnote" id="prototype-boundary">Prototype boundary: fixed sample navigation with click, hover, Enter and Escape states. It does not provide arbitrary typing, query evaluation or data persistence. The save action opens a sample screen and makes no CRM write. Drag, reorder and resize states are visual specimens; the underlying Figma model remains editable.</p>
+  </section>
+
+  <section id="exceptions">
+    <div class="section-head"><span class="number">03</span><h2>Token exceptions</h2></div>
+    <div class="pending-panel" id="token-audit-status"><span class="badge verified">Audit complete</span><h3>Hard-coded geometry, semantic styling</h3><p>The final audit found no unbound solid paint colors. Existing Spartant components, semantic color roles, text styles, spacing, radii and effects supply the shared styling. Explicit values remain for component geometry, sample sizing and the supplementary hidden-column state. All recorded exceptions are listed below.</p></div>
+    <div class="table-wrap"><table><thead><tr><th scope="col">Property / value</th><th scope="col">Closest existing token</th><th scope="col">Reason &amp; usage</th><th scope="col">Status</th></tr></thead><tbody id="token-exceptions">
+      <tr><td>Table cell, row &amp; calculation height<br>36 px</td><td>density/control/height/small and density/control/height/base</td><td>Existing modes resolve to 28, 32 or 40 px around this size. None matches the observed 36 px table density; the row height remains explicit.</td><td>Verified exception</td></tr>
+      <tr><td>Default component widths<br>224 / 240 / 176 / 420 px</td><td>No matching component-width role</td><td>Data value 224, cell/header 240, segment 176 and chip 420. These are adjustable specimen defaults rather than shared design-token roles.</td><td>Verified exception</td></tr>
+      <tr><td>Incomplete segment outline<br>3 px dash / 2 px gap</td><td>No dash-pattern role</td><td>Pattern geometry distinguishes an incomplete segment. Border color remains semantic.</td><td>Verified exception</td></tr>
+      <tr><td>Focus, edit, resize &amp; range stroke<br>1 / 2 px</td><td>color/focus-ring/default supplies color, not stroke geometry</td><td>Focus and grid borders use 1 px; editing, resizing and range outlines use 2 px. Widths are explicit geometry; colors remain semantic.</td><td>Verified exception</td></tr>
+      <tr><td>Table composition width<br>1,160 px</td><td>No component-dimension role</td><td>Resizable row and table specimen width, independent of the shared styling.</td><td>Verified exception</td></tr>
+      <tr><td>Column widths<br>48 / 260 / 220 / 170 / 160 / 170 / 132 px</td><td>No column-width role</td><td>Independently editable widths reflecting the sample content and source proportions.</td><td>Verified exception</td></tr>
+      <tr><td>Table state-message area<br>1,160 × 280 px; body width 560 px</td><td>No state-message geometry role</td><td>Composition dimensions for centered empty, no-match and supplementary message specimens.</td><td>Verified exception</td></tr>
+      <tr><td>Multiline editor<br>350 × 136 px</td><td>No role-specific dimension token</td><td>Approximate source geometry with editable slot content. Existing padding, radius, colors and typography are retained.</td><td>Verified exception</td></tr>
+    </tbody></table></div>
+    <div class="table-wrap"><table><thead><tr><th scope="col">Panel construction value</th><th scope="col">Role &amp; closest-token assessment</th><th scope="col">Status</th></tr></thead><tbody id="panel-exceptions">
+      <tr><td>Default panel widths<br>248 / 264 / 280 / 288 / 320 / 352 / 440 / 540 / 580 / 720 / 780 / 900 px</td><td>Content-dependent, adjustable specimens: condition/overflow 248; operator/calculation 264; column 280; chip menu 288; picker/editor 320; settings 352; modal/save controls 440; sort row 540; sort panel 580; condition row 720; group 780; bulk toolbar 900. No corresponding component-width tokens.</td><td>Verified exception</td></tr>
+      <tr><td>Nested segment widths<br>144 / 170 / 180 / 190 / 224 px</td><td>Adjustable layout geometry. Existing filter-segment styling and 28 px height are retained; segments stay connected to their masters.</td><td>Verified exception</td></tr>
+      <tr><td>Calendar day cells<br>36 px initial width / 28 px height</td><td>Fixed sample grid geometry. Existing control-height roles can represent 28 px in one mode; a dedicated calendar-cell dimension role is absent. Colors, spacing and radii retain token bindings.</td><td>Verified exception</td></tr>
+      <tr><td>Panel strokes<br>1 px</td><td>Explicit border/separator geometry with semantic border colors.</td><td>Verified exception</td></tr>
+      <tr><td>Hidden column opacity<br>50%</td><td>No matching hidden-column opacity role was identified. This is a supplementary state, not the observed default settings-list presentation.</td><td>Supplementary exception</td></tr>
+      <tr><td>Master arrangement<br>24 / 32 px variant gaps; 24 px padding; 80 / 160 px family separation</td><td>Canvas organization only. Atom origin 100,100; panel origin 5,000,100. These values are not component anatomy or proposed tokens.</td><td>Canvas-only geometry</td></tr>
+      <tr><td>Prototype &amp; review frames<br>1,240 × 720 px / 1,240 × 560 px</td><td>Presentation dimensions, not product token roles. The components remain independently resizable.</td><td>Canvas-only geometry</td></tr>
+      <tr><td>Prototype placement &amp; hit regions<br>Absolute positions / transparent regions</td><td>Bounded navigation examples, not responsive application behavior or a shared token role.</td><td>Prototype-only geometry</td></tr>
+    </tbody></table></div>
+    <p class="footnote">The typography and colors used to format this report are presentation choices, not findings about Attio or claims of Spartant token binding.</p>
+  </section>
+
+  <section id="limitations">
+    <div class="section-head"><span class="number">04</span><h2>Validation boundary</h2></div>
+    <ul class="plain-list">
+      <li>Live coverage is limited to the described controls in the ss-5-sg Companies view. Other objects, permissions, custom attributes, multi-record action differences and workspace-wide states are not established.</li>
+      <li>Official screenshots provide selected visual references. They do not establish exhaustive variants or current interaction timing.</li>
+      <li>Exact measurements, token mappings, keyboard focus, menu dismissal, selection precedence, error feedback and animations need their own checks. Observing a control is not evidence that its action was executed.</li>
+      <li>Live inspection resolves the saving ambiguity in the documentation: the tested filter exposed explicit save and discard controls, and discard restored the original view. The save operation was not performed.</li>
+      <li>Workflow comparison documentation is not a table-filter specification. The inspected numeric field had strict comparisons but no inclusive comparisons; the live operator inventory above is the source for this component.</li>
+      <li>The Figma audit checked component structure, token bindings, icon configuration, content-slot constraints and valid navigation destinations. Screenshot review checked presentation. It did not include a full live traversal in the Figma prototype player.</li>
+      <li>The build contains six synthetic sample companies. Query results, sorting and saving are fixed examples; the prototype does not evaluate arbitrary values or persist data. Supplemental states are marked in the delivered-coverage section.</li>
+    </ul>
+  </section>
+
+  <section id="sources">
+    <div class="section-head"><span class="number">05</span><h2>Evidence &amp; sources</h2></div>
+    <ul class="source-list">
+      <li id="source-live"><a href="https://app.attio.com/ss-5-sg">Live ss-5-sg Companies workspace ↗</a><small>Signed-in Dia inspection; scoped to the interactions recorded above</small></li>
+      <li id="source-table"><a href="https://attio.com/help/reference/managing-your-data/views/create-and-manage-table-views">Table views and column controls ↗</a><small>Interaction reference and selected screenshots</small></li>
+      <li id="source-filters"><a href="https://attio.com/help/reference/managing-your-data/views/filter-and-sort-views">Filtering, grouping and sorting ↗</a><small>Behavior reference and selected screenshots</small></li>
+      <li id="source-attributes"><a href="https://attio.com/help/reference/managing-your-data/attributes/create-manage-attributes">Attribute types and editors ↗</a><small>Type coverage reference</small></li>
+      <li id="source-operators"><a href="https://attio.com/help/reference/automations/workflows/workflows-block-library">Workflow condition operators ↗</a><small>Context only; live table operators differ</small></li>
+      <li id="source-records"><a href="https://attio.com/help/reference/managing-your-data/records/create-and-view-records">Record creation and bulk actions ↗</a><small>Behavior reference</small></li>
+      <li id="source-permissions"><a href="https://attio.com/help/reference/managing-your-data/objects/manage-access-to-objects">Object access and permissions ↗</a><small>Permission behavior reference</small></li>
+    </ul>
+  </section>
+  <footer><span>Spartant · Attio component study</span><span>Evidence reviewed 02 October 2026</span></footer>
+</div>
+<script>
+  (() => {
+    const search = document.getElementById('search');
+    const evidence = document.getElementById('evidence');
+    const rows = Array.from(document.querySelectorAll('#inventory-table tbody tr'));
+    const count = document.getElementById('match-count');
+    const update = () => {
+      const query = search.value.toLowerCase().trim();
+      let visible = 0;
+      rows.forEach(row => {
+        row.hidden = !(row.textContent.toLowerCase().includes(query) && (evidence.value === 'all' || row.dataset.evidence === evidence.value));
+        if (!row.hidden) visible += 1;
+      });
+      count.textContent = visible === 0 ? 'No component families match. Clear the search or change the evidence filter.' : `${visible} component ${visible === 1 ? 'family' : 'families'} shown.`;
+    };
+    search.addEventListener('input', update);
+    evidence.addEventListener('change', update);
+  })();
+</script>
+</body>
+</html>

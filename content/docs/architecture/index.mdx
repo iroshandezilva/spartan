@@ -1,0 +1,34 @@
+---
+title: "Architecture"
+description: "A shared token source with separate design and implementation surfaces."
+---
+
+## System responsibilities
+
+| Layer | Responsibility | Current state |
+| --- | --- | --- |
+| Token JSON | Stable keys, values, aliases, and collection modes | Initial fixture and validator |
+| Token build | Generate CSS from the canonical source | Implemented for the initial schema |
+| Lit | Implement reusable Web Components | Backlog |
+| Storybook | Exercise component states and interactions | Backlog |
+| Custom plugin | Apply token changes to Figma variables | Initial build; runtime verification pending |
+| Figma | Editable anatomy, variants, slots, and variable bindings | Existing library; alignment audit pending |
+| Fumadocs | Explain architecture, workflows, and decisions | This hub |
+| Task manager | Record progress and acceptance evidence | Local file-backed implementation |
+
+## Ownership
+
+Token JSON in Git is the canonical input. CSS and plugin changes are derived from it. Figma variables should not be recreated during routine sync. Component structure remains an explicitly maintained contract between Figma and Lit.
+
+## Change flow
+
+1. Edit token data or a component contract in a branch.
+2. Validate the token graph and generate CSS.
+3. Review applicable components in Storybook once implemented.
+4. Preview token changes in the Figma plugin and apply them in the library file.
+5. Verify bound components and record both progress tracks.
+6. Commit the token source, code, task evidence, and documentation changes.
+
+## What does not synchronize automatically
+
+Tokens do not describe every layout decision, slot, accessibility behavior, or interaction. Changing a Lit template does not update Figma anatomy. Changing a Figma variant does not create a Lit implementation. Track both sides of those changes on the same component task.

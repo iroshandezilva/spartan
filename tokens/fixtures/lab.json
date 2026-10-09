@@ -1,0 +1,22 @@
+{
+  "schema": "spartant.tokens.v1",
+  "version": "0.2.0-fixture",
+  "collections": [{ "key": "lab", "name": "Spartant Lab", "modes": ["Light", "Dark"] }],
+  "tokens": [
+    {"key": "color.surface", "name": "color/surface", "collection": "lab", "type": "COLOR", "values": {"Light": {"r": 1, "g": 1, "b": 1, "a": 1}, "Dark": {"r": 0.08, "g": 0.08, "b": 0.08, "a": 1}}},
+    {"key": "radius.base", "name": "radius/base", "collection": "lab", "type": "FLOAT", "unit": "px", "values": {"Light": 6, "Dark": 6}},
+    {"key": "radius.control", "name": "radius/control", "collection": "lab", "type": "FLOAT", "unit": "px", "values": {"Light": {"alias": "radius.base"}, "Dark": {"alias": "radius.base"}}},
+    {"key": "space.control", "name": "space/control", "collection": "lab", "type": "FLOAT", "unit": "px", "values": {"Light": 12, "Dark": 12}},
+    {"key": "color.text", "name": "color/text", "collection": "lab", "type": "COLOR", "values": {"Light": {"r": 0.09, "g": 0.09, "b": 0.09, "a": 1}, "Dark": {"r": 0.96, "g": 0.96, "b": 0.96, "a": 1}}},
+    {"key": "color.border", "name": "color/border", "collection": "lab", "type": "COLOR", "values": {"Light": {"r": 0.83, "g": 0.83, "b": 0.83, "a": 1}, "Dark": {"r": 0.25, "g": 0.25, "b": 0.25, "a": 1}}},
+    {"key": "color.surface-hover", "name": "color/surface-hover", "collection": "lab", "type": "COLOR", "values": {"Light": {"r": 0.95, "g": 0.95, "b": 0.95, "a": 1}, "Dark": {"r": 0.15, "g": 0.15, "b": 0.15, "a": 1}}},
+    {"key": "color.accent", "name": "color/accent", "collection": "lab", "type": "COLOR", "values": {"Light": {"r": 0.09, "g": 0.09, "b": 0.09, "a": 1}, "Dark": {"r": 0.96, "g": 0.96, "b": 0.96, "a": 1}}},
+    {"key": "color.accent-hover", "name": "color/accent-hover", "collection": "lab", "type": "COLOR", "values": {"Light": {"r": 0.25, "g": 0.25, "b": 0.25, "a": 1}, "Dark": {"r": 0.83, "g": 0.83, "b": 0.83, "a": 1}}},
+    {"key": "color.on-accent", "name": "color/on-accent", "collection": "lab", "type": "COLOR", "values": {"Light": {"r": 1, "g": 1, "b": 1, "a": 1}, "Dark": {"r": 0.08, "g": 0.08, "b": 0.08, "a": 1}}},
+    {"key": "color.focus-ring", "name": "color/focus-ring", "collection": "lab", "type": "COLOR", "values": {"Light": {"r": 0.231, "g": 0.51, "b": 0.965, "a": 1}, "Dark": {"r": 0.231, "g": 0.51, "b": 0.965, "a": 1}}},
+    {"key": "size.control-sm", "name": "size/control-sm", "collection": "lab", "type": "FLOAT", "unit": "px", "values": {"Light": 28, "Dark": 28}},
+    {"key": "size.control-md", "name": "size/control-md", "collection": "lab", "type": "FLOAT", "unit": "px", "values": {"Light": 36, "Dark": 36}},
+    {"key": "space.control-sm", "name": "space/control-sm", "collection": "lab", "type": "FLOAT", "unit": "px", "values": {"Light": 8, "Dark": 8}},
+    {"key": "opacity.disabled", "name": "opacity/disabled", "collection": "lab", "type": "FLOAT", "values": {"Light": 0.5, "Dark": 0.5}}
+  ]
+}

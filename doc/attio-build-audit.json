@@ -1,0 +1,316 @@
+{
+  "pageId": "556:66",
+  "families": 28,
+  "componentSets": 26,
+  "componentVariants": 97,
+  "standaloneComponents": [
+    {
+      "id": "569:2019",
+      "name": "Attio / Header row"
+    },
+    {
+      "id": "573:16745",
+      "name": "Attio / Multiline editor"
+    }
+  ],
+  "nativeSlots": 1318,
+  "masterSlots": 79,
+  "screenCount": 27,
+  "frames": [
+    {
+      "id": "573:16748",
+      "name": "Prototype / Companies"
+    },
+    {
+      "id": "573:17130",
+      "name": "Prototype / Choose attribute"
+    },
+    {
+      "id": "573:17592",
+      "name": "Prototype / Text operator"
+    },
+    {
+      "id": "573:18025",
+      "name": "Prototype / Enter value"
+    },
+    {
+      "id": "573:18419",
+      "name": "Prototype / Applied filter"
+    },
+    {
+      "id": "573:19179",
+      "name": "Prototype / Filter actions"
+    },
+    {
+      "id": "573:19961",
+      "name": "Prototype / Condition actions"
+    },
+    {
+      "id": "573:20393",
+      "name": "Prototype / Advanced conditions"
+    },
+    {
+      "id": "573:20890",
+      "name": "Prototype / Nested group"
+    },
+    {
+      "id": "573:21436",
+      "name": "Prototype / Sort rules"
+    },
+    {
+      "id": "573:21901",
+      "name": "Prototype / Sort direction"
+    },
+    {
+      "id": "573:22298",
+      "name": "Prototype / Sort ascending"
+    },
+    {
+      "id": "573:22711",
+      "name": "Prototype / Column menu"
+    },
+    {
+      "id": "573:23151",
+      "name": "Prototype / View settings"
+    },
+    {
+      "id": "573:23709",
+      "name": "Prototype / Selected record"
+    },
+    {
+      "id": "573:24537",
+      "name": "Prototype / Editing description"
+    },
+    {
+      "id": "573:24922",
+      "name": "Prototype / No matching companies"
+    },
+    {
+      "id": "573:25101",
+      "name": "Prototype / Category operator"
+    },
+    {
+      "id": "573:25510",
+      "name": "Prototype / Category options"
+    },
+    {
+      "id": "573:25910",
+      "name": "Prototype / Relative date"
+    },
+    {
+      "id": "573:26363",
+      "name": "Prototype / Saved view sample"
+    },
+    {
+      "id": "573:27095",
+      "name": "Prototype / Applied date"
+    },
+    {
+      "id": "573:27824",
+      "name": "Prototype / Exact date"
+    },
+    {
+      "id": "573:28321",
+      "name": "Prototype / Column calculation"
+    },
+    {
+      "id": "573:28755",
+      "name": "Prototype / Edit column label"
+    },
+    {
+      "id": "573:29738",
+      "name": "Review / Light table"
+    },
+    {
+      "id": "573:30120",
+      "name": "Review / Dark table"
+    }
+  ],
+  "paintCount": 10012,
+  "paintIssues": [],
+  "iconCount": 885,
+  "iconIssues": [],
+  "slotIssues": [],
+  "flow": [
+    {
+      "nodeId": "573:16748",
+      "name": "Attio / Table and filters"
+    },
+    {
+      "nodeId": "573:24922",
+      "name": "Attio / No matching records"
+    },
+    {
+      "nodeId": "573:30120",
+      "name": "Attio / Dark review"
+    }
+  ],
+  "checks": [
+    {
+      "frame": "Prototype / Choose attribute",
+      "label": "Item / Name",
+      "found": true,
+      "reactions": [
+        {
+          "trigger": "ON_CLICK",
+          "dest": "573:17592"
+        }
+      ]
+    },
+    {
+      "frame": "Prototype / Text operator",
+      "label": "Item / contains",
+      "found": true,
+      "reactions": [
+        {
+          "trigger": "ON_CLICK",
+          "dest": "573:18025"
+        }
+      ]
+    },
+    {
+      "frame": "Prototype / Filter actions",
+      "label": "Item / Convert to advanced filter",
+      "found": true,
+      "reactions": [
+        {
+          "trigger": "ON_CLICK",
+          "dest": "573:20393"
+        }
+      ]
+    },
+    {
+      "frame": "Prototype / Condition actions",
+      "label": "Item / Convert to group",
+      "found": true,
+      "reactions": [
+        {
+          "trigger": "ON_CLICK",
+          "dest": "573:20890"
+        }
+      ]
+    },
+    {
+      "frame": "Prototype / Sort direction",
+      "label": "Item / Ascending",
+      "found": true,
+      "reactions": [
+        {
+          "trigger": "ON_CLICK",
+          "dest": "573:22298"
+        }
+      ]
+    },
+    {
+      "frame": "Prototype / Category options",
+      "label": "Option / Accounting",
+      "found": true,
+      "nodeId": "I573:25892;560:2036",
+      "reactions": [
+        {
+          "trigger": "ON_CLICK",
+          "dest": "573:24922"
+        }
+      ]
+    },
+    {
+      "frame": "Prototype / No matching companies",
+      "label": "Clear Filter",
+      "found": true,
+      "reactions": [
+        {
+          "trigger": "ON_CLICK",
+          "dest": "573:16748"
+        }
+      ]
+    },
+    {
+      "frame": "Prototype / Exact date",
+      "label": "Day 2",
+      "found": true,
+      "reactions": [
+        {
+          "trigger": "ON_CLICK",
+          "dest": "573:27095"
+        }
+      ]
+    }
+  ],
+  "counts": {
+    "families": 28,
+    "componentSets": 26,
+    "variants": 97,
+    "standaloneComponents": 2,
+    "screens": 27,
+    "navigationEdges": 232
+  },
+  "badDestinations": [],
+  "theme": {
+    "light": {
+      "value": {
+        "r": 1,
+        "g": 1,
+        "b": 1,
+        "a": 1
+      },
+      "resolvedType": "COLOR"
+    },
+    "dark": {
+      "value": {
+        "r": 0.06666667014360428,
+        "g": 0.0784313753247261,
+        "b": 0.09019608050584793,
+        "a": 1
+      },
+      "resolvedType": "COLOR"
+    }
+  },
+  "categoryOption": "I573:25892;560:2036",
+  "slotReorderEvidence": [
+    {
+      "name": "Company / Northstar",
+      "type": "INSTANCE"
+    },
+    {
+      "name": "Company / Attio",
+      "type": "INSTANCE"
+    },
+    {
+      "name": "Company / Orbit",
+      "type": "INSTANCE"
+    },
+    {
+      "name": "Company / Acme",
+      "type": "INSTANCE"
+    },
+    {
+      "name": "Company / Juniper",
+      "type": "INSTANCE"
+    },
+    {
+      "name": "Company / Forma",
+      "type": "INSTANCE"
+    },
+    {
+      "name": "Record count and calculations",
+      "type": "FRAME"
+    }
+  ],
+  "appliedEvidence": [
+    {
+      "name": "Company / Attio",
+      "type": "INSTANCE"
+    },
+    {
+      "name": "Record count and calculations",
+      "type": "FRAME"
+    }
+  ],
+  "keyboardVerification": {
+    "focusedCell": "556:119",
+    "enterKeyCode": 13,
+    "editingDestination": "556:122",
+    "escapeAndEnterExitEditing": true
+  },
+  "validationBoundary": "Structural graph and component checks plus screenshots. Fixed sample flows; the complete graph was not traversed in the Figma player."
+}

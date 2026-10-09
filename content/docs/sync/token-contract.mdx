@@ -1,0 +1,28 @@
+---
+title: "Token contract"
+description: "The initial schema shared by the CSS build and Figma plugin."
+---
+
+## Initial scope
+
+The initial schema is `spartant.tokens.v1`. It supports explicit collections and modes, stable token keys, and COLOR, FLOAT, STRING, and BOOLEAN values. Aliases reference stable token keys. This is a project-specific transport format, not a claim of full DTCG compliance.
+
+The sample uses an isolated `Spartant Lab` collection so it does not overwrite the existing production library. Existing variables can be adopted only when their collection, name, and type match unambiguously. Audit real library data before migrating it into this schema.
+
+## Identity and names
+
+A token key is permanent. Its name can change without changing its identity. The plugin stores mappings from token keys to Figma variable IDs on the document. Keep collection keys and mode names stable in this first version. Renaming a collection or mode requires a migration.
+
+## Aliases
+
+Use `{ "alias": "radius.base" }` to reference another token key. The validator rejects missing targets, type mismatches, and cycles. Aliases are applied after all variables exist. Cross-collection aliases are intentionally unsupported in v1; the importer rejects them instead of guessing mode resolution.
+
+## Units and CSS output
+
+FLOAT tokens specify `unit: "px"` for lengths or omit it for unitless numbers. Colors use RGBA channels between 0 and 1. CSS variables are named from stable keys with a `--sp-` prefix. Names that collapse to the same CSS identifier are rejected.
+
+Mode selection uses a separate attribute per collection, such as `data-sp-mode-lab="Dark"`. The first mode supplies defaults on `:root`; alternate mode selectors redefine that collection's complete token set, including aliases. This allows aliases to resolve against the values at the selected theme scope.
+
+## Unsupported data
+
+Composite typography, gradients, shadows, responsive rules, and cross-collection aliases need a normalization layer. They are not silently flattened. Add a task before expanding the contract.
