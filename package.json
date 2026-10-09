@@ -13,6 +13,7 @@
     "components:build": "pnpm --filter @spartan/components build",
     "storybook": "pnpm --filter @spartan/components storybook",
     "storybook:build": "pnpm --filter @spartan/components build-storybook",
+    "test:stories": "pnpm --filter @spartan/components test:stories",
     "tokens:import": "node --import tsx scripts/import-figma-tokens.ts",
     "tokens:check": "node --import tsx scripts/check-tokens.ts",
     "test:e2e": "pnpm storybook:build && node --import tsx --test e2e/*.e2e.ts",
