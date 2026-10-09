@@ -4,17 +4,20 @@ import '../src/index.js';
 import { COLOR_SCHEMES, DENSITIES, HUES, STYLES, applyTheme, fromLegacyTheme, type ThemeConfig } from '../src/theme.js';
 import './preview.css';
 
-// Five independent globals, each one a Storybook URL parameter (for example
-// ?globals=style:Helios;theme:Dark;highContrast:!true;hue:Purple;density:Compact), so a shared link
-// reproduces the exact combination. Style, theme, hue, and density are toolbar dropdowns that
-// show their current value; High contrast is an on/off toggle registered in manager.tsx.
+// Six independent globals, each one a Storybook URL parameter (for example
+// ?globals=style:Helios;theme:Dark;highContrast:!true;hue:Purple;density:Compact;direction:rtl), so a
+// shared link reproduces the exact combination. Style, theme, hue, density, and direction are toolbar
+// dropdowns that show their current value; High contrast is an on/off toggle registered in manager.tsx.
+// Direction sets the native `dir` on the document root. That is the whole direction contract:
+// components use logical properties and inherit it, and a nested `dir` overrides it.
 const dropdown = (label: string, description: string, values: readonly string[]) => ({
   name: label,
   description,
   toolbar: { title: label, icon: 'mirror' as const, items: values.map(value => ({ value, title: `${label}: ${value}` })), dynamicTitle: true },
 });
 
-const DEFAULTS = { style: 'Atlas', theme: 'Light', highContrast: false, hue: 'Blue', density: 'Relaxed' } as const;
+const DIRECTIONS = ['ltr', 'rtl'] as const;
+const DEFAULTS = { style: 'Atlas', theme: 'Light', highContrast: false, hue: 'Blue', density: 'Relaxed', direction: 'ltr' } as const;
 const pick = <T extends string>(allowed: readonly T[], value: unknown, fallback: T): T => (allowed.includes(value as T) ? (value as T) : fallback);
 
 const preview: Preview = {
@@ -24,6 +27,7 @@ const preview: Preview = {
     highContrast: { name: 'High contrast', description: 'High contrast on or off, for every style and both color schemes' },
     hue: dropdown('Hue', 'Brand hue', HUES),
     density: dropdown('Density', 'Density', DENSITIES),
+    direction: dropdown('Direction', 'Text direction, set as `dir` on the document root', DIRECTIONS),
   },
   initialGlobals: { ...DEFAULTS },
   decorators: [
@@ -42,6 +46,7 @@ const preview: Preview = {
       };
       // Every setting on one element: the document root, which the canvas and the Docs previews share.
       applyTheme(document.documentElement, config);
+      document.documentElement.dir = pick(DIRECTIONS, g.direction, DEFAULTS.direction);
       return story();
     },
   ],

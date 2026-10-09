@@ -31,15 +31,14 @@ export const buttonStyles = [
       --_line: var(--sp-density-control-line-height-small);
     }
 
-    :host([shape='pill']) button {
-      border-radius: var(--sp-radius-pill);
-    }
-
+    /* A label wider than its container truncates instead of overflowing the button. */
     .label {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
+      display: block;
+      min-inline-size: 0;
       padding-inline: var(--_label);
+      overflow: hidden;
+      text-align: center;
+      text-overflow: ellipsis;
     }
 
     .icon {
