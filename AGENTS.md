@@ -9,6 +9,21 @@ This repository is the Spartan Design System. Its Lit components, Storybook, tok
 - Agent-facing guides: [Figma component guideline](https://linear.app/wearehaux/document/figma-component-guideline-a6670f4b71f3) and [agent workflow](https://linear.app/wearehaux/document/agent-workflow-3b7ab59c7144). Their `.doc/` files remain local entry points.
 - When you finish work on a Linear issue, set its status to **Agent Done** and add the evidence to the issue: what changed, the verification run, and the remaining gaps. Do this every time, including when only part of the issue is complete. Agent Done is separate from Done: the issue moves to Done only under the rules below.
 - Keep one issue per component. Update its `Dev: ...` and `Figma: ...` labels separately and mirror them in the issue description. A component is Done only when both tracks are Done. Track documentation, plugin, research, and infrastructure as separate issues.
+- Whenever you create a Linear task, update [doc/task-order.html](doc/task-order.html) in the same work session. Add its exact task name, issue ID and direct Linear link, place it after its prerequisites and before dependent tasks, and renumber the rows. Keep this HTML view aligned when dependencies or open-task membership change. Verify the entries against Linear, which remains the source of truth; preserve the existing compact table.
+
+## Branches and releases
+
+- `main` only receives releases. Open every pull request against `dev`, the default branch; `validate` fails any pull request into `main` that does not come from `dev`.
+- Feature work: branch from `dev`, open a pull request into `dev`, squash merge. `validate` runs only on the release pull request from `dev` into `main`, so run the checks locally first.
+- Release: open a pull request from `dev` into `main` and merge it with **rebase** so `main` keeps linear history without squashing a release into one commit.
+- Vercel builds only `main` (Production) and `dev` (Preview, with a stable branch alias); feature branches and pull requests are not built (`ignoreCommand` in `vercel.json`).
+
+## Branches and releases
+
+- `main` only receives releases. Open every pull request against `dev`, the default branch; `validate` fails any pull request into `main` that does not come from `dev`.
+- Feature work: branch from `dev`, open a pull request into `dev`, squash merge after `validate` passes.
+- Release: open a pull request from `dev` into `main` and merge it with **rebase** so `main` keeps linear history without squashing a release into one commit.
+- Vercel builds only `main` (`ignoreCommand` in `vercel.json`); other branches and pull requests are not built.
 
 ## Branches and releases
 

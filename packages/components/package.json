@@ -32,6 +32,10 @@
       "types": "./dist/components/icon-button/sp-icon-button.d.ts",
       "default": "./dist/components/icon-button/sp-icon-button.js"
     },
+    "./theme": {
+      "types": "./dist/theme.d.ts",
+      "default": "./dist/theme.js"
+    },
     "./tokens.css": "./dist/tokens.css",
     "./package.json": "./package.json"
   },
@@ -43,12 +47,14 @@
     "typecheck": "pnpm icons:generate && tsc --noEmit",
     "storybook": "pnpm icons:generate && storybook dev --port 6006 --host 127.0.0.1 --no-open",
     "build-storybook": "pnpm icons:generate && storybook build --output-dir storybook-static",
-    "icons:generate": "node scripts/generate-story-icons.mjs"
+    "icons:generate": "node scripts/generate-story-icons.mjs",
+    "test:stories": "pnpm icons:generate && vitest run --project storybook"
   },
   "dependencies": {
     "lit": "3.3.3"
   },
   "devDependencies": {
+    "@storybook/addon-designs": "11.1.4",
     "@storybook/addon-docs": "10.6.1",
     "@storybook/web-components-vite": "10.6.1",
     "@types/react": "^19.3.0",
@@ -56,7 +62,12 @@
     "react-dom": "19.2.0",
     "storybook": "10.6.1",
     "typescript": "~5.9.3",
-    "vite": "8.2.2"
+    "vite": "8.2.2",
+    "@storybook/addon-vitest": "10.6.1",
+    "vitest": "5.0.3",
+    "@vitest/browser-playwright": "5.0.3",
+    "playwright": "1.62.1",
+    "@vitest/coverage-v8": "5.0.3"
   },
   "optionalDependencies": {
     "@central-icons-react/round-outlined-radius-2-stroke-1.5": "1.2.8"

@@ -7,7 +7,7 @@ import { readFileSync } from 'node:fs';
 import type { Browser, Page } from 'playwright-core';
 import type { Server } from 'node:http';
 import type { TokenSourceV2 } from '../lib/figma-tokens';
-import { close, expectedColor, launch, openCanvas, parseColor, setMarkup, startServer } from './harness';
+import { close, expectedColor, launch, openCanvas, parseColor, setAttrs, setMarkup, startServer, themeAttrs } from './harness';
 
 const source: TokenSourceV2 = JSON.parse(readFileSync('tokens/source.json', 'utf8'));
 const THEMES = ['Light', 'Dark', 'Light High Contrast', 'Dark High Contrast'];
@@ -179,7 +179,7 @@ describe('density: sizes follow the generated Component and Density variables', 
 describe('theme, hue, shape, and variants resolve through the real variables', () => {
   test('primary fill, hover, and pressed follow Semantic Color mode and Primary hue', async () => {
     for (const theme of THEMES) for (const hue of HUES) {
-      const page = await openCanvas(browser, base, 'components-button--playground', { 'semantic-color': theme, primary: hue });
+      const page = await openCanvas(browser, base, 'components-button--playground', { ...themeAttrs(theme), primary: hue });
       await setMarkup(page, '<sp-button id="b">Save</sp-button>');
       const assign = { 'semantic-color': theme, primary: hue };
       const fill = (key: string) => expectedColor(source, `semantic-color.color.primary.${key}`, assign);
@@ -208,7 +208,7 @@ describe('theme, hue, shape, and variants resolve through the real variables', (
     };
     for (const theme of THEMES) {
       const assign = { 'semantic-color': theme };
-      await page.evaluate(t => document.documentElement.setAttribute('data-sp-mode-semantic-color', t), theme);
+      await setAttrs(page, themeAttrs(theme));
       await setMarkup(page, VARIANTS.map(v => `<sp-button id="${v}" variant="${v}">x</sp-button><sp-button id="${v}-d" variant="${v}" disabled>x</sp-button>`).join(''));
       for (const v of VARIANTS) {
         const [fillKey, textKey] = keys[v];
@@ -228,7 +228,7 @@ describe('theme, hue, shape, and variants resolve through the real variables', (
   test('dashed uses the border-width variable, which doubles in the high contrast modes', async () => {
     const page = await openCanvas(browser, base);
     for (const [theme, width] of [['Light', '1px'], ['Dark', '1px'], ['Light High Contrast', '2px'], ['Dark High Contrast', '2px']]) {
-      await page.evaluate(t => document.documentElement.setAttribute('data-sp-mode-semantic-color', t), theme);
+      await setAttrs(page, themeAttrs(theme));
       await setMarkup(page, '<sp-button id="d" variant="dashed">x</sp-button>');
       assert.equal(await style(page, '#d', 'border-top-style'), 'dashed');
       assert.equal(await style(page, '#d', 'border-top-width'), width, theme);
