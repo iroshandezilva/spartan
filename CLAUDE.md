@@ -25,6 +25,7 @@ pnpm build            # tokens:build, plugin:build, then next build --webpack
 pnpm typecheck        # app tsconfig plus plugin/tsconfig.json
 pnpm tokens:build     # figma export -> tokens/source.json -> public/tokens.css
 pnpm tokens:check     # fail if source.json or tokens.css is stale (optionally diff a new Figma export)
+pnpm tokens:manifest  # diff a Figma hash manifest against the snapshot to find what to refetch
 pnpm plugin:build     # esbuild plugin/code.ts + ui.html -> plugin/dist
 pnpm components:build # packages/components -> dist (typed exports + tokens.css)
 pnpm storybook        # Lit Storybook on http://127.0.0.1:6006
@@ -43,7 +44,7 @@ node --import tsx --test --test-name-pattern="aliases" tests/*.test.ts
 
 The token pipeline feeds the Lit components in `packages/components` (`@spartan/components`: `sp-button`, `sp-icon-button`) and their Storybook.
 
-- `tokens/figma/spartan-ds.export.json` is a verified read-only snapshot of all 461 variables in the Spartan DS Figma file (six collections). `tokens/figma/README.md` explains the collections, mode attributes, and how to refresh and diff it. `tokens/source.json` (`spartan.tokens.v2`) and `public/tokens.css` are generated from it; do not edit them by hand.
+- `tokens/figma/spartan-ds.export.json` is a verified read-only snapshot of all 547 variables in the Spartan DS Figma file (seven collections, including 07 Style). `tokens/figma/README.md` explains the collections, mode attributes, and how to refresh and diff it. `tokens/source.json` (`spartan.tokens.v2`) and `public/tokens.css` are generated from it; do not edit them by hand.
 - `lib/figma-tokens.ts` is the v2 contract: import, validation, cross-collection alias resolution, mode-aware CSS (`data-sp-mode-<collection>` attributes), and drift diff. It fails explicitly on unresolved aliases, type or unit mismatches, cycles, and unsupported values.
 - `lib/token-contract.ts` is the v1 contract. It still drives the custom Figma plugin and its fixture `tokens/fixtures/lab.json`, and rejects cross-collection aliases. Changes there affect the plugin and its tests.
 - `plugin/code.ts` is the custom Figma plugin (no MCP). It validates input with the v1 contract, previews a diff, then applies it, persisting a token-key to Figma-ID map in root plugin data (`spartan-token-map-v1`). It cannot import the production v2 source yet. Import `plugin/manifest.json` into Figma; it has no network access.

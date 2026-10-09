@@ -52,12 +52,14 @@ const COLLECTION_RULES: Record<string, { key: string; cssPrefix: string }> = {
   '04 Semantic Foundation': { key: 'semantic-foundation', cssPrefix: '' },
   '05 Component': { key: 'component', cssPrefix: '' },
   '06 Density': { key: 'density', cssPrefix: '' },
+  // Figma already names these --sp-style-*, which matches the derived CSS names.
+  '07 Style': { key: 'style', cssPrefix: '' },
 };
 
 // FLOAT tokens carry no unit in Figma. Literal values get one from their first
 // name segment; aliases inherit from their target. A family without a rule fails
 // the import so a new family forces a decision instead of defaulting silently.
-const PX_FAMILIES = new Set(['space', 'size', 'radius', 'border-width', 'density', 'contrast', 'badge', 'button', 'dialog', 'field', 'popover', 'selection', 'tooltip', 'avatar', 'switch']);
+const PX_FAMILIES = new Set(['style', 'space', 'size', 'radius', 'border-width', 'density', 'contrast', 'badge', 'button', 'dialog', 'field', 'popover', 'selection', 'tooltip', 'avatar', 'switch']);
 const UNITLESS_LINE_HEIGHTS = new Set(['normal', 'relaxed', 'snug', 'tight']);
 
 function literalUnit(name: string): Unit | undefined {
@@ -251,6 +253,8 @@ export function validateTokensV2(input: unknown): TokenSourceV2 {
 
 // ---- Resolution ----
 
+const channel = (n: number) => +(n * 255).toFixed(3);
+
 export type Resolved = number | string | boolean | Rgba | { alpha: { color: Rgba; opacity: number } };
 export type ModeAssignment = Record<string, string>;
 
@@ -276,10 +280,22 @@ export function resolveToken(input: TokenSourceV2, key: string, assign: ModeAssi
   return walk(key);
 }
 
+/** The CSS text a token resolves to for one mode per collection, as the generated CSS spells it. */
+export function resolvedCss(input: TokenSourceV2, key: string, assign: ModeAssignment = {}): string {
+  const t = input.tokens.find(x => x.key === key);
+  if (!t) throw new Error(`Unknown token ${key}.`);
+  const rgb = (c: Rgba) => `rgb(${channel(c.r)} ${channel(c.g)} ${channel(c.b)} / ${c.a})`;
+  const v = resolveToken(input, key, assign);
+  if (typeof v === 'number') return `${v}${t.unit === 'px' ? 'px' : t.unit === 'percent' ? '%' : ''}`;
+  if (typeof v === 'string') return JSON.stringify(v);
+  if (typeof v === 'boolean') return v ? '1' : '0';
+  if ('alpha' in v) return `color-mix(in srgb, ${rgb(v.alpha.color)} ${v.alpha.opacity}%, transparent)`;
+  return rgb(v);
+}
+
 // ---- CSS ----
 
 const modeSelector = (collection: string, mode: string) => `[data-sp-mode-${collection}="${mode}"]`;
-const channel = (n: number) => +(n * 255).toFixed(3);
 
 function analyze(s: TokenSourceV2) {
   const byKey = new Map(s.tokens.map(t => [t.key, t]));
@@ -334,31 +350,40 @@ export function renderCSSV2(input: unknown): string {
 
   type Entry = { selectors: string[]; specificity: number; decl: string };
   const entries: Entry[] = [];
+  const defaults = (k: string) => colls.get(k)!.modes[0].name;
   for (const t of s.tokens) {
     const D = [...deps(t)].sort((a, b) => order.get(a)! - order.get(b)!);
-    if (D.length > 2) throw new Error(`${t.key} depends on the modes of ${D.length} collections (${D.join(', ')}). Only up to two are supported.`);
-    const ownModes = colls.get(t.collection)!.modes;
-    const decl = (assign: Map<string, string>) => `  ${css(t)}: ${expr(t, assign.get(t.collection) ?? ownModes[0].name)};`;
-    const defaults = (k: string) => colls.get(k)!.modes[0].name;
-    if (D.length === 0) { entries.push({ selectors: [':root'], specificity: 0, decl: decl(new Map()) }); continue; }
-    if (D.length === 1) {
-      const [k] = D;
-      for (const m of colls.get(k)!.modes) {
+    const own = t.collection;
+    const ownModes = colls.get(own)!.modes;
+    const decl = (mode: string) => `  ${css(t)}: ${expr(t, mode)};`;
+    if (D.length === 0) { entries.push({ selectors: [':root'], specificity: 0, decl: decl(ownModes[0].name) }); continue; }
+    const foreign = D.filter(k => k !== own);
+    if (!D.includes(own)) {
+      // The value is the same in every own mode; it is only re-declared where a collection
+      // it depends on changes mode, so its var() references resolve there.
+      for (const k of foreign) for (const m of colls.get(k)!.modes) {
         const sel = modeSelector(k, m.name);
-        entries.push({ selectors: m.name === defaults(k) ? [':root', sel] : [sel], specificity: 1, decl: decl(new Map([[k, m.name]])) });
+        entries.push({ selectors: k === foreign[0] && m.name === defaults(k) ? [':root', sel] : [sel], specificity: 1, decl: decl(ownModes[0].name) });
       }
       continue;
     }
-    // Two collections. Each alone (other at its default), plus every pair on one element.
-    const [a, b] = D;
-    for (const [x, y] of [[a, b], [b, a]]) for (const m of colls.get(x)!.modes) {
-      const sel = modeSelector(x, m.name);
-      entries.push({ selectors: m.name === defaults(x) ? (x === a ? [':root', sel] : [sel]) : [sel], specificity: 1, decl: decl(new Map([[x, m.name], [y, defaults(y)]])) });
+    if (foreign.length === 0) {
+      for (const m of ownModes) {
+        const sel = modeSelector(own, m.name);
+        entries.push({ selectors: m.name === ownModes[0].name ? [':root', sel] : [sel], specificity: 1, decl: decl(m.name) });
+      }
+      continue;
     }
-    for (const ma of colls.get(a)!.modes) for (const mb of colls.get(b)!.modes) {
-      if (ma.name === defaults(a) && mb.name === defaults(b)) continue;
-      entries.push({ selectors: [modeSelector(a, ma.name) + modeSelector(b, mb.name)], specificity: 2, decl: decl(new Map([[a, ma.name], [b, mb.name]])) });
-    }
+    // The value depends on its own collection's mode and on other collections' modes.
+    //  - the default value on :root;
+    //  - the default value where only a foreign collection sets a mode, so its var()
+    //    references re-resolve there;
+    //  - each own mode's value, one specificity step higher, so on an element that sets its
+    //    own mode and a foreign mode the own mode wins and its var() resolves with both.
+    // No combination selectors are needed, so any number of collections can be combined.
+    entries.push({ selectors: [':root'], specificity: 0, decl: decl(ownModes[0].name) });
+    for (const k of foreign) for (const m of colls.get(k)!.modes) entries.push({ selectors: [modeSelector(k, m.name)], specificity: 1, decl: decl(ownModes[0].name) });
+    for (const m of ownModes) entries.push({ selectors: [modeSelector(own, m.name).repeat(2)], specificity: 2, decl: decl(m.name) });
   }
 
   // Group declarations that share a selector list, lower specificity first.
