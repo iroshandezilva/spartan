@@ -35,7 +35,7 @@ This repository is the Spartan Design System. Its Lit components, Storybook, tok
 ## Components
 
 - In Figma, inspect the existing component and variables first. Reuse library components and token bindings. Preserve instance links, properties, slots, and relevant variants. Create only the component work requested. Follow [the Figma guide](.doc/figma.md).
-- In code, build reusable Lit Web Components with TypeScript. Use Lit `static styles` for component CSS and consume generated `--sp-*` tokens. Keep Storybook as the interactive playground. Verify behavior, keyboard access, and applicable states before marking Development Done.
+- In code, build reusable Lit Web Components with TypeScript. Use Lit `static styles` for component CSS and consume generated `--sp-*` tokens. Keep Storybook as the interactive playground. Verify behavior, keyboard access, and applicable states before marking Development Done. Run `pnpm test`, `pnpm typecheck`, `pnpm test:e2e`, and `pnpm test:stories` before opening a pull request; `validate` in CI runs the e2e suite, so skipping it fails the check.
 - Code-owned tokens feed CSS and the custom Figma plugin. Preview imports, preserve variable IDs and aliases, and verify changes in a disposable Figma file before applying them to the library. Follow [the project guide](.doc/project.md).
 
 ## Detailed guidance

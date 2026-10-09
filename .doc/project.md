@@ -34,4 +34,4 @@ Git-owned token data feeds generated CSS and the custom Figma plugin. Preserve v
 
 ## Validation
 
-From the repository root, run `pnpm test`, `pnpm build`, and `pnpm typecheck` as relevant. Keep evidence in the corresponding Linear issue after validation. Linear issue state is not synchronized back to Git.
+From the repository root, run `pnpm test`, `pnpm build`, and `pnpm typecheck` as relevant. Any change to a component, its styles, its stories, or the theme or token CSS also needs `pnpm test:e2e` (it builds Storybook and runs the real-browser Playwright suite in `e2e/`) and, from `packages/components`, `pnpm test:stories`. CI runs the e2e suite in the `validate` check, and `pnpm test` alone does not cover it. When behavior changes on purpose, update the e2e assertions in the same commit and say so in the Linear evidence. Keep evidence in the corresponding Linear issue after validation. Linear issue state is not synchronized back to Git.
