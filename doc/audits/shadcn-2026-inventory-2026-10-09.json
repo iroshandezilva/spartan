@@ -1,0 +1,2132 @@
+{
+  "date": "2026-10-09",
+  "status": "blocked_by_figma_mcp_plan_tool_call_limit",
+  "figmaWritesCommitted": 0,
+  "sourceFile": "7F1sJzLjFVEjtcrscikunQ",
+  "targetFile": "PhcMPmdpkpgxH3N83SvpBY",
+  "protectedPages": [
+    "12:14",
+    "326:2",
+    "12:17",
+    "12:44",
+    "12:49"
+  ],
+  "reviewMarker": "🟣",
+  "scope": "Existing non-green component pages. Reference and documentation pages excluded. Structural audit only; no visual verification or implementation completed.",
+  "rootEvidence": {
+    "date": "2026-10-09",
+    "status": "blocked_by_figma_mcp_plan_tool_call_limit",
+    "figmaWritesCommitted": 0,
+    "sourceFile": "7F1sJzLjFVEjtcrscikunQ",
+    "targetFile": "PhcMPmdpkpgxH3N83SvpBY",
+    "targetInventory": {
+      "status": "fulfilled",
+      "value": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\"pages\":[{\"id\":\"0:1\",\"name\":\"Cover\"},{\"id\":\"706:27576\",\"name\":\"Index\"},{\"id\":\"12:14\",\"name\":\"Button 🟢\"},{\"id\":\"706:27575\",\"name\":\"---\"},{\"id\":\"12:3\",\"name\":\"Color\"},{\"id\":\"12:4\",\"name\":\"Typography\"},{\"id\":\"12:5\",\"name\":\"Spacing and Radius\"},{\"id\":\"12:6\",\"name\":\"Elevation\"},{\"id\":\"58:2\",\"name\":\"Density and Contrast\"},{\"id\":\"116:2\",\"name\":\"Assets and icon sets\"},{\"id\":\"12:8\",\"name\":\"Divider and separator\"},{\"id\":\"12:9\",\"name\":\"Progressive blur\"},{\"id\":\"12:10\",\"name\":\"Scroll shadow\"},{\"id\":\"12:11\",\"name\":\"Surface\"},{\"id\":\"12:12\",\"name\":\"Typography specimens\"},{\"id\":\"711:29039\",\"name\":\"--\"},{\"id\":\"439:16\",\"name\":\"--- PRIMITIVES ---\"},{\"id\":\"12:16\",\"name\":\"Close button\"},{\"id\":\"12:13\",\"name\":\"--- ACTIONS ---\"},{\"id\":\"12:15\",\"name\":\"Button group\"},{\"id\":\"326:2\",\"name\":\"Icon Button 🟢\"},{\"id\":\"12:17\",\"name\":\"Link action 🟢\"},{\"id\":\"366:2\",\"name\":\"--- DATA DISPLAY ---\"},{\"id\":\"12:44\",\"name\":\"Avatar 🟢\"},{\"id\":\"12:45\",\"name\":\"Badge\"},{\"id\":\"12:46\",\"name\":\"Card\"},{\"id\":\"12:47\",\"name\":\"Charts 🅿️\"},{\"id\":\"12:51\",\"name\":\"Table\"},{\"id\":\"12:49\",\"name\":\"Keyboard shortcut 🟢\"},{\"id\":\"12:52\",\"name\":\"Chips\"},{\"id\":\"366:3\",\"name\":\"--- FEEDBACK ---\"},{\"id\":\"12:54\",\"name\":\"Alert and toast\"},{\"id\":\"12:55\",\"name\":\"Banner\"},{\"id\":\"12:56\",\"name\":\"Empty states\"},{\"id\":\"12:57\",\"name\":\"Progress indicator\"},{\"id\":\"12:58\",\"name\":\"Spinner\"},{\"id\":\"366:4\",\"name\":\"--- FORMS ---\"},{\"id\":\"12:20\",\"name\":\"Accordion\"},{\"id\":\"12:21\",\"name\":\"Checkbox\"},{\"id\":\"12:23\",\"name\":\"Date picker and calendar\"},{\"id\":\"12:24\",\"name\":\"Description and error message\"},{\"id\":\"12:25\",\"name\":\"File upload\"},{\"id\":\"12:26\",\"name\":\"Filter\"},{\"id\":\"377:2\",\"name\":\"Form controls\"},{\"id\":\"12:27\",\"name\":\"Input and text field\"},{\"id\":\"12:28\",\"name\":\"Input group\"},{\"id\":\"12:29\",\"name\":\"Input OTP\"},{\"id\":\"12:31\",\"name\":\"Listbox\"},{\"id\":\"12:32\",\"name\":\"Radio group\"},{\"id\":\"12:33\",\"name\":\"Select\"},{\"id\":\"12:34\",\"name\":\"Slider\"},{\"id\":\"12:35\",\"name\":\"Switch\"},{\"id\":\"12:36\",\"name\":\"Textarea\"},{\"id\":\"366:5\",\"name\":\"--- NAVIGATION ---\"},{\"id\":\"12:37\",\"name\":\"Breadcrumbs\"},{\"id\":\"12:38\",\"name\":\"Headers\"},{\"id\":\"12:39\",\"name\":\"Navigation\"},{\"id\":\"12:40\",\"name\":\"Pagination\"},{\"id\":\"215:2\",\"name\":\"Sidebar\"},{\"id\":\"12:41\",\"name\":\"Step indicator\"},{\"id\":\"12:42\",\"name\":\"Tabs\"},{\"id\":\"530:16\",\"name\":\"Loading\"},{\"id\":\"366:6\",\"name\":\"--- OVERLAY ---\"},{\"id\":\"12:59\",\"name\":\"Drawer\"},{\"id\":\"12:60\",\"name\":\"Dropdown menu\"},{\"id\":\"12:61\",\"name\":\"Modal\"},{\"id\":\"12:62\",\"name\":\"Popover\"},{\"id\":\"12:63\",\"name\":\"Tooltip\"},{\"id\":\"12:64\",\"name\":\"--- UTILITIES ---\"},{\"id\":\"12:65\",\"name\":\"Blocks and compositions\"},{\"id\":\"77:2\",\"name\":\"Reference Screens\"},{\"id\":\"556:66\",\"name\":\"Attio\"},{\"id\":\"637:669\",\"name\":\"Forms / Reference studies\"},{\"id\":\"711:28568\",\"name\":\"Documentation\"},{\"id\":\"839:32\",\"name\":\"Attachment\"}],\"collections\":[{\"id\":\"VariableCollectionId:4:2\",\"name\":\"02 Primary\",\"count\":13,\"modes\":[{\"name\":\"Blue\",\"modeId\":\"4:0\"},{\"name\":\"Purple\",\"modeId\":\"4:1\"},{\"name\":\"Orange\",\"modeId\":\"4:2\"},{\"name\":\"Sky\",\"modeId\":\"4:3\"}]},{\"id\":\"VariableCollectionId:4:3\",\"name\":\"01 Primitives\",\"count\":183,\"modes\":[{\"name\":\"Value\",\"modeId\":\"4:4\"}]},{\"id\":\"VariableCollectionId:4:4\",\"name\":\"03 Semantic Color\",\"count\":84,\"modes\":[{\"name\":\"Light\",\"modeId\":\"4:5\"},{\"name\":\"Dark\",\"modeId\":\"4:6\"},{\"name\":\"Light High Contrast\",\"modeId\":\"53:0\"},{\"name\":\"Dark High Contrast\",\"modeId\":\"53:1\"}]},{\"id\":\"VariableCollectionId:4:5\",\"name\":\"04 Semantic Foundation\",\"count\":58,\"modes\":[{\"name\":\"Value\",\"modeId\":\"4:7\"}]},{\"id\":\"VariableCollectionId:4:6\",\"name\":\"05 Component\",\"count\":66,\"modes\":[{\"name\":\"Value\",\"modeId\":\"4:8\"}]},{\"id\":\"VariableCollectionId:53:4\",\"name\":\"06 Density\",\"count\":62,\"modes\":[{\"name\":\"Relaxed\",\"modeId\":\"53:2\"},{\"name\":\"Compact\",\"modeId\":\"53:3\"}]},{\"id\":\"VariableCollectionId:848:16\",\"name\":\"07 Style\",\"count\":81,\"modes\":[{\"name\":\"Atlas\",\"modeId\":\"848:0\"},{\"name\":\"Selene\",\"modeId\":\"848:1\"},{\"name\":\"Helios\",\"modeId\":\"848:2\"},{\"name\":\"Ares\",\"modeId\":\"848:3\"}]}]}"
+          }
+        ],
+        "isError": false
+      }
+    },
+    "referencePages": {
+      "status": "fulfilled",
+      "value": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\"pages\":[{\"id\":\"25551:106783\",\"name\":\"Welcome\"},{\"id\":\"28556:53663\",\"name\":\"Getting Started\"},{\"id\":\"28552:39276\",\"name\":\"Style Guide\"},{\"id\":\"580:9185\",\"name\":\"---\"},{\"id\":\"21003:22055\",\"name\":\"Icons\"},{\"id\":\"1:433\",\"name\":\"Lucide Icons\"},{\"id\":\"21001:21\",\"name\":\"Tabler Icons\"},{\"id\":\"21003:9\",\"name\":\"HugeIcons\"},{\"id\":\"21003:9075\",\"name\":\"Phosphor Icons\"},{\"id\":\"21033:57\",\"name\":\"Remix Icon\"},{\"id\":\"21003:22054\",\"name\":\"---\"},{\"id\":\"43:396\",\"name\":\"Assets\"},{\"id\":\"477:11332\",\"name\":\"Blocks (Official)\"},{\"id\":\"11002:7884\",\"name\":\"Pro Blocks (Application) 🔷\"},{\"id\":\"13020:20854\",\"name\":\"Pro Blocks (Landing Page) 🔷\"},{\"id\":\"18881:19692\",\"name\":\"Pro Blocks (E-commerce) 🔷\"},{\"id\":\"580:8906\",\"name\":\"---\"},{\"id\":\"580:9180\",\"name\":\"Default shadcn/ui components ↓\"},{\"id\":\"580:9071\",\"name\":\"---\"},{\"id\":\"1:434\",\"name\":\"Accordion\"},{\"id\":\"21:322\",\"name\":\"Alert\"},{\"id\":\"46:65\",\"name\":\"Card\"},{\"id\":\"22:307\",\"name\":\"Alert Dialog\"},{\"id\":\"21:535\",\"name\":\"Aspect Ratio\"},{\"id\":\"25498:10180\",\"name\":\"Attachment\"},{\"id\":\"23:988\",\"name\":\"Avatar\"},{\"id\":\"23:995\",\"name\":\"Badge\"},{\"id\":\"23:1004\",\"name\":\"Breadcrumb\"},{\"id\":\"25507:10566\",\"name\":\"Bubble\"},{\"id\":\"34:6\",\"name\":\"Button\"},{\"id\":\"18672:217548\",\"name\":\"Button Group\"},{\"id\":\"37:1900\",\"name\":\"Calendar\"},{\"id\":\"46:66\",\"name\":\"Carousel\"},{\"id\":\"449:6176\",\"name\":\"Chart\"},{\"id\":\"46:67\",\"name\":\"Checkbox\"},{\"id\":\"60:434\",\"name\":\"Collapsible\"},{\"id\":\"60:435\",\"name\":\"Combobox\"},{\"id\":\"60:436\",\"name\":\"Command\"},{\"id\":\"60:437\",\"name\":\"Context Menu\"},{\"id\":\"244:2897\",\"name\":\"Data Table\"},{\"id\":\"244:2898\",\"name\":\"Date Picker\"},{\"id\":\"112:477\",\"name\":\"Dialog\"},{\"id\":\"21192:433238\",\"name\":\"Direction\"},{\"id\":\"112:454\",\"name\":\"Drawer\"},{\"id\":\"89:189\",\"name\":\"Dropdown Menu\"},{\"id\":\"18672:1039\",\"name\":\"Empty\"},{\"id\":\"18684:15122\",\"name\":\"Field\"},{\"id\":\"216:2886\",\"name\":\"Hover Card\"},{\"id\":\"65:520\",\"name\":\"Input\"},{\"id\":\"18677:11182\",\"name\":\"Input Group\"},{\"id\":\"76:89\",\"name\":\"Input OTP\"},{\"id\":\"18672:6033\",\"name\":\"Item\"},{\"id\":\"18665:239\",\"name\":\"Kbd\"},{\"id\":\"65:517\",\"name\":\"Label\"},{\"id\":\"25527:2488\",\"name\":\"Marker\"},{\"id\":\"210:2486\",\"name\":\"Menubar\"},{\"id\":\"25527:14566\",\"name\":\"Message\"},{\"id\":\"25458:2008\",\"name\":\"Message Scroller\"},{\"id\":\"21886:14793\",\"name\":\"Native Select\"},{\"id\":\"209:1883\",\"name\":\"Navigation Menu\"},{\"id\":\"65:516\",\"name\":\"Pagination\"},{\"id\":\"193:1388\",\"name\":\"Popover\"},{\"id\":\"65:441\",\"name\":\"Progress\"},{\"id\":\"28672:9096\",\"name\":\"Questionnaire\"},{\"id\":\"64:316\",\"name\":\"Radio Group\"},{\"id\":\"296:243\",\"name\":\"Resizable\"},{\"id\":\"296:207\",\"name\":\"Scroll Area\"},{\"id\":\"118:1264\",\"name\":\"Select\"},{\"id\":\"118:2682\",\"name\":\"Separator\"},{\"id\":\"216:3314\",\"name\":\"Sheet\"},{\"id\":\"5143:200\",\"name\":\"Sidebar\"},{\"id\":\"64:243\",\"name\":\"Skeleton\"},{\"id\":\"61:169\",\"name\":\"Slider\"},{\"id\":\"18665:1996\",\"name\":\"Spinner\"},{\"id\":\"60:438\",\"name\":\"Switch\"},{\"id\":\"184:890\",\"name\":\"Table\"},{\"id\":\"183:417\",\"name\":\"Tabs\"},{\"id\":\"177:367\",\"name\":\"Textarea\"},{\"id\":\"118:2756\",\"name\":\"Toast\"},{\"id\":\"132:1671\",\"name\":\"Toggle\"},{\"id\":\"123:75\",\"name\":\"Toggle Group\"},{\"id\":\"122:10\",\"name\":\"Tooltip\"},{\"id\":\"22:1400\",\"name\":\"Typography\"},{\"id\":\"27826:1341\",\"name\":\"Typeset\"},{\"id\":\"40:155\",\"name\":\"---\"},{\"id\":\"40:153\",\"name\":\"Utility Components\"}]}"
+          }
+        ],
+        "isError": false
+      }
+    },
+    "linearInventory": {
+      "status": "fulfilled",
+      "value": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\"issues\":[{\"id\":\"HAUX-77\",\"title\":\"Button\",\"status\":\"Agent Done\",\"labels\":[\"Build\",\"Components\",\"Figma: Done\",\"Dev: Review\"],\"url\":\"https://linear.app/wearehaux/issue/HAUX-77/button\"},{\"id\":\"HAUX-83\",\"title\":\"Build code variables from Figma library\",\"status\":\"Agent Done\",\"labels\":[\"Build\",\"Tokens\"],\"url\":\"https://linear.app/wearehaux/issue/HAUX-83/build-code-variables-from-figma-library\"},{\"id\":\"HAUX-107\",\"title\":\"Adapt token pipeline to Atlas, Selene, Helios and Ares style modes\",\"status\":\"Backlog\",\"labels\":[\"Build\",\"Tokens\"],\"url\":\"https://linear.app/wearehaux/issue/HAUX-107/adapt-token-pipeline-to-atlas-selene-helios-and-ares-style-modes\"},{\"id\":\"HAUX-98\",\"title\":\"Show design tokens in Storybook\",\"status\":\"Backlog\",\"labels\":[\"Build\",\"Tokens\"],\"url\":\"https://linear.app/wearehaux/issue/HAUX-98/show-design-tokens-in-storybook\"},{\"id\":\"HAUX-91\",\"title\":\"Input\",\"status\":\"Backlog\",\"labels\":[\"Build\",\"Components\",\"Dev: Not started\",\"Figma: Done\"],\"url\":\"https://linear.app/wearehaux/issue/HAUX-91/input\"},{\"id\":\"HAUX-106\",\"title\":\"Document style modes\",\"status\":\"Agent Done\",\"labels\":[\"Documentation task\",\"Documentation\"],\"url\":\"https://linear.app/wearehaux/issue/HAUX-106/document-style-modes\"},{\"id\":\"HAUX-85\",\"title\":\"Custom Figma token sync plugin\",\"status\":\"In Progress\",\"labels\":[\"Build\",\"Tokens\"],\"url\":\"https://linear.app/wearehaux/issue/HAUX-85/custom-figma-token-sync-plugin\"},{\"id\":\"HAUX-79\",\"title\":\"Add repository transport to the plugin\",\"status\":\"Backlog\",\"labels\":[\"Build\",\"Tokens\"],\"url\":\"https://linear.app/wearehaux/issue/HAUX-79/add-repository-transport-to-the-plugin\"},{\"id\":\"HAUX-78\",\"title\":\"Add DTCG normalization\",\"status\":\"Backlog\",\"labels\":[\"Build\",\"Tokens\"],\"url\":\"https://linear.app/wearehaux/issue/HAUX-78/add-dtcg-normalization\"},{\"id\":\"HAUX-87\",\"title\":\"Document plugin migration strategy\",\"status\":\"Backlog\",\"labels\":[\"Documentation task\",\"Documentation\"],\"url\":\"https://linear.app/wearehaux/issue/HAUX-87/document-plugin-migration-strategy\"},{\"id\":\"HAUX-97\",\"title\":\"Show color palettes in Storybook\",\"status\":\"Backlog\",\"labels\":[\"Build\",\"Foundation\"],\"url\":\"https://linear.app/wearehaux/issue/HAUX-97/show-color-palettes-in-storybook\"},{\"id\":\"HAUX-90\",\"title\":\"Icon Button\",\"status\":\"In Progress\",\"labels\":[\"Build\",\"Components\",\"Figma: Needs verification\",\"Dev: Review\"],\"url\":\"https://linear.app/wearehaux/issue/HAUX-90/icon-button\"},{\"id\":\"HAUX-102\",\"title\":\"Token validation and CSS generation\",\"status\":\"Done\",\"labels\":[\"Build\",\"Foundation\"],\"url\":\"https://linear.app/wearehaux/issue/HAUX-102/token-validation-and-css-generation\"},{\"id\":\"HAUX-105\",\"title\":\"Write component usage documentation\",\"status\":\"Backlog\",\"labels\":[\"Documentation task\",\"Documentation\"],\"url\":\"https://linear.app/wearehaux/issue/HAUX-105/write-component-usage-documentation\"},{\"id\":\"HAUX-104\",\"title\":\"Tooltip\",\"status\":\"Backlog\",\"labels\":[\"Build\",\"Components\",\"Figma: Needs verification\",\"Dev: Not started\"],\"url\":\"https://linear.app/wearehaux/issue/HAUX-104/tooltip\"},{\"id\":\"HAUX-101\",\"title\":\"Textarea\",\"status\":\"Backlog\",\"labels\":[\"Build\",\"Components\",\"Figma: Needs verification\",\"Dev: Not started\"],\"url\":\"https://linear.app/wearehaux/issue/HAUX-101/textarea\"},{\"id\":\"HAUX-103\",\"title\":\"Task manager and completion rules\",\"status\":\"Done\",\"labels\":[\"Build\",\"Foundation\"],\"url\":\"https://linear.app/wearehaux/issue/HAUX-103/task-manager-and-completion-rules\"},{\"id\":\"HAUX-100\",\"title\":\"Switch\",\"status\":\"Backlog\",\"labels\":[\"Build\",\"Components\",\"Figma: Needs verification\",\"Dev: Not started\"],\"url\":\"https://linear.app/wearehaux/issue/HAUX-100/switch\"},{\"id\":\"HAUX-99\",\"title\":\"Tabs\",\"status\":\"Backlog\",\"labels\":[\"Build\",\"Components\",\"Figma: Needs verification\",\"Dev: Not started\"],\"url\":\"https://linear.app/wearehaux/issue/HAUX-99/tabs\"},{\"id\":\"HAUX-96\",\"title\":\"Set up the Lit Storybook playground\",\"status\":\"Done\",\"labels\":[\"Build\",\"Foundation\"],\"url\":\"https://linear.app/wearehaux/issue/HAUX-96/set-up-the-lit-storybook-playground\"},{\"id\":\"HAUX-94\",\"title\":\"Set up the Lit component package\",\"status\":\"Done\",\"labels\":[\"Build\",\"Foundation\"],\"url\":\"https://linear.app/wearehaux/issue/HAUX-94/set-up-the-lit-component-package\"},{\"id\":\"HAUX-92\",\"title\":\"Project documentation hub\",\"status\":\"Done\",\"labels\":[\"Documentation task\",\"Documentation\"],\"url\":\"https://linear.app/wearehaux/issue/HAUX-92/project-documentation-hub\"},{\"id\":\"HAUX-95\",\"title\":\"Select\",\"status\":\"Backlog\",\"labels\":[\"Build\",\"Components\",\"Figma: Needs verification\",\"Dev: Not started\"],\"url\":\"https://linear.app/wearehaux/issue/HAUX-95/select\"},{\"id\":\"HAUX-93\",\"title\":\"Radio Group\",\"status\":\"Backlog\",\"labels\":[\"Build\",\"Components\",\"Figma: Needs verification\",\"Dev: Not started\"],\"url\":\"https://linear.app/wearehaux/issue/HAUX-93/radio-group\"},{\"id\":\"HAUX-89\",\"title\":\"Dropdown Menu\",\"status\":\"Backlog\",\"labels\":[\"Build\",\"Components\",\"Figma: Needs verification\",\"Dev: Not started\"],\"url\":\"https://linear.app/wearehaux/issue/HAUX-89/dropdown-menu\"},{\"id\":\"HAUX-86\",\"title\":\"Dialog\",\"status\":\"Backlog\",\"labels\":[\"Build\",\"Components\",\"Figma: Needs verification\",\"Dev: Not started\"],\"url\":\"https://linear.app/wearehaux/issue/HAUX-86/dialog\"},{\"id\":\"HAUX-88\",\"title\":\"Checkbox\",\"status\":\"Backlog\",\"labels\":[\"Build\",\"Components\",\"Figma: Needs verification\",\"Dev: Not started\"],\"url\":\"https://linear.app/wearehaux/issue/HAUX-88/checkbox\"},{\"id\":\"HAUX-81\",\"title\":\"Audit the full Figma component inventory\",\"status\":\"Backlog\",\"labels\":[\"Foundation\",\"Research\"],\"url\":\"https://linear.app/wearehaux/issue/HAUX-81/audit-the-full-figma-component-inventory\"},{\"id\":\"HAUX-82\",\"title\":\"Badge\",\"status\":\"Backlog\",\"labels\":[\"Build\",\"Components\",\"Figma: Needs verification\",\"Dev: Not started\"],\"url\":\"https://linear.app/wearehaux/issue/HAUX-82/badge\"},{\"id\":\"HAUX-84\",\"title\":\"Card\",\"status\":\"Backlog\",\"labels\":[\"Build\",\"Components\",\"Figma: Needs verification\",\"Dev: Not started\"],\"url\":\"https://linear.app/wearehaux/issue/HAUX-84/card\"},{\"id\":\"HAUX-80\",\"title\":\"Audit Figma variable collections, modes, and aliases\",\"status\":\"In Progress\",\"labels\":[\"Tokens\",\"Research\"],\"url\":\"https://linear.app/wearehaux/issue/HAUX-80/audit-figma-variable-collections-modes-and-aliases\"},{\"id\":\"HAUX-74\",\"title\":\"Decouple selection-control colors and align Switch with HeroUI\",\"status\":\"Canceled\",\"labels\":[\"Motion\",\"Accessibility\",\"Agent ready\",\"Build\",\"Manual test\",\"Components\",\"Human input required\"],\"url\":\"https://linear.app/wearehaux/issue/HAUX-74/decouple-selection-control-colors-and-align-switch-with-heroui\"},{\"id\":\"HAUX-73\",\"title\":\"Add filled appearance to Input and Textarea\",\"status\":\"Canceled\",\"labels\":[\"Accessibility\",\"Agent ready\",\"Build\",\"Manual test\",\"Components\",\"Human input required\"],\"url\":\"https://linear.app/wearehaux/issue/HAUX-73/add-filled-appearance-to-input-and-textarea\"},{\"id\":\"HAUX-75\",\"title\":\"Improve Tooltip Figma component with slot, appearance, and arrow controls\",\"status\":\"Canceled\",\"labels\":[\"Build\",\"Components\"],\"url\":\"https://linear.app/wearehaux/issue/HAUX-75/improve-tooltip-figma-component-with-slot-appearance-and-arrow\"}],\"hasNextPage\":false}"
+          }
+        ],
+        "isError": false
+      }
+    },
+    "inspections": {
+      "839:32": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\"page\":\"Attachment\",\"id\":\"839:32\",\"top\":[{\"id\":\"839:51\",\"name\":\"Attachment Preview\",\"type\":\"COMPONENT_SET\"},{\"id\":\"839:448\",\"name\":\"Attachment\",\"type\":\"COMPONENT_SET\"},{\"id\":\"839:449\",\"name\":\"Attachment Group\",\"type\":\"COMPONENT\"}],\"sets\":[{\"id\":\"839:51\",\"name\":\"Attachment Preview\",\"type\":\"COMPONENT_SET\",\"props\":{\"File icon#839:5\":{\"type\":\"INSTANCE_SWAP\",\"defaultValue\":\"124:148985\",\"preferredValues\":[]},\"Image#839:6\":{\"type\":\"SLOT\",\"description\":null,\"preferredValues\":[]},\"Type\":{\"type\":\"VARIANT\",\"defaultValue\":\"File\",\"variantOptions\":[\"File\",\"Image\",\"Uploading\",\"Error\"]}},\"children\":[{\"id\":\"839:33\",\"name\":\"Type=File\",\"type\":\"COMPONENT\"},{\"id\":\"839:39\",\"name\":\"Type=Image\",\"type\":\"COMPONENT\"},{\"id\":\"839:41\",\"name\":\"Type=Uploading\",\"type\":\"COMPONENT\"},{\"id\":\"839:45\",\"name\":\"Type=Error\",\"type\":\"COMPONENT\"}]},{\"id\":\"839:448\",\"name\":\"Attachment\",\"type\":\"COMPONENT_SET\",\"props\":{\"Filename#839:132\":{\"type\":\"TEXT\",\"defaultValue\":\"Project-brief.pdf\"},\"File size#839:133\":{\"type\":\"TEXT\",\"defaultValue\":\"2.4 MB\"},\"Show remove#839:134\":{\"type\":\"BOOLEAN\",\"defaultValue\":true},\"Show file size#839:135\":{\"type\":\"BOOLEAN\",\"defaultValue\":true},\"Orientation\":{\"type\":\"VARIANT\",\"defaultValue\":\"Horizontal\",\"variantOptions\":[\"Horizontal\",\"Vertical\"]},\"Size\":{\"type\":\"VARIANT\",\"defaultValue\":\"Base\",\"variantOptions\":[\"Base\",\"Small\",\"Extra small\"]},\"State\":{\"type\":\"VARIANT\",\"defaultValue\":\"Default\",\"variantOptions\":[\"Default\",\"Idle\",\"Uploading\",\"Error\"]}},\"children\":[{\"id\":\"839:52\",\"name\":\"Orientation=Horizontal, Size=Base, State=Default\",\"type\":\"COMPONENT\"},{\"id\":\"839:69\",\"name\":\"Orientation=Horizontal, Size=Base, State=Idle\",\"type\":\"COMPONENT\"},{\"id\":\"839:86\",\"name\":\"Orientation=Horizontal, Size=Base, State=Uploading\",\"type\":\"COMPONENT\"},{\"id\":\"839:101\",\"name\":\"Orientation=Horizontal, Size=Base, State=Error\",\"type\":\"COMPONENT\"},{\"id\":\"839:118\",\"name\":\"Orientation=Vertical, Size=Base, State=Default\",\"type\":\"COMPONENT\"},{\"id\":\"839:135\",\"name\":\"Orientation=Vertical, Size=Base, State=Idle\",\"type\":\"COMPONENT\"},{\"id\":\"839:152\",\"name\":\"Orientation=Vertical, Size=Base, State=Uploading\",\"type\":\"COMPONENT\"},{\"id\":\"839:167\",\"name\":\"Orientation=Vertical, Size=Base, State=Error\",\"type\":\"COMPONENT\"},{\"id\":\"839:184\",\"name\":\"Orientation=Horizontal, Size=Small, State=Default\",\"type\":\"COMPONENT\"},{\"id\":\"839:201\",\"name\":\"Orientation=Horizontal, Size=Small, State=Idle\",\"type\":\"COMPONENT\"},{\"id\":\"839:218\",\"name\":\"Orientation=Horizontal, Size=Small, State=Uploading\",\"type\":\"COMPONENT\"},{\"id\":\"839:233\",\"name\":\"Orientation=Horizontal, Size=Small, State=Error\",\"type\":\"COMPONENT\"},{\"id\":\"839:250\",\"name\":\"Orientation=Vertical, Size=Small, State=Default\",\"type\":\"COMPONENT\"},{\"id\":\"839:267\",\"name\":\"Orientation=Vertical, Size=Small, State=Idle\",\"type\":\"COMPONENT\"},{\"id\":\"839:284\",\"name\":\"Orientation=Vertical, Size=Small, State=Uploading\",\"type\":\"COMPONENT\"},{\"id\":\"839:299\",\"name\":\"Orientation=Vertical, Size=Small, State=Error\",\"type\":\"COMPONENT\"},{\"id\":\"839:316\",\"name\":\"Orientation=Horizontal, Size=Extra small, State=Default\",\"type\":\"COMPONENT\"},{\"id\":\"839:333\",\"name\":\"Orientation=Horizontal, Size=Extra small, State=Idle\",\"type\":\"COMPONENT\"},{\"id\":\"839:350\",\"name\":\"Orientation=Horizontal, Size=Extra small, State=Uploading\",\"type\":\"COMPONENT\"},{\"id\":\"839:365\",\"name\":\"Orientation=Horizontal, Size=Extra small, State=Error\",\"type\":\"COMPONENT\"},{\"id\":\"839:382\",\"name\":\"Orientation=Vertical, Size=Extra small, State=Default\",\"type\":\"COMPONENT\"},{\"id\":\"839:399\",\"name\":\"Orientation=Vertical, Size=Extra small, State=Idle\",\"type\":\"COMPONENT\"},{\"id\":\"839:416\",\"name\":\"Orientation=Vertical, Size=Extra small, State=Uploading\",\"type\":\"COMPONENT\"},{\"id\":\"839:431\",\"name\":\"Orientation=Vertical, Size=Extra small, State=Error\",\"type\":\"COMPONENT\"}]},{\"id\":\"839:449\",\"name\":\"Attachment Group\",\"type\":\"COMPONENT\",\"props\":{\"Attachments#839:137\":{\"type\":\"SLOT\",\"description\":null,\"preferredValues\":[{\"type\":\"COMPONENT_SET\",\"key\":\"d14a9c9e35085fada354989d9d99c172830c2409\"}]}},\"children\":[{\"id\":\"839:450\",\"name\":\"Attachments\",\"type\":\"SLOT\"}]}]}"
+          }
+        ],
+        "isError": false
+      },
+      "12:15": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\"page\":\"Button group\",\"id\":\"12:15\",\"top\":[{\"id\":\"42:2\",\"name\":\"Actions / Button group / Documentation\",\"type\":\"FRAME\"}],\"sets\":[{\"id\":\"44:52\",\"name\":\"Button group\",\"type\":\"COMPONENT_SET\",\"props\":{\"Count\":{\"type\":\"VARIANT\",\"defaultValue\":\"2\",\"variantOptions\":[\"2\",\"3\",\"4\"]}},\"children\":[{\"id\":\"44:31\",\"name\":\"Count=2\",\"type\":\"COMPONENT\"},{\"id\":\"44:36\",\"name\":\"Count=3\",\"type\":\"COMPONENT\"},{\"id\":\"44:43\",\"name\":\"Count=4\",\"type\":\"COMPONENT\"}]}]}"
+          }
+        ],
+        "isError": false
+      },
+      "12:16": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\"page\":\"Close button\",\"id\":\"12:16\",\"top\":[{\"id\":\"35:2\",\"name\":\"Close Button / Documentation\",\"type\":\"FRAME\"}],\"sets\":[{\"id\":\"35:23\",\"name\":\"Close Button\",\"type\":\"COMPONENT_SET\",\"props\":{\"Size\":{\"type\":\"VARIANT\",\"defaultValue\":\"Small\",\"variantOptions\":[\"Small\",\"Base\",\"Large\"]}},\"children\":[{\"id\":\"35:17\",\"name\":\"Size=Small\",\"type\":\"COMPONENT\"},{\"id\":\"35:19\",\"name\":\"Size=Base\",\"type\":\"COMPONENT\"},{\"id\":\"35:21\",\"name\":\"Size=Large\",\"type\":\"COMPONENT\"}]}]}"
+          }
+        ],
+        "isError": false
+      },
+      "12:8": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\"page\":\"Divider and separator\",\"id\":\"12:8\",\"top\":[{\"id\":\"25:2\",\"name\":\"Separator / Documentation\",\"type\":\"FRAME\"}],\"sets\":[{\"id\":\"25:19\",\"name\":\"Separator\",\"type\":\"COMPONENT_SET\",\"props\":{\"Orientation\":{\"type\":\"VARIANT\",\"defaultValue\":\"Horizontal\",\"variantOptions\":[\"Horizontal\",\"Vertical\"]}},\"children\":[{\"id\":\"25:17\",\"name\":\"Orientation=Horizontal\",\"type\":\"COMPONENT\"},{\"id\":\"25:18\",\"name\":\"Orientation=Vertical\",\"type\":\"COMPONENT\"}]}]}"
+          }
+        ],
+        "isError": false
+      },
+      "12:9": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\"page\":\"Progressive blur\",\"id\":\"12:9\",\"top\":[{\"id\":\"38:2\",\"name\":\"Progressive Blur / Documentation\",\"type\":\"FRAME\"}],\"sets\":[{\"id\":\"39:10\",\"name\":\"Progressive Blur\",\"type\":\"COMPONENT_SET\",\"props\":{\"Direction\":{\"type\":\"VARIANT\",\"defaultValue\":\"Top\",\"variantOptions\":[\"Top\",\"Bottom\"]},\"Strength\":{\"type\":\"VARIANT\",\"defaultValue\":\"Soft\",\"variantOptions\":[\"Soft\",\"Strong\"]}},\"children\":[{\"id\":\"39:2\",\"name\":\"Direction=Top, Strength=Soft\",\"type\":\"COMPONENT\"},{\"id\":\"39:3\",\"name\":\"Direction=Top, Strength=Strong\",\"type\":\"COMPONENT\"},{\"id\":\"39:4\",\"name\":\"Direction=Bottom, Strength=Soft\",\"type\":\"COMPONENT\"},{\"id\":\"39:5\",\"name\":\"Direction=Bottom, Strength=Strong\",\"type\":\"COMPONENT\"}]}]}"
+          }
+        ],
+        "isError": false
+      },
+      "12:10": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\"page\":\"Scroll shadow\",\"id\":\"12:10\",\"top\":[{\"id\":\"40:2\",\"name\":\"Scroll Shadow / Documentation\",\"type\":\"FRAME\"}],\"sets\":[{\"id\":\"40:21\",\"name\":\"Scroll Shadow\",\"type\":\"COMPONENT_SET\",\"props\":{\"Edge\":{\"type\":\"VARIANT\",\"defaultValue\":\"Top\",\"variantOptions\":[\"Top\",\"Bottom\"]},\"Strength\":{\"type\":\"VARIANT\",\"defaultValue\":\"Soft\",\"variantOptions\":[\"Soft\",\"Strong\"]}},\"children\":[{\"id\":\"40:17\",\"name\":\"Edge=Top, Strength=Soft\",\"type\":\"COMPONENT\"},{\"id\":\"40:18\",\"name\":\"Edge=Top, Strength=Strong\",\"type\":\"COMPONENT\"},{\"id\":\"40:19\",\"name\":\"Edge=Bottom, Strength=Soft\",\"type\":\"COMPONENT\"},{\"id\":\"40:20\",\"name\":\"Edge=Bottom, Strength=Strong\",\"type\":\"COMPONENT\"}]}]}"
+          }
+        ],
+        "isError": false
+      },
+      "12:11": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\"page\":\"Surface\",\"id\":\"12:11\",\"top\":[{\"id\":\"26:2\",\"name\":\"Surface / Documentation\",\"type\":\"FRAME\"}],\"sets\":[{\"id\":\"26:25\",\"name\":\"Surface\",\"type\":\"COMPONENT_SET\",\"props\":{\"Label#26:1\":{\"type\":\"TEXT\",\"defaultValue\":\"Transparent\"},\"Style\":{\"type\":\"VARIANT\",\"defaultValue\":\"Transparent\",\"variantOptions\":[\"Transparent\",\"Default\",\"Muted\",\"Elevated\"]}},\"children\":[{\"id\":\"26:17\",\"name\":\"Style=Transparent\",\"type\":\"COMPONENT\"},{\"id\":\"26:19\",\"name\":\"Style=Default\",\"type\":\"COMPONENT\"},{\"id\":\"26:21\",\"name\":\"Style=Muted\",\"type\":\"COMPONENT\"},{\"id\":\"26:23\",\"name\":\"Style=Elevated\",\"type\":\"COMPONENT\"}]}]}"
+          }
+        ],
+        "isError": false
+      }
+    },
+    "protectedPages": [
+      "12:14",
+      "326:2",
+      "12:17",
+      "12:44",
+      "12:49"
+    ],
+    "reviewMarker": "🟣"
+  },
+  "agentEvidence": {
+    "forms": {
+      "date": "2026-10-09",
+      "agent": "forms",
+      "targetFileKey": "PhcMPmdpkpgxH3N83SvpBY",
+      "referenceFileKey": "7F1sJzLjFVEjtcrscikunQ",
+      "status": "Read-only audit complete; mutation blocked by account Figma MCP limit reported by parent",
+      "writesCommitted": [],
+      "pagesMarked": [],
+      "verificationPending": [
+        "Reference and target screenshots",
+        "Per-component structural changes",
+        "Native slot edit/reorder/replace behavior",
+        "Legacy instance/property preservation",
+        "Atlas/Selene/Helios/Ares modes",
+        "Light/Dark themes",
+        "Responsive and long-content visual tests"
+      ],
+      "collectionsObserved": [
+        "01 Primitives",
+        "02 Primary",
+        "03 Semantic Color",
+        "04 Semantic Foundation",
+        "05 Component",
+        "06 Density",
+        "07 Style"
+      ],
+      "styleModes": [
+        "Atlas",
+        "Selene",
+        "Helios",
+        "Ares"
+      ],
+      "components": [
+        {
+          "page": "12:20",
+          "id": "12:20",
+          "name": "Accordion",
+          "sets": [
+            {
+              "id": "35:61",
+              "name": "Accordion",
+              "count": 2,
+              "props": {
+                "Label#35:1": {
+                  "type": "TEXT",
+                  "defaultValue": "Account settings                                    +"
+                },
+                "Style": {
+                  "type": "VARIANT",
+                  "defaultValue": "Plain",
+                  "variantOptions": [
+                    "Plain",
+                    "Bounded"
+                  ]
+                }
+              },
+              "first": "35:57"
+            }
+          ],
+          "components": [],
+          "audit": {
+            "reference": "1:434",
+            "referenceSet": "22:516",
+            "observed": "Current Accordion has two visual styles and one padded text label containing plus sign. Reference separates trigger, content, expanded state and interaction states.",
+            "plan": "Retain set and master IDs. Add nested Accordion Item anatomy, connected expand icon, editable trigger, native Content slot, Open/Closed and Default/Hover/Focus/Disabled variants. Add slotted parent collection using connected items."
+          }
+        },
+        {
+          "page": "12:21",
+          "id": "12:21",
+          "name": "Checkbox",
+          "sets": [
+            {
+              "id": "35:75",
+              "name": "Checkbox",
+              "count": 3,
+              "props": {
+                "Value": {
+                  "type": "VARIANT",
+                  "defaultValue": "Unchecked",
+                  "variantOptions": [
+                    "Unchecked",
+                    "Checked",
+                    "Mixed"
+                  ]
+                }
+              },
+              "first": "35:69"
+            }
+          ],
+          "components": [],
+          "audit": {
+            "reference": "46:67",
+            "referenceSet": "46:112",
+            "observed": "Current Checkbox has only Unchecked/Checked/Mixed variants, no state or labeled-wrapper axes. Reference has focus, disabled, pressed, invalid, boxed presentation and start/end control placement.",
+            "plan": "Retain value axis and IDs. Expand reusable control states, add nested label/description wrapper and boxed composition with start/end placement. Use color.control roles, existing Form/Option Label and Support Text, style radius bindings."
+          }
+        },
+        {
+          "page": "12:23",
+          "id": "12:23",
+          "name": "Date picker and calendar",
+          "sets": [
+            {
+              "id": "45:89",
+              "name": "Date picker and calendar",
+              "count": 2,
+              "props": {
+                "View": {
+                  "type": "VARIANT",
+                  "defaultValue": "Calendar",
+                  "variantOptions": [
+                    "Calendar",
+                    "Date Picker"
+                  ]
+                }
+              },
+              "first": "45:2"
+            },
+            {
+              "id": "687:28",
+              "name": "Date Segment",
+              "count": 6,
+              "props": {
+                "Value#687:0": {
+                  "type": "TEXT",
+                  "defaultValue": "DD"
+                },
+                "State": {
+                  "type": "VARIANT",
+                  "defaultValue": "Placeholder",
+                  "variantOptions": [
+                    "Placeholder",
+                    "Entered",
+                    "Active",
+                    "Error",
+                    "Disabled",
+                    "Read only"
+                  ]
+                }
+              },
+              "first": "687:16"
+            },
+            {
+              "id": "687:227",
+              "name": "Date Value",
+              "count": 22,
+              "props": {
+                "Format": {
+                  "type": "VARIANT",
+                  "defaultValue": "DD/MM/YY",
+                  "variantOptions": [
+                    "DD/MM/YY",
+                    "DD/MM/YYYY",
+                    "MM/DD/YY",
+                    "MM/DD/YYYY",
+                    "YY/MM/DD",
+                    "YYYY/MM/DD",
+                    "DD-MM-YY",
+                    "DD-MM-YYYY",
+                    "MM-DD-YY",
+                    "MM-DD-YYYY",
+                    "YY-MM-DD",
+                    "YYYY-MM-DD",
+                    "DD.MM.YY",
+                    "DD.MM.YYYY",
+                    "MM.DD.YY",
+                    "MM.DD.YYYY",
+                    "YY.MM.DD",
+                    "YYYY.MM.DD",
+                    "DD MMM YYYY",
+                    "DD MMMM YYYY",
+                    "MMM DD YYYY",
+                    "MMMM DD YYYY"
+                  ]
+                }
+              },
+              "first": "687:29"
+            },
+            {
+              "id": "688:742",
+              "name": "Date Field",
+              "count": 28,
+              "props": {
+                "Calendar icon#696:0": {
+                  "type": "INSTANCE_SWAP",
+                  "defaultValue": "124:310518",
+                  "preferredValues": []
+                },
+                "Show calendar icon#696:29": {
+                  "type": "BOOLEAN",
+                  "defaultValue": true
+                },
+                "Mode": {
+                  "type": "VARIANT",
+                  "defaultValue": "Single",
+                  "variantOptions": [
+                    "Single",
+                    "Range"
+                  ]
+                },
+                "Size": {
+                  "type": "VARIANT",
+                  "defaultValue": "Small",
+                  "variantOptions": [
+                    "Small",
+                    "Base"
+                  ]
+                },
+                "State": {
+                  "type": "VARIANT",
+                  "defaultValue": "Default",
+                  "variantOptions": [
+                    "Default",
+                    "Hover",
+                    "Focus",
+                    "Error",
+                    "Error focus",
+                    "Disabled",
+                    "Read only"
+                  ]
+                }
+              },
+              "first": "688:82"
+            },
+            {
+              "id": "688:765",
+              "name": "Calendar Day",
+              "count": 11,
+              "props": {
+                "Day#688:0": {
+                  "type": "TEXT",
+                  "defaultValue": "14"
+                },
+                "State": {
+                  "type": "VARIANT",
+                  "defaultValue": "Default",
+                  "variantOptions": [
+                    "Default",
+                    "Hover",
+                    "Focused",
+                    "Selected",
+                    "Today",
+                    "Disabled",
+                    "Outside month",
+                    "Range start",
+                    "Range middle",
+                    "Range end",
+                    "Range preview"
+                  ]
+                }
+              },
+              "first": "688:743"
+            },
+            {
+              "id": "690:6729",
+              "name": "Calendar",
+              "count": 30,
+              "props": {
+                "Mode": {
+                  "type": "VARIANT",
+                  "defaultValue": "Single",
+                  "variantOptions": [
+                    "Single",
+                    "Range"
+                  ]
+                },
+                "Selection": {
+                  "type": "VARIANT",
+                  "defaultValue": "Empty",
+                  "variantOptions": [
+                    "Empty",
+                    "Complete",
+                    "Start"
+                  ]
+                },
+                "View": {
+                  "type": "VARIANT",
+                  "defaultValue": "Days",
+                  "variantOptions": [
+                    "Days",
+                    "Months",
+                    "Years"
+                  ]
+                },
+                "Month": {
+                  "type": "VARIANT",
+                  "defaultValue": "October",
+                  "variantOptions": [
+                    "October",
+                    "November"
+                  ]
+                }
+              },
+              "first": "690:530"
+            },
+            {
+              "id": "691:3753",
+              "name": "Date Picker",
+              "count": 26,
+              "props": {
+                "Mode": {
+                  "type": "VARIANT",
+                  "defaultValue": "Single",
+                  "variantOptions": [
+                    "Single",
+                    "Range"
+                  ]
+                },
+                "State": {
+                  "type": "VARIANT",
+                  "defaultValue": "Closed empty",
+                  "variantOptions": [
+                    "Closed empty",
+                    "Open empty",
+                    "Open selected",
+                    "Closed selected",
+                    "Open start",
+                    "Disabled",
+                    "Read only"
+                  ]
+                },
+                "Size": {
+                  "type": "VARIANT",
+                  "defaultValue": "Base",
+                  "variantOptions": [
+                    "Base",
+                    "Small"
+                  ]
+                }
+              },
+              "first": "691:2714"
+            },
+            {
+              "id": "693:5178",
+              "name": "Date Range Value",
+              "count": 22,
+              "props": {
+                "Format": {
+                  "type": "VARIANT",
+                  "defaultValue": "DD/MM/YY",
+                  "variantOptions": [
+                    "DD/MM/YY",
+                    "DD/MM/YYYY",
+                    "MM/DD/YY",
+                    "MM/DD/YYYY",
+                    "YY/MM/DD",
+                    "YYYY/MM/DD",
+                    "DD-MM-YY",
+                    "DD-MM-YYYY",
+                    "MM-DD-YY",
+                    "MM-DD-YYYY",
+                    "YY-MM-DD",
+                    "YYYY-MM-DD",
+                    "DD.MM.YY",
+                    "DD.MM.YYYY",
+                    "MM.DD.YY",
+                    "MM.DD.YYYY",
+                    "YY.MM.DD",
+                    "YYYY.MM.DD",
+                    "DD MMM YYYY",
+                    "MMM DD YYYY",
+                    "DD MMMM YYYY",
+                    "MMMM DD YYYY"
+                  ]
+                }
+              },
+              "first": "693:4746"
+            }
+          ],
+          "components": [],
+          "audit": {
+            "reference": "37:1900",
+            "referenceSet": "17179:197284",
+            "observed": "Spartan already has Date Segment 6 states, Date Value 22 formats, Date Field 28 variants, Calendar Day 11 states, Calendar 30 variants, Date Picker 26 variants and range formats. Reference adds week-number, custom day metadata and multi-month compositions. Structural coverage is advanced but style binding and visual checks remain pending.",
+            "plan": "Preserve advanced current behavior. Audit Style collection inheritance. Add reusable month content slots and needed multi-month, custom day, week-number compositions after further visual inspection. Do not duplicate existing date-format variants."
+          }
+        },
+        {
+          "page": "12:24",
+          "id": "12:24",
+          "name": "Description and error message",
+          "sets": [
+            {
+              "id": "32:65",
+              "name": "Field Message",
+              "count": 2,
+              "props": {
+                "Label#32:5": {
+                  "type": "TEXT",
+                  "defaultValue": "Helpful description"
+                },
+                "Type": {
+                  "type": "VARIANT",
+                  "defaultValue": "Description",
+                  "variantOptions": [
+                    "Description",
+                    "Error"
+                  ]
+                }
+              },
+              "first": "32:61"
+            }
+          ],
+          "components": [],
+          "audit": {
+            "reference": "18684:15122",
+            "observed": "Field Message has only Description/Error types, text property retained. Support Text elsewhere already has Default/Error/Success/Disabled.",
+            "plan": "Consolidate composition through nested Support Text while retaining Field Message master IDs and Label property. Add relevant disabled and status options using existing semantic roles."
+          }
+        },
+        {
+          "page": "12:25",
+          "id": "12:25",
+          "name": "File upload",
+          "sets": [
+            {
+              "id": "445:18603",
+              "name": "File Upload Area [1.0]",
+              "count": 2,
+              "props": {
+                "💠 Pick Icon#450:0": {
+                  "type": "INSTANCE_SWAP",
+                  "defaultValue": "445:14225",
+                  "preferredValues": []
+                },
+                "✏️ Edit Title#450:2": {
+                  "type": "TEXT",
+                  "defaultValue": "Choose a file or drag & drop it here."
+                },
+                "✏️ Edit Description#450:4": {
+                  "type": "TEXT",
+                  "defaultValue": "JPEG, PNG, PDF, and MP4 formats, up to 50 MB."
+                },
+                "📌 State": {
+                  "type": "VARIANT",
+                  "defaultValue": "Default",
+                  "variantOptions": [
+                    "Default",
+                    "Hover"
+                  ]
+                }
+              },
+              "first": "445:18604"
+            },
+            {
+              "id": "445:18616",
+              "name": "File Upload Cards [1.0]",
+              "count": 3,
+              "props": {
+                "✨ Status#452:0": {
+                  "type": "BOOLEAN",
+                  "defaultValue": true
+                },
+                "✏️ Edit Label#452:2": {
+                  "type": "TEXT",
+                  "defaultValue": "my-cv.pdf"
+                },
+                "✏️ Edit Description#452:4": {
+                  "type": "TEXT",
+                  "defaultValue": "0 KB of 120 KB"
+                },
+                "📌 State": {
+                  "type": "VARIANT",
+                  "defaultValue": "📶 In Progress",
+                  "variantOptions": [
+                    "📶 In Progress",
+                    "🟢 Success",
+                    "🆘 Error"
+                  ]
+                }
+              },
+              "first": "445:18617"
+            },
+            {
+              "id": "445:18656",
+              "name": "File Format Icons [1.0]",
+              "count": 18,
+              "props": {
+                "✏️ Edit Format#4965:0": {
+                  "type": "TEXT",
+                  "defaultValue": "PDF"
+                },
+                "🎨 Color": {
+                  "type": "VARIANT",
+                  "defaultValue": "🔴 Red",
+                  "variantOptions": [
+                    "🔴 Red",
+                    "🟠 Orange",
+                    "🟡 Yellow",
+                    "🟢 Green",
+                    "🩵 Teal",
+                    "🔵 Blue",
+                    "🟣 Purple",
+                    "🩷 Pink",
+                    "🩶 Gray"
+                  ]
+                },
+                "📏 Size": {
+                  "type": "VARIANT",
+                  "defaultValue": "Medium (40)",
+                  "variantOptions": [
+                    "Medium (40)",
+                    "X-Small (32)"
+                  ]
+                }
+              },
+              "first": "445:18657"
+            },
+            {
+              "id": "445:18747",
+              "name": "Image Upload [1.0]",
+              "count": 8,
+              "props": {
+                "✏️ Edit Title#452:6": {
+                  "type": "TEXT",
+                  "defaultValue": "Upload Image"
+                },
+                "✏️ Edit Description#452:8": {
+                  "type": "TEXT",
+                  "defaultValue": "Min 400x400px, PNG or JPEG"
+                },
+                "🏢 Pick Company#452:10": {
+                  "type": "INSTANCE_SWAP",
+                  "defaultValue": "445:14205",
+                  "preferredValues": [
+                    {
+                      "type": "COMPONENT_SET",
+                      "key": "8cc0e8d15d9827d86a2f942c06ab979916e3d39b"
+                    },
+                    {
+                      "type": "COMPONENT_SET",
+                      "key": "7c48c27fd92ee59e86e6980aea985c0d24a04bc7"
+                    },
+                    {
+                      "type": "COMPONENT_SET",
+                      "key": "2abf102f6e9659633c00b4dcb760157e58e4ac00"
+                    },
+                    {
+                      "type": "COMPONENT",
+                      "key": "f789d9d643237fa71e9464d5f46105bdc057800b"
+                    },
+                    {
+                      "type": "COMPONENT_SET",
+                      "key": "80c477d8fc4f6ab419de3664f490e73cd5ddbfa6"
+                    },
+                    {
+                      "type": "COMPONENT_SET",
+                      "key": "a9640e660fb8d5091fb06ed7cd854d027729c537"
+                    },
+                    {
+                      "type": "COMPONENT_SET",
+                      "key": "52a4ac25b997830ab25ac18ae130e6374e0f09b3"
+                    },
+                    {
+                      "type": "COMPONENT_SET",
+                      "key": "63fd6319fae77b389ba62f492cb43b7f6aebf583"
+                    },
+                    {
+                      "type": "COMPONENT_SET",
+                      "key": "904a4cfe236aa060571f0d3d143c6f18195cc9c4"
+                    },
+                    {
+                      "type": "COMPONENT_SET",
+                      "key": "0621b061f5c8769316e97e78350815e27d2ed659"
+                    }
+                  ]
+                },
+                "🧩 Type": {
+                  "type": "VARIANT",
+                  "defaultValue": "Avatar",
+                  "variantOptions": [
+                    "Avatar",
+                    "Company"
+                  ]
+                },
+                "📌 State": {
+                  "type": "VARIANT",
+                  "defaultValue": "Empty",
+                  "variantOptions": [
+                    "Empty",
+                    "Uploaded"
+                  ]
+                },
+                "🎯 Alignment": {
+                  "type": "VARIANT",
+                  "defaultValue": "Vertical",
+                  "variantOptions": [
+                    "Vertical",
+                    "Horizontal"
+                  ]
+                }
+              },
+              "first": "445:18748"
+            },
+            {
+              "id": "465:776",
+              "name": "File Format Icon",
+              "count": 18,
+              "props": {
+                "Extension#465:18": {
+                  "type": "TEXT",
+                  "defaultValue": "PDF"
+                },
+                "Tone": {
+                  "type": "VARIANT",
+                  "defaultValue": "Red",
+                  "variantOptions": [
+                    "Red",
+                    "Orange",
+                    "Yellow",
+                    "Green",
+                    "Teal",
+                    "Blue",
+                    "Purple",
+                    "Pink",
+                    "Gray"
+                  ]
+                },
+                "Size": {
+                  "type": "VARIANT",
+                  "defaultValue": "40",
+                  "variantOptions": [
+                    "40",
+                    "32"
+                  ]
+                }
+              },
+              "first": "465:632"
+            },
+            {
+              "id": "466:724",
+              "name": "File Upload Thumbnail",
+              "count": 4,
+              "props": {
+                "State": {
+                  "type": "VARIANT",
+                  "defaultValue": "Empty",
+                  "variantOptions": [
+                    "Empty",
+                    "Uploading",
+                    "Success",
+                    "Error"
+                  ]
+                }
+              },
+              "first": "466:704"
+            },
+            {
+              "id": "467:790",
+              "name": "File Upload Area",
+              "count": 4,
+              "props": {
+                "Title#467:8": {
+                  "type": "TEXT",
+                  "defaultValue": "Choose a file or drag and drop it here"
+                },
+                "Supported formats#467:9": {
+                  "type": "TEXT",
+                  "defaultValue": "JPEG, PNG, PDF, or MP4, up to 50 MB"
+                },
+                "Size": {
+                  "type": "VARIANT",
+                  "defaultValue": "Small",
+                  "variantOptions": [
+                    "Small",
+                    "Large"
+                  ]
+                },
+                "State": {
+                  "type": "VARIANT",
+                  "defaultValue": "Default",
+                  "variantOptions": [
+                    "Default",
+                    "Hover"
+                  ]
+                }
+              },
+              "first": "467:712"
+            },
+            {
+              "id": "470:976",
+              "name": "File Upload Item",
+              "count": 13,
+              "props": {
+                "Filename#470:13": {
+                  "type": "TEXT",
+                  "defaultValue": "my-cv.pdf"
+                },
+                "Layout": {
+                  "type": "VARIANT",
+                  "defaultValue": "Card",
+                  "variantOptions": [
+                    "Card",
+                    "Text",
+                    "Picture"
+                  ]
+                },
+                "State": {
+                  "type": "VARIANT",
+                  "defaultValue": "Ready",
+                  "variantOptions": [
+                    "Ready",
+                    "Uploading",
+                    "Success",
+                    "Error",
+                    "Success no preview"
+                  ]
+                }
+              },
+              "first": "470:736"
+            },
+            {
+              "id": "472:1107",
+              "name": "File Upload Image",
+              "count": 8,
+              "props": {
+                "Preview#472:16": {
+                  "type": "SLOT",
+                  "description": null,
+                  "preferredValues": []
+                },
+                "Title#472:17": {
+                  "type": "TEXT",
+                  "defaultValue": "Upload image"
+                },
+                "Guidance#472:18": {
+                  "type": "TEXT",
+                  "defaultValue": "Min 400×400 px, PNG or JPEG"
+                },
+                "Type": {
+                  "type": "VARIANT",
+                  "defaultValue": "Avatar",
+                  "variantOptions": [
+                    "Avatar",
+                    "Company"
+                  ]
+                },
+                "State": {
+                  "type": "VARIANT",
+                  "defaultValue": "Empty",
+                  "variantOptions": [
+                    "Empty",
+                    "Uploaded"
+                  ]
+                },
+                "Alignment": {
+                  "type": "VARIANT",
+                  "defaultValue": "Vertical",
+                  "variantOptions": [
+                    "Vertical",
+                    "Horizontal"
+                  ]
+                }
+              },
+              "first": "472:869"
+            },
+            {
+              "id": "32:79",
+              "name": "File Upload",
+              "count": 13,
+              "props": {
+                "File cards#481:0": {
+                  "type": "SLOT",
+                  "description": "Add, remove, or reorder connected File Upload Item instances.",
+                  "preferredValues": [
+                    {
+                      "type": "COMPONENT_SET",
+                      "key": "280f99aaebfcb263aa334f8bf07a34b30dc30265"
+                    }
+                  ]
+                },
+                "Text items#481:7": {
+                  "type": "SLOT",
+                  "description": "Add, remove, or reorder connected File Upload Item instances.",
+                  "preferredValues": [
+                    {
+                      "type": "COMPONENT_SET",
+                      "key": "280f99aaebfcb263aa334f8bf07a34b30dc30265"
+                    }
+                  ]
+                },
+                "Picture items#481:16": {
+                  "type": "SLOT",
+                  "description": "Add, remove, or reorder connected File Upload Item instances.",
+                  "preferredValues": [
+                    {
+                      "type": "COMPONENT_SET",
+                      "key": "280f99aaebfcb263aa334f8bf07a34b30dc30265"
+                    }
+                  ]
+                },
+                "Thumbnails#481:27": {
+                  "type": "SLOT",
+                  "description": "Add, remove, or reorder connected File Upload Thumbnail instances.",
+                  "preferredValues": [
+                    {
+                      "type": "COMPONENT_SET",
+                      "key": "f5a6a75da61665befa1739cdd4a74c00631b8d3b"
+                    }
+                  ]
+                },
+                "Inline label#659:0": {
+                  "type": "TEXT",
+                  "defaultValue": "Choose file"
+                },
+                "Inline guidance#659:10": {
+                  "type": "TEXT",
+                  "defaultValue": "Accepted file types: DOC, DOCX, PDF, ODT. Max size: 10 MB."
+                },
+                "Show inline guidance#659:20": {
+                  "type": "BOOLEAN",
+                  "defaultValue": true
+                },
+                "Inline icon#659:30": {
+                  "type": "INSTANCE_SWAP",
+                  "defaultValue": "124:193482",
+                  "preferredValues": []
+                },
+                "Type": {
+                  "type": "VARIANT",
+                  "defaultValue": "Drag and drop",
+                  "variantOptions": [
+                    "Drag and drop",
+                    "File cards",
+                    "Text list",
+                    "Picture list",
+                    "Picture cards",
+                    "Image",
+                    "Inline"
+                  ]
+                },
+                "Size": {
+                  "type": "VARIANT",
+                  "defaultValue": "Small",
+                  "variantOptions": [
+                    "Small",
+                    "Large",
+                    "Base"
+                  ]
+                },
+                "State": {
+                  "type": "VARIANT",
+                  "defaultValue": "Default",
+                  "variantOptions": [
+                    "Default",
+                    "Hover"
+                  ]
+                }
+              },
+              "first": "32:73"
+            }
+          ],
+          "components": [],
+          "audit": {
+            "reference": "25498:10180",
+            "referenceSet": "25467:2086",
+            "observed": "File Upload already has reusable item, thumbnail, area, image and file-format components, plus slots for cards/text/pictures/thumbnails. Area only Default/Hover. Reference Attachment has Default/Idle/Uploading/Error, sizes, horizontal/vertical and media/actions slots.",
+            "plan": "Retain upload hierarchy, file slots and historical [1.0] components. Add keyboard focus, drag-active/error/disabled area states. Create compatible Attachment composition from existing items/media with native slots, style inheritance and existing icon/button links. Inspect exact user-corrected Upload content hierarchy before modifying."
+          }
+        },
+        {
+          "page": "12:26",
+          "id": "12:26",
+          "name": "Filter",
+          "sets": [
+            {
+              "id": "32:91",
+              "name": "Filter",
+              "count": 2,
+              "props": {
+                "Label#32:11": {
+                  "type": "TEXT",
+                  "defaultValue": "All     Open     Closed"
+                },
+                "Layout": {
+                  "type": "VARIANT",
+                  "defaultValue": "Horizontal",
+                  "variantOptions": [
+                    "Horizontal",
+                    "Compact"
+                  ]
+                }
+              },
+              "first": "32:87"
+            }
+          ],
+          "components": [],
+          "audit": {
+            "observed": "Filter set has Horizontal/Compact variants; Label property contains 'All     Open     Closed' as one text string.",
+            "plan": "Replace flat text anatomy with connected Filter Item components and native Items slot. Preserve parent IDs and legacy Label property if used. Add Default/Hover/Focus/Selected/Disabled states and horizontal/compact layouts using semantic tokens."
+          }
+        },
+        {
+          "page": "377:2",
+          "id": "377:2",
+          "name": "Form controls",
+          "sets": [
+            {
+              "id": "378:17",
+              "name": "Form Label",
+              "count": 6,
+              "props": {
+                "Label#378:0": {
+                  "type": "TEXT",
+                  "defaultValue": "Field label"
+                },
+                "State": {
+                  "type": "VARIANT",
+                  "defaultValue": "Default",
+                  "variantOptions": [
+                    "Default",
+                    "Error",
+                    "Disabled"
+                  ]
+                },
+                "Requirement": {
+                  "type": "VARIANT",
+                  "defaultValue": "Optional",
+                  "variantOptions": [
+                    "Optional",
+                    "Required"
+                  ]
+                }
+              },
+              "first": "378:2"
+            },
+            {
+              "id": "378:26",
+              "name": "Support Text",
+              "count": 4,
+              "props": {
+                "Message#378:7": {
+                  "type": "TEXT",
+                  "defaultValue": "Helpful detail about this field."
+                },
+                "State": {
+                  "type": "VARIANT",
+                  "defaultValue": "Default",
+                  "variantOptions": [
+                    "Default",
+                    "Error",
+                    "Success",
+                    "Disabled"
+                  ]
+                }
+              },
+              "first": "378:18"
+            },
+            {
+              "id": "379:17",
+              "name": "Form Control",
+              "count": 2,
+              "props": {
+                "Input#379:1": {
+                  "type": "SLOT",
+                  "description": "Place an existing input component here. Input, Select, and Textarea are suggested; other suitable controls remain allowed.",
+                  "slotSettings": {
+                    "stretchChildOnInsert": true,
+                    "displayEmptyByDefault": false,
+                    "minChildren": 1,
+                    "maxChildren": 1,
+                    "allowPreferredValuesOnly": false
+                  },
+                  "preferredValues": [
+                    {
+                      "type": "COMPONENT_SET",
+                      "key": "b6adec0ee677b87e580a20f61d1dad64065977b6"
+                    },
+                    {
+                      "type": "COMPONENT_SET",
+                      "key": "af929460fac5298e56c84c0e3d8d35d6042cae0f"
+                    },
+                    {
+                      "type": "COMPONENT_SET",
+                      "key": "78e76f5c6495f1a75d6a176a890ea42d06ce37cd"
+                    },
+                    {
+                      "type": "COMPONENT_SET",
+                      "key": "830561049594d3803c5c7cb4ca3bccc156bd3c2a"
+                    }
+                  ]
+                },
+                "Show support text#379:2": {
+                  "type": "BOOLEAN",
+                  "defaultValue": true
+                },
+                "Show form label#734:4": {
+                  "type": "BOOLEAN",
+                  "defaultValue": true
+                },
+                "Support position": {
+                  "type": "VARIANT",
+                  "defaultValue": "After input",
+                  "variantOptions": [
+                    "After input",
+                    "After label"
+                  ]
+                }
+              },
+              "first": "379:2"
+            },
+            {
+              "id": "734:52",
+              "name": "Option Label",
+              "count": 3,
+              "props": {
+                "Option label#734:0": {
+                  "type": "TEXT",
+                  "defaultValue": "Enable notifications"
+                },
+                "State": {
+                  "type": "VARIANT",
+                  "defaultValue": "Default",
+                  "variantOptions": [
+                    "Default",
+                    "Error",
+                    "Disabled"
+                  ]
+                }
+              },
+              "first": "734:46"
+            }
+          ],
+          "components": [],
+          "audit": {
+            "reference": "18684:15122",
+            "referenceSet": "18684:15220",
+            "observed": "Form controls already includes Form Label 6 variants, Support Text 4 variants, native single-control Input slot with preferred values, two support placements and visibility controls, and Option Label 3 variants. Reference Field adds orientation and Field Group slots.",
+            "plan": "Preserve current slots/properties. Add responsive/horizontal Field orientation and slotted Field Group shell; reuse existing labels/support components. Confirm naming mapping with existing code and preserve consumers."
+          }
+        },
+        {
+          "page": "12:27",
+          "id": "12:27",
+          "name": "Input and text field",
+          "sets": [
+            {
+              "id": "32:105",
+              "name": "Input",
+              "count": 120,
+              "props": {
+                "Label#32:13": {
+                  "type": "TEXT",
+                  "defaultValue": "Enter a value"
+                },
+                "Type": {
+                  "type": "VARIANT",
+                  "defaultValue": "Text",
+                  "variantOptions": [
+                    "Text",
+                    "Number",
+                    "Email",
+                    "Password"
+                  ]
+                },
+                "Appearance": {
+                  "type": "VARIANT",
+                  "defaultValue": "Default",
+                  "variantOptions": [
+                    "Outlined",
+                    "Filled",
+                    "Default"
+                  ]
+                },
+                "Size": {
+                  "type": "VARIANT",
+                  "defaultValue": "Base",
+                  "variantOptions": [
+                    "Small",
+                    "Base"
+                  ]
+                },
+                "State": {
+                  "type": "VARIANT",
+                  "defaultValue": "Default",
+                  "variantOptions": [
+                    "Default",
+                    "Hover",
+                    "Focus",
+                    "Error",
+                    "Disabled"
+                  ]
+                }
+              },
+              "first": "32:99"
+            }
+          ],
+          "components": [],
+          "audit": {
+            "reference": "65:520",
+            "referenceSet": "65:533",
+            "observed": "Input has 120 variants across Text/Number/Email/Password, Outlined/Filled/Default, Small/Base and Default/Hover/Focus/Error/Disabled. Reference distinguishes Filled and Invalid(Filled). No Read only/Error focus in current state list.",
+            "plan": "Preserve 120 existing variants and consumers. Audit error-focus/read-only and value/placeholder behavior; avoid multiplying already large matrix unnecessarily. Reuse nested value state component and apply existing Style field bindings rather than new style variants."
+          }
+        },
+        {
+          "page": "12:28",
+          "id": "12:28",
+          "name": "Input group",
+          "sets": [
+            {
+              "id": "35:109",
+              "name": "Input Group",
+              "count": 3,
+              "props": {
+                "Affix": {
+                  "type": "VARIANT",
+                  "defaultValue": "Prefix",
+                  "variantOptions": [
+                    "Prefix",
+                    "Suffix",
+                    "Both"
+                  ]
+                }
+              },
+              "first": "35:103"
+            }
+          ],
+          "components": [],
+          "audit": {
+            "reference": "18677:11182",
+            "referenceSet": "18672:226415",
+            "observed": "Current Input Group has only Prefix/Suffix/Both and single text child, despite token-bound field shell. Reference has Input/Textarea, 5 states, inline/block add-ons and eight addon content types.",
+            "plan": "Retain parent IDs and Affix axis. Build reusable Input Group Addon components, native inline-start/inline-end and block-start/block-end slots. Nest existing Input/Textarea/value components, expose text and add-on visibility. Add Default/Focus/Filled/Disabled/Error states with Style field tokens."
+          }
+        },
+        {
+          "page": "12:29",
+          "id": "12:29",
+          "name": "Input OTP",
+          "sets": [
+            {
+              "id": "32:117",
+              "name": "Input OTP",
+              "count": 2,
+              "props": {
+                "Length": {
+                  "type": "VARIANT",
+                  "defaultValue": "Four",
+                  "variantOptions": [
+                    "Four",
+                    "Six"
+                  ]
+                }
+              },
+              "first": "32:113"
+            }
+          ],
+          "components": [],
+          "audit": {
+            "reference": "76:89",
+            "referenceSet": "81:141",
+            "observed": "Current Input OTP Four/Six variants are each one text string in a bordered field. Reference has nested digit slot component with Default/Focus/Filled/Invalid/Disabled and grouped/separated/spaced compositions.",
+            "plan": "Retain parent IDs and Length values. Build Input OTP Slot with empty/focus/filled/error/disabled states. Compose connected digit instances in editable native slot groups, add grouped/separated/spaced presentations, expose digit values."
+          }
+        },
+        {
+          "page": "12:31",
+          "id": "12:31",
+          "name": "Listbox",
+          "sets": [
+            {
+              "id": "32:145",
+              "name": "Listbox Item",
+              "count": 3,
+              "props": {
+                "Type": {
+                  "type": "VARIANT",
+                  "defaultValue": "Simple",
+                  "variantOptions": [
+                    "Simple",
+                    "Icon",
+                    "Danger"
+                  ]
+                }
+              },
+              "first": "32:139"
+            }
+          ],
+          "components": [],
+          "audit": {
+            "reference": "118:1264",
+            "referenceSet": "118:1541",
+            "observed": "Listbox Item has Simple/Icon/Danger only. Reference Select Menu Item has state and size distinctions with optional icon; parent menu uses slots.",
+            "plan": "Preserve type options and component IDs. Expand Default/Hover/Focus/Selected/Disabled/Error as applicable, editable label and connected icon swap. Reuse as slotted list content and coordinate with Select."
+          }
+        },
+        {
+          "page": "12:32",
+          "id": "12:32",
+          "name": "Radio group",
+          "sets": [
+            {
+              "id": "35:121",
+              "name": "Radio control",
+              "count": 2,
+              "props": {
+                "Value": {
+                  "type": "VARIANT",
+                  "defaultValue": "Unselected",
+                  "variantOptions": [
+                    "Unselected",
+                    "Selected"
+                  ]
+                }
+              },
+              "first": "35:117"
+            },
+            {
+              "id": "45:146",
+              "name": "Radio Group",
+              "count": 2,
+              "props": {
+                "Selected": {
+                  "type": "VARIANT",
+                  "defaultValue": "Option A",
+                  "variantOptions": [
+                    "Option A",
+                    "Option B"
+                  ]
+                }
+              },
+              "first": "45:132"
+            }
+          ],
+          "components": [],
+          "audit": {
+            "reference": "64:316",
+            "referenceSet": "65:326",
+            "observed": "Radio control has Unselected/Selected only. Radio Group has selected Option A/Option B variants. Reference separates labeled radio button state, boxed presentation and control placement.",
+            "plan": "Retain legacy selection axis/IDs, add shared stateful Radio Control and nested Option label/description. Build Radio Group Items native slot, reusable Radio Item with box/plain and start/end placement, use color.control roles."
+          }
+        },
+        {
+          "page": "12:33",
+          "id": "12:33",
+          "name": "Select",
+          "sets": [
+            {
+              "id": "747:36",
+              "name": ".Select Tag",
+              "count": 5,
+              "props": {
+                "Label#747:0": {
+                  "type": "TEXT",
+                  "defaultValue": "Design"
+                },
+                "Removable#747:6": {
+                  "type": "BOOLEAN",
+                  "defaultValue": true
+                },
+                "State": {
+                  "type": "VARIANT",
+                  "defaultValue": "Default",
+                  "variantOptions": [
+                    "Default",
+                    "Hover",
+                    "Focus",
+                    "Disabled",
+                    "Readonly"
+                  ]
+                }
+              },
+              "first": "747:20"
+            },
+            {
+              "id": "747:61",
+              "name": "Select Multi Value",
+              "count": 4,
+              "props": {
+                "Placeholder#747:16": {
+                  "type": "TEXT",
+                  "defaultValue": "Choose options"
+                },
+                "Selected tags#747:17": {
+                  "type": "SLOT",
+                  "description": null,
+                  "slotSettings": {
+                    "stretchChildOnInsert": false,
+                    "displayEmptyByDefault": false,
+                    "minChildren": null,
+                    "maxChildren": null,
+                    "allowPreferredValuesOnly": true
+                  },
+                  "preferredValues": [
+                    {
+                      "type": "COMPONENT_SET",
+                      "key": "4e8969cb771d9c42ca8036f06a87e626ca58fac5"
+                    }
+                  ]
+                },
+                "Size": {
+                  "type": "VARIANT",
+                  "defaultValue": "Small",
+                  "variantOptions": [
+                    "Small",
+                    "Base"
+                  ]
+                },
+                "Selection": {
+                  "type": "VARIANT",
+                  "defaultValue": "Empty",
+                  "variantOptions": [
+                    "Empty",
+                    "Filled"
+                  ]
+                }
+              },
+              "first": "747:37"
+            },
+            {
+              "id": "32:159",
+              "name": "Select Field",
+              "count": 28,
+              "props": {
+                "Label#32:23": {
+                  "type": "TEXT",
+                  "defaultValue": "Choose an option "
+                },
+                "Show clear#748:0": {
+                  "type": "BOOLEAN",
+                  "defaultValue": false
+                },
+                "Size": {
+                  "type": "VARIANT",
+                  "defaultValue": "Small",
+                  "variantOptions": [
+                    "Small",
+                    "Base"
+                  ]
+                },
+                "Mode": {
+                  "type": "VARIANT",
+                  "defaultValue": "Single",
+                  "variantOptions": [
+                    "Single",
+                    "Multi"
+                  ]
+                },
+                "State": {
+                  "type": "VARIANT",
+                  "defaultValue": "Default",
+                  "variantOptions": [
+                    "Default",
+                    "Hover",
+                    "Focus",
+                    "Open",
+                    "Error",
+                    "Disabled",
+                    "Readonly"
+                  ]
+                }
+              },
+              "first": "32:153"
+            },
+            {
+              "id": "749:813",
+              "name": "Select",
+              "count": 8,
+              "props": {
+                "Mode": {
+                  "type": "VARIANT",
+                  "defaultValue": "Single",
+                  "variantOptions": [
+                    "Single",
+                    "Multi"
+                  ]
+                },
+                "Selection": {
+                  "type": "VARIANT",
+                  "defaultValue": "Empty",
+                  "variantOptions": [
+                    "Empty",
+                    "Filled"
+                  ]
+                },
+                "Menu": {
+                  "type": "VARIANT",
+                  "defaultValue": "Closed",
+                  "variantOptions": [
+                    "Closed",
+                    "Open"
+                  ]
+                }
+              },
+              "first": "749:165"
+            }
+          ],
+          "components": [],
+          "audit": {
+            "reference": "118:1264",
+            "referenceSet": "345:11530",
+            "observed": "Select is already rich: .Select Tag 5 states; Select Multi Value 4 variants with restricted tag slot; Select Field 28 states including Open/Error/Disabled/Readonly; Select wrapper 8 single/multi selection/menu variants. Reference has additional focus+filled distinction and menu scrollability controls.",
+            "plan": "Preserve current structure and slots, audit Style inheritance and default names. Add error-focus and optional menu scroll controls only if absent after deep inspection, coordinate listbox item states. Visual test long labels/tag wrapping and slot replacement."
+          }
+        },
+        {
+          "page": "12:34",
+          "id": "12:34",
+          "name": "Slider",
+          "sets": [
+            {
+              "id": "43:32",
+              "name": "Slider",
+              "count": 5,
+              "props": {
+                "Value": {
+                  "type": "VARIANT",
+                  "defaultValue": "0%",
+                  "variantOptions": [
+                    "0%",
+                    "25%",
+                    "50%",
+                    "75%",
+                    "100%"
+                  ]
+                }
+              },
+              "first": "43:2"
+            }
+          ],
+          "components": [],
+          "audit": {
+            "reference": "61:169",
+            "referenceSet": "17382:13106",
+            "observed": "Slider has five Value variants from 0 to 100%. Anatomy uses absolute rectangles and ellipse with primary fills. Reference has reusable thumb states, single/range mode and disabled state.",
+            "plan": "Retain value IDs and labels. Extract connected Slider Thumb states, shared track anatomy and add Range/Disabled configurations. Bind interactive control colors to color.control roles and verify responsive constraints, focus outline and min/max handles."
+          }
+        },
+        {
+          "page": "12:35",
+          "id": "12:35",
+          "name": "Switch",
+          "sets": [
+            {
+              "id": "370:54",
+              "name": "Switch Control",
+              "count": 18,
+              "props": {
+                "Show icon#370:0": {
+                  "type": "BOOLEAN",
+                  "defaultValue": false
+                },
+                "Icon#370:7": {
+                  "type": "INSTANCE_SWAP",
+                  "defaultValue": "124:194012",
+                  "preferredValues": []
+                },
+                "Size": {
+                  "type": "VARIANT",
+                  "defaultValue": "Small",
+                  "variantOptions": [
+                    "Small",
+                    "Base",
+                    "Large"
+                  ]
+                },
+                "Value": {
+                  "type": "VARIANT",
+                  "defaultValue": "Off",
+                  "variantOptions": [
+                    "Off",
+                    "On",
+                    "Indeterminate"
+                  ]
+                },
+                "Shape": {
+                  "type": "VARIANT",
+                  "defaultValue": "Rounded",
+                  "variantOptions": [
+                    "Rounded",
+                    "Square"
+                  ]
+                }
+              },
+              "first": "370:12"
+            },
+            {
+              "id": "42:53",
+              "name": "Switch",
+              "count": 18,
+              "props": {
+                "Show form label#737:137": {
+                  "type": "BOOLEAN",
+                  "defaultValue": false
+                },
+                "Show option label#737:144": {
+                  "type": "BOOLEAN",
+                  "defaultValue": true
+                },
+                "Show support text#737:151": {
+                  "type": "BOOLEAN",
+                  "defaultValue": true
+                },
+                "Value": {
+                  "type": "VARIANT",
+                  "defaultValue": "Off",
+                  "variantOptions": [
+                    "Off",
+                    "On",
+                    "Indeterminate"
+                  ]
+                },
+                "Layout": {
+                  "type": "VARIANT",
+                  "defaultValue": "Toggle left",
+                  "variantOptions": [
+                    "Toggle right",
+                    "Toggle left"
+                  ]
+                },
+                "State": {
+                  "type": "VARIANT",
+                  "defaultValue": "Default",
+                  "variantOptions": [
+                    "Error",
+                    "Disabled",
+                    "Default"
+                  ]
+                }
+              },
+              "first": "42:45"
+            }
+          ],
+          "components": [],
+          "audit": {
+            "reference": "60:438",
+            "referenceSet": "60:450",
+            "observed": "Switch Control has Small/Base/Large, Off/On/Indeterminate and Rounded/Square, icon visibility/swap. Switch wrapper has 18 value/layout/state variants and label/support visibility. Missing focus/hover and boxed presentation compared with reference.",
+            "plan": "Retain existing consumers and properties. Add Focus/Hover and boxed wrapper composition while preserving error outline/support semantics. Inspect Large tier dimensions before enforcing standard control-size rule. Bind Style modes where appropriate without altering intentionally pill switch tracks."
+          }
+        },
+        {
+          "page": "12:36",
+          "id": "12:36",
+          "name": "Textarea",
+          "sets": [
+            {
+              "id": "32:173",
+              "name": "Textarea",
+              "count": 28,
+              "props": {
+                "Title#32:26": {
+                  "type": "TEXT",
+                  "defaultValue": "Write a message…"
+                },
+                "Body#32:27": {
+                  "type": "TEXT",
+                  "defaultValue": "This is an example of an entered message."
+                },
+                "Appearance": {
+                  "type": "VARIANT",
+                  "defaultValue": "Outlined",
+                  "variantOptions": [
+                    "Outlined",
+                    "Filled"
+                  ]
+                },
+                "State": {
+                  "type": "VARIANT",
+                  "defaultValue": "Default",
+                  "variantOptions": [
+                    "Default",
+                    "Hover",
+                    "Focus",
+                    "Error",
+                    "Error focus",
+                    "Disabled",
+                    "Read only"
+                  ]
+                },
+                "Content": {
+                  "type": "VARIANT",
+                  "defaultValue": "Empty",
+                  "variantOptions": [
+                    "Empty",
+                    "Filled"
+                  ]
+                }
+              },
+              "first": "32:167"
+            }
+          ],
+          "components": [],
+          "audit": {
+            "reference": "177:367",
+            "referenceSet": "183:74",
+            "observed": "Textarea already has 28 variants, Outlined/Filled, Default/Hover/Focus/Error/Error focus/Disabled/Read only and Empty/Filled content. Reference has only five states. Current coverage is richer.",
+            "plan": "Preserve state matrix, audit Style collection inheritance and text/placeholder property behavior. Inspect variable-bound radius, field side widths, shadow and minimum 72px height. Verify long content/narrow sizing and all four Style modes."
+          }
+        }
+      ]
+    },
+    "navigation": {
+      "date": "2026-10-09",
+      "targetFileKey": "PhcMPmdpkpgxH3N83SvpBY",
+      "sourceFileKey": "7F1sJzLjFVEjtcrscikunQ",
+      "writesCommitted": false,
+      "reviewEmojiApplied": false,
+      "blocker": "Figma MCP Full seat Professional plan tool call limit",
+      "scope": "12 assigned navigation and overlay pages; all names inspected without green-circle markers",
+      "pages": [
+        {
+          "name": "Breadcrumbs",
+          "targetPageId": "12:37",
+          "targetMasterId": "33:21",
+          "sourcePageId": "23:1004",
+          "observedCurrentStructure": "Divider Slash/Chevron, 2 variants",
+          "observedReferenceStructure": "BreadcrumbItem Link/Dropdown/Ellipsis/Link Current with Default/Hover/Focus; breakpoint shells with item slots",
+          "plannedChange": "Add connected nested breadcrumb item states and native Items slots, preserve divider values"
+        },
+        {
+          "name": "Headers",
+          "targetPageId": "12:38",
+          "targetMasterId": "33:38",
+          "sourcePageId": null,
+          "observedCurrentStructure": "Basic/With Back/With Context, 3 variants",
+          "observedReferenceStructure": null,
+          "plannedChange": "Inspect deeper anatomy and identify applicable reference before mutation"
+        },
+        {
+          "name": "Navigation",
+          "targetPageId": "12:39",
+          "targetMasterId": "33:50",
+          "sourcePageId": "209:1883",
+          "observedCurrentStructure": "Horizontal/Sidebar, 2 variants",
+          "observedReferenceStructure": "NavigationMenu Trigger/Link with Default/Hover/Focused; native Items slot, Menu Link subcomponents and popover compositions",
+          "plannedChange": "Replace simplistic anatomy with connected nested menu buttons and slots, preserve existing master IDs"
+        },
+        {
+          "name": "Pagination",
+          "targetPageId": "12:40",
+          "targetMasterId": "33:62",
+          "sourcePageId": "65:516",
+          "observedCurrentStructure": "One Size Base variant; single Label text property",
+          "observedReferenceStructure": "PaginationItem Previous/Next/Link/Ellipsis; Default/Hover/Focus/Active/Active Hover/Active Focus/Disabled; Items slot",
+          "plannedChange": "Add nested PaginationItem states and native Items slot, retain legacy Label property compatibility"
+        },
+        {
+          "name": "Sidebar",
+          "targetPageId": "215:2",
+          "targetMasterId": "219:399",
+          "sourcePageId": "5143:200",
+          "observedCurrentStructure": "Collapsed No/Yes; restricted Navigation/Footer items/Collapsed navigation slots; nested Nav Item, Nav Group, Nested Nav Group",
+          "observedReferenceStructure": "Additional Big Icon menu type, group label states, submenu layouts, popover components",
+          "plannedChange": "Preserve current slot architecture; inspect and add missing relevant subcomponents and states without deleting recovery/user components"
+        },
+        {
+          "name": "Step indicator",
+          "targetPageId": "12:41",
+          "targetMasterId": "33:74",
+          "sourcePageId": null,
+          "observedCurrentStructure": "Horizontal/Vertical, 2 variants",
+          "observedReferenceStructure": null,
+          "plannedChange": "Inspect deeper anatomy and identify applicable source counterpart"
+        },
+        {
+          "name": "Tabs",
+          "targetPageId": "12:42",
+          "targetMasterId": "33:86",
+          "sourcePageId": "183:417",
+          "observedCurrentStructure": "Segmented Horizontal/Vertical, Underline Horizontal; nested items Default/Selected; restricted native slots",
+          "observedReferenceStructure": "Trigger separates Active On/Off from Default/Hover/Focus/Disabled, with icon/badge booleans",
+          "plannedChange": "Expand nested item states preserving legacy State properties and extend icon/badge controls"
+        },
+        {
+          "name": "Drawer",
+          "targetPageId": "12:59",
+          "targetMasterId": "34:40",
+          "sourcePageId": "112:454",
+          "observedCurrentStructure": "Small/Medium/Large; Title, Show footer, native Header/Content/Actions slots",
+          "observedReferenceStructure": "Direction bottom/top/right/left, Show Header, Description and swipe handle boolean",
+          "plannedChange": "Add missing directional anatomy and header/handle controls while preserving current slots and sizes"
+        },
+        {
+          "name": "Dropdown menu",
+          "targetPageId": "12:60",
+          "targetMasterId": "34:54",
+          "sourcePageId": "89:189",
+          "observedCurrentStructure": "Small/Base/Large; Header/Menu items/Footer slots; item Default/Hover/Focus/Selected/Disabled/Destructive with icon/shortcut controls",
+          "observedReferenceStructure": "Separate Variant Default/Shortcut/Destructive and states including translucent hover; label/subtrigger; Default/Inverted and Solid/Translucent menus",
+          "plannedChange": "Add missing relevant label/subtrigger and state combinations while retaining existing strong composition API"
+        },
+        {
+          "name": "Modal",
+          "targetPageId": "12:61",
+          "targetMasterId": "34:71",
+          "sourcePageId": "112:477",
+          "observedCurrentStructure": "Small/Medium/Large with Title/Body text properties",
+          "observedReferenceStructure": "Dialog name; native Header/Content/Footer slots; show-close boolean and close icon Default/Hover/Focus",
+          "plannedChange": "Rename master set Dialog, keep IDs and Title/Body properties, add slotted regions and connected close/action controls"
+        },
+        {
+          "name": "Popover",
+          "targetPageId": "12:62",
+          "targetMasterId": "34:85",
+          "sourcePageId": "193:1388",
+          "observedCurrentStructure": "Small/Large; Title/Body plus native Slot",
+          "observedReferenceStructure": "Show Header/Title/Description booleans and Items slot",
+          "plannedChange": "Expose title/description/header visibility, refine existing slot anatomy"
+        },
+        {
+          "name": "Tooltip",
+          "targetPageId": "12:63",
+          "targetMasterId": "34:97",
+          "sourcePageId": "122:10",
+          "observedCurrentStructure": "Light/Dark x eight arrow positions; Content slot and Show arrow",
+          "observedReferenceStructure": "Side Top/Bottom/Left/Right; optional keyboard group",
+          "plannedChange": "Preserve richer current positioning; add reusable optional keyboard hint and verify style modes"
+        }
+      ],
+      "verification": {
+        "structuralInventoryRead": true,
+        "referencePropertySchemasRead": true,
+        "screenshotsObtained": false,
+        "pending": [
+          "deeper current layer anatomy",
+          "semantic color token mappings",
+          "implementation",
+          "structure and property preservation",
+          "native slot replacement and limitViolations",
+          "long copy and resize checks",
+          "Light/Dark and four style mode visual checks"
+        ]
+      },
+      "foundations": {
+        "styleCollectionId": "VariableCollectionId:848:16",
+        "styleModes": {
+          "Atlas": "848:0",
+          "Selene": "848:1",
+          "Helios": "848:2",
+          "Ares": "848:3"
+        },
+        "surfaceRadius": "VariableID:848:22",
+        "controlRadius": "VariableID:9:2",
+        "densityCollectionId": "VariableCollectionId:53:4"
+      },
+      "notes": [
+        "No pages renamed or marked purple",
+        "No shared variables/styles edited",
+        "No Linear edits made",
+        "No speculative mutation scripts created",
+        "Sidebar recovery set 306:445 and Sidebar1 768:35156 must be preserved",
+        "Tabs has Items#294:0 and Items#342:20 property keys that need careful reconciliation"
+      ],
+      "detailedCheckpoint": "/private/tmp/spartan-navigation-overlay-checkpoint.md"
+    },
+    "display": {
+      "date": "2026-10-09",
+      "targetFile": "PhcMPmdpkpgxH3N83SvpBY",
+      "referenceFile": "7F1sJzLjFVEjtcrscikunQ",
+      "status": "Blocked before first write by Figma Full-seat Professional MCP call limit",
+      "writesCommitted": [],
+      "pageMarkersChanged": [],
+      "protectedPagesTouched": [],
+      "rawInventory": "/private/tmp/spartan-display-feedback-inspection.json",
+      "styleCollection": {
+        "id": "VariableCollectionId:848:16",
+        "name": "07 Style",
+        "modes": [
+          "Atlas",
+          "Selene",
+          "Helios",
+          "Ares"
+        ],
+        "surfaceRadius": "VariableID:848:22",
+        "note": "Inspected only. No global style/token changes."
+      },
+      "components": [
+        {
+          "component": "Badge",
+          "page": "12:45",
+          "target": "29:31",
+          "sourcePage": "23:995",
+          "source": [
+            "26:169",
+            "17100:10130"
+          ],
+          "observed": "7 Tone variants. Label text property; horizontal Auto Layout, pill radius, badge spacing and semantic fills bound.",
+          "reference": "Badge: 6 appearances × Default/Hover/Focus, optional left/right icons and dot. Badge Number: 5 appearances × 3 states.",
+          "planned": [
+            "Retain existing tone/property IDs; add appearances and default/hover/focus states.",
+            "Expose optional connected icon swaps and dot.",
+            "Create separate reusable Badge Number component."
+          ],
+          "verification": "Pending. No mutation or post-change screenshots performed.",
+          "writesCommitted": []
+        },
+        {
+          "component": "Card",
+          "page": "12:46",
+          "target": "30:82",
+          "sourcePage": "46:65",
+          "source": [
+            "21123:292666"
+          ],
+          "observed": "3 Style variants Default/Muted/Elevated. Native Content slot already present. Density card padding, semantic fills/borders, radius/surface.",
+          "reference": "Default/sm size; Header Content, Content, Footer Content slots; header/title/description/action/image controls.",
+          "planned": [
+            "Preserve Content property and existing surface variants.",
+            "Add optional Header and Footer native slots and meaningful nested header structure.",
+            "Add compact size without changing existing defaults; style/surface/radius binding."
+          ],
+          "verification": "Pending. No mutation or post-change screenshots performed.",
+          "writesCommitted": []
+        },
+        {
+          "component": "Chart",
+          "page": "12:47",
+          "target": "35:49",
+          "sourcePage": "449:6176",
+          "source": [
+            "449:7503",
+            "517:111675",
+            "520:6888",
+            "523:7181",
+            "523:7880",
+            "524:3257",
+            "533:6153"
+          ],
+          "observed": "3 tone-only variants Primary/Success/Danger with 5 rectangle bars each.",
+          "reference": "Bar 9 types; Area 5 types × gradient; Line 7 types; full Pie, Donut, Radar, Radial families. Reusable grid, legend item, tooltip item, dot, bar rectangle/layer, radar grids/labels.",
+          "planned": [
+            "Expand beyond placeholder bars into chart families using nested reusable chart primitives.",
+            "Use chart plus legend composition only, with native legend/item slots where useful.",
+            "Retain current masters/tones; establish desktop/tablet/mobile sizing variants.",
+            "Bind semantic series colors and density/style variables; broad family parity remains entirely pending."
+          ],
+          "verification": "Pending. No mutation or post-change screenshots performed.",
+          "writesCommitted": []
+        },
+        {
+          "component": "Table",
+          "page": "12:51",
+          "target": "30:138",
+          "sourcePage": "184:890",
+          "source": [
+            "325:388",
+            "190:898",
+            "190:901"
+          ],
+          "observed": "4 Style Standard/Alternate × Density Relaxed/Compact variants. Absolute positioning with flat text and divider rectangles, no nested cells/rows or slots.",
+          "reference": "Table container with Columns content and Footer slots and caption; Head 3 states; Cell 3 states × last-cell condition, each with Items slot.",
+          "planned": [
+            "Retain 4 root master IDs while replacing flat anatomy with nested reusable Head/Cell/Row masters.",
+            "Add native rows/columns content and footer slots.",
+            "Expose cell default/hover/selected states and caption/footer controls.",
+            "Verify add/remove/reorder cell/row composition, narrow width and long text."
+          ],
+          "verification": "Pending. No mutation or post-change screenshots performed.",
+          "writesCommitted": []
+        },
+        {
+          "component": "Chips / Tag",
+          "page": "12:52",
+          "target": "30:154",
+          "sourcePage": "23:995",
+          "source": [
+            "26:169"
+          ],
+          "observed": "Tag component with Label and 4 tone variants, only label child.",
+          "reference": "No dedicated Chips page observed; Badge offers optional icons/dot and interactive states.",
+          "planned": [
+            "Retain Tag compatibility; use Badge-like anatomy as relevant inspiration.",
+            "Add optional connected remove/leading icon controls and interactive states.",
+            "Clarify naming through maintained component description instead of destructive rename."
+          ],
+          "verification": "Pending. No mutation or post-change screenshots performed.",
+          "writesCommitted": []
+        },
+        {
+          "component": "Alert and Toast",
+          "page": "12:54",
+          "target": "31:46",
+          "sourcePage": "21:322 / 118:2756",
+          "source": [
+            "26:160",
+            "18482:48401"
+          ],
+          "observed": "Combined Alert and Toast component set, 4 tones Information/Success/Warning/Danger, Title and Body text props. Vertical flat title/body, fixed 380×150.",
+          "reference": "Alert: default/destructive, optional title/description/icon/button, flexible slot. Toast: Default/Success/Warning/Info/Error/Loading with optional title/description/icon/action/close.",
+          "planned": [
+            "Preserve existing root masters and text properties, regroup title/body into hugging semantic content.",
+            "Split public Alert and Toast compositions with common reusable status/copy parts.",
+            "Add action/content native slots, connected icons and dismiss action.",
+            "Add loading and neutral toast types; verify wrapping and optional regions."
+          ],
+          "verification": "Pending. No mutation or post-change screenshots performed.",
+          "writesCommitted": []
+        },
+        {
+          "component": "Banner",
+          "page": "12:55",
+          "target": [
+            "31:62",
+            "709:171"
+          ],
+          "sourcePage": "21:322",
+          "source": [
+            "26:160"
+          ],
+          "observed": "System Banner: 3 tones and Show action. Banner: 20 Tone×Layout Inline/Stacked×Visual Icon/Illustration; title/description controls; illustration/actions slots; tone-specific icon swaps. Existing references/user material present.",
+          "reference": "No Banner page; Alert shell/optional regions are relevant reference pattern.",
+          "planned": [
+            "Preserve mature 20 variants and existing user reference material.",
+            "Audit duplicate Actions slot property keys and preserve existing instance overrides while repairing only if confirmed.",
+            "Bind style/surface radius where applicable; verify all conditional icon/illustration/actions states."
+          ],
+          "verification": "Pending. No mutation or post-change screenshots performed.",
+          "writesCommitted": []
+        },
+        {
+          "component": "Empty State",
+          "page": "12:56",
+          "target": "32:23",
+          "sourcePage": "18672:1039",
+          "source": [
+            "18672:2962",
+            "18672:1781"
+          ],
+          "observed": "2 Style variants Default/Compact with connected illustration and button, flat title/body siblings, Title/Body props.",
+          "reference": "Empty Header and Content native slots; optional title/description; Media nested master Icon/Avatar/AvatarGroup.",
+          "planned": [
+            "Preserve title/body controls and connected action.",
+            "Regroup title/description into semantic copy Auto Layout.",
+            "Add Media/Header and Content/Actions slots with nested media options.",
+            "Verify default/compact, long copy, no media and multi-action composition."
+          ],
+          "verification": "Pending. No mutation or post-change screenshots performed.",
+          "writesCommitted": []
+        },
+        {
+          "component": "Progress Indicator",
+          "page": "12:57",
+          "target": "32:37",
+          "sourcePage": "65:441",
+          "source": [
+            "296:4740"
+          ],
+          "observed": "3 Value variants 25%,50%,75%, each with progress-fill rectangle. Detailed token/geometry read blocked by quota.",
+          "reference": "0%,25%,50%,75%,100%.",
+          "planned": [
+            "Preserve 3 value masters; add 0% and 100% states.",
+            "Normalize public name to Progress if compatible with consumers.",
+            "Verify track/fill semantic bindings, width resize and endpoints."
+          ],
+          "verification": "Pending. No mutation or post-change screenshots performed.",
+          "writesCommitted": []
+        },
+        {
+          "component": "Spinner",
+          "page": "12:58",
+          "target": "32:53",
+          "sourcePage": "18665:1996",
+          "source": [
+            "18665:25956"
+          ],
+          "observed": "4 tone variants with spinner-ring ellipse. Detailed token/geometry read blocked by quota.",
+          "reference": "5 Size values 3/4/5/6/8 × 4 rotation frames 0/90/180/270.",
+          "planned": [
+            "Preserve tone masters and add meaningful density-token sizes.",
+            "Reuse connected spinner part across rotation frames.",
+            "Verify static geometry, contrast and animation/prototype feasibility separately."
+          ],
+          "verification": "Pending. No mutation or post-change screenshots performed.",
+          "writesCommitted": []
+        },
+        {
+          "component": "Loading / Skeleton",
+          "page": "530:16",
+          "target": "639:21139",
+          "sourcePage": "64:243 / 18665:1996",
+          "source": [
+            "295:462",
+            "18665:25956"
+          ],
+          "observed": "Loading 2 Black/White variants with Loading style instance swap, 10 preferred connected animated shape masters: Block Grid, Pulse Dots, Wave Bars, Orbit Ring, Dash Ring, Dots Ring, Fade Arc, Morphing Infinity, Spokes Ring, Track Ring.",
+          "reference": "Skeleton: Default/Card/Text/Form/Table. Spinner has size and rotation frames.",
+          "planned": [
+            "Preserve existing animated loading shapes, swap property and prototype data.",
+            "Add semantic foreground options without breaking Black/White consumers.",
+            "Create reusable Skeleton parts and 5 compositions with Spartan tokens.",
+            "Verify all existing animation shape swaps still function."
+          ],
+          "verification": "Pending. No mutation or post-change screenshots performed.",
+          "writesCommitted": []
+        }
+      ]
+    }
+  },
+  "resumption": [
+    "Restore Figma MCP account availability before further calls.",
+    "Use saved inventory to avoid repeating full-library discovery; refresh only target nodes about to change.",
+    "Preserve green-circle pages, existing master IDs, component property keys and shared token/style definitions.",
+    "Implement per-page component edits using reference anatomy with Spartan tokens, native slots and nested connected components.",
+    "Verify states, property wiring, slot replacement, resizing, applicable theme and style modes before applying purple review markers.",
+    "Reuse canonical component Linear issues. Create missing issues only when work starts and update doc/task-order.html accordingly."
+  ]
+}
