@@ -11,7 +11,7 @@ Track current work in the Spartan Design System Linear project. The older React 
 - [Documentation home](https://linear.app/wearehaux/document/spartant-design-system-project-home-5730425b4e0d)
 - [Project issues](https://linear.app/wearehaux/project/spartant-design-system-b4328c010ac8/overview)
 
-Use Linear to fetch, update, and verify project documentation and issues. Do not maintain a parallel local tracker. Local MDX and `data/tasks.json` are preserved migration snapshots. Local documentation routes redirect to Linear documents; the local task API returns 410 with the Linear project URL. The previous Notion pages remain historical references.
+Use Linear to fetch, update, and verify project documentation and issues. Do not maintain a parallel local tracker. `content/archive` MDX and `data/tasks.json` are preserved migration snapshots. The retired local project routes redirect to Linear documents; the local task API returns 410 with the Linear project URL. The previous Notion pages remain historical references.
 
 ## Task contract
 
@@ -25,7 +25,7 @@ Use Linear to fetch, update, and verify project documentation and issues. Do not
 
 ## Documentation
 
-Maintain the Linear project documents for setup, architecture, variables, plugin workflow, component development, Storybook, validation, decisions, and changelog. Distinguish implemented behavior from planned capabilities. Fumadocs may serve published component references later, but it is not the project documentation source.
+Maintain the Linear project documents for setup, architecture, variables, plugin workflow, component development, Storybook, validation, decisions, and changelog. Distinguish implemented behavior from planned capabilities. The Fumadocs site (`content/docs`, published at https://spartan-docs.vercel.app) is the design-system usage documentation: getting started, tokens, theming, and component references linked to Storybook and Figma. It is not the project documentation source. Authoring steps, ownership, and Vercel deployment are in `README.md`.
 
 ## Token sync
 

@@ -1,0 +1,36 @@
+---
+title: Typography
+description: Font families and the semantic type scale.
+---
+
+Text is Inter and code is IBM Plex Mono. The stylesheet declares the family names; load the font files yourself.
+
+```css
+body { font-family: var(--sp-font-family-body); }
+code { font-family: var(--sp-font-family-code); }
+```
+
+## Semantic scale
+
+| Token | Resolves to |
+| --- | --- |
+| `--sp-font-size-caption` | `--sp-prim-font-size-xs` |
+| `--sp-font-size-body-small` | `--sp-prim-font-size-xs` |
+| `--sp-font-size-body` | `--sp-prim-font-size-sm` (14px) |
+| `--sp-font-size-body-large` | `--sp-prim-font-size-md` |
+| `--sp-font-size-heading-small` | `--sp-prim-font-size-xl` |
+| `--sp-font-size-heading` | `--sp-prim-font-size-2xl` |
+| `--sp-font-size-heading-large` | `--sp-prim-font-size-3xl` |
+| `--sp-font-size-display` | `--sp-prim-font-size-4xl` |
+
+Weights are `--sp-font-weight-body`, `--sp-font-weight-emphasis`, and `--sp-font-weight-heading`. Line heights are `--sp-font-line-height-body`, `-heading`, and `-caption`. Tracking is `--sp-font-tracking-body` and `--sp-font-tracking-heading`.
+
+<div style={{ display: 'grid', gap: 12, margin: '1.25rem 0' }}>
+  <div style={{ fontSize: 'var(--sp-font-size-display)', fontWeight: 'var(--sp-font-weight-heading)', lineHeight: 'var(--sp-font-line-height-heading)' }}>Display</div>
+  <div style={{ fontSize: 'var(--sp-font-size-heading-large)', fontWeight: 'var(--sp-font-weight-heading)' }}>Heading large</div>
+  <div style={{ fontSize: 'var(--sp-font-size-heading)', fontWeight: 'var(--sp-font-weight-heading)' }}>Heading</div>
+  <div style={{ fontSize: 'var(--sp-font-size-heading-small)', fontWeight: 'var(--sp-font-weight-heading)' }}>Heading small</div>
+  <div style={{ fontSize: 'var(--sp-font-size-body-large)' }}>Body large</div>
+  <div style={{ fontSize: 'var(--sp-font-size-body)' }}>Body</div>
+  <div style={{ fontSize: 'var(--sp-font-size-caption)', color: 'var(--sp-color-foreground-muted)' }}>Caption</div>
+</div>

@@ -1,0 +1,127 @@
+---
+title: Button
+description: An action button with seven variants, two sizes, and form support.
+---
+
+`sp-button` renders a native `<button>` in its shadow root, so Tab, Enter, and Space behave as for any button. It is form-associated: `type="submit"` and `type="reset"` act on the closest form.
+
+<StorybookEmbed story="components-button--playground" title="Button playground" height={200} />
+
+Design reference: [Button set in Spartan DS](https://www.figma.com/design/PhcMPmdpkpgxH3N83SvpBY/Spartan-DS?node-id=21-27). Sizes map to the Figma set: `sm` is Small and `base` is Base.
+
+## Usage
+
+```ts
+import '@spartan/components/tokens.css';
+import '@spartan/components/button';
+```
+
+```html
+<sp-button>Save</sp-button>
+<sp-button variant="secondary" size="sm">Cancel</sp-button>
+<sp-button variant="danger" shape="pill" loading>Deleting</sp-button>
+```
+
+## Variants
+
+`primary` (default), `secondary`, `danger`, `ghost`, `dashed`, `danger-subtle`, and `warning`.
+
+<StorybookEmbed story="components-button--variants" title="All variants" height={140} />
+
+## Sizes and shapes
+
+<Tabs items={['Sizes', 'Shapes']}>
+  <Tab value="Sizes">
+    <StorybookEmbed story="components-button--sizes" title="Small and Base" height={120} />
+  </Tab>
+  <Tab value="Shapes">
+    <StorybookEmbed story="components-button--shapes" title="Rounded and Pill" height={120} />
+  </Tab>
+</Tabs>
+
+## Properties
+
+| Property | Attribute | Type | Default | Description |
+| --- | --- | --- | --- | --- |
+| `variant` | `variant` | `'primary' \| 'secondary' \| 'danger' \| 'ghost' \| 'dashed' \| 'danger-subtle' \| 'warning'` | `'primary'` | Visual emphasis. |
+| `size` | `size` | `'sm' \| 'base'` | `'base'` | Height, padding, and type size. Density modes scale each. |
+| `shape` | `shape` | `'rounded' \| 'pill'` | `'rounded'` | `pill` fully rounds the ends. |
+| `type` | `type` | `'button' \| 'submit' \| 'reset'` | `'button'` | Native button behavior inside a form. |
+| `disabled` | `disabled` | `boolean` | `false` | Prevents interaction and removes the control from the tab order. |
+| `loading` | `loading` | `boolean` | `false` | Shows a spinner, hides the content, and ignores activation. The button stays focusable. |
+| `name` | `name` | `string` | `''` | Submitted with the form when this control submits it. |
+| `value` | `value` | `string` | `''` | Submitted with the form when this control submits it. |
+
+The read-only `form` getter returns the associated `HTMLFormElement`, or `null`.
+
+## Slots
+
+| Slot | Content |
+| --- | --- |
+| default | Button label. |
+| `start` | Icon before the label (Figma "Left icon"). |
+| `end` | Icon after the label (Figma "Right icon"). |
+
+An icon slot takes up no space until something is slotted. Any inline `<svg>` or `<img>` fits the icon frame.
+
+```html
+<sp-button>
+  <svg slot="start" aria-hidden="true" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="1.5" fill="none" /></svg>
+  Add
+</sp-button>
+```
+
+<StorybookEmbed story="components-button--with-icons" title="Left and right icons" height={140} />
+
+## Parts
+
+| Part | Element |
+| --- | --- |
+| `button` | The native button element, for `::part(button)` styling. |
+
+## States
+
+The six Figma states map to behavior, not to properties.
+
+| Figma state | Implementation |
+| --- | --- |
+| Default | No state applied. |
+| Hover | `:hover`, on devices that support hover. |
+| Pressed | `:active`. |
+| Focus | `:focus-visible`: a 2px ring with a 2px offset in `--sp-color-focus-ring-default`. |
+| Disabled | `disabled`, or an ancestor `<fieldset disabled>`. |
+| Loading | `loading`. |
+
+<StorybookEmbed story="components-button--disabled" title="Disabled variants" height={140} />
+<StorybookEmbed story="components-button--loading" title="Loading variants" height={140} />
+
+## Density
+
+Heights are 40px (Base) and 32px (Small) in Relaxed, and 32px and 28px in Compact. Wrap content in `data-sp-mode-density="Compact"` to switch. See [Density](/docs/foundations/density).
+
+## Forms
+
+```html
+<form>
+  <input name="email" aria-label="Email" />
+  <sp-button type="submit" name="intent" value="save">Submit</sp-button>
+  <sp-button type="reset" variant="secondary">Reset</sp-button>
+</form>
+```
+
+<StorybookEmbed story="components-button--in-form" title="Button inside a form" height={120} />
+
+## Accessibility
+
+- The shadow root contains a native `<button>`. Focus is delegated to it, so Tab focuses the control and Enter or Space activates it.
+- The focus ring uses `:focus-visible`, so it shows for keyboard focus and not for most pointer clicks.
+- A `disabled` button is removed from the tab order and does not fire `click`.
+- A `loading` button sets `aria-busy="true"`, stays focusable, and swallows activation. The spinner is `aria-hidden`.
+- The accessible name is the slotted label. Mark slotted icon SVGs `aria-hidden="true"` so they are not read twice.
+- Color pairs come from semantic tokens, so the High Contrast modes apply without extra work. Contrast was not measured for this page.
+
+## Links
+
+- <StorybookLink story="components-button--playground">Button in Storybook</StorybookLink> (controls and the Theme, Hue, and Density toolbar)
+- [Button set in Figma](https://www.figma.com/design/PhcMPmdpkpgxH3N83SvpBY/Spartan-DS?node-id=21-27)
+- Token bindings: [`tokens/figma/bindings.md`](https://github.com/iroshandezilva/spartan/blob/dev/tokens/figma/bindings.md)

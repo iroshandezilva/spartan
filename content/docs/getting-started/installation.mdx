@@ -1,0 +1,57 @@
+---
+title: Installation
+description: Add the component package and the generated token stylesheet.
+---
+
+## Inside this repository
+
+The component package is a pnpm workspace package. Depend on it with the workspace protocol, then build it so `dist` exists.
+
+```json title="package.json"
+{
+  "dependencies": {
+    "@spartan/components": "workspace:*"
+  }
+}
+```
+
+```sh
+pnpm install
+pnpm components:build
+```
+
+`components:build` compiles `packages/components` to `dist` and copies the generated `public/tokens.css` next to it.
+
+## Load the tokens once
+
+Import the stylesheet once at the root of your page or app. It declares every `--sp-*` variable and the mode selectors described in [Theming](/docs/theming).
+
+```ts title="entry.ts"
+import '@spartan/components/tokens.css';
+```
+
+## Register components
+
+Each component has an entry that defines its custom element when imported.
+
+```ts title="entry.ts"
+// One component
+import '@spartan/components/button';
+import '@spartan/components/icon-button';
+
+// Or everything
+import '@spartan/components';
+```
+
+Importing an entry runs `customElements.define` once. A second import is safe because the entry checks `customElements.get` first.
+
+| Import | Registers |
+| --- | --- |
+| `@spartan/components/button` | `<sp-button>` |
+| `@spartan/components/icon-button` | `<sp-icon-button>` |
+| `@spartan/components` | Both |
+| `@spartan/components/button/class` | The `SpButton` class only, without registering |
+
+<Callout title="Fonts">
+Spartan type uses Inter for text and IBM Plex Mono for code (`--sp-font-family-body`, `--sp-font-family-code`). The token stylesheet names the families but does not load them. Load the font files in your page.
+</Callout>

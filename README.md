@@ -16,15 +16,17 @@ pnpm install
 pnpm dev
 ```
 
-Local `/docs` routes redirect to the matching Linear documents. The old task API returns 410 with the Linear project URL. MDX content and `data/tasks.json` remain as migration snapshots and should not be updated as live documentation or task state.
+`/docs` is the published design-system usage documentation (Fumadocs), served from `content/docs`. The retired project routes (`/docs/project/*`, `/docs/architecture`, `/docs/sync/*`, `/docs/development/*`) still redirect to their Linear documents. The old task API returns 410 with the Linear project URL. `content/archive` and `data/tasks.json` remain as migration snapshots and should not be updated as live documentation or task state.
 
 - `pnpm storybook`: Lit Storybook playground on http://127.0.0.1:6006
 - `pnpm storybook:build`: static Storybook build
+- `pnpm docs:storybook`: build Storybook and copy it to `public/storybook`, where the docs site serves and embeds it at `/storybook`
+- `pnpm docs:build`: `docs:storybook` plus `pnpm build`, the production build of the docs site
 - `pnpm components:build`: build `packages/components` (`@spartan/components`)
 - `pnpm tokens:build`: Figma export to `tokens/source.json` to `public/tokens.css`; `pnpm tokens:check` fails when they are stale
 - `pnpm test:e2e`: builds Storybook and runs real-keyboard Chromium tests
 - `pnpm test`: builds the component package, then runs token, plugin, package-consumer, and historical local tracker checks
-- `pnpm build`: token output, plugin bundle, and redirect application
+- `pnpm build`: token output, plugin bundle, component package, and the Next.js docs build
 - `pnpm typecheck`: TypeScript checks
 - `pnpm plugin:build`: rebuild the Figma development plugin
 
@@ -44,8 +46,29 @@ Buttons take icons in the `start` (left) and `end` (right) slots, and any `<svg>
 
 `dev` is the default branch and the target for every pull request. `main` only receives releases from `dev`; see `AGENTS.md`. Both are protected by the `main and dev protection` ruleset and require the `validate` check.
 
-## Publishing Storybook on Vercel
+## Documentation site
 
-`vercel.json` builds Storybook (`pnpm storybook:build`) and serves `packages/components/storybook-static`, but only for `main`: its `ignoreCommand` skips every other branch and pull request. Create a Vercel project from this repo with the repo root as its Root Directory; no other settings are needed. It is for the Storybook project only: the Next docs app would need its own project and config.
+The docs site is Next.js with Fumadocs. Pages are MDX under `content/docs`, grouped as Getting started, Foundations, Theming, and Components, and ordered by each folder's `meta.json`. Search is a static index at `/api/search`. The site is styled with the generated `--sp-*` tokens, and its header toggle sets `data-sp-mode-semantic-color` to `Light` or `Dark`.
 
-Do not add `CENTRAL_LICENSE_KEY` to a public deployment. The Iconists license forbids sharing the icons publicly, so the published Storybook shows the plain fallback icon. Add the key only behind Vercel Deployment Protection.
+- Run it: `pnpm dev` (http://127.0.0.1:4310). Embeds point at `/storybook`, so run `pnpm docs:storybook` once, or set `NEXT_PUBLIC_STORYBOOK_URL=http://127.0.0.1:6006` and run `pnpm storybook`.
+- Add a component page: copy `content/templates/component-page.mdx` to `content/docs/components/<name>.mdx`, add the name to `content/docs/components/meta.json`, and fill every table from the component source. Describe implemented behavior only. `tests/docs.test.ts` fails if a page lacks a title or description, embeds a story id that does not exist, or uses an em dash.
+- Ownership: usage documentation lives here. Task tracking, project decisions, and workflow documents stay in Linear.
+
+## Publishing on Vercel
+
+There are two Vercel projects in the `iroshandezilvas-projects` team, both connected to this repository with the repo root as Root Directory. Their build settings live in the Vercel project settings, not in `vercel.json`, which only sets the install command.
+
+| Project | Framework | Build command | Output |
+| --- | --- | --- | --- |
+| `spartan-docs` (docs site, https://spartan-docs.vercel.app) | Next.js | `pnpm docs:build` | Next.js default; includes Storybook at `/storybook` |
+| `spartan-storybook` (standalone Storybook) | Other | `pnpm storybook:build` | `packages/components/storybook-static` |
+
+Both set `ignoreCommand` to skip every branch except `main`, so git deployments happen only on release. To deploy by hand from the repo root:
+
+```sh
+vercel link --project spartan-docs --scope iroshandezilvas-projects   # once; .vercel is git-ignored
+vercel deploy --scope iroshandezilvas-projects                         # preview
+vercel deploy --prod --scope iroshandezilvas-projects                  # production
+```
+
+Do not add `CENTRAL_LICENSE_KEY` to either project's environment while it is public. The Iconists license forbids sharing the icons publicly, so the published Storybook (including the copy under `/storybook` on the docs site) shows the plain fallback icon.

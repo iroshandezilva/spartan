@@ -1,0 +1,34 @@
+---
+title: Theming
+description: Switch color mode, hue, and density with attributes.
+---
+
+Spartan has no theme provider and no JavaScript API. A mode is a data attribute, and the generated CSS re-declares tokens under each attribute selector.
+
+| Attribute | Values |
+| --- | --- |
+| `data-sp-mode-semantic-color` | `Light`, `Dark`, `Light High Contrast`, `Dark High Contrast` |
+| `data-sp-mode-primary` | `Blue`, `Purple`, `Orange`, `Sky` |
+| `data-sp-mode-density` | `Relaxed`, `Compact` |
+
+The first value of each is the default on `:root`, so a page with no attributes is Light, Blue, Relaxed.
+
+## Apply a mode
+
+Set the attributes on the root element for the whole page, or on any element to theme only its subtree.
+
+```html
+<html data-sp-mode-semantic-color="Dark" data-sp-mode-primary="Purple" data-sp-mode-density="Compact">
+```
+
+```ts
+document.documentElement.setAttribute('data-sp-mode-semantic-color', 'Dark');
+```
+
+<Callout type="warn" title="Set Semantic Color and Primary on the same element">
+Semantic color tokens alias the Primary hue. They are re-declared for each combination, so the two attributes must sit on one element. Splitting them across a parent and a child can resolve to the wrong value.
+</Callout>
+
+## This site
+
+The header toggle sets `data-sp-mode-semantic-color` to `Light` or `Dark`, and the site's own colors are mapped to Spartan tokens. High contrast, hue, and density are not exposed in the site toggle. Try them in <StorybookLink>Storybook</StorybookLink>, whose toolbar has Theme, Hue, and Density controls.

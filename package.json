@@ -5,6 +5,8 @@
   "scripts": {
     "dev": "next dev --hostname 127.0.0.1 --port 4310",
     "build": "pnpm tokens:build && pnpm plugin:build && pnpm components:build && next build --webpack",
+    "docs:storybook": "pnpm storybook:build && node scripts/copy-storybook.mjs",
+    "docs:build": "pnpm docs:storybook && pnpm build",
     "start": "next start --hostname 127.0.0.1 --port 4310",
     "typecheck": "pnpm components:build && tsc --noEmit && tsc -p plugin/tsconfig.json && pnpm --filter @spartan/components typecheck",
     "test": "pnpm components:build && node --import tsx --test tests/*.test.ts",

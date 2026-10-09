@@ -1,0 +1,46 @@
+---
+title: Foundations
+description: How the Spartan design tokens are organized and generated.
+---
+
+Spartan tokens come from the Spartan DS Figma variables. A verified export of all 461 variables is committed in the repository, and a build step turns it into one stylesheet, `tokens.css`. Nothing in that file is edited by hand.
+
+```text
+Figma variables export  ->  tokens/source.json  ->  public/tokens.css
+```
+
+## Six collections
+
+| Figma collection | Modes | CSS prefix |
+| --- | --- | --- |
+| 01 Primitives | Value | `--sp-prim-` |
+| 02 Primary | Blue, Purple, Orange, Sky | `--sp-hue-` |
+| 03 Semantic Color | Light, Dark, Light High Contrast, Dark High Contrast | `--sp-` |
+| 04 Semantic Foundation | Value | `--sp-` |
+| 05 Component | Value | `--sp-` |
+| 06 Density | Relaxed, Compact | `--sp-` |
+
+A variable named `button/height/base` in 05 Component becomes the property `--sp-button-height-base`.
+
+## Use semantic tokens
+
+Components and your own styles should use semantic and component tokens, not primitives. Semantic tokens change with the active mode; primitives do not.
+
+```css
+.card {
+  background: var(--sp-color-surface-elevated);
+  color: var(--sp-color-foreground-default);
+  border: var(--sp-border-width-default) solid var(--sp-color-border-default);
+  border-radius: var(--sp-radius-surface);
+  padding: var(--sp-space-surface-padding);
+}
+```
+
+## Regenerate
+
+```sh
+pnpm tokens:build   # export -> source.json -> public/tokens.css
+pnpm tokens:check   # fails if either generated file is stale
+```
+
+The pages that follow show live values. They read the current CSS variables, so toggle Light and Dark in the header to see them change.

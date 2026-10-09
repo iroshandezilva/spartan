@@ -1,0 +1,54 @@
+---
+# Copy to content/docs/components/<name>.mdx and add "<name>" to content/docs/components/meta.json.
+# Describe implemented behavior only. Verify every property, slot, and state against the source.
+title: Component name
+description: One sentence on what the component is for.
+---
+
+`sp-name` does one thing in one sentence. Mention the native element it wraps, if any.
+
+<StorybookEmbed story="components-name--playground" title="Name playground" height={200} />
+
+Design reference: [Name set in Spartan DS](https://www.figma.com/design/PhcMPmdpkpgxH3N83SvpBY/Spartan-DS?node-id=FIGMA-NODE-ID).
+
+## Usage
+
+```ts
+import '@spartan/components/tokens.css';
+import '@spartan/components/name';
+```
+
+```html
+<sp-name>Example</sp-name>
+```
+
+## Variants and sizes
+
+One embed per story id (Storybook title "Components/Name" gives `components-name--story-name`).
+
+## Properties
+
+| Property | Attribute | Type | Default | Description |
+| --- | --- | --- | --- | --- |
+
+## Slots
+
+| Slot | Content |
+| --- | --- |
+
+## Parts and events
+
+List `::part()` names and dispatched events, or state that there are none.
+
+## States
+
+Map each Figma state to its implementation (`:hover`, `:focus-visible`, `disabled`, and so on).
+
+## Accessibility
+
+Keyboard behavior, accessible name, roles and ARIA, focus handling, and High Contrast support. Only claim what is implemented and verified.
+
+## Links
+
+- <StorybookLink story="components-name--playground">Name in Storybook</StorybookLink>
+- [Name set in Figma](https://www.figma.com/design/PhcMPmdpkpgxH3N83SvpBY/Spartan-DS?node-id=FIGMA-NODE-ID)

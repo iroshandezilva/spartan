@@ -1,0 +1,26 @@
+---
+title: Modes in CSS
+description: How the generated stylesheet resolves modes, and its limits.
+---
+
+Each collection has its own attribute, `data-sp-mode-<collection>="<mode name>"`. The generator re-declares every token under the selectors of each collection that can change its value.
+
+## Resolution
+
+A token's value is picked per collection, with each mode independent. For example `--sp-color-primary-default` is step 600 of the active hue in Light and Dark, step 800 in Light High Contrast, and step 300 in Dark High Contrast. Dark High Contrast with Sky therefore resolves to Sky step 300.
+
+## Limits
+
+- A token may depend on the modes of at most two collections.
+- Tokens that depend on two (semantic colors that alias a Primary hue) are re-declared per combination with a compound selector. Set both attributes on one element.
+- Opacity primitives are percentages, and alpha-bound colors become `color-mix(in srgb, <color> <opacity>, transparent)`.
+
+## Nested modes
+
+Because each `var()` resolves where it is declared, a nested attribute re-resolves its subtree. A Compact island inside a Relaxed page works, and so does a Dark panel inside a Light page.
+
+```html
+<section data-sp-mode-semantic-color="Dark">
+  <sp-button>Dark panel button</sp-button>
+</section>
+```

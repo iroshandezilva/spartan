@@ -29,3 +29,6 @@ plugin/dist/
 .pnpm-store/
 .vercel
 .env*
+
+# Storybook copied into the docs site by `pnpm docs:storybook`
+public/storybook/

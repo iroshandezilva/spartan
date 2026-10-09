@@ -1,0 +1,40 @@
+---
+title: Your first component
+description: Render an sp-button and handle its click.
+---
+
+With the [tokens and component loaded](/docs/getting-started/installation), use the element like any HTML element.
+
+```html title="index.html"
+<sp-button>Save</sp-button>
+<sp-button variant="secondary">Cancel</sp-button>
+<sp-button variant="danger" size="sm">Delete</sp-button>
+```
+
+<StorybookEmbed story="components-button--variants" title="Button variants" height={140} />
+
+## Listen for clicks
+
+The host element dispatches the native `click` event, so a normal listener works. A disabled or loading button never delivers it.
+
+```ts
+document.querySelector('sp-button')!.addEventListener('click', () => {
+  console.log('saved');
+});
+```
+
+## Use it in a form
+
+`sp-button` is form-associated. `type="submit"` submits the closest form and `type="reset"` resets it. The button's `name` and `value` are submitted when it triggers the submit.
+
+```html
+<form>
+  <input name="email" aria-label="Email" />
+  <sp-button type="submit" name="intent" value="save">Submit</sp-button>
+  <sp-button type="reset" variant="secondary">Reset</sp-button>
+</form>
+```
+
+## Next
+
+Browse every property, slot, and state in the [Button reference](/docs/components/button).

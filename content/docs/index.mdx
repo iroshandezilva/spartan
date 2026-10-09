@@ -1,19 +1,26 @@
 ---
-title: "Project overview"
-description: "The working record for the Spartan Lit experiment."
+title: Spartan Design System
+description: Usage documentation for the Spartan Lit components, design tokens, and Storybook playground.
 ---
 
-<ProjectOverview />
+Spartan is a code-owned design system. The components are Lit Web Components, the design tokens are generated from the Spartan DS Figma variables, and Storybook is the interactive playground.
+
+<Callout title="What this site covers">
+This site documents how to use what exists today: the generated tokens, theming modes, and the components that have shipped (`sp-button` and `sp-icon-button`). Pages describe implemented behavior only. Task tracking, project decisions, and workflow documents live in [Linear](https://linear.app/wearehaux/document/spartant-design-system-project-home-5730425b4e0d).
+</Callout>
 
 ## Start here
 
-This experiment explores a code-owned component system using Lit, with Figma as an editable design companion. This hub records decisions, explains the workflow, and tracks implementation without treating an old screenshot as proof of completion.
+- [Getting started](/docs/getting-started): install, load the tokens, and render a first component.
+- [Foundations](/docs/foundations): the token collections, colors, typography, spacing, radii, and density.
+- [Theming](/docs/theming): switch Semantic Color, Primary hue, and Density with mode attributes.
+- [Components](/docs/components): the component reference, starting with [Button](/docs/components/button).
 
-- [Task manager](/docs/project/tasks): edit development and Figma progress.
-- [Local setup](/docs/project/setup): run the hub and build the plugin.
-- [Architecture](/docs/architecture): understand each tool's responsibility.
-- [Token contract](/docs/sync/token-contract): understand the initial sync format.
+## Where things live
 
-## What exists today
-
-The local Fumadocs hub, task file, token build, and initial custom plugin source are implemented. The seed token file is a small, isolated fixture, not an export of the production Figma library. The plugin must pass a real Figma import and binding check before its task is marked Done. Lit component and Storybook implementation remain tracked work.
+| Need | Go to |
+| --- | --- |
+| Usage guidance, props, accessibility | This site |
+| Try a component with controls and toolbar modes | <StorybookLink>Storybook</StorybookLink> |
+| Design source | [Spartan DS in Figma](https://www.figma.com/design/PhcMPmdpkpgxH3N83SvpBY/Spartan-DS) |
+| Tasks, decisions, workflow | [Linear project](https://linear.app/wearehaux/project/spartant-design-system-b4328c010ac8/overview) |
