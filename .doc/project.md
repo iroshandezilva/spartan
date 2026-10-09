@@ -16,6 +16,7 @@ Use Linear to fetch, update, and verify project documentation and issues. Do not
 ## Task contract
 
 - Reuse one canonical Linear issue per component. Search the project issues and source ID before creating a record.
+- Whenever you create a Linear task, update `doc/task-order.html` in the same work session. Add the exact task name, issue ID and direct Linear link; place prerequisites before dependent tasks and renumber the rows. Keep the view aligned when dependencies or open-task membership change. Verify names, links, duplicates and ordering against Linear. Preserve the compact table: order, task name, ID and link. This HTML is a derived work-order view, not a second task tracker; Linear remains the source of truth. Keep Agent Done issues visible until they are actually Done, canceled or archived.
 - Update Development and Figma independently through the `Development track` and `Figma track` label groups. Keep one label from each group and mirror both values in the issue description. Both must be Done for overall completion; reopening either track reopens the issue.
 - When an agent finishes work on an issue, set the issue status to **Agent Done** and record the evidence in the issue: what changed, the verification run, and the remaining gaps. Do this for every issue type, and also when only part of the issue is complete.
 - Agent Done is not Done. Move a component issue to Done only when its Development and Figma tracks are both Done.

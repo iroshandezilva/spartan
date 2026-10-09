@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Spartant task order</title>
+  <style>
+    :root { color-scheme: light dark; font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: #f5f5f2; color: #20211f; }
+    main { max-width: 960px; margin: 0 auto; padding: clamp(24px, 5vw, 64px) 20px 80px; }
+    h1 { margin: 0 0 28px; font-size: clamp(30px, 4vw, 44px); letter-spacing: -0.045em; line-height: 1.08; }
+    .table-wrap { overflow-x: auto; border: 1px solid #dcded8; border-radius: 16px; background: #fff; box-shadow: 0 10px 30px #1c26180a; }
+    table { width: 100%; border-collapse: collapse; text-align: left; }
+    th { padding: 16px 20px; color: #666b61; background: #fafbf8; font-size: 12px; font-weight: 700; letter-spacing: 0.07em; text-transform: uppercase; }
+    td { padding: 17px 20px; border-top: 1px solid #eaebe7; font-size: 15px; }
+    tbody tr:hover { background: #f7f9f4; }
+    .order { width: 72px; color: #868d80; font-variant-numeric: tabular-nums; }
+    .task { min-width: 290px; font-weight: 600; }
+    .id { width: 120px; color: #5f675b; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; white-space: nowrap; }
+    th:last-child, td:last-child { width: 175px; white-space: nowrap; }
+    a { color: #315d39; font-weight: 600; text-decoration: none; }
+    a:hover, a:focus-visible { text-decoration: underline; text-underline-offset: 3px; }
+    a:focus-visible { outline: 2px solid #315d39; outline-offset: 4px; border-radius: 2px; }
+    @media (max-width: 600px) { th, td { padding: 14px 12px; } .task { min-width: 210px; } }
+    @media (prefers-color-scheme: dark) {
+      body { background: #171a17; color: #eef2ea; }
+      .table-wrap { background: #222721; border-color: #3b443a; box-shadow: none; }
+      th { color: #aab5a7; background: #292f28; }
+      td { border-color: #384037; }
+      tbody tr:hover { background: #2c352c; }
+      .order { color: #9aa694; }
+      .id { color: #b9c5b4; }
+      a { color: #9bd4a5; }
+      a:focus-visible { outline-color: #9bd4a5; }
+    }
+    @media print { body { background: #fff; } main { max-width: none; padding: 0; } .table-wrap { box-shadow: none; } a { color: inherit; text-decoration: underline; } }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Spartant task order</h1>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th scope="col">Order</th><th scope="col">Task name</th><th scope="col">ID</th><th scope="col">Link</th></tr></thead>
+        <tbody>
+          <tr><td class="order">01</td><td class="task">Build code variables from Figma library</td><td class="id">HAUX-83</td><td><a href="https://linear.app/wearehaux/issue/HAUX-83/build-code-variables-from-figma-library" target="_blank" rel="noopener noreferrer" aria-label="Open HAUX-83 in Linear">Open in Linear <span aria-hidden="true">↗</span></a></td></tr>
+          <tr><td class="order">02</td><td class="task">Document style modes</td><td class="id">HAUX-106</td><td><a href="https://linear.app/wearehaux/issue/HAUX-106/document-style-modes" target="_blank" rel="noopener noreferrer" aria-label="Open HAUX-106 in Linear">Open in Linear <span aria-hidden="true">↗</span></a></td></tr>
+          <tr><td class="order">03</td><td class="task">Adapt token pipeline to Atlas, Selene, Helios and Ares style modes</td><td class="id">HAUX-107</td><td><a href="https://linear.app/wearehaux/issue/HAUX-107/adapt-token-pipeline-to-atlas-selene-helios-and-ares-style-modes" target="_blank" rel="noopener noreferrer" aria-label="Open HAUX-107 in Linear">Open in Linear <span aria-hidden="true">↗</span></a></td></tr>
+          <tr><td class="order">04</td><td class="task">Add Storybook style themes and an independent high-contrast toggle</td><td class="id">HAUX-109</td><td><a href="https://linear.app/wearehaux/issue/HAUX-109/add-storybook-style-themes-and-an-independent-high-contrast-toggle" target="_blank" rel="noopener noreferrer" aria-label="Open HAUX-109 in Linear">Open in Linear <span aria-hidden="true">↗</span></a></td></tr>
+          <tr><td class="order">05</td><td class="task">Install the Storybook Vitest addon for component story tests</td><td class="id">HAUX-110</td><td><a href="https://linear.app/wearehaux/issue/HAUX-110/install-the-storybook-vitest-addon-for-component-story-tests" target="_blank" rel="noopener noreferrer" aria-label="Open HAUX-110 in Linear">Open in Linear <span aria-hidden="true">↗</span></a></td></tr>
+          <tr><td class="order">06</td><td class="task">Install the Storybook Designs addon for embedded Figma previews</td><td class="id">HAUX-111</td><td><a href="https://linear.app/wearehaux/issue/HAUX-111/install-the-storybook-designs-addon-for-embedded-figma-previews" target="_blank" rel="noopener noreferrer" aria-label="Open HAUX-111 in Linear">Open in Linear <span aria-hidden="true">↗</span></a></td></tr>
+          <tr><td class="order">07</td><td class="task">create component for focus ring and use on button.</td><td class="id">HAUX-108</td><td><a href="https://linear.app/wearehaux/issue/HAUX-108/create-component-for-focus-ring-and-use-on-button" target="_blank" rel="noopener noreferrer" aria-label="Open HAUX-108 in Linear">Open in Linear <span aria-hidden="true">↗</span></a></td></tr>
+          <tr><td class="order">08</td><td class="task">Button</td><td class="id">HAUX-77</td><td><a href="https://linear.app/wearehaux/issue/HAUX-77/button" target="_blank" rel="noopener noreferrer" aria-label="Open HAUX-77 in Linear">Open in Linear <span aria-hidden="true">↗</span></a></td></tr>
+          <tr><td class="order">09</td><td class="task">Icon Button</td><td class="id">HAUX-90</td><td><a href="https://linear.app/wearehaux/issue/HAUX-90/icon-button" target="_blank" rel="noopener noreferrer" aria-label="Open HAUX-90 in Linear">Open in Linear <span aria-hidden="true">↗</span></a></td></tr>
+          <tr><td class="order">10</td><td class="task">Input</td><td class="id">HAUX-91</td><td><a href="https://linear.app/wearehaux/issue/HAUX-91/input" target="_blank" rel="noopener noreferrer" aria-label="Open HAUX-91 in Linear">Open in Linear <span aria-hidden="true">↗</span></a></td></tr>
+          <tr><td class="order">11</td><td class="task">Audit the full Figma component inventory</td><td class="id">HAUX-81</td><td><a href="https://linear.app/wearehaux/issue/HAUX-81/audit-the-full-figma-component-inventory" target="_blank" rel="noopener noreferrer" aria-label="Open HAUX-81 in Linear">Open in Linear <span aria-hidden="true">↗</span></a></td></tr>
+          <tr><td class="order">12</td><td class="task">Show color palettes in Storybook</td><td class="id">HAUX-97</td><td><a href="https://linear.app/wearehaux/issue/HAUX-97/show-color-palettes-in-storybook" target="_blank" rel="noopener noreferrer" aria-label="Open HAUX-97 in Linear">Open in Linear <span aria-hidden="true">↗</span></a></td></tr>
+          <tr><td class="order">13</td><td class="task">Show design tokens in Storybook</td><td class="id">HAUX-98</td><td><a href="https://linear.app/wearehaux/issue/HAUX-98/show-design-tokens-in-storybook" target="_blank" rel="noopener noreferrer" aria-label="Open HAUX-98 in Linear">Open in Linear <span aria-hidden="true">↗</span></a></td></tr>
+          <tr><td class="order">14</td><td class="task">Document plugin migration strategy</td><td class="id">HAUX-87</td><td><a href="https://linear.app/wearehaux/issue/HAUX-87/document-plugin-migration-strategy" target="_blank" rel="noopener noreferrer" aria-label="Open HAUX-87 in Linear">Open in Linear <span aria-hidden="true">↗</span></a></td></tr>
+          <tr><td class="order">15</td><td class="task">Custom Figma token sync plugin</td><td class="id">HAUX-85</td><td><a href="https://linear.app/wearehaux/issue/HAUX-85/custom-figma-token-sync-plugin" target="_blank" rel="noopener noreferrer" aria-label="Open HAUX-85 in Linear">Open in Linear <span aria-hidden="true">↗</span></a></td></tr>
+          <tr><td class="order">16</td><td class="task">Set up Fumadocs as the Spartan documentation site</td><td class="id">HAUX-112</td><td><a href="https://linear.app/wearehaux/issue/HAUX-112/set-up-fumadocs-as-the-spartan-documentation-site" target="_blank" rel="noopener noreferrer" aria-label="Open HAUX-112 in Linear">Open in Linear <span aria-hidden="true">↗</span></a></td></tr>
+          <tr><td class="order">17</td><td class="task">Write component usage documentation</td><td class="id">HAUX-105</td><td><a href="https://linear.app/wearehaux/issue/HAUX-105/write-component-usage-documentation" target="_blank" rel="noopener noreferrer" aria-label="Open HAUX-105 in Linear">Open in Linear <span aria-hidden="true">↗</span></a></td></tr>
+          <tr><td class="order">18</td><td class="task">Textarea</td><td class="id">HAUX-101</td><td><a href="https://linear.app/wearehaux/issue/HAUX-101/textarea" target="_blank" rel="noopener noreferrer" aria-label="Open HAUX-101 in Linear">Open in Linear <span aria-hidden="true">↗</span></a></td></tr>
+          <tr><td class="order">19</td><td class="task">Checkbox</td><td class="id">HAUX-88</td><td><a href="https://linear.app/wearehaux/issue/HAUX-88/checkbox" target="_blank" rel="noopener noreferrer" aria-label="Open HAUX-88 in Linear">Open in Linear <span aria-hidden="true">↗</span></a></td></tr>
+          <tr><td class="order">20</td><td class="task">Radio Group</td><td class="id">HAUX-93</td><td><a href="https://linear.app/wearehaux/issue/HAUX-93/radio-group" target="_blank" rel="noopener noreferrer" aria-label="Open HAUX-93 in Linear">Open in Linear <span aria-hidden="true">↗</span></a></td></tr>
+          <tr><td class="order">21</td><td class="task">Switch</td><td class="id">HAUX-100</td><td><a href="https://linear.app/wearehaux/issue/HAUX-100/switch" target="_blank" rel="noopener noreferrer" aria-label="Open HAUX-100 in Linear">Open in Linear <span aria-hidden="true">↗</span></a></td></tr>
+          <tr><td class="order">22</td><td class="task">Select</td><td class="id">HAUX-95</td><td><a href="https://linear.app/wearehaux/issue/HAUX-95/select" target="_blank" rel="noopener noreferrer" aria-label="Open HAUX-95 in Linear">Open in Linear <span aria-hidden="true">↗</span></a></td></tr>
+          <tr><td class="order">23</td><td class="task">Dropdown Menu</td><td class="id">HAUX-89</td><td><a href="https://linear.app/wearehaux/issue/HAUX-89/dropdown-menu" target="_blank" rel="noopener noreferrer" aria-label="Open HAUX-89 in Linear">Open in Linear <span aria-hidden="true">↗</span></a></td></tr>
+          <tr><td class="order">24</td><td class="task">Dialog</td><td class="id">HAUX-86</td><td><a href="https://linear.app/wearehaux/issue/HAUX-86/dialog" target="_blank" rel="noopener noreferrer" aria-label="Open HAUX-86 in Linear">Open in Linear <span aria-hidden="true">↗</span></a></td></tr>
+          <tr><td class="order">25</td><td class="task">Tabs</td><td class="id">HAUX-99</td><td><a href="https://linear.app/wearehaux/issue/HAUX-99/tabs" target="_blank" rel="noopener noreferrer" aria-label="Open HAUX-99 in Linear">Open in Linear <span aria-hidden="true">↗</span></a></td></tr>
+          <tr><td class="order">26</td><td class="task">Tooltip</td><td class="id">HAUX-104</td><td><a href="https://linear.app/wearehaux/issue/HAUX-104/tooltip" target="_blank" rel="noopener noreferrer" aria-label="Open HAUX-104 in Linear">Open in Linear <span aria-hidden="true">↗</span></a></td></tr>
+          <tr><td class="order">27</td><td class="task">Badge</td><td class="id">HAUX-82</td><td><a href="https://linear.app/wearehaux/issue/HAUX-82/badge" target="_blank" rel="noopener noreferrer" aria-label="Open HAUX-82 in Linear">Open in Linear <span aria-hidden="true">↗</span></a></td></tr>
+          <tr><td class="order">28</td><td class="task">Card</td><td class="id">HAUX-84</td><td><a href="https://linear.app/wearehaux/issue/HAUX-84/card" target="_blank" rel="noopener noreferrer" aria-label="Open HAUX-84 in Linear">Open in Linear <span aria-hidden="true">↗</span></a></td></tr>
+          <tr><td class="order">29</td><td class="task">Add DTCG normalization</td><td class="id">HAUX-78</td><td><a href="https://linear.app/wearehaux/issue/HAUX-78/add-dtcg-normalization" target="_blank" rel="noopener noreferrer" aria-label="Open HAUX-78 in Linear">Open in Linear <span aria-hidden="true">↗</span></a></td></tr>
+          <tr><td class="order">30</td><td class="task">Add repository transport to the plugin</td><td class="id">HAUX-79</td><td><a href="https://linear.app/wearehaux/issue/HAUX-79/add-repository-transport-to-the-plugin" target="_blank" rel="noopener noreferrer" aria-label="Open HAUX-79 in Linear">Open in Linear <span aria-hidden="true">↗</span></a></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </main>
+</body>
+</html>
