@@ -1,4 +1,4 @@
-# Spartant project workflow
+# Spartan project workflow
 
 Collaborative copy: [Agent workflow in Linear](https://linear.app/wearehaux/document/agent-workflow-3b7ab59c7144).
 
@@ -6,7 +6,7 @@ The user selected Lit, Storybook as the component playground, and a custom code-
 
 ## Canonical Linear records
 
-Track current work in the Spartant Design System Linear project. The older React issues remain historical.
+Track current work in the Spartan Design System Linear project. The older React issues remain historical.
 
 - [Documentation home](https://linear.app/wearehaux/document/spartant-design-system-project-home-5730425b4e0d)
 - [Project issues](https://linear.app/wearehaux/project/spartant-design-system-b4328c010ac8/overview)

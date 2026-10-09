@@ -1,7 +1,7 @@
 import { validateTokens, isAlias, type TokenSource, type TokenValue } from '../lib/token-contract';
 type Mapping = { variables: Record<string,string>; collections: Record<string,string> };
 type Row = { key: string; action: string; detail: string };
-const storage = 'spartant-token-map-v1';
+const storage = 'spartan-token-map-v1';
 figma.showUI(__html__, { width: 480, height: 580, themeColors: true });
 let preview: { source: TokenSource; snapshot: string } | undefined;
 let busy = false;
@@ -74,7 +74,7 @@ async function apply(source: TokenSource, plan: Awaited<ReturnType<typeof inspec
     }
   }
   figma.root.setPluginData(storage,JSON.stringify(map));
-  figma.root.setPluginData('spartant-token-last-sync',JSON.stringify({version:source.version,at:new Date().toISOString()}));
+  figma.root.setPluginData('spartan-token-last-sync',JSON.stringify({version:source.version,at:new Date().toISOString()}));
   figma.commitUndo();
 }
 figma.ui.onmessage=async(message: {type:string;source?:unknown})=>{

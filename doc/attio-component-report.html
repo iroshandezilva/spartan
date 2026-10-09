@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="light">
-  <title>Attio component study · Spartant</title>
+  <title>Attio component study · Spartan</title>
   <style>
     :root { --paper:#fafaf8; --ink:#252622; --muted:#686a62; --line:#dedfd8; --green:#254b36; --green-bg:#eaf1eb; --amber:#765818; --amber-bg:#faf1db; }
     * { box-sizing:border-box; }
@@ -79,11 +79,11 @@
 </head>
 <body>
 <div class="wrap">
-  <div class="masthead"><strong>Spartant / component research</strong><span>02 October 2026 · Attio</span></div>
+  <div class="masthead"><strong>Spartan / component research</strong><span>02 October 2026 · Attio</span></div>
   <header>
     <p class="eyebrow">Reference study · tables &amp; filters</p>
     <h1>A reusable system for working with records.</h1>
-    <p class="intro">Attio table and filter patterns, rebuilt as reusable Spartant components. This report records the delivered library, verified source interactions, design-token exceptions and the limits of the prototype.</p>
+    <p class="intro">Attio table and filter patterns, rebuilt as reusable Spartan components. This report records the delivered library, verified source interactions, design-token exceptions and the limits of the prototype.</p>
     <div class="actions"><a class="action primary" href="https://www.figma.com/design/PhcMPmdpkpgxH3N83SvpBY?node-id=556-66">Open Attio page in Figma ↗</a><a class="action" href="https://www.figma.com/proto/PhcMPmdpkpgxH3N83SvpBY?node-id=573-16748&amp;page-id=556-66">Open the prototype ↗</a></div>
   </header>
   <aside class="notice live" aria-label="Research status">
@@ -140,8 +140,8 @@
     </tbody></table></div>
     <p class="validation">Verified sample outcomes: the Attio text filter displays one company; the Accounting category displays no matches; the sorted sample changes row order while retaining connected row instances. <a href="attio-build-audit.json">Open the build audit ↗</a></p>
     <div class="preview-grid" aria-label="Delivered Figma previews">
-      <figure><a href="attio-built-assets/light-table.png"><img src="attio-built-assets/light-table.png" width="1240" height="560" loading="lazy" alt="Built Spartant Attio table in light mode with six synthetic companies"></a><figcaption>Light review · editable table composition</figcaption></figure>
-      <figure><a href="attio-built-assets/dark-table.png"><img src="attio-built-assets/dark-table.png" width="1240" height="560" loading="lazy" alt="Built Spartant Attio table in dark mode with the same six synthetic companies"></a><figcaption>Dark review · semantic theme bindings</figcaption></figure>
+      <figure><a href="attio-built-assets/light-table.png"><img src="attio-built-assets/light-table.png" width="1240" height="560" loading="lazy" alt="Built Spartan Attio table in light mode with six synthetic companies"></a><figcaption>Light review · editable table composition</figcaption></figure>
+      <figure><a href="attio-built-assets/dark-table.png"><img src="attio-built-assets/dark-table.png" width="1240" height="560" loading="lazy" alt="Built Spartan Attio table in dark mode with the same six synthetic companies"></a><figcaption>Dark review · semantic theme bindings</figcaption></figure>
       <figure class="wide"><a href="attio-built-assets/advanced-filter.png"><img src="attio-built-assets/advanced-filter.png" width="1240" height="720" loading="lazy" alt="Built advanced filter panel over the table showing connected Name and Description conditions"></a><figcaption>Advanced filter · component instances inside the table flow. Also inspect <a href="attio-built-assets/applied-filter.png">the applied filter</a> and <a href="attio-built-assets/no-results.png">the no-results state</a>.</figcaption></figure>
     </div>
     <div class="grid">
@@ -157,7 +157,7 @@
 
   <section id="exceptions">
     <div class="section-head"><span class="number">03</span><h2>Token exceptions</h2></div>
-    <div class="pending-panel" id="token-audit-status"><span class="badge verified">Audit complete</span><h3>Hard-coded geometry, semantic styling</h3><p>The final audit found no unbound solid paint colors. Existing Spartant components, semantic color roles, text styles, spacing, radii and effects supply the shared styling. Explicit values remain for component geometry, sample sizing and the supplementary hidden-column state. All recorded exceptions are listed below.</p></div>
+    <div class="pending-panel" id="token-audit-status"><span class="badge verified">Audit complete</span><h3>Hard-coded geometry, semantic styling</h3><p>The final audit found no unbound solid paint colors. Existing Spartan components, semantic color roles, text styles, spacing, radii and effects supply the shared styling. Explicit values remain for component geometry, sample sizing and the supplementary hidden-column state. All recorded exceptions are listed below.</p></div>
     <div class="table-wrap"><table><thead><tr><th scope="col">Property / value</th><th scope="col">Closest existing token</th><th scope="col">Reason &amp; usage</th><th scope="col">Status</th></tr></thead><tbody id="token-exceptions">
       <tr><td>Table cell, row &amp; calculation height<br>36 px</td><td>density/control/height/small and density/control/height/base</td><td>Existing modes resolve to 28, 32 or 40 px around this size. None matches the observed 36 px table density; the row height remains explicit.</td><td>Verified exception</td></tr>
       <tr><td>Default component widths<br>224 / 240 / 176 / 420 px</td><td>No matching component-width role</td><td>Data value 224, cell/header 240, segment 176 and chip 420. These are adjustable specimen defaults rather than shared design-token roles.</td><td>Verified exception</td></tr>
@@ -178,7 +178,7 @@
       <tr><td>Prototype &amp; review frames<br>1,240 × 720 px / 1,240 × 560 px</td><td>Presentation dimensions, not product token roles. The components remain independently resizable.</td><td>Canvas-only geometry</td></tr>
       <tr><td>Prototype placement &amp; hit regions<br>Absolute positions / transparent regions</td><td>Bounded navigation examples, not responsive application behavior or a shared token role.</td><td>Prototype-only geometry</td></tr>
     </tbody></table></div>
-    <p class="footnote">The typography and colors used to format this report are presentation choices, not findings about Attio or claims of Spartant token binding.</p>
+    <p class="footnote">The typography and colors used to format this report are presentation choices, not findings about Attio or claims of Spartan token binding.</p>
   </section>
 
   <section id="limitations">
@@ -206,7 +206,7 @@
       <li id="source-permissions"><a href="https://attio.com/help/reference/managing-your-data/objects/manage-access-to-objects">Object access and permissions ↗</a><small>Permission behavior reference</small></li>
     </ul>
   </section>
-  <footer><span>Spartant · Attio component study</span><span>Evidence reviewed 02 October 2026</span></footer>
+  <footer><span>Spartan · Attio component study</span><span>Evidence reviewed 02 October 2026</span></footer>
 </div>
 <script>
   (() => {

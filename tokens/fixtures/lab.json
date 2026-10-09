@@ -1,7 +1,7 @@
 {
-  "schema": "spartant.tokens.v1",
+  "schema": "spartan.tokens.v1",
   "version": "0.2.0-fixture",
-  "collections": [{ "key": "lab", "name": "Spartant Lab", "modes": ["Light", "Dark"] }],
+  "collections": [{ "key": "lab", "name": "Spartan Lab", "modes": ["Light", "Dark"] }],
   "tokens": [
     {"key": "color.surface", "name": "color/surface", "collection": "lab", "type": "COLOR", "values": {"Light": {"r": 1, "g": 1, "b": 1, "a": 1}, "Dark": {"r": 0.08, "g": 0.08, "b": 0.08, "a": 1}}},
     {"key": "radius.base", "name": "radius/base", "collection": "lab", "type": "FLOAT", "unit": "px", "values": {"Light": 6, "Dark": 6}},

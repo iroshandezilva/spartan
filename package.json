@@ -1,18 +1,18 @@
 {
-  "name": "spartant",
+  "name": "spartan",
   "private": true,
   "type": "module",
   "scripts": {
     "dev": "next dev --hostname 127.0.0.1 --port 4310",
     "build": "pnpm tokens:build && pnpm plugin:build && pnpm components:build && next build --webpack",
     "start": "next start --hostname 127.0.0.1 --port 4310",
-    "typecheck": "pnpm components:build && tsc --noEmit && tsc -p plugin/tsconfig.json && pnpm --filter @spartant/components typecheck",
+    "typecheck": "pnpm components:build && tsc --noEmit && tsc -p plugin/tsconfig.json && pnpm --filter @spartan/components typecheck",
     "test": "pnpm components:build && node --import tsx --test tests/*.test.ts",
     "tokens:build": "pnpm tokens:import && node --import tsx scripts/build-tokens.ts",
     "plugin:build": "node scripts/build-plugin.mjs",
-    "components:build": "pnpm --filter @spartant/components build",
-    "storybook": "pnpm --filter @spartant/components storybook",
-    "storybook:build": "pnpm --filter @spartant/components build-storybook",
+    "components:build": "pnpm --filter @spartan/components build",
+    "storybook": "pnpm --filter @spartan/components storybook",
+    "storybook:build": "pnpm --filter @spartan/components build-storybook",
     "tokens:import": "node --import tsx scripts/import-figma-tokens.ts",
     "tokens:check": "node --import tsx scripts/check-tokens.ts",
     "test:e2e": "pnpm storybook:build && node --import tsx --test e2e/*.e2e.ts"
@@ -28,7 +28,7 @@
   },
   "devDependencies": {
     "@figma/plugin-typings": "1.141.0",
-    "@spartant/components": "workspace:*",
+    "@spartan/components": "workspace:*",
     "@tailwindcss/postcss": "^4.0.0",
     "@types/mdx": "^2.0.13",
     "@types/node": "^22.0.0",
