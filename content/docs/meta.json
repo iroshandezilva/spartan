@@ -1,10 +1,4 @@
 {
-  "title": "Spartan Lab",
-  "pages": [
-    "index",
-    "project",
-    "architecture",
-    "sync",
-    "development"
-  ]
+  "title": "Spartan Design System",
+  "pages": ["index", "getting-started", "foundations", "theming", "components"]
 }

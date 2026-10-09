@@ -1,0 +1,63 @@
+---
+title: Icon Button
+description: A square, icon-only button that requires an accessible label.
+---
+
+`sp-icon-button` is a square button that shows only an icon. An icon has no text, so `label` is required to give the control an accessible name. It shares its behavior with [Button](/docs/components/button): a native `<button>` in the shadow root, form association, and the same states.
+
+<StorybookEmbed story="components-icon-button--playground" title="Icon Button playground" height={160} />
+
+Design reference: [Icon Button set in Spartan DS](https://www.figma.com/design/PhcMPmdpkpgxH3N83SvpBY/Spartan-DS?node-id=326-63).
+
+## Usage
+
+```ts
+import '@spartan/components/icon-button';
+```
+
+```html
+<sp-icon-button label="Add item">
+  <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="1.5" fill="none" /></svg>
+</sp-icon-button>
+```
+
+## Sizes
+
+`xs` is Extra small (24px), `sm` is Small (32px), and `base` is Base (40px) in Relaxed density.
+
+<StorybookEmbed story="components-icon-button--sizes" title="Sizes" height={140} />
+
+## Properties
+
+| Property | Attribute | Type | Default | Description |
+| --- | --- | --- | --- | --- |
+| `label` | `label` | `string` | `''` | Accessible name. Required. |
+| `variant` | `variant` | `'primary' \| 'secondary' \| 'danger' \| 'ghost' \| 'dashed'` | `'primary'` | Visual emphasis. `danger-subtle` and `warning` are not available. |
+| `size` | `size` | `'xs' \| 'sm' \| 'base'` | `'base'` | Control size. Density modes scale each. |
+| `type` | `type` | `'button' \| 'submit' \| 'reset'` | `'button'` | Native button behavior inside a form. |
+| `disabled` | `disabled` | `boolean` | `false` | Prevents interaction and removes the control from the tab order. |
+| `name`, `value` | `name`, `value` | `string` | `''` | Submitted with the form when this control submits it. |
+
+## Slots and parts
+
+| Name | Content |
+| --- | --- |
+| default slot | The icon, usually an inline `<svg>` marked `aria-hidden`. |
+| `button` part | The native button element. |
+
+## States
+
+Figma defines no hover, pressed, focus, or disabled variants for this set, so those states reuse the Button rules and tokens.
+
+<StorybookEmbed story="components-icon-button--disabled" title="Disabled variants" height={140} />
+
+## Accessibility
+
+- `label` becomes `aria-label` on the native button. If it is empty, the component logs a console warning after first render.
+- Keyboard behavior is that of a native button: Tab to focus, Enter or Space to activate.
+- Use a label that describes the action, such as "Add item", not the icon, such as "Plus".
+
+## Links
+
+- <StorybookLink story="components-icon-button--playground">Icon Button in Storybook</StorybookLink>
+- [Icon Button set in Figma](https://www.figma.com/design/PhcMPmdpkpgxH3N83SvpBY/Spartan-DS?node-id=326-63)

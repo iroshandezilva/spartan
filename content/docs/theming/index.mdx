@@ -1,0 +1,48 @@
+---
+title: Theming
+description: Five independent settings, each carried by one attribute.
+---
+
+A Spartan theme is five independent settings. Each is a data attribute that the generated CSS reads, and any element can set any of them for its own subtree.
+
+| Setting | Attribute | Values | Default |
+| --- | --- | --- | --- |
+| Style | `data-sp-mode-style` | `Atlas`, `Selene`, `Helios`, `Ares` | `Atlas` |
+| Color scheme | `data-sp-mode-color-scheme` | `Light`, `Dark` | `Light` |
+| Contrast | `data-sp-mode-contrast` | `Normal`, `High` | `Normal` |
+| Brand hue | `data-sp-mode-primary` | `Blue`, `Purple`, `Orange`, `Sky` | `Blue` |
+| Density | `data-sp-mode-density` | `Relaxed`, `Compact` | `Relaxed` |
+
+With no attribute anywhere the result is Atlas, Light, normal contrast, Blue, and Relaxed.
+
+High contrast is its own setting. It composes with every style and both color schemes, so Dark with `contrast="High"` is Dark High Contrast.
+
+## Apply a theme
+
+Use `applyTheme` from `@spartan/components/theme`, or write the attributes yourself.
+
+```ts
+import { applyTheme } from '@spartan/components/theme';
+
+applyTheme(document.documentElement, { style: 'Helios', colorScheme: 'Dark', highContrast: true, hue: 'Purple', density: 'Compact' });
+applyTheme(document.documentElement, { highContrast: false }); // only contrast changes
+applyTheme(section, { colorScheme: null });                    // inherit the color scheme again
+```
+
+Only the fields you pass change. `null` removes a setting from that element. An invalid value throws and changes nothing.
+
+```html
+<html data-sp-mode-style="Selene" data-sp-mode-color-scheme="Dark" data-sp-mode-contrast="High" data-sp-mode-primary="Purple">
+  <section data-sp-mode-density="Compact"> <!-- Compact inside, everything else inherited -->
+    <sp-button>Save</sp-button>
+  </section>
+</html>
+```
+
+<Callout title="Migrating from data-sp-mode-semantic-color">
+The combined `data-sp-mode-semantic-color` attribute is gone. `Light` and `Dark` become `data-sp-mode-color-scheme`, and the two High Contrast values become a color scheme plus `data-sp-mode-contrast="High"`. `fromLegacyTheme('Dark High Contrast')` returns `{ colorScheme: 'Dark', highContrast: true }`.
+</Callout>
+
+## This site
+
+The header toggle sets `data-sp-mode-color-scheme` to `Light` or `Dark`, and the site's own colors are mapped to Spartan tokens. Style, contrast, hue, and density are not exposed in the site toggle. Try them in <StorybookLink>Storybook</StorybookLink>, whose toolbar has Style, Theme, Hue, Density, and High contrast controls.

@@ -30,6 +30,9 @@ plugin/dist/
 .vercel
 .env*
 
+# Storybook copied into the docs site by `pnpm docs:storybook`
+public/storybook/
+
 # Local work-order view and audit captures
 doc/task-order.html
 doc/audits/*.json

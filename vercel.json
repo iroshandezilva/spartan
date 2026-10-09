@@ -1,8 +1,4 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
-  "framework": null,
-  "installCommand": "pnpm install --frozen-lockfile",
-  "buildCommand": "pnpm storybook:build",
-  "outputDirectory": "packages/components/storybook-static",
-  "ignoreCommand": "[ \"$VERCEL_GIT_COMMIT_REF\" != \"main\" ] && [ \"$VERCEL_GIT_COMMIT_REF\" != \"dev\" ]"
+  "installCommand": "pnpm install --frozen-lockfile"
 }

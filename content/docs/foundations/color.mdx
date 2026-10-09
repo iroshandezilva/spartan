@@ -1,0 +1,24 @@
+---
+title: Color
+description: Semantic color tokens that follow the Light, Dark, and high contrast modes.
+---
+
+Semantic colors depend on the color scheme (Light or Dark) and on contrast (Normal or High). Primary colors also depend on the active hue (Blue, Purple, Orange, or Sky), and some colors on the active style. This site's header toggle switches Light and Dark; see [Theming](/docs/theming) for the others.
+
+## Surface and text
+
+<Swatches tokens={['--sp-color-background-default','--sp-color-surface-default','--sp-color-surface-muted','--sp-color-surface-subtle','--sp-color-surface-elevated','--sp-color-foreground-default','--sp-color-foreground-muted','--sp-color-foreground-disabled','--sp-color-border-default','--sp-color-border-strong']} />
+
+## Primary
+
+<Swatches tokens={['--sp-color-primary-default','--sp-color-primary-hover','--sp-color-primary-active','--sp-color-primary-surface','--sp-color-primary-text','--sp-color-focus-ring-default']} />
+
+## Status
+
+<Swatches tokens={['--sp-color-danger-default','--sp-color-warning-default','--sp-color-success-default','--sp-color-information-default','--sp-color-accent-default']} />
+
+## Guidance
+
+- Pair a fill with its matching text token, for example `--sp-color-primary-default` with `--sp-color-primary-foreground`.
+- Do not read primitive color variables (`--sp-prim-color-*`) in components. Semantic tokens carry the color scheme, contrast, and hue logic.
+- Focus rings use `--sp-color-focus-ring-default`.

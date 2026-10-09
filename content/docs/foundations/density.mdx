@@ -1,0 +1,22 @@
+---
+title: Density
+description: Relaxed and Compact density scale control sizes.
+---
+
+Density is its own collection with two modes, Relaxed (the default) and Compact. Control heights, padding, type size, and icon size are bound to Density variables through the Component collection, so one attribute resizes everything inside it.
+
+```html
+<div data-sp-mode-density="Compact">
+  <sp-button size="sm">Compact small</sp-button>
+  <sp-button>Compact base</sp-button>
+</div>
+```
+
+| Token | Relaxed | Compact |
+| --- | --- | --- |
+| `--sp-density-control-font-size-small` | 14px | 13px |
+| `--sp-density-control-font-size-base` | 15px | 14px |
+
+Button heights follow: Base is 40px and Small is 32px in Relaxed, and 32px and 28px in Compact.
+
+<StorybookEmbed story="components-button--density" title="Button in Relaxed and Compact density" height={200} />

@@ -1,0 +1,35 @@
+---
+title: Spacing and radius
+description: Semantic spacing, border width, and corner radius tokens.
+---
+
+## Spacing
+
+Layout spacing uses semantic tokens that alias the space primitives.
+
+| Token | Use |
+| --- | --- |
+| `--sp-space-surface-padding` | Padding inside a card or panel |
+| `--sp-space-stack-gap` | Gap between stacked items |
+| `--sp-space-section-gap` | Gap between page sections |
+
+Primitives run on a 4px step, for example `--sp-prim-space-1` (4px), `-2` (8px), `-4` (16px), `-6` (24px), and `-12` (48px).
+
+<Scale kind="space" tokens={['--sp-prim-space-1','--sp-prim-space-2','--sp-prim-space-4','--sp-prim-space-6','--sp-prim-space-12']} />
+
+## Radius
+
+| Token | Use |
+| --- | --- |
+| `--sp-radius-control` | Buttons and inputs |
+| `--sp-radius-surface` | Cards and panels |
+| `--sp-radius-pill` | Fully rounded ends |
+| `--sp-radius-drawer` | Drawers |
+
+Button corner radius is owned by the active style, not by `--sp-radius-control` alone: Helios is the pill and Ares is square. See [Button](/docs/components/button#styles).
+
+<Scale kind="radius" tokens={['--sp-radius-control','--sp-radius-surface','--sp-radius-drawer','--sp-radius-pill']} />
+
+## Border width
+
+`--sp-border-width-default` is 1px at Normal contrast and 2px at High contrast, in both color schemes.

@@ -2,48 +2,60 @@
 /* Scan only the app's own sources. At the repo root Tailwind would otherwise also read doc/, packages/, and tokens/. */
 @source '../app';
 @source '../components';
-@source '../content';
+@source '../content/docs';
 @source '../lib';
 @import 'fumadocs-ui/css/neutral.css';
 @import 'fumadocs-ui/css/preset.css';
-:root { --fd-layout-width: 1500px; --color-fd-primary: #216547; --color-fd-primary-foreground: #fff; }
-body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
-.brand { display:flex;align-items:center;gap:9px;font-weight:650;letter-spacing:-.4px }
-.brand-mark { background:#216547;color:white;display:grid;place-items:center;width:26px;height:28px;border-radius:6px;font-size:23px;font-weight:800 }
-.brand-lab { font-size:12px;color:var(--color-fd-muted-foreground);font-weight:450;letter-spacing:0 }
-.small-label {font-size:12px;color:var(--color-fd-muted-foreground)}
-.project-statement {padding:24px 0 36px;border-bottom:1px solid var(--color-fd-border)}
-.project-statement>p {font-size:clamp(32px,4vw,48px);font-weight:600;letter-spacing:-1.8px;line-height:1.15;margin:16px 0 20px}
-.project-statement>span:last-child {font-size:15px;color:var(--color-fd-muted-foreground);display:block;max-width:440px;line-height:1.65}
-.overview-links {display:grid;grid-template-columns:1fr 1fr;gap:0 30px;margin:20px 0 28px}
-.overview-links>a {display:flex;gap:16px;padding:24px 0;border-bottom:1px solid var(--color-fd-border);text-decoration:none}
-.overview-links>a>svg {flex-shrink:0;color:var(--color-fd-primary);margin-top:3px}
-.overview-links>a>svg:last-child {margin-left:auto;color:var(--color-fd-muted-foreground)}
-.overview-links strong {font-size:15px;font-weight:600}
-.overview-links p {font-size:13px;line-height:1.6;color:var(--color-fd-muted-foreground);margin:6px 0 0}
-.working-note {border-left:3px solid #216547;padding:3px 0 3px 18px;font-size:13px;line-height:1.7}
-.working-note p {margin-top:5px;color:var(--color-fd-muted-foreground)}
-.task-manager {font-size:13px;max-width:1120px}
-.task-manager button,.task-manager input,.task-manager select,.task-manager textarea {font:inherit}
-.task-manager button {cursor:pointer}
-.task-manager button:disabled {cursor:wait;opacity:.5}
-.task-manager :focus-visible {outline:2px solid #216547;outline-offset:3px}
-.board-summary {display:flex;align-items:center;gap:30px;padding:22px 0 30px;border-bottom:1px solid var(--color-fd-border)}
-.board-summary>div {min-width:108px}.board-summary strong{font-size:30px;font-weight:600;letter-spacing:-1px}.board-summary strong span {font-weight:400;color:var(--color-fd-muted-foreground)}
-.board-summary p {color:var(--color-fd-muted-foreground);line-height:1.6;margin:3px 0 0;max-width:400px}.board-summary>p {font-size:13px}.board-summary b{font-weight:500;color:var(--color-fd-foreground)}
-.task-manager .primary-button {background:#216547;color:white;border:1px solid #216547;border-radius:7px;padding:9px 13px;font-weight:550;display:inline-flex;gap:7px;align-items:center;justify-content:center;white-space:nowrap}
-.board-summary>.primary-button {margin-left:auto}
-.board-toolbar {display:flex;gap:10px;align-items:center;margin:24px 0 10px}
-.task-manager select,.task-manager input,.task-manager textarea {border:1px solid var(--color-fd-border);border-radius:6px;background:var(--color-fd-background);color:var(--color-fd-foreground);padding:9px 10px;min-height:38px}
-.search-field {position:relative;flex:1;min-width:160px}.search-field svg{position:absolute;left:10px;top:11px;color:var(--color-fd-muted-foreground)}.search-field input{width:100%;padding-left:34px}
-.task-manager .icon-button {padding:10px;border-radius:6px;border:1px solid var(--color-fd-border);background:var(--color-fd-background);display:grid;place-items:center}
-.save-notice {font-size:12px;color:var(--color-fd-muted-foreground);min-height:20px;margin:10px 0}
-.table-scroll{overflow-x:auto}.task-table{border-collapse:collapse;width:100%;text-align:left;white-space:nowrap}.task-table th{font-size:12px;font-weight:500;color:var(--color-fd-muted-foreground);padding:12px 16px;background:var(--color-fd-muted);border-block:1px solid var(--color-fd-border)}
-.task-table td{padding:16px;border-bottom:1px solid var(--color-fd-border)}.task-table th:first-child{width:42%}.task-table tr:hover td{background:color-mix(in srgb,var(--color-fd-muted) 45%,transparent)}
-.task-title {font-weight:550!important;text-align:left;white-space:normal;max-width:310px;background:none;border:none;padding:0}.task-title:hover{text-decoration:underline;text-underline-offset:3px}
-.task-meta {display:flex;gap:12px;font-size:11px;color:var(--color-fd-muted-foreground);margin-top:6px}.task-meta span{border-left:1px solid var(--color-fd-border);padding-left:12px}
-.status-badge {display:inline-flex;gap:6px;align-items:center;font-size:11px;padding:4px 7px;border-radius:5px;background:var(--color-fd-muted);white-space:nowrap}
-.status-badge i{width:6px;height:6px;border-radius:50%;background:#8d9398}.status-badge[data-status='Done']{background:#e5f2e9;color:#216547}.status-badge[data-status='Done'] i{background:#216547}.status-badge[data-status='In progress'] i{background:#337fe0}.status-badge[data-status='Review'] i{background:#9670d1}.status-badge[data-status='Blocked'] i{background:#dc5555}.status-badge[data-status='Needs verification'] i{background:#a87b20}.not-applicable {color:var(--color-fd-muted-foreground);font-size:11px}
-.task-dialog{margin:auto;width:min(660px,calc(100% - 24px));max-height:90dvh;overflow:auto;border:1px solid var(--color-fd-border);border-radius:12px;background:var(--color-fd-background);color:var(--color-fd-foreground);padding:26px;box-shadow:0 20px 80px #0002}.task-dialog::backdrop{background:#0005}
-.dialog-heading{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;margin-bottom:24px}.dialog-heading h2{font-size:23px;font-weight:600;letter-spacing:-.6px;margin-top:5px}.task-dialog fieldset{border:0;padding:0;display:grid;gap:17px}.task-dialog label{display:grid;gap:7px;font-size:12px;font-weight:500}.task-dialog input,.task-dialog select,.task-dialog textarea{width:100%;font-weight:400}.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}.completion-rule{padding:12px;background:var(--color-fd-muted);border-radius:6px;display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:space-between}.completion-rule small{width:100%;color:var(--color-fd-muted-foreground);font-size:11px}.task-dialog footer{display:flex;justify-content:flex-end;gap:18px;border-top:1px solid var(--color-fd-border);margin-top:25px;padding-top:18px}.task-dialog footer>button:first-child{background:none;border:none}.task-links{display:flex;gap:18px}.task-links a{display:flex;gap:5px;align-items:center;color:var(--color-fd-primary);font-size:12px}.error-message{padding:12px;border:1px solid #c77;border-radius:6px;color:#b32b2b;margin:12px 0;font-size:13px}.error-message button{display:block;text-decoration:underline;margin-top:8px}.empty-state{padding:50px;text-align:center}.empty-state p{margin:10px}.empty-state button{color:var(--color-fd-primary)}
-@media(max-width:760px){.overview-links{grid-template-columns:1fr}.board-summary{flex-wrap:wrap;gap:16px}.board-summary>p{order:3;max-width:none}.board-toolbar{flex-wrap:wrap}.search-field{flex-basis:100%}.board-toolbar select{flex:1;min-width:0}.form-grid{grid-template-columns:1fr}.task-dialog{padding:20px}.task-table td{padding:13px 10px}}
+@import '../public/tokens.css';
+
+/* Fumadocs switches dark styles with the theme value; here that value is the Spartan mode attribute. */
+@custom-variant dark (&:where([data-sp-mode-color-scheme='Dark'], [data-sp-mode-color-scheme='Dark'] *));
+
+/* Presentation comes from the generated Spartan tokens, so Light and Dark follow the color scheme. */
+:root,
+[data-sp-mode-color-scheme] {
+  --color-fd-background: var(--sp-color-surface-default);
+  --color-fd-foreground: var(--sp-color-foreground-default);
+  --color-fd-muted: var(--sp-color-surface-muted);
+  --color-fd-muted-foreground: var(--sp-color-foreground-muted);
+  --color-fd-card: var(--sp-color-surface-elevated);
+  --color-fd-card-foreground: var(--sp-color-foreground-default);
+  --color-fd-popover: var(--sp-color-surface-elevated);
+  --color-fd-popover-foreground: var(--sp-color-foreground-default);
+  --color-fd-border: var(--sp-color-border-default);
+  --color-fd-primary: var(--sp-color-primary-text);
+  --color-fd-primary-foreground: var(--sp-color-primary-foreground);
+  --color-fd-secondary: var(--sp-color-surface-subtle);
+  --color-fd-secondary-foreground: var(--sp-color-foreground-default);
+  --color-fd-accent: var(--sp-color-surface-subtle);
+  --color-fd-accent-foreground: var(--sp-color-foreground-default);
+  --color-fd-ring: var(--sp-color-focus-ring-default);
+  --fd-layout-width: 1400px;
+}
+
+body {
+  font-family: var(--font-sans), var(--sp-font-family-body), system-ui, sans-serif;
+  letter-spacing: var(--sp-font-tracking-body);
+}
+code, pre, kbd { font-family: var(--font-mono), var(--sp-font-family-code), ui-monospace, monospace; }
+h1, h2, h3 { letter-spacing: var(--sp-font-tracking-heading); }
+:focus-visible { outline-color: var(--sp-color-focus-ring-default); }
+
+.brand { display: flex; align-items: center; gap: 9px; font-weight: 650; letter-spacing: -0.4px; }
+.brand-mark { background: var(--sp-color-primary-default); color: var(--sp-color-primary-foreground); display: grid; place-items: center; width: 26px; height: 26px; border-radius: var(--sp-radius-control); font-size: 17px; font-weight: 700; }
+
+/* Storybook embeds and live examples */
+.sp-embed { margin: 1.5rem 0; border: 1px solid var(--color-fd-border); border-radius: var(--sp-radius-surface); overflow: hidden; background: var(--color-fd-card); }
+.sp-embed iframe { display: block; width: 100%; border: 0; background: transparent; }
+.sp-embed figcaption { display: flex; flex-wrap: wrap; gap: 6px 16px; justify-content: space-between; padding: 10px 14px; border-top: 1px solid var(--color-fd-border); font-size: 13px; color: var(--color-fd-muted-foreground); }
+.sp-embed a { color: var(--color-fd-primary); text-underline-offset: 3px; }
+
+/* Token swatches */
+.sp-swatches { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 12px; margin: 1.25rem 0; }
+.sp-swatch { border: 1px solid var(--color-fd-border); border-radius: var(--sp-radius-control); overflow: hidden; font-size: 12px; background: var(--color-fd-card); }
+.sp-swatch > div { height: 56px; border-bottom: 1px solid var(--color-fd-border); }
+.sp-swatch p { margin: 0; padding: 8px 10px; }
+.sp-swatch code { display: block; font-size: 11px; overflow-wrap: anywhere; }
+
+/* Responsive tables scroll instead of widening the page */
+.prose table { display: block; overflow-x: auto; }

@@ -51,7 +51,7 @@ The token pipeline feeds the Lit components in `packages/components` (`@spartan/
 - Storybook has an Icons panel (`.storybook/manager.tsx`) over the licensed Central Icons set, generated into a git-ignored file. Never commit icon data or the license key; see `README.md`.
 - Theme settings are five independent attributes (style, color scheme, contrast, hue, density); high contrast is a boolean, never a theme value. The CSS composes them with inherited toggle variables, `packages/components/src/theme.ts` is the runtime API, and Storybook has a control for each. See `tokens/figma/README.md`.
 - Components consume only generated `--sp-*` variables. Sizes, paddings, type, and icon sizes come from the Component and Density collections, so Relaxed and Compact density change them.
-- The Next.js + Fumadocs app is a thin shell: `/docs/*` routes redirect to Linear documents via `lib/linear.ts`, and `app/api/tasks` returns 410. `content/docs` MDX and `data/tasks.json` are frozen migration snapshots; do not edit them as live docs or task state.
+- The Next.js + Fumadocs app publishes the design-system usage docs from `content/docs` (Getting started, Foundations, Theming, Components) with static search at `/api/search`. Retired project routes redirect to Linear via `lib/linear-docs.json` (applied in `next.config.mjs`), and `app/api/tasks` returns 410. `content/archive` MDX and `data/tasks.json` are frozen migration snapshots; do not edit them as live docs or task state. `pnpm docs:build` also embeds the static Storybook at `/storybook`. Vercel projects and deploy steps are in `README.md`.
 
 ## Writing rules
 
