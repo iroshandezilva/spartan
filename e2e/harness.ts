@@ -41,6 +41,11 @@ export async function openCanvas(browser: Browser, base: string, story = 'compon
 
 export const setMarkup = (page: Page, html: string) => page.evaluate(html => { document.getElementById('storybook-root')!.innerHTML = html; }, html).then(() => page.waitForTimeout(50));
 
+// Setting attributes on the document root, and the combined theme names split into the two settings
+// the code API exposes: 'Dark High Contrast' is color scheme Dark with high contrast on.
+export const themeAttrs = (theme: string): Record<string, string> => ({ 'color-scheme': theme.replace(' High Contrast', ''), contrast: theme.endsWith('High Contrast') ? 'High' : 'Normal' });
+export const setAttrs = (page: Page, attrs: Record<string, string>) => page.evaluate(attrs => { for (const [k, v] of Object.entries(attrs)) document.documentElement.setAttribute(`data-sp-mode-${k}`, v); }, attrs);
+
 // ---- expected colors, from the generated token source ----
 
 export const channel = (n: number) => Math.round(n * 255);
@@ -62,3 +67,17 @@ export function expectedColor(source: TokenSourceV2, key: string, assign: ModeAs
 export function close(a: { r: number; g: number; b: number; a: number }, b: { r: number; g: number; b: number; a: number }, tol = 1) {
   return Math.abs(a.r - b.r) <= tol && Math.abs(a.g - b.g) <= tol && Math.abs(a.b - b.b) <= tol && Math.abs(a.a - b.a) <= 0.01;
 }
+
+// Chromium serializes colors in custom properties as hex while the generator writes rgb(), so
+// both sides are compared as eight-digit hex.
+const hex = (n: number) => Math.max(0, Math.min(255, Math.round(n))).toString(16).padStart(2, '0');
+const COLOR = /#[0-9a-fA-F]{3,8}\b|rgba?\([^)]*\)/g;
+export const canon = (s: string) => s.replace(/\s+/g, ' ').trim().replace(COLOR, c => {
+  if (c.startsWith('#')) {
+    const d = c.slice(1);
+    const full = d.length <= 4 ? [...d].map(x => x + x).join('') : d;
+    return '#' + full.padEnd(8, 'f').toLowerCase();
+  }
+  const n = (c.match(/-?\d*\.?\d+/g) ?? []).map(Number);
+  return '#' + hex(n[0]) + hex(n[1]) + hex(n[2]) + hex((n[3] ?? 1) * 255);
+});

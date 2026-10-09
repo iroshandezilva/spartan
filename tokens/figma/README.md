@@ -23,43 +23,91 @@ follows the name; the Figma ID and key stored beside it are the stable identity.
 
 ## Modes in CSS
 
-Each collection has its own attribute: `data-sp-mode-<code key>="<mode name>"`, for example
-`data-sp-mode-style="Helios"`. The first mode of each collection is the default on `:root`, so
-Atlas, Blue, Light, and Relaxed apply with no attribute. Collections feed each other (05
-Component aliases 06 Density; 03 Semantic Color aliases 02 Primary and 04 Semantic Foundation;
-07 Style aliases 03 Semantic Color), and a `var()` resolves where it is declared. So a token is
-re-declared under the mode selectors of every collection that can change its value, which lets a
-nested `data-sp-mode-density="Compact"` or `data-sp-mode-style="Ares"` re-resolve its subtree.
+There is one attribute per independent setting, `data-sp-mode-<setting>="<value>"`:
 
-How a token is declared, by what its value depends on:
+| Setting | Attribute | Values | Default |
+| --- | --- | --- | --- |
+| Style | `data-sp-mode-style` | Atlas, Selene, Helios, Ares | Atlas |
+| Color scheme | `data-sp-mode-color-scheme` | Light, Dark | Light |
+| Contrast | `data-sp-mode-contrast` | Normal, High | Normal |
+| Brand hue | `data-sp-mode-primary` | Blue, Purple, Orange, Sky | Blue |
+| Density | `data-sp-mode-density` | Relaxed, Compact | Relaxed |
 
-- Nothing varies: once on `:root`.
-- Only collections other than its own (for example Component tokens that alias Density): the same
-  `var()` under each mode of each collection it depends on.
-- Its own collection's mode (for example a Semantic Color token): one rule per own mode
-  (`[data-sp-mode-semantic-color="Dark"]`).
-- Its own mode and other collections' modes (a Style token that aliases a Semantic Color that
-  aliases a Primary hue): the default on `:root`, the default under each foreign mode, and each own
-  mode's value under its attribute repeated (`[x="Ares"][x="Ares"]`) so it outranks the foreign
-  rules on an element that sets both. No selector combines two collections, so any number of
-  collections can depend on each other; one token depends on three today
-  (`style.field.border.hover`: Style, Semantic Color, Primary).
+With no attribute anywhere the result is Atlas, Light, normal contrast, Blue, and Relaxed.
 
-Limits, enforced by the tests:
+**High contrast is its own setting.** Figma keeps four combined Semantic Color modes (Light, Dark,
+Light High Contrast, Dark High Contrast) and that stays as source data, but the code boundary splits
+them into color scheme and contrast (`COLLECTION_RULES` in `lib/figma-tokens.ts`; the source file
+records `axes` and `modeAxes`). So `Dark High Contrast` is color scheme Dark with contrast High,
+high contrast composes with every style and both schemes, and no combined value is exposed. Setting
+only `contrast="High"` keeps the default Light scheme: Light High Contrast.
 
-- A token's own mode and the modes it depends on must be set on the same element. A mode
-  attribute set on a descendant re-resolves that collection's tokens, and tokens that depend on
-  that collection alone, but not a token whose own collection's mode is set on an ancestor.
-- Opacity primitives are percentages (`50%`), and alpha-bound colors become
-  `color-mix(in srgb, <color> <opacity>, transparent)`.
+**How the CSS composes the settings.** Each axis is carried by inherited toggle variables
+(`--_sp-not-style-helios` and so on). An attribute sets its own axis' toggles on its element and
+leaves every other axis inherited. A token whose value differs per mode is one expression that picks
+its value from the toggles, and it is declared again wherever an axis it depends on can change,
+because `var()` resolves where it is declared. A toggle is `initial` when its value is selected and
+empty when it is not, so `var(--toggle, value)` gives `value` only for the selected mode and the
+terms concatenate to exactly the selected value. Consequences, all tested in a CSS cascade
+simulator and in Chromium:
+
+- Settings are independent at any depth: a nested element that sets only the color scheme keeps the
+  page's contrast, style, hue, and density, and the same for each of the five settings.
+- Any number of settings can matter to one token (`style.field.border.hover` depends on style,
+  color scheme and contrast, and hue), and they can be set on different elements.
+- There are no compound selectors and no specificity tricks; every token is declared once.
+
+Opacity primitives are percentages (`50%`), and alpha-bound colors become
+`color-mix(in srgb, <color> <opacity>, transparent)`. The toggles use empty custom property values,
+which current evergreen browsers support; they were verified in Chromium only.
 
 ```html
-<html data-sp-mode-style="Selene" data-sp-mode-semantic-color="Dark" data-sp-mode-primary="Purple">
-  <div data-sp-mode-density="Compact"> <!-- Compact inside, everything else inherited -->
+<html data-sp-mode-style="Selene" data-sp-mode-color-scheme="Dark" data-sp-mode-contrast="High" data-sp-mode-primary="Purple">
+  <section data-sp-mode-density="Compact"> <!-- Compact inside, everything else inherited -->
     <sp-button>Save</sp-button>
-  </div>
+  </section>
+  <aside data-sp-mode-color-scheme="Light"> <!-- Light inside, still high contrast and Selene -->
+  </aside>
 </html>
 ```
+
+### Code API and migration
+
+Use `@spartan/components/theme` instead of writing attributes by hand:
+
+```ts
+import { applyTheme, fromLegacyTheme } from '@spartan/components/theme';
+
+applyTheme(document.documentElement, { style: 'Helios', colorScheme: 'Dark', highContrast: true, hue: 'Purple', density: 'Compact' });
+applyTheme(document.documentElement, { highContrast: false }); // only contrast changes
+applyTheme(section, { colorScheme: null });                    // inherit the color scheme again
+```
+
+Only the fields you pass change; `null` removes a setting from that element; invalid values throw and
+change nothing. A test checks the constants and attribute names against `tokens/source.json`.
+
+Migrating from the earlier combined theme value (`data-sp-mode-semantic-color`, which is gone):
+
+| Before | Now |
+| --- | --- |
+| `data-sp-mode-semantic-color="Light"` | `data-sp-mode-color-scheme="Light"` (or no attribute) |
+| `data-sp-mode-semantic-color="Dark"` | `data-sp-mode-color-scheme="Dark"` |
+| `data-sp-mode-semantic-color="Light High Contrast"` | `data-sp-mode-color-scheme="Light" data-sp-mode-contrast="High"` |
+| `data-sp-mode-semantic-color="Dark High Contrast"` | `data-sp-mode-color-scheme="Dark" data-sp-mode-contrast="High"` |
+
+`fromLegacyTheme('Dark High Contrast')` returns `{ colorScheme: 'Dark', highContrast: true }`. In
+tests, `assignmentFromAttributes(source, { 'color-scheme': 'Dark', contrast: 'High' })` gives the
+combined Figma mode, and `resolveToken` accepts either form.
+
+### Storybook
+
+The toolbar has Style, Theme (Light or Dark), Hue, and Density dropdowns that show their current
+value, and a **High contrast** switch (off by default) beside them. All five are Storybook globals,
+so a shared link reproduces them, for example
+`?globals=style:Helios;theme:Dark;highContrast:!true;hue:Purple;density:Compact`. They apply to
+canvases and Docs previews, stay when you move between stories, and are keyboard accessible. A
+shared link from before the split with `theme:Dark High Contrast` still opens Dark with high contrast
+on.
 
 ## Resolving a mode combination
 
@@ -67,9 +115,10 @@ A token's value is picked per collection, each mode independent. For example
 `semantic-color.color.primary.default` is `color/primary/600` in Light and Dark, `/800` in Light High
 Contrast, and `/300` in Dark High Contrast, and `color/primary/600` itself is a color per hue: Blue
 `#006dce`, Purple `#8933e4`, Orange `#ad5000`, Sky `#007a9b`. So Dark High Contrast with Sky resolves
-to Sky's step 300. `resolveToken(source, key, { 'semantic-color': 'Dark', primary: 'Orange' })` in
-`lib/figma-tokens.ts` does this, and the tests compare it with the generated CSS for all 128
-combinations of style, hue, theme, and density, in a CSS cascade simulator and in Chromium. What Button and Icon Button bind to is in `bindings.md`.
+to Sky's step 300. `resolveToken(source, key, { 'color-scheme': 'Dark', contrast: 'High', primary: 'Orange' })` in
+`lib/figma-tokens.ts` does this (a combined mode name such as `'semantic-color': 'Dark High Contrast'`
+works too), and the tests compare it with the generated CSS for all 128
+combinations of style, hue, color scheme, contrast, and density, in a CSS cascade simulator and in Chromium. What Button and Icon Button bind to is in `bindings.md`.
 
 ## Unsupported and flagged values
 

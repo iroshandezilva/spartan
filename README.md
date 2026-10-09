@@ -49,3 +49,7 @@ Buttons take icons in the `start` (left) and `end` (right) slots, and any `<svg>
 `vercel.json` builds Storybook (`pnpm storybook:build`) and serves `packages/components/storybook-static`, but only for `main` (Production) and `dev` (Preview): its `ignoreCommand` skips every other branch and pull request. Create a Vercel project from this repo with the repo root as its Root Directory; no other settings are needed. It is for the Storybook project only: the Next docs app would need its own project and config.
 
 Do not add `CENTRAL_LICENSE_KEY` to a public deployment. The Iconists license forbids sharing the icons publicly, so the published Storybook shows the plain fallback icon. Add the key only behind Vercel Deployment Protection.
+
+## Theme settings
+
+Style (Atlas, Selene, Helios, Ares), color scheme (Light, Dark), **high contrast** (on or off), brand hue, and density are five independent settings. High contrast is a boolean that composes with every style and both color schemes, not a theme value. Set them with `applyTheme` from `@spartan/components/theme`, or with the `data-sp-mode-*` attributes. Storybook has a control for each, including a High contrast switch, and they are Storybook globals, so a shared link reproduces them. See `tokens/figma/README.md` for the attributes, the migration from the earlier combined theme values, and how the CSS composes them.
