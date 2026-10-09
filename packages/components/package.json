@@ -7,6 +7,7 @@
   "sideEffects": [
     "./src/index.ts",
     "./src/components/**/define.ts",
+    "./src/foundations/**/color-palette.ts",
     "./dist/index.js",
     "./dist/components/**/define.js",
     "./dist/tokens.css"
