@@ -42,7 +42,7 @@ Buttons take icons in the `start` (left) and `end` (right) slots, and any `<svg>
 
 ## Branches
 
-`dev` is the default branch and the target for every pull request. `main` only receives releases from `dev`; see `AGENTS.md`. Both are protected by the `main and dev protection` ruleset and require the `validate` check.
+`dev` is the default branch and the target for every pull request. `main` only receives releases from `dev`; see `AGENTS.md`. Both are protected by rulesets and take pull requests only. Only `main` requires the `validate` check, so it runs on the release pull request from `dev` and not on pull requests into `dev`. Run `pnpm typecheck`, `pnpm test`, and `pnpm test:e2e` locally before opening a pull request into `dev`.
 
 ## Publishing Storybook on Vercel
 

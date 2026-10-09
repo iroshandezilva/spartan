@@ -1,10 +1,11 @@
 name: validate
 
 on:
+  # Runs only for releases into main. Pull requests into dev are not gated by it.
   pull_request:
-    branches: [main, dev]
+    branches: [main]
   push:
-    branches: [main, dev]
+    branches: [main]
 
 permissions:
   contents: read
@@ -14,7 +15,7 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  # The job name is the status check that the "main protection" ruleset requires.
+  # The job name is the status check that the "main protection" ruleset requires on main.
   validate:
     runs-on: ubuntu-latest
     timeout-minutes: 20
