@@ -1,8 +1,8 @@
 // "Icons" panel: search the generated Central Icons set and pick one for the current
 // story's icon arguments. Stories opt in with parameters.iconPicker.
 import React, { useMemo, useState } from 'react';
-import { AddonPanel } from 'storybook/internal/components';
-import { addons, types, useArgs, useParameter } from 'storybook/manager-api';
+import { AddonPanel, ToggleButton } from 'storybook/internal/components';
+import { addons, types, useArgs, useGlobals, useParameter } from 'storybook/manager-api';
 import { useTheme } from 'storybook/theming';
 import data from './generated/icons.json';
 
@@ -92,5 +92,32 @@ addons.register('spartan/icon-picker', () => {
         <Picker />
       </AddonPanel>
     ),
+  });
+});
+
+// High contrast is its own on/off setting, not a theme value, so it is a labeled toggle button in
+// the toolbar rather than a dropdown item. Storybook's ToggleButton is a real button with
+// role="switch" and aria-checked, so it is reachable with Tab and toggles with Space or Enter.
+const HighContrastToggle = () => {
+  const [globals, updateGlobals] = useGlobals();
+  const on = globals.highContrast === true;
+  return (
+    <ToggleButton
+      pressed={on}
+      ariaLabel="High contrast"
+      tooltip="High contrast on or off, for every style and color scheme"
+      onClick={() => updateGlobals({ highContrast: !on })}
+    >
+      High contrast: {on ? 'On' : 'Off'}
+    </ToggleButton>
+  );
+};
+
+addons.register('spartan/high-contrast', () => {
+  addons.add('spartan/high-contrast/tool', {
+    type: types.TOOL,
+    title: 'High contrast',
+    match: ({ viewMode }) => viewMode === 'story' || viewMode === 'docs',
+    render: () => <HighContrastToggle />,
   });
 });

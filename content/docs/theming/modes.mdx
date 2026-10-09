@@ -1,26 +1,27 @@
 ---
 title: Modes in CSS
-description: How the generated stylesheet resolves modes, and its limits.
+description: How the generated stylesheet composes the five settings.
 ---
 
-Each collection has its own attribute, `data-sp-mode-<collection>="<mode name>"`. The generator re-declares every token under the selectors of each collection that can change its value.
+Each setting has its own attribute, `data-sp-mode-<setting>="<value>"`. Each setting is carried by inherited toggle variables, such as `--_sp-not-style-helios`. An attribute sets only its own setting's toggles on its element and leaves every other setting inherited.
 
-## Resolution
+A token whose value differs by mode is one expression that picks its value from the toggles. It is declared again wherever a setting it depends on can change, because `var()` resolves where it is declared.
 
-A token's value is picked per collection, with each mode independent. For example `--sp-color-primary-default` is step 600 of the active hue in Light and Dark, step 800 in Light High Contrast, and step 300 in Dark High Contrast. Dark High Contrast with Sky therefore resolves to Sky step 300.
+## Consequences
 
-## Limits
-
-- A token may depend on the modes of at most two collections.
-- Tokens that depend on two (semantic colors that alias a Primary hue) are re-declared per combination with a compound selector. Set both attributes on one element.
+- Settings are independent at any depth. A nested element that sets only the color scheme keeps the page's style, contrast, hue, and density.
+- Any number of settings can matter to one token, and they can be set on different elements. There are no compound selectors.
 - Opacity primitives are percentages, and alpha-bound colors become `color-mix(in srgb, <color> <opacity>, transparent)`.
+- The toggles use empty custom property values. The project verified them in Chromium only.
 
-## Nested modes
-
-Because each `var()` resolves where it is declared, a nested attribute re-resolves its subtree. A Compact island inside a Relaxed page works, and so does a Dark panel inside a Light page.
+## Nested settings
 
 ```html
-<section data-sp-mode-semantic-color="Dark">
-  <sp-button>Dark panel button</sp-button>
-</section>
+<html data-sp-mode-color-scheme="Dark" data-sp-mode-contrast="High">
+  <aside data-sp-mode-color-scheme="Light"> <!-- Light inside, still high contrast -->
+    <sp-button>Light panel button</sp-button>
+  </aside>
+</html>
 ```
+
+The full reference, including the migration table, is `tokens/figma/README.md` in the repository.

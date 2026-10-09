@@ -16,8 +16,9 @@ Use Linear to fetch, update, and verify project documentation and issues. Do not
 ## Task contract
 
 - Reuse one canonical Linear issue per component. Search the project issues and source ID before creating a record.
+- Whenever you create a Linear task, update `doc/task-order.html` in the same work session. Add the exact task name, issue ID and direct Linear link; place prerequisites before dependent tasks and renumber the rows. Keep the view aligned when dependencies or open-task membership change. Verify names, links, duplicates and ordering against Linear. Preserve the compact table: order, task name, ID and link. This HTML is a derived work-order view, not a second task tracker; Linear remains the source of truth. Keep Agent Done issues visible until they are actually Done, canceled or archived.
 - Update Development and Figma independently through the `Development track` and `Figma track` label groups. Keep one label from each group and mirror both values in the issue description. Both must be Done for overall completion; reopening either track reopens the issue.
-- When an agent finishes work on an issue, set the issue status to **Agent Done** and record the evidence in the issue: what changed, the verification run, and the remaining gaps. Do this for every issue type, and also when only part of the issue is complete.
+- When an agent finishes work on an issue, set the issue status to **Agent Done** and record the evidence in the issue: what changed, the verification run, and the remaining gaps. Do this for every issue type, and also when only part of the issue is complete. Keep the issue current as the work moves, not only at the end: when you start, set it In Progress and the Development label; after every commit, push, or pull request, add the PR link to the issue and post a comment (or edit your evidence comment) so it never says work is uncommitted or missing a PR when it is not. Before you reply that the work is finished, check the issue's status, labels, PR link, and latest comment against the repository.
 - Agent Done is not Done. Move a component issue to Done only when its Development and Figma tracks are both Done.
 - Documentation, Plugin, Infrastructure, and Research work uses normal Linear issue status.
 - Preserve unverified work as Needs verification, with evidence and remaining acceptance gates in the task body.
@@ -33,4 +34,4 @@ Git-owned token data feeds generated CSS and the custom Figma plugin. Preserve v
 
 ## Validation
 
-From the repository root, run `pnpm test`, `pnpm build`, and `pnpm typecheck` as relevant. Keep evidence in the corresponding Linear issue after validation. Linear issue state is not synchronized back to Git.
+From the repository root, run `pnpm test`, `pnpm build`, and `pnpm typecheck` as relevant. Any change to a component, its styles, its stories, or the theme or token CSS also needs `pnpm test:e2e` (it builds Storybook and runs the real-browser Playwright suite in `e2e/`) and, from `packages/components`, `pnpm test:stories`. CI runs the e2e suite in the `validate` check, and `pnpm test` alone does not cover it. When behavior changes on purpose, update the e2e assertions in the same commit and say so in the Linear evidence. Keep evidence in the corresponding Linear issue after validation. Linear issue state is not synchronized back to Git.

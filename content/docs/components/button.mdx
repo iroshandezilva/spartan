@@ -1,13 +1,13 @@
 ---
 title: Button
-description: An action button with seven variants, two sizes, and form support.
+description: An action button with seven variants, two sizes, four styles, and form support.
 ---
 
 `sp-button` renders a native `<button>` in its shadow root, so Tab, Enter, and Space behave as for any button. It is form-associated: `type="submit"` and `type="reset"` act on the closest form.
 
 <StorybookEmbed story="components-button--playground" title="Button playground" height={200} />
 
-Design reference: [Button set in Spartan DS](https://www.figma.com/design/PhcMPmdpkpgxH3N83SvpBY/Spartan-DS?node-id=21-27). Sizes map to the Figma set: `sm` is Small and `base` is Base.
+Design reference: [Button set in Spartan DS](https://www.figma.com/design/PhcMPmdpkpgxH3N83SvpBY/Spartan-DS?node-id=21-27). Sizes map to the Figma set: `sm` is Small and `base` is Base. The corner radius, Secondary treatment, and state colors come from the active style, so there is no `shape` property.
 
 ## Usage
 
@@ -19,7 +19,7 @@ import '@spartan/components/button';
 ```html
 <sp-button>Save</sp-button>
 <sp-button variant="secondary" size="sm">Cancel</sp-button>
-<sp-button variant="danger" shape="pill" loading>Deleting</sp-button>
+<sp-button variant="danger" loading>Deleting</sp-button>
 ```
 
 ## Variants
@@ -28,16 +28,21 @@ import '@spartan/components/button';
 
 <StorybookEmbed story="components-button--variants" title="All variants" height={140} />
 
-## Sizes and shapes
+## Sizes
 
-<Tabs items={['Sizes', 'Shapes']}>
-  <Tab value="Sizes">
-    <StorybookEmbed story="components-button--sizes" title="Small and Base" height={120} />
-  </Tab>
-  <Tab value="Shapes">
-    <StorybookEmbed story="components-button--shapes" title="Rounded and Pill" height={120} />
-  </Tab>
-</Tabs>
+<StorybookEmbed story="components-button--sizes" title="Small and Base" height={120} />
+
+## Styles
+
+The style setting (`data-sp-mode-style`: Atlas, Selene, Helios, Ares) owns the corner radius, the Secondary treatment, and every state color. Helios is the pill and Ares is square. A nested attribute re-resolves the style for its subtree.
+
+```html
+<div data-sp-mode-style="Helios">
+  <sp-button>Pill</sp-button>
+</div>
+```
+
+<StorybookEmbed story="components-button--styles" title="Button in each style" height={320} />
 
 ## Properties
 
@@ -45,7 +50,6 @@ import '@spartan/components/button';
 | --- | --- | --- | --- | --- |
 | `variant` | `variant` | `'primary' \| 'secondary' \| 'danger' \| 'ghost' \| 'dashed' \| 'danger-subtle' \| 'warning'` | `'primary'` | Visual emphasis. |
 | `size` | `size` | `'sm' \| 'base'` | `'base'` | Height, padding, and type size. Density modes scale each. |
-| `shape` | `shape` | `'rounded' \| 'pill'` | `'rounded'` | `pill` fully rounds the ends. |
 | `type` | `type` | `'button' \| 'submit' \| 'reset'` | `'button'` | Native button behavior inside a form. |
 | `disabled` | `disabled` | `boolean` | `false` | Prevents interaction and removes the control from the tab order. |
 | `loading` | `loading` | `boolean` | `false` | Shows a spinner, hides the content, and ignores activation. The button stays focusable. |
@@ -88,12 +92,18 @@ The six Figma states map to behavior, not to properties.
 | Default | No state applied. |
 | Hover | `:hover`, on devices that support hover. |
 | Pressed | `:active`. |
-| Focus | `:focus-visible`: a 2px ring with a 2px offset in `--sp-color-focus-ring-default`. |
+| Focus | `:focus-visible`: a 2px ring drawn 4px outside the border edge in `--sp-color-focus-ring-default`, with the style's focus radius. |
 | Disabled | `disabled`, or an ancestor `<fieldset disabled>`. |
 | Loading | `loading`. |
 
 <StorybookEmbed story="components-button--disabled" title="Disabled variants" height={140} />
 <StorybookEmbed story="components-button--loading" title="Loading variants" height={140} />
+
+## Direction
+
+Layout follows the inherited `dir` attribute. `start` is the leading side in both LTR and RTL, and a nested `dir` overrides the document's. Slotted icons are not mirrored, so flip a direction-sensitive icon yourself.
+
+<StorybookEmbed story="components-button--directions" title="LTR and RTL" height={260} />
 
 ## Density
 
@@ -118,7 +128,7 @@ Heights are 40px (Base) and 32px (Small) in Relaxed, and 32px and 28px in Compac
 - A `disabled` button is removed from the tab order and does not fire `click`.
 - A `loading` button sets `aria-busy="true"`, stays focusable, and swallows activation. The spinner is `aria-hidden`.
 - The accessible name is the slotted label. Mark slotted icon SVGs `aria-hidden="true"` so they are not read twice.
-- Color pairs come from semantic tokens, so the High Contrast modes apply without extra work. Contrast was not measured for this page.
+- Color pairs come from semantic tokens, so `data-sp-mode-contrast="High"` applies without extra work. Contrast ratios were not measured for this page.
 
 ## Links
 

@@ -26,8 +26,10 @@ Primitives run on a 4px step, for example `--sp-prim-space-1` (4px), `-2` (8px),
 | `--sp-radius-pill` | Fully rounded ends |
 | `--sp-radius-drawer` | Drawers |
 
+Button corner radius is owned by the active style, not by `--sp-radius-control` alone: Helios is the pill and Ares is square. See [Button](/docs/components/button#styles).
+
 <Scale kind="radius" tokens={['--sp-radius-control','--sp-radius-surface','--sp-radius-drawer','--sp-radius-pill']} />
 
 ## Border width
 
-`--sp-border-width-default` is 1px in Light and Dark and 2px in the two high contrast modes.
+`--sp-border-width-default` is 1px at Normal contrast and 2px at High contrast, in both color schemes.

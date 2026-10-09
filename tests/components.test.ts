@@ -26,7 +26,7 @@ test('consumer import registers both elements once and keeps their public proper
   assert.equal(customElements.get('sp-button'), SpButton);
   assert.equal(customElements.get('sp-icon-button'), SpIconButton);
   assert.equal(SpButton.formAssociated, true);
-  assert.deepEqual(Object.keys(SpButton.properties), ['variant', 'type', 'disabled', 'name', 'value', 'size', 'shape', 'loading']);
+  assert.deepEqual(Object.keys(SpButton.properties), ['variant', 'type', 'disabled', 'name', 'value', 'size', 'loading']);
   assert.deepEqual(Object.keys(SpIconButton.properties), ['variant', 'type', 'disabled', 'name', 'value', 'size', 'label']);
 });
 
@@ -52,8 +52,34 @@ test('component styles contain no hard-coded colors, sizes, or radii outside the
 test('stories exist for every variant, size, and state in the Figma sets', () => {
   const button = read('button/sp-button.stories.ts');
   for (const v of ['primary', 'secondary', 'danger', 'ghost', 'dashed', 'danger-subtle', 'warning']) assert.match(button, new RegExp(`'${v}'`));
-  for (const story of ['Variants', 'Sizes', 'Shapes', 'WithIcons', 'Disabled', 'Loading', 'Density', 'InForm']) assert.match(button, new RegExp(`export const ${story}\\b`));
+  for (const story of ['Variants', 'Sizes', 'Styles', 'Directions', 'WithIcons', 'Disabled', 'Loading', 'Density', 'InForm']) assert.match(button, new RegExp(`export const ${story}\\b`));
   const icon = read('icon-button/sp-icon-button.stories.ts');
   for (const s of ['xs', 'sm', 'base']) assert.match(icon, new RegExp(`'${s}'`));
   assert.deepEqual(readdirSync(new URL('../packages/components/src/components', import.meta.url)).sort(), ['button', 'icon-button', 'shared']);
+});
+
+test('Button takes its shape, fills, and borders from the Style collection and has no shadow or shape API', () => {
+  const action = read('shared/action.styles.ts').replace(/\/\*[\s\S]*?\*\//g, '').replace(/^\s*\/\/.*$/gm, '');
+  const button = read('button/sp-button.ts');
+  const s = source();
+  const emitted = new Set(s.tokens.map(t => tokenCssName(t, s)));
+  assert.doesNotMatch(action, /box-shadow|--_shadow|shadow/, 'buttons carry no shadow');
+  assert.doesNotMatch(button + read('button/define.ts'), /ButtonShape|declare shape|shape:|this\.shape/, 'the obsolete shape API is gone');
+  assert.match(action, /border-radius:\s*var\(--sp-style-button-radius\)/);
+  assert.match(action, /var\(--sp-style-button-border-width\)/);
+  assert.match(action, /border-radius:\s*var\(--sp-style-field-focus-radius\)/);
+  // Every variant maps fill, foreground, and border for default, hover, and pressed.
+  for (const v of ['primary', 'secondary', 'danger', 'ghost', 'dashed', 'danger-subtle', 'warning'])
+    for (const part of ['background', 'foreground', 'border'])
+      for (const state of ['default', 'hover', 'pressed']) {
+        const name = `--sp-style-button-${v}-${part}-${state}`;
+        assert.ok(emitted.has(name), `${name} is not emitted`);
+        assert.ok(action.includes(name), `${name} is not used`);
+      }
+});
+
+test('Button layout uses logical properties so an inherited or nested dir mirrors it', () => {
+  const css = ['shared/action.styles.ts', 'button/sp-button.styles.ts'].map(read).join('\n').replace(/\/\*[\s\S]*?\*\//g, '');
+  assert.doesNotMatch(css, /\b(margin|padding|border)-(left|right)\b|(?<![-\w])(left|right)\s*:|text-align:\s*(left|right)/, 'physical left/right in Button styles');
+  assert.match(css, /padding-inline:/);
 });

@@ -44,11 +44,11 @@ Buttons take icons in the `start` (left) and `end` (right) slots, and any `<svg>
 
 ## Branches
 
-`dev` is the default branch and the target for every pull request. `main` only receives releases from `dev`; see `AGENTS.md`. Both are protected by the `main and dev protection` ruleset and require the `validate` check.
+`dev` is the default branch and the target for every pull request. `main` only receives releases from `dev`; see `AGENTS.md`. Both are protected by rulesets and take pull requests only. Only `main` requires the `validate` check, so it runs on the release pull request from `dev` and not on pull requests into `dev`. Run `pnpm typecheck`, `pnpm test`, and `pnpm test:e2e` locally before opening a pull request into `dev`.
 
 ## Documentation site
 
-The docs site is Next.js with Fumadocs. Pages are MDX under `content/docs`, grouped as Getting started, Foundations, Theming, and Components, and ordered by each folder's `meta.json`. Search is a static index at `/api/search`. The site is styled with the generated `--sp-*` tokens, and its header toggle sets `data-sp-mode-semantic-color` to `Light` or `Dark`.
+The docs site is Next.js with Fumadocs. Pages are MDX under `content/docs`, grouped as Getting started, Foundations, Theming, and Components, and ordered by each folder's `meta.json`. Search is a static index at `/api/search`. The site is styled with the generated `--sp-*` tokens, and its header toggle sets `data-sp-mode-color-scheme` to `Light` or `Dark`.
 
 - Run it: `pnpm dev` (http://127.0.0.1:4310). Embeds point at `/storybook`, so run `pnpm docs:storybook` once, or set `NEXT_PUBLIC_STORYBOOK_URL=http://127.0.0.1:6006` and run `pnpm storybook`.
 - Add a component page: copy `content/templates/component-page.mdx` to `content/docs/components/<name>.mdx`, add the name to `content/docs/components/meta.json`, and fill every table from the component source. Describe implemented behavior only. `tests/docs.test.ts` fails if a page lacks a title or description, embeds a story id that does not exist, or uses an em dash.
@@ -63,7 +63,7 @@ There are two Vercel projects in the `iroshandezilvas-projects` team, both conne
 | `spartan-docs` (docs site, https://spartan-docs.vercel.app) | Next.js | `pnpm docs:build` | Next.js default; includes Storybook at `/storybook` |
 | `spartan-storybook` (standalone Storybook) | Other | `pnpm storybook:build` | `packages/components/storybook-static` |
 
-Both set `ignoreCommand` to skip every branch except `main`, so git deployments happen only on release. To deploy by hand from the repo root:
+Both set `ignoreCommand` to skip every branch except `main` (Production) and `dev` (Preview), and skip pull request branches. To deploy by hand from the repo root:
 
 ```sh
 vercel link --project spartan-docs --scope iroshandezilvas-projects   # once; .vercel is git-ignored
@@ -72,3 +72,7 @@ vercel deploy --prod --scope iroshandezilvas-projects                  # product
 ```
 
 Do not add `CENTRAL_LICENSE_KEY` to either project's environment while it is public. The Iconists license forbids sharing the icons publicly, so the published Storybook (including the copy under `/storybook` on the docs site) shows the plain fallback icon.
+
+## Theme settings
+
+Style (Atlas, Selene, Helios, Ares), color scheme (Light, Dark), **high contrast** (on or off), brand hue, and density are five independent settings. High contrast is a boolean that composes with every style and both color schemes, not a theme value. Set them with `applyTheme` from `@spartan/components/theme`, or with the `data-sp-mode-*` attributes. Storybook has a control for each, including a High contrast switch, and they are Storybook globals, so a shared link reproduces them. See `tokens/figma/README.md` for the attributes, the migration from the earlier combined theme values, and how the CSS composes them.

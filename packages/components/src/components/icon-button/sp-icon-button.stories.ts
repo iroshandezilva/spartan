@@ -28,6 +28,7 @@ const meta: Meta<Args> = {
     <sp-icon-button label=${label} variant=${variant} size=${size} ?disabled=${disabled} @click=${onClick}>${iconNode(icon)}</sp-icon-button>
   `,
   parameters: {
+    design: { type: 'figma', url: 'https://www.figma.com/design/PhcMPmdpkpgxH3N83SvpBY/Spartan-DS?node-id=326-63' },
     iconPicker: { targets: [{ arg: 'icon', label: 'Icon' }] },
     docs: {
       description: {

@@ -9,11 +9,11 @@
 @import '../public/tokens.css';
 
 /* Fumadocs switches dark styles with the theme value; here that value is the Spartan mode attribute. */
-@custom-variant dark (&:where([data-sp-mode-semantic-color='Dark'], [data-sp-mode-semantic-color='Dark'] *));
+@custom-variant dark (&:where([data-sp-mode-color-scheme='Dark'], [data-sp-mode-color-scheme='Dark'] *));
 
-/* Presentation comes from the generated Spartan tokens, so Light and Dark follow Semantic Color. */
+/* Presentation comes from the generated Spartan tokens, so Light and Dark follow the color scheme. */
 :root,
-[data-sp-mode-semantic-color] {
+[data-sp-mode-color-scheme] {
   --color-fd-background: var(--sp-color-surface-default);
   --color-fd-foreground: var(--sp-color-foreground-default);
   --color-fd-muted: var(--sp-color-surface-muted);

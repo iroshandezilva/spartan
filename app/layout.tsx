@@ -14,8 +14,8 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={`${sans.variable} ${mono.variable}`} suppressHydrationWarning>
       <body>
-        {/* The theme toggle writes the Spartan Semantic Color mode attribute, so every --sp-color-* token follows it. */}
-        <RootProvider theme={{ attribute: 'data-sp-mode-semantic-color', defaultTheme: 'system', value: { light: 'Light', dark: 'Dark' } }}>
+        {/* The theme toggle writes the Spartan color scheme attribute, so every --sp-color-* token follows it. */}
+        <RootProvider theme={{ attribute: 'data-sp-mode-color-scheme', defaultTheme: 'system', value: { light: 'Light', dark: 'Dark' } }}>
           {children}
         </RootProvider>
       </body>

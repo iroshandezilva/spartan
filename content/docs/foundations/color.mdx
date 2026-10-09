@@ -3,7 +3,7 @@ title: Color
 description: Semantic color tokens that follow the Light, Dark, and high contrast modes.
 ---
 
-Semantic Color has four modes: Light, Dark, Light High Contrast, and Dark High Contrast. Primary colors also depend on the active Primary hue (Blue, Purple, Orange, or Sky). This site's header toggle switches Light and Dark; see [Theming](/docs/theming) for the others.
+Semantic colors depend on the color scheme (Light or Dark) and on contrast (Normal or High). Primary colors also depend on the active hue (Blue, Purple, Orange, or Sky), and some colors on the active style. This site's header toggle switches Light and Dark; see [Theming](/docs/theming) for the others.
 
 ## Surface and text
 
@@ -20,5 +20,5 @@ Semantic Color has four modes: Light, Dark, Light High Contrast, and Dark High C
 ## Guidance
 
 - Pair a fill with its matching text token, for example `--sp-color-primary-default` with `--sp-color-primary-foreground`.
-- Do not read primitive color variables (`--sp-prim-color-*`) in components. Semantic tokens carry the mode and hue logic.
+- Do not read primitive color variables (`--sp-prim-color-*`) in components. Semantic tokens carry the color scheme, contrast, and hue logic.
 - Focus rings use `--sp-color-focus-ring-default`.

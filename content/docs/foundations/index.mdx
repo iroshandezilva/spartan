@@ -3,13 +3,13 @@ title: Foundations
 description: How the Spartan design tokens are organized and generated.
 ---
 
-Spartan tokens come from the Spartan DS Figma variables. A verified export of all 461 variables is committed in the repository, and a build step turns it into one stylesheet, `tokens.css`. Nothing in that file is edited by hand.
+Spartan tokens come from the Spartan DS Figma variables. A verified export of all 547 variables is committed in the repository, and a build step turns it into one stylesheet, `tokens.css`. Nothing in that file is edited by hand.
 
 ```text
 Figma variables export  ->  tokens/source.json  ->  public/tokens.css
 ```
 
-## Six collections
+## Seven collections
 
 | Figma collection | Modes | CSS prefix |
 | --- | --- | --- |
@@ -19,6 +19,7 @@ Figma variables export  ->  tokens/source.json  ->  public/tokens.css
 | 04 Semantic Foundation | Value | `--sp-` |
 | 05 Component | Value | `--sp-` |
 | 06 Density | Relaxed, Compact | `--sp-` |
+| 07 Style | Atlas, Selene, Helios, Ares | `--sp-` |
 
 A variable named `button/height/base` in 05 Component becomes the property `--sp-button-height-base`.
 

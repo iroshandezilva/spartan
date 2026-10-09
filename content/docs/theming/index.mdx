@@ -1,34 +1,48 @@
 ---
 title: Theming
-description: Switch color mode, hue, and density with attributes.
+description: Five independent settings, each carried by one attribute.
 ---
 
-Spartan has no theme provider and no JavaScript API. A mode is a data attribute, and the generated CSS re-declares tokens under each attribute selector.
+A Spartan theme is five independent settings. Each is a data attribute that the generated CSS reads, and any element can set any of them for its own subtree.
 
-| Attribute | Values |
-| --- | --- |
-| `data-sp-mode-semantic-color` | `Light`, `Dark`, `Light High Contrast`, `Dark High Contrast` |
-| `data-sp-mode-primary` | `Blue`, `Purple`, `Orange`, `Sky` |
-| `data-sp-mode-density` | `Relaxed`, `Compact` |
+| Setting | Attribute | Values | Default |
+| --- | --- | --- | --- |
+| Style | `data-sp-mode-style` | `Atlas`, `Selene`, `Helios`, `Ares` | `Atlas` |
+| Color scheme | `data-sp-mode-color-scheme` | `Light`, `Dark` | `Light` |
+| Contrast | `data-sp-mode-contrast` | `Normal`, `High` | `Normal` |
+| Brand hue | `data-sp-mode-primary` | `Blue`, `Purple`, `Orange`, `Sky` | `Blue` |
+| Density | `data-sp-mode-density` | `Relaxed`, `Compact` | `Relaxed` |
 
-The first value of each is the default on `:root`, so a page with no attributes is Light, Blue, Relaxed.
+With no attribute anywhere the result is Atlas, Light, normal contrast, Blue, and Relaxed.
 
-## Apply a mode
+High contrast is its own setting. It composes with every style and both color schemes, so Dark with `contrast="High"` is Dark High Contrast.
 
-Set the attributes on the root element for the whole page, or on any element to theme only its subtree.
+## Apply a theme
 
-```html
-<html data-sp-mode-semantic-color="Dark" data-sp-mode-primary="Purple" data-sp-mode-density="Compact">
-```
+Use `applyTheme` from `@spartan/components/theme`, or write the attributes yourself.
 
 ```ts
-document.documentElement.setAttribute('data-sp-mode-semantic-color', 'Dark');
+import { applyTheme } from '@spartan/components/theme';
+
+applyTheme(document.documentElement, { style: 'Helios', colorScheme: 'Dark', highContrast: true, hue: 'Purple', density: 'Compact' });
+applyTheme(document.documentElement, { highContrast: false }); // only contrast changes
+applyTheme(section, { colorScheme: null });                    // inherit the color scheme again
 ```
 
-<Callout type="warn" title="Set Semantic Color and Primary on the same element">
-Semantic color tokens alias the Primary hue. They are re-declared for each combination, so the two attributes must sit on one element. Splitting them across a parent and a child can resolve to the wrong value.
+Only the fields you pass change. `null` removes a setting from that element. An invalid value throws and changes nothing.
+
+```html
+<html data-sp-mode-style="Selene" data-sp-mode-color-scheme="Dark" data-sp-mode-contrast="High" data-sp-mode-primary="Purple">
+  <section data-sp-mode-density="Compact"> <!-- Compact inside, everything else inherited -->
+    <sp-button>Save</sp-button>
+  </section>
+</html>
+```
+
+<Callout title="Migrating from data-sp-mode-semantic-color">
+The combined `data-sp-mode-semantic-color` attribute is gone. `Light` and `Dark` become `data-sp-mode-color-scheme`, and the two High Contrast values become a color scheme plus `data-sp-mode-contrast="High"`. `fromLegacyTheme('Dark High Contrast')` returns `{ colorScheme: 'Dark', highContrast: true }`.
 </Callout>
 
 ## This site
 
-The header toggle sets `data-sp-mode-semantic-color` to `Light` or `Dark`, and the site's own colors are mapped to Spartan tokens. High contrast, hue, and density are not exposed in the site toggle. Try them in <StorybookLink>Storybook</StorybookLink>, whose toolbar has Theme, Hue, and Density controls.
+The header toggle sets `data-sp-mode-color-scheme` to `Light` or `Dark`, and the site's own colors are mapped to Spartan tokens. Style, contrast, hue, and density are not exposed in the site toggle. Try them in <StorybookLink>Storybook</StorybookLink>, whose toolbar has Style, Theme, Hue, Density, and High contrast controls.

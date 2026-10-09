@@ -18,12 +18,18 @@ export type TokenV2 = {
   figma: { id: string; key: string; codeSyntax?: string };
   values: Record<string, ValueV2>;
 };
+/** One independent control that a collection's combined Figma modes are split into at the code boundary. */
+export type CollectionAxis = { key: string; values: string[] };
 export type CollectionV2 = {
   key: string;
   name: string;
   cssPrefix: string;
   figma: { id: string; key: string };
   modes: { name: string; figmaId: string }[];
+  /** Independent attributes the modes are exposed as. Each mode is one combination of axis values. */
+  axes?: CollectionAxis[];
+  /** For each mode name, its value on every axis. */
+  modeAxes?: Record<string, Record<string, string>>;
 };
 export type TokenSourceV2 = {
   schema: 'spartan.tokens.v2';
@@ -45,19 +51,35 @@ export type FigmaExport = {
 };
 
 // Mapping that needs human review when the Figma library gains a collection.
-const COLLECTION_RULES: Record<string, { key: string; cssPrefix: string }> = {
+type CollectionRule = { key: string; cssPrefix: string; axes?: CollectionAxis[]; modeAxes?: Record<string, Record<string, string>> };
+const COLLECTION_RULES: Record<string, CollectionRule> = {
   '01 Primitives': { key: 'primitives', cssPrefix: 'prim' },
   '02 Primary': { key: 'primary', cssPrefix: 'hue' },
-  '03 Semantic Color': { key: 'semantic-color', cssPrefix: '' },
+  // Figma keeps one combined mode per scheme and contrast (Light, Dark, Light High Contrast,
+  // Dark High Contrast). Code exposes them as two independent settings instead, so high
+  // contrast composes with every style and both schemes and is never a theme value.
+  '03 Semantic Color': {
+    key: 'semantic-color',
+    cssPrefix: '',
+    axes: [{ key: 'color-scheme', values: ['Light', 'Dark'] }, { key: 'contrast', values: ['Normal', 'High'] }],
+    modeAxes: {
+      Light: { 'color-scheme': 'Light', contrast: 'Normal' },
+      Dark: { 'color-scheme': 'Dark', contrast: 'Normal' },
+      'Light High Contrast': { 'color-scheme': 'Light', contrast: 'High' },
+      'Dark High Contrast': { 'color-scheme': 'Dark', contrast: 'High' },
+    },
+  },
   '04 Semantic Foundation': { key: 'semantic-foundation', cssPrefix: '' },
   '05 Component': { key: 'component', cssPrefix: '' },
   '06 Density': { key: 'density', cssPrefix: '' },
+  // Figma already names these --sp-style-*, which matches the derived CSS names.
+  '07 Style': { key: 'style', cssPrefix: '' },
 };
 
 // FLOAT tokens carry no unit in Figma. Literal values get one from their first
 // name segment; aliases inherit from their target. A family without a rule fails
 // the import so a new family forces a decision instead of defaulting silently.
-const PX_FAMILIES = new Set(['space', 'size', 'radius', 'border-width', 'density', 'contrast', 'badge', 'button', 'dialog', 'field', 'popover', 'selection', 'tooltip', 'avatar', 'switch']);
+const PX_FAMILIES = new Set(['style', 'space', 'size', 'radius', 'border-width', 'density', 'contrast', 'badge', 'button', 'dialog', 'field', 'popover', 'selection', 'tooltip', 'avatar', 'switch']);
 const UNITLESS_LINE_HEIGHTS = new Set(['normal', 'relaxed', 'snug', 'tight']);
 
 function literalUnit(name: string): Unit | undefined {
@@ -102,7 +124,8 @@ export function importFigmaExport(raw: unknown): TokenSourceV2 {
     const rule = COLLECTION_RULES[c.name];
     if (!rule) throw new Error(`Unmapped Figma collection "${c.name}". Add it to COLLECTION_RULES.`);
     if (!c.modes.length) throw new Error(`Collection "${c.name}" has no modes.`);
-    collections.push({ key: rule.key, name: c.name, cssPrefix: rule.cssPrefix, figma: { id: c.id, key: c.key }, modes: c.modes.map(m => ({ name: m.name, figmaId: m.id })) });
+    for (const m of c.modes) if (rule.modeAxes && !rule.modeAxes[m.name]) throw new Error(`Mode "${m.name}" of "${c.name}" has no axis mapping. Add it to COLLECTION_RULES.`);
+    collections.push({ key: rule.key, name: c.name, cssPrefix: rule.cssPrefix, figma: { id: c.id, key: c.key }, modes: c.modes.map(m => ({ name: m.name, figmaId: m.id })), ...(rule.axes ? { axes: rule.axes, modeAxes: rule.modeAxes } : {}) });
     for (const v of c.variables) {
       if (v.values.length !== c.modes.length) throw new Error(`Variable "${v.name}" has ${v.values.length} values for ${c.modes.length} modes.`);
       const segs = v.name.split('/').map(slug);
@@ -184,6 +207,53 @@ function assignUnits(s: TokenSourceV2) {
   }
 }
 
+function validateAxes(collections: CollectionV2[]) {
+  const names = new Set(collections.map(c => c.key));
+  for (const c of collections) {
+    if (!c.axes) { if (c.modeAxes) throw new Error(`Collection ${c.key} has modeAxes without axes.`); continue; }
+    if (!c.modeAxes) throw new Error(`Collection ${c.key} has axes without modeAxes.`);
+    for (const a of c.axes) {
+      if (!/^[a-z][a-z0-9-]*$/.test(a.key) || names.has(a.key)) throw new Error(`Axis key "${a.key}" of ${c.key} must be a unique slug and differ from every collection key.`);
+      names.add(a.key);
+      if (!a.values.length || new Set(a.values).size !== a.values.length || a.values.some(v => !/^[a-zA-Z][a-zA-Z0-9 -]*$/.test(v))) throw new Error(`Axis ${a.key} of ${c.key} needs unique values.`);
+    }
+    const combos = new Set<string>();
+    for (const m of c.modes) {
+      const at = c.modeAxes[m.name];
+      if (!at) throw new Error(`Mode "${m.name}" of ${c.key} has no axis mapping.`);
+      for (const a of c.axes) if (!a.values.includes(at[a.key])) throw new Error(`Mode "${m.name}" of ${c.key} maps axis ${a.key} to "${at[a.key]}", which is not one of ${a.values.join(', ')}.`);
+      combos.add(c.axes.map(a => at[a.key]).join('|'));
+    }
+    const product = c.axes.reduce((n, a) => n * a.values.length, 1);
+    if (combos.size !== c.modes.length || product !== c.modes.length) throw new Error(`The modes of ${c.key} must cover every combination of its axes exactly once (${product} combinations, ${c.modes.length} modes).`);
+    if (c.axes.map(a => c.modeAxes![c.modes[0].name][a.key] === a.values[0]).includes(false)) throw new Error(`The first mode of ${c.key} must be every axis' first value, so the defaults agree with :root.`);
+  }
+}
+
+/** The mode of a collection for the given axis values. Axes left out use their first value. */
+export function modeForAxes(c: CollectionV2, values: Record<string, string | undefined>): string {
+  if (!c.axes) throw new Error(`Collection ${c.key} has no axes.`);
+  const want = c.axes.map(a => values[a.key] ?? a.values[0]);
+  c.axes.forEach((a, i) => { if (!a.values.includes(want[i])) throw new Error(`${want[i]} is not a value of ${a.key} (${a.values.join(', ')}).`); });
+  const mode = c.modes.find(m => c.axes!.every((a, i) => c.modeAxes![m.name][a.key] === want[i]));
+  if (!mode) throw new Error(`No mode of ${c.key} for ${want.join(', ')}.`);
+  return mode.name;
+}
+
+/**
+ * Turns attribute settings (style, primary, density, color-scheme, contrast) into one mode per
+ * collection. This is the translation between the code API and the Figma modes.
+ */
+export function assignmentFromAttributes(input: TokenSourceV2, attrs: Record<string, string | undefined>): ModeAssignment {
+  const out: ModeAssignment = {};
+  for (const c of input.collections) {
+    if (c.axes) {
+      if (c.axes.some(a => attrs[a.key] !== undefined)) out[c.key] = modeForAxes(c, attrs);
+    } else if (attrs[c.key] !== undefined) out[c.key] = attrs[c.key]!;
+  }
+  return out;
+}
+
 export function validateTokensV2(input: unknown): TokenSourceV2 {
   const s = input as TokenSourceV2;
   if (!s || s.schema !== 'spartan.tokens.v2' || !Array.isArray(s.collections) || !Array.isArray(s.tokens) || typeof s.version !== 'string' || !s.version.trim()) throw new Error('Expected a spartan.tokens.v2 file with a version, collections, and tokens.');
@@ -193,6 +263,7 @@ export function validateTokensV2(input: unknown): TokenSourceV2 {
     if (!c.modes.length || new Set(c.modes.map(m => m.name)).size !== c.modes.length || c.modes.some(m => !/^[a-zA-Z][a-zA-Z0-9 -]*$/.test(m.name))) throw new Error(`Collection ${c.key} needs unique mode names.`);
     collections.set(c.key, c);
   }
+  validateAxes([...collections.values()]);
   const byKey = new Map<string, TokenV2>();
   const cssNames = new Map<string, string>();
   const figmaIds = new Set<string>();
@@ -251,18 +322,23 @@ export function validateTokensV2(input: unknown): TokenSourceV2 {
 
 // ---- Resolution ----
 
+const channel = (n: number) => +(n * 255).toFixed(3);
+
 export type Resolved = number | string | boolean | Rgba | { alpha: { color: Rgba; opacity: number } };
 export type ModeAssignment = Record<string, string>;
 
 // Resolves a token to a literal for one explicit mode per collection. Collections
-// missing from `assign` use their first mode, matching the CSS defaults.
+// missing from `assign` use their first mode, matching the CSS defaults. A collection with
+// axes may be given either its combined mode name or its axis values (for example
+// { 'color-scheme': 'Dark', contrast: 'High' } for Dark High Contrast).
 export function resolveToken(input: TokenSourceV2, key: string, assign: ModeAssignment = {}): Resolved {
   const byKey = new Map(input.tokens.map(t => [t.key, t]));
   const colls = new Map(input.collections.map(c => [c.key, c]));
   const walk = (k: string): Resolved => {
     const t = byKey.get(k);
     if (!t) throw new Error(`Unknown token ${k}.`);
-    const mode = assign[t.collection] ?? colls.get(t.collection)!.modes[0].name;
+    const c = colls.get(t.collection)!;
+    const mode = assign[t.collection] ?? (c.axes ? modeForAxes(c, assign) : c.modes[0].name);
     if (!(mode in t.values)) throw new Error(`${t.collection} has no mode "${mode}".`);
     const v = t.values[mode];
     if (isRef(v)) return walk(v.alias);
@@ -276,11 +352,24 @@ export function resolveToken(input: TokenSourceV2, key: string, assign: ModeAssi
   return walk(key);
 }
 
+/** The CSS text a token resolves to for one mode per collection, as the generated CSS spells it. */
+export function resolvedCss(input: TokenSourceV2, key: string, assign: ModeAssignment = {}): string {
+  const t = input.tokens.find(x => x.key === key);
+  if (!t) throw new Error(`Unknown token ${key}.`);
+  const rgb = (c: Rgba) => `rgb(${channel(c.r)} ${channel(c.g)} ${channel(c.b)} / ${c.a})`;
+  const v = resolveToken(input, key, assign);
+  if (typeof v === 'number') return `${v}${t.unit === 'px' ? 'px' : t.unit === 'percent' ? '%' : ''}`;
+  if (typeof v === 'string') return JSON.stringify(v);
+  if (typeof v === 'boolean') return v ? '1' : '0';
+  if ('alpha' in v) return `color-mix(in srgb, ${rgb(v.alpha.color)} ${v.alpha.opacity}%, transparent)`;
+  return rgb(v);
+}
+
 // ---- CSS ----
 
-const modeSelector = (collection: string, mode: string) => `[data-sp-mode-${collection}="${mode}"]`;
-const channel = (n: number) => +(n * 255).toFixed(3);
-
+const attr = (key: string, value: string) => `[data-sp-mode-${key}="${value}"]`;
+// Every single-attribute selector that sets a mode of this collection.
+const singleSelectors = (c: CollectionV2) => (c.axes ? c.axes.flatMap(a => a.values.map(v => attr(a.key, v))) : c.modes.map(m => attr(c.key, m.name)));
 function analyze(s: TokenSourceV2) {
   const byKey = new Map(s.tokens.map(t => [t.key, t]));
   const colls = new Map(s.collections.map(c => [c.key, c]));
@@ -328,54 +417,60 @@ export function modeDependencies(input: unknown): Map<string, string[]> {
   return new Map(s.tokens.map(t => [t.key, [...deps(t)].sort((a, b) => order.get(a)! - order.get(b)!)]));
 }
 
+// Every axis of a collection: its declared axes, or a single axis for its modes.
+const axesOf = (c: CollectionV2): CollectionAxis[] => c.axes ?? [{ key: c.key, values: c.modes.map(m => m.name) }];
+const axisValuesOf = (c: CollectionV2, mode: string): Record<string, string> => (c.axes ? c.modeAxes![mode] : { [c.key]: mode });
+const toggleName = (axis: string, value: string) => `--_sp-not-${axis}-${value.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`;
+
+/**
+ * Generates the CSS custom properties for every token.
+ *
+ * Each axis of a collection (style, hue, color scheme, contrast, density) is carried by
+ * inherited toggle variables. Setting `data-sp-mode-<axis>="<value>"` on any element sets that
+ * axis' toggles and leaves every other axis' toggles inherited from the ancestors. A token whose
+ * value differs per mode is one expression that picks its value from the toggles, so independent
+ * axes compose at any nesting depth: a section can switch only the color scheme and keeps the
+ * page's contrast, style, hue, and density. Because `var()` resolves where a property is
+ * declared, a token is re-declared (the same expression) wherever one of the axes it depends on
+ * can change.
+ *
+ * A toggle is `initial` (guaranteed-invalid) when its value is selected and an empty value when
+ * it is not, so `var(--toggle, value)` yields `value` only for the selected mode and nothing
+ * otherwise; concatenating the per-mode terms leaves exactly the selected value.
+ */
 export function renderCSSV2(input: unknown): string {
   const s = validateTokensV2(input);
   const { colls, order, css, expr, deps } = analyze(s);
+  const varying = s.collections.filter(c => c.modes.length > 1);
 
-  type Entry = { selectors: string[]; specificity: number; decl: string };
-  const entries: Entry[] = [];
+  // Toggle defaults on :root, then each attribute value. Same specificity, so source order decides:
+  // :root first, and an element carries at most one value per axis.
+  const toggles = (c: CollectionV2, axis: CollectionAxis, selected: string) => axis.values.map(v => `  ${toggleName(axis.key, v)}: ${v === selected ? 'initial' : ''};`).join('\n');
+  const toggleBlocks: string[] = [`:root {\n${varying.flatMap(c => axesOf(c).map(a => toggles(c, a, a.values[0]))).join('\n')}\n}`];
+  for (const c of varying) for (const a of axesOf(c)) for (const v of a.values) toggleBlocks.push(`${attr(a.key, v)} {\n${toggles(c, a, v)}\n}`);
+
+  // A token that varies by its own collection's mode is one expression over the toggles.
+  const toggled = (t: TokenV2, c: CollectionV2) => c.modes.map(m => {
+    let term = expr(t, m.name);
+    for (const a of [...axesOf(c)].reverse()) term = `var(${toggleName(a.key, axisValuesOf(c, m.name)[a.key])}, ${term})`;
+    return term;
+  }).join(' ');
+
+  const blocks = new Map<string, string[]>();
   for (const t of s.tokens) {
-    const D = [...deps(t)].sort((a, b) => order.get(a)! - order.get(b)!);
-    if (D.length > 2) throw new Error(`${t.key} depends on the modes of ${D.length} collections (${D.join(', ')}). Only up to two are supported.`);
-    const ownModes = colls.get(t.collection)!.modes;
-    const decl = (assign: Map<string, string>) => `  ${css(t)}: ${expr(t, assign.get(t.collection) ?? ownModes[0].name)};`;
-    const defaults = (k: string) => colls.get(k)!.modes[0].name;
-    if (D.length === 0) { entries.push({ selectors: [':root'], specificity: 0, decl: decl(new Map()) }); continue; }
-    if (D.length === 1) {
-      const [k] = D;
-      for (const m of colls.get(k)!.modes) {
-        const sel = modeSelector(k, m.name);
-        entries.push({ selectors: m.name === defaults(k) ? [':root', sel] : [sel], specificity: 1, decl: decl(new Map([[k, m.name]])) });
-      }
-      continue;
-    }
-    // Two collections. Each alone (other at its default), plus every pair on one element.
-    const [a, b] = D;
-    for (const [x, y] of [[a, b], [b, a]]) for (const m of colls.get(x)!.modes) {
-      const sel = modeSelector(x, m.name);
-      entries.push({ selectors: m.name === defaults(x) ? (x === a ? [':root', sel] : [sel]) : [sel], specificity: 1, decl: decl(new Map([[x, m.name], [y, defaults(y)]])) });
-    }
-    for (const ma of colls.get(a)!.modes) for (const mb of colls.get(b)!.modes) {
-      if (ma.name === defaults(a) && mb.name === defaults(b)) continue;
-      entries.push({ selectors: [modeSelector(a, ma.name) + modeSelector(b, mb.name)], specificity: 2, decl: decl(new Map([[a, ma.name], [b, mb.name]])) });
-    }
+    const own = colls.get(t.collection)!;
+    const D = [...deps(t)].sort((x, y) => order.get(x)! - order.get(y)!);
+    const value = D.includes(t.collection) ? toggled(t, own) : expr(t, own.modes[0].name);
+    const selectors = [':root', ...D.flatMap(k => singleSelectors(colls.get(k)!))];
+    const key = selectors.join(',\n');
+    (blocks.get(key) ?? blocks.set(key, []).get(key)!).push(`  ${css(t)}: ${value};`);
   }
-
-  // Group declarations that share a selector list, lower specificity first.
-  const blocks = new Map<string, { specificity: number; decls: string[] }>();
-  for (const e of entries) {
-    const key = e.selectors.join(',\n');
-    const b = blocks.get(key) ?? { specificity: e.specificity, decls: [] };
-    b.decls.push(e.decl);
-    blocks.set(key, b);
-  }
-  const ordered = [...blocks.entries()].map(([sel, b], i) => ({ sel, ...b, i })).sort((x, y) => x.specificity - y.specificity || x.i - y.i);
   const header = [
     '/* Generated from tokens/source.json. Do not edit. */',
-    '/* Mode attributes: ' + s.collections.map(c => `data-sp-mode-${c.key} = ${c.modes.map(m => m.name).join(' | ')}`).join('; ') + ' */',
-    '/* Collections that feed each other (semantic-color <- primary) resolve per element: set their attributes on the same element. */',
+    '/* Mode attributes: ' + s.collections.map(c => (c.axes ? c.axes.map(a => `data-sp-mode-${a.key} = ${a.values.join(' | ')}`).join('; ') : `data-sp-mode-${c.key} = ${c.modes.map(m => m.name).join(' | ')}`)).join('; ') + ' */',
+    '/* Axes are independent and inherit: an attribute on any element changes only its own axis for that subtree. */',
   ].join('\n');
-  return header + '\n' + ordered.map(b => `${b.sel} {\n${b.decls.join('\n')}\n}`).join('\n\n') + '\n';
+  return header + '\n' + [...toggleBlocks, ...[...blocks].map(([sel, decls]) => `${sel} {\n${decls.join('\n')}\n}`)].join('\n\n') + '\n';
 }
 
 // ---- Drift ----

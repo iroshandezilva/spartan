@@ -1,15 +1,15 @@
 import type { Meta, StoryObj } from '@storybook/web-components-vite';
 import { html } from 'lit';
-import { fn } from 'storybook/test';
+import { expect, fn, userEvent } from 'storybook/test';
 import { iconNode } from '../../../.storybook/icons.js';
 import './define.js';
-import type { ButtonShape, ButtonSize, ButtonType, ButtonVariant } from './sp-button.js';
+import type { SpButton } from './sp-button.js';
+import type { ButtonSize, ButtonType, ButtonVariant } from './sp-button.js';
 
 type Args = {
   label: string;
   variant: ButtonVariant;
   size: ButtonSize;
-  shape: ButtonShape;
   type: ButtonType;
   startIcon?: string;
   endIcon?: string;
@@ -29,27 +29,27 @@ const NEXT = 'IconArrowRight';
 const meta: Meta<Args> = {
   title: 'Components/Button',
   component: 'sp-button',
-  args: { label: 'Button', variant: 'primary', size: 'base', shape: 'rounded', type: 'button', startIcon: undefined, endIcon: undefined, disabled: false, loading: false, onClick: fn() },
+  args: { label: 'Button', variant: 'primary', size: 'base', type: 'button', startIcon: undefined, endIcon: undefined, disabled: false, loading: false, onClick: fn() },
   argTypes: {
     variant: { control: 'select', options: variants },
     size: { control: 'inline-radio', options: ['sm', 'base'] },
-    shape: { control: 'inline-radio', options: ['rounded', 'pill'] },
     type: { control: 'inline-radio', options: ['button', 'submit', 'reset'] },
     startIcon: { name: 'Left icon', control: 'text', description: 'Icon in the `start` slot. Pick one in the Icons panel, or type a name such as IconPlusSmall.' },
     endIcon: { name: 'Right icon', control: 'text', description: 'Icon in the `end` slot. Pick one in the Icons panel.' },
     onClick: { table: { disable: true } },
   },
-  render: ({ label, variant, size, shape, type, startIcon, endIcon, disabled, loading, onClick }) => html`
-    <sp-button variant=${variant} size=${size} shape=${shape} type=${type} ?disabled=${disabled} ?loading=${loading} @click=${onClick}>
+  render: ({ label, variant, size, type, startIcon, endIcon, disabled, loading, onClick }) => html`
+    <sp-button variant=${variant} size=${size} type=${type} ?disabled=${disabled} ?loading=${loading} @click=${onClick}>
       ${iconNode(startIcon, 'start')}${label}${iconNode(endIcon, 'end')}
     </sp-button>
   `,
   parameters: {
+    design: { type: 'figma', url: 'https://www.figma.com/design/PhcMPmdpkpgxH3N83SvpBY/Spartan-DS?node-id=21-27' },
     iconPicker: { targets: [{ arg: 'startIcon', label: 'Left icon' }, { arg: 'endIcon', label: 'Right icon' }] },
     docs: {
       description: {
         component:
-          'Action button built from the Spartan DS Button set ([Figma](https://www.figma.com/design/PhcMPmdpkpgxH3N83SvpBY/Spartan-DS?node-id=21-27)). Sizes: `sm` is Small, `base` is Base. Heights, padding, type, and icons come from the generated Component and Density variables, so the Density toolbar changes them. Track work on the [Button task in Notion](https://app.notion.com/p/3f4556177d6b8145a1b9f3cefb5a072c).',
+          'Action button built from the Spartan DS Button set ([Figma](https://www.figma.com/design/PhcMPmdpkpgxH3N83SvpBY/Spartan-DS?node-id=21-27)). Sizes: `sm` is Small, `base` is Base. Heights, padding, type, and icons come from the generated Component and Density variables, so the Density toolbar changes them. The corner radius, Secondary fill and border, and state colors come from the Style toolbar (Atlas, Selene, Helios, Ares), so there is no `shape` property: Helios is the pill. Layout follows the Direction toolbar and any nested `dir`.',
       },
     },
   },
@@ -58,10 +58,20 @@ const meta: Meta<Args> = {
 export default meta;
 type Story = StoryObj<Args>;
 
-export const Playground: Story = {};
+export const Playground: Story = {
+  // Interaction test: a real click reaches the onClick arg, then focusing the host (delegatesFocus) and pressing Enter activates it.
+  play: async ({ canvasElement, args }) => {
+    const host = canvasElement.querySelector('sp-button')!;
+    await userEvent.click(host);
+    await expect(args.onClick).toHaveBeenCalledTimes(1);
+    host.focus();
+    await userEvent.keyboard('{Enter}');
+    await expect(args.onClick).toHaveBeenCalledTimes(2);
+  },
+};
 
 export const Variants: Story = {
-  render: ({ size, shape }) => html`<div style=${row}>${variants.map(v => html`<sp-button variant=${v} size=${size} shape=${shape}>${v}</sp-button>`)}</div>`,
+  render: ({ size }) => html`<div style=${row}>${variants.map(v => html`<sp-button variant=${v} size=${size}>${v}</sp-button>`)}</div>`,
 };
 
 export const Sizes: Story = {
@@ -73,13 +83,66 @@ export const Sizes: Story = {
   `,
 };
 
-export const Shapes: Story = {
-  render: ({ variant }) => html`
-    <div style=${row}>
-      <sp-button variant=${variant} shape="rounded">Rounded</sp-button>
-      <sp-button variant=${variant} shape="pill">Pill</sp-button>
+const styleNames = ['Atlas', 'Selene', 'Helios', 'Ares'];
+
+// The style collection owns the corner radius and the Secondary treatment, so there is no shape
+// property: Helios is the pill. A nested attribute re-resolves every style-bound value in its subtree.
+export const Styles: Story = {
+  render: ({ size }) => html`
+    <div style="display:grid;gap:20px">
+      ${styleNames.map(
+        name => html`
+          <div data-sp-mode-style=${name} style=${row}>
+            <span style="width:72px">${name}</span>
+            ${variants.map(v => html`<sp-button variant=${v} size=${size}>${v}</sp-button>`)}
+          </div>
+        `,
+      )}
     </div>
   `,
+  play: async ({ canvasElement }) => {
+    const radius = (name: string) => {
+      const host = canvasElement.querySelector(`[data-sp-mode-style="${name}"] sp-button`)!;
+      return parseFloat(getComputedStyle(host.shadowRoot!.querySelector('button')!).borderTopLeftRadius);
+    };
+    await expect(radius('Ares')).toBe(0);
+    await expect(radius('Atlas')).toBeGreaterThan(0);
+    await expect(radius('Selene')).toBeGreaterThan(radius('Atlas'));
+    await expect(radius('Helios')).toBeGreaterThan(radius('Selene'));
+  },
+};
+
+// Direction is the native `dir` attribute, inherited through the shadow root. Start and end icons
+// swap sides with it, and a nested `dir` overrides the document's, whatever the Direction toolbar says.
+export const Directions: Story = {
+  args: { label: 'Continue' },
+  render: ({ variant, size, label }) => html`
+    <div style="display:grid;gap:16px">
+      ${(['ltr', 'rtl'] as const).map(
+        dir => html`
+          <div dir=${dir} style=${row}>
+            <span style="width:48px">${dir.toUpperCase()}</span>
+            <sp-button variant=${variant} size=${size}>${iconNode(ADD, 'start')}${label}${iconNode(NEXT, 'end')}</sp-button>
+            <sp-button variant=${variant} size=${size}>${iconNode(ADD, 'start')}${label}</sp-button>
+            <sp-button variant=${variant} size=${size} loading>${iconNode(ADD, 'start')}${label}${iconNode(NEXT, 'end')}</sp-button>
+            <div style="max-width:140px"><sp-button variant=${variant} size=${size}>${iconNode(ADD, 'start')}Export every selected record</sp-button></div>
+          </div>
+        `,
+      )}
+    </div>
+  `,
+  play: async ({ canvasElement }) => {
+    const ltr = canvasElement.querySelector<SpButton>('[dir=ltr] sp-button')!;
+    const rtl = canvasElement.querySelector<SpButton>('[dir=rtl] sp-button')!;
+    await Promise.all([ltr.updateComplete, rtl.updateComplete]);
+    await new Promise(resolve => requestAnimationFrame(resolve));
+    const box = (host: SpButton, selector: string) => (selector === '.label' ? host.shadowRoot!.querySelector(selector)! : host.querySelector(selector)!).getBoundingClientRect();
+    // LTR: the start icon is left of the label and the end icon right of it. RTL swaps them.
+    await expect(box(ltr, '[slot=start]').right).toBeLessThanOrEqual(box(ltr, '.label').left);
+    await expect(box(ltr, '[slot=end]').left).toBeGreaterThanOrEqual(box(ltr, '.label').right);
+    await expect(box(rtl, '[slot=start]').left).toBeGreaterThanOrEqual(box(rtl, '.label').right);
+    await expect(box(rtl, '[slot=end]').right).toBeLessThanOrEqual(box(rtl, '.label').left);
+  },
 };
 
 // Pick the icons in the Icons panel. Left and right icons are independent slots.
@@ -88,6 +151,11 @@ export const WithIcons: Story = {
 };
 
 export const Disabled: Story = {
+  play: async ({ canvasElement, args }) => {
+    const host = canvasElement.querySelector('sp-button')!;
+    await userEvent.click(host);
+    await expect(args.onClick).not.toHaveBeenCalled();
+  },
   render: ({ size }) => html`<div style=${row}>${variants.map(v => html`<sp-button variant=${v} size=${size} disabled>${v}</sp-button>`)}</div>`,
 };
 

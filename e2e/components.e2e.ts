@@ -7,7 +7,7 @@ import { readFileSync } from 'node:fs';
 import type { Browser, Page } from 'playwright-core';
 import type { Server } from 'node:http';
 import type { TokenSourceV2 } from '../lib/figma-tokens';
-import { close, expectedColor, launch, openCanvas, parseColor, setMarkup, startServer } from './harness';
+import { close, expectedColor, launch, openCanvas, parseColor, setAttrs, setMarkup, startServer, themeAttrs } from './harness';
 
 const source: TokenSourceV2 = JSON.parse(readFileSync('tokens/source.json', 'utf8'));
 const THEMES = ['Light', 'Dark', 'Light High Contrast', 'Dark High Contrast'];
@@ -20,6 +20,11 @@ after(async () => { await browser.close(); server.close(); });
 
 const inner = (sel: string) => `${sel} >> css=button`;
 const style = (page: Page, sel: string, prop: string) => page.locator(sel).evaluate((el, p) => getComputedStyle(el.shadowRoot!.querySelector('button')!).getPropertyValue(p), prop);
+// The focus ring is the ::after of the inner button, drawn 4 px outside the border edge.
+const ring = (page: Page, sel: string) => page.locator(sel).evaluate(el => {
+  const btn = el.shadowRoot!.querySelector('button')!, after = getComputedStyle(btn, '::after'), box = btn.getBoundingClientRect();
+  return { content: after.content, style: after.borderTopStyle, width: after.borderTopWidth, color: after.borderTopColor, radius: after.borderTopLeftRadius, grow: [Math.round(parseFloat(after.width) - box.width), Math.round(parseFloat(after.height) - box.height)] };
+});
 const counter = (page: Page, sel: string) => page.locator(sel).evaluate(el => { (el as any).__clicks = 0; el.addEventListener('click', () => (el as any).__clicks++); });
 const clicks = (page: Page, sel: string) => page.locator(sel).evaluate(el => (el as any).__clicks as number);
 
@@ -30,9 +35,10 @@ describe('sp-button keyboard and activation', () => {
     await counter(page, '#b');
     await page.keyboard.press('Tab');
     assert.equal(await page.evaluate(() => document.activeElement?.id), 'b');
-    assert.equal(await style(page, '#b', 'outline-style'), 'solid');
-    assert.equal(await style(page, '#b', 'outline-width'), '2px');
-    assert.ok(close(parseColor(await style(page, '#b', 'outline-color')), expectedColor(source, 'semantic-color.color.focus-ring.default', {})));
+    const r = await ring(page, '#b');
+    assert.deepEqual([r.style, r.width, r.radius], ['solid', '2px', '12px'], 'ring is 2 px with the Atlas focus radius');
+    assert.deepEqual(r.grow, [8, 8], 'ring frame is 4 px outside the border edge on each side, as in Figma');
+    assert.ok(close(parseColor(r.color), expectedColor(source, 'semantic-color.color.focus-ring.default', {})));
     await page.keyboard.press('Enter');
     assert.equal(await clicks(page, '#b'), 1);
     await page.keyboard.press('Space');
@@ -44,7 +50,7 @@ describe('sp-button keyboard and activation', () => {
     const page = await openCanvas(browser, base);
     await setMarkup(page, '<sp-button id="b">Save</sp-button>');
     await page.locator('#b').click();
-    assert.equal(await style(page, '#b', 'outline-style'), 'none');
+    assert.equal((await ring(page, '#b')).content, 'none');
     await page.close();
   });
 
@@ -176,10 +182,10 @@ describe('density: sizes follow the generated Component and Density variables', 
   });
 });
 
-describe('theme, hue, shape, and variants resolve through the real variables', () => {
+describe('theme, hue, style, and variants resolve through the real variables', () => {
   test('primary fill, hover, and pressed follow Semantic Color mode and Primary hue', async () => {
     for (const theme of THEMES) for (const hue of HUES) {
-      const page = await openCanvas(browser, base, 'components-button--playground', { 'semantic-color': theme, primary: hue });
+      const page = await openCanvas(browser, base, 'components-button--playground', { ...themeAttrs(theme), primary: hue });
       await setMarkup(page, '<sp-button id="b">Save</sp-button>');
       const assign = { 'semantic-color': theme, primary: hue };
       const fill = (key: string) => expectedColor(source, `semantic-color.color.primary.${key}`, assign);
@@ -208,7 +214,7 @@ describe('theme, hue, shape, and variants resolve through the real variables', (
     };
     for (const theme of THEMES) {
       const assign = { 'semantic-color': theme };
-      await page.evaluate(t => document.documentElement.setAttribute('data-sp-mode-semantic-color', t), theme);
+      await setAttrs(page, themeAttrs(theme));
       await setMarkup(page, VARIANTS.map(v => `<sp-button id="${v}" variant="${v}">x</sp-button><sp-button id="${v}-d" variant="${v}" disabled>x</sp-button>`).join(''));
       for (const v of VARIANTS) {
         const [fillKey, textKey] = keys[v];
@@ -228,7 +234,7 @@ describe('theme, hue, shape, and variants resolve through the real variables', (
   test('dashed uses the border-width variable, which doubles in the high contrast modes', async () => {
     const page = await openCanvas(browser, base);
     for (const [theme, width] of [['Light', '1px'], ['Dark', '1px'], ['Light High Contrast', '2px'], ['Dark High Contrast', '2px']]) {
-      await page.evaluate(t => document.documentElement.setAttribute('data-sp-mode-semantic-color', t), theme);
+      await setAttrs(page, themeAttrs(theme));
       await setMarkup(page, '<sp-button id="d" variant="dashed">x</sp-button>');
       assert.equal(await style(page, '#d', 'border-top-style'), 'dashed');
       assert.equal(await style(page, '#d', 'border-top-width'), width, theme);
@@ -236,21 +242,23 @@ describe('theme, hue, shape, and variants resolve through the real variables', (
     await page.close();
   });
 
-  test('radius follows the control and pill radius variables', async () => {
+  test('radius follows the style: Atlas control radius, Selene large, Helios pill, Ares square', async () => {
     const page = await openCanvas(browser, base);
-    await setMarkup(page, '<sp-button id="r">x</sp-button><sp-button id="p" shape="pill">x</sp-button>');
-    assert.equal(await style(page, '#r', 'border-top-left-radius'), '8px');
-    assert.equal(await style(page, '#p', 'border-top-left-radius'), '9999px');
+    await setMarkup(page, '<sp-button id="r">x</sp-button>');
+    for (const [st, radius] of [['Atlas', '8px'], ['Selene', '12px'], ['Helios', '9999px'], ['Ares', '0px']]) {
+      await setAttrs(page, { style: st });
+      assert.equal(await style(page, '#r', 'border-top-left-radius'), radius, st);
+    }
     await page.close();
   });
 
-  test('secondary and primary draw the two control shadows; danger does not', async () => {
+  test('no variant draws a shadow in any style', async () => {
     const page = await openCanvas(browser, base);
-    await setMarkup(page, '<sp-button id="p">x</sp-button><sp-button id="d" variant="danger">x</sp-button>');
-    const shadow = await style(page, '#p', 'box-shadow');
-    assert.match(shadow, /0px 1px 3px 0px/);
-    assert.match(shadow, /0px 0px 2px 0px/);
-    assert.equal(await style(page, '#d', 'box-shadow'), 'none');
+    await setMarkup(page, VARIANTS.map(v => `<sp-button id="${v}" variant="${v}">x</sp-button>`).join(''));
+    for (const st of ['Atlas', 'Selene', 'Helios', 'Ares']) {
+      await setAttrs(page, { style: st });
+      for (const v of VARIANTS) assert.equal(await style(page, `#${v}`, 'box-shadow'), 'none', `${v} in ${st}`);
+    }
     await page.close();
   });
 });
