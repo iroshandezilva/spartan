@@ -37,6 +37,40 @@ Limits, enforced by the generator and its tests:
 - Opacity primitives are percentages (`50%`), and alpha-bound colors become
   `color-mix(in srgb, <color> <opacity>, transparent)`.
 
+## Resolving a mode combination
+
+A token's value is picked per collection, each mode independent. For example
+`semantic-color.color.primary.default` is `color/primary/600` in Light and Dark, `/800` in Light High
+Contrast, and `/300` in Dark High Contrast, and `color/primary/600` itself is a color per hue: Blue
+`#006dce`, Purple `#8933e4`, Orange `#ad5000`, Sky `#007a9b`. So Dark High Contrast with Sky resolves
+to Sky's step 300. `resolveToken(source, key, { 'semantic-color': 'Dark', primary: 'Orange' })` in
+`lib/figma-tokens.ts` does this, and the tests compare it with the generated CSS for all 32
+combinations of hue, theme, and density. What Button and Icon Button bind to is in `bindings.md`.
+
+## Unsupported and flagged values
+
+Reviewed against the file on 2026-10-09. The import handles each case explicitly or fails.
+
+- **Alpha-bound colors (14):** a color alias plus an opacity alias, for example `color/dashed/*`,
+  `color/danger/subtle/*`, `color/shadow/*`, `color/surface/faint`, `color/backdrop/drawer`, and
+  `color/border/overlay` in Light. Supported as `color-mix(in srgb, color opacity, transparent)`; the
+  opacity must be a percent token.
+- **Opacity is a percentage:** primitives hold 0 to 100, so CSS gets `50%`, which is also valid for the
+  CSS `opacity` property.
+- **FLOAT has no unit in Figma:** literals get `px` or percent from their name family, line heights
+  such as `font/line-height/normal` and font weights are unitless, and aliases inherit the unit. A
+  new family fails the import until a rule is added.
+- **Names:** `radius/sm 2` contains a space, so its key is `primitives.radius.sm-2`.
+- **Code syntax is not trusted:** 33 variables have none, three strings are shared by two variables
+  (`radius/sm`, `border-width`, `border-width-emphasis`), and the prefixes are inconsistent
+  (`--spartant-` on 412, `--spartan-` on 6, others unprefixed or `--color-`, `--select-`, `--switch-`,
+  `--space-`). Code names come from collection and name instead. Only the WEB syntax was exported.
+- **Not variables in this file:** composite typography, gradients, and shadows (shadows are effect
+  styles whose colors are variables).
+- **Fails the import:** an unresolved alias, a type or unit mismatch, a cycle, an unsupported value
+  shape, a color outside 0 to 1, a missing mode value, an unmapped collection, and a CSS name
+  collision. See below.
+
 ## Failures are explicit
 
 The import throws on: an unmapped collection, an alias to a variable missing from the
