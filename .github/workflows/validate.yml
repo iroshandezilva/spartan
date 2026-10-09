@@ -1,0 +1,54 @@
+name: validate
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: validate-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  # The job name is the status check that the "main protection" ruleset requires.
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 11
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .node-version
+          cache: pnpm
+
+      # The licensed Central Icons package is an optional dependency whose install
+      # needs CENTRAL_LICENSE_KEY. CI does not have it, so Storybook uses the plain
+      # fallback icon and the Icons panel tests skip themselves.
+      - run: pnpm install --frozen-lockfile
+
+      - name: Tokens are current
+        run: pnpm tokens:check
+
+      - name: Typecheck
+        run: pnpm typecheck
+
+      - name: Unit tests
+        run: pnpm test
+
+      - name: Build
+        run: pnpm build
+
+      - name: Install Chromium for the browser tests
+        run: pnpm exec playwright-core install --with-deps chromium
+
+      - name: Browser tests
+        run: pnpm test:e2e
