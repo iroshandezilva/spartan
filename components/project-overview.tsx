@@ -2,7 +2,7 @@ import Link from 'next/link';
 import { ArrowUpRight, Boxes, GitBranch, ListChecks, BookOpen } from 'lucide-react';
 export function ProjectOverview() {
   return <div className="not-prose overview">
-    <div className="project-statement"><span className="small-label">An experiment in shared components</span><p>Built in code.<br />Connected to design.</p><span>Lit components, a Figma token bridge, and one place to keep the work honest.</span></div>
+    <div className="project-statement"><span className="small-label">Spartant Design System</span><p>Built in code.<br />Connected to design.</p><span>Lit components, a Figma token bridge, and one place to keep the work aligned.</span></div>
     <div className="overview-links">
       {[
         { href: '/docs/project/tasks', icon: ListChecks, title: 'Track the work', text: 'One component. Two progress tracks. A shared finish line.' },
@@ -11,6 +11,6 @@ export function ProjectOverview() {
         { href: '/docs/project/decisions', icon: BookOpen, title: 'Read the decisions', text: 'What we chose, why we chose it, and what remains open.' }
       ].map(({ href, icon: Icon, title, text }) => <Link key={href} href={href}><Icon size={21} /><div><strong>{title}</strong><p>{text}</p></div><ArrowUpRight size={17} /></Link>)}
     </div>
-    <div className="working-note"><strong>Current stage</strong><p>The project hub and local task tracking are implemented. The token plugin is an initial build awaiting a real Figma import and binding check. Lit component development is tracked in the backlog.</p></div>
+    <div className="working-note"><strong>Current stage</strong><p>Documentation and tasks live in Linear. The token plugin awaits a real Figma import and binding check. Component progress is tracked on each issue.</p></div>
   </div>;
 }

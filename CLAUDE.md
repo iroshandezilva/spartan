@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 @AGENTS.md
 
-AGENTS.md is the project source of truth. Read the linked guide for the task: [.doc/experiment.md](.doc/experiment.md) for code, tokens, plugin, and Linear tracking; [.doc/figma.md](.doc/figma.md) for any Figma work.
+AGENTS.md is the project source of truth. Read the linked guide for the task: [.doc/project.md](.doc/project.md) for code, tokens, plugin, and Linear tracking; [.doc/figma.md](.doc/figma.md) for any Figma work.
 
 ## Repository state
 
@@ -41,7 +41,7 @@ node --import tsx --test --test-name-pattern="aliases" tests/*.test.ts
 
 ## Architecture
 
-The token pipeline feeds the Lit components in `packages/components` (`@spartant-lab/components`: `sp-button`, `sp-icon-button`) and their Storybook.
+The token pipeline feeds the Lit components in `packages/components` (`@spartant/components`: `sp-button`, `sp-icon-button`) and their Storybook.
 
 - `tokens/figma/spartan-ds.export.json` is a verified read-only snapshot of all 461 variables in the Spartan DS Figma file (six collections). `tokens/figma/README.md` explains the collections, mode attributes, and how to refresh and diff it. `tokens/source.json` (`spartant.tokens.v2`) and `public/tokens.css` are generated from it; do not edit them by hand.
 - `lib/figma-tokens.ts` is the v2 contract: import, validation, cross-collection alias resolution, mode-aware CSS (`data-sp-mode-<collection>` attributes), and drift diff. It fails explicitly on unresolved aliases, type or unit mismatches, cycles, and unsupported values.

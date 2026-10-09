@@ -27,3 +27,5 @@ bun.lockb
 .source/
 plugin/dist/
 .pnpm-store/
+.vercel
+.env*
