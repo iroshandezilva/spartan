@@ -162,23 +162,23 @@ describe('all 16 style, color scheme, and contrast combinations', () => {
       const got = await page.evaluate(names => { const cs = getComputedStyle(document.documentElement); return Object.fromEntries(names.map(n => [n, cs.getPropertyValue(n)])); }, names);
       const wrong = source.tokens.filter(t => canon(got[tokenCssName(t, source)]) !== canon(resolvedCss(source, t.key, assign))).map(t => t.key);
       assert.deepEqual(wrong.slice(0, 3), [], `${JSON.stringify(attrs)} tokens`);
-      // Visible output: Primary and Secondary fills, Dashed border weight, and focus ring color.
+      // Visible output: Primary and Secondary fills (the style button tokens, which Selene changes for Secondary), Dashed border weight, and focus ring color.
       // Anonymous callbacks only: a named helper would pull tsx's __name shim into the page.
       const visible = await page.evaluate(() => {
         const read = ['primary', 'secondary', 'dashed'].map(v => getComputedStyle(document.querySelector(`sp-button[variant=${v}]`)!.shadowRoot!.querySelector('button')!));
         return { primary: read[0].backgroundColor, secondary: read[1].backgroundColor, dashed: read[2].borderTopWidth, text: read[0].color };
       });
-      assert.ok(close(parseColor(visible.primary), expectedColor(source, 'semantic-color.color.primary.default', assign)), `primary fill ${JSON.stringify(attrs)}`);
-      assert.ok(close(parseColor(visible.secondary), expectedColor(source, 'semantic-color.color.secondary.default', assign)), `secondary fill ${JSON.stringify(attrs)}`);
-      assert.ok(close(parseColor(visible.text), expectedColor(source, 'semantic-color.color.primary.foreground', assign)), `primary text ${JSON.stringify(attrs)}`);
+      assert.ok(close(parseColor(visible.primary), expectedColor(source, 'style.style.button.primary.background.default', assign)), `primary fill ${JSON.stringify(attrs)}`);
+      assert.ok(close(parseColor(visible.secondary), expectedColor(source, 'style.style.button.secondary.background.default', assign)), `secondary fill ${JSON.stringify(attrs)}`);
+      assert.ok(close(parseColor(visible.text), expectedColor(source, 'style.style.button.primary.foreground.default', assign)), `primary text ${JSON.stringify(attrs)}`);
       assert.equal(visible.dashed, high ? '2px' : '1px', `dashed border width, high contrast ${high}`);
       // Focus stays visible in every combination: a real Tab lands on the first button and draws the
-      // 2 px ring in the focus-ring color of that style, scheme, and contrast.
+      // 2 px ring (the ::after of the inner button) in the focus-ring color of that style, scheme, and contrast.
       await page.keyboard.press('Tab');
       const ring = await page.evaluate(() => {
         const inner = (document.activeElement as HTMLElement & { shadowRoot: ShadowRoot }).shadowRoot.activeElement!;
-        const cs = getComputedStyle(inner);
-        return { style: cs.outlineStyle, width: cs.outlineWidth, color: cs.outlineColor, matches: inner.matches(':focus-visible') };
+        const cs = getComputedStyle(inner, '::after');
+        return { style: cs.borderTopStyle, width: cs.borderTopWidth, color: cs.borderTopColor, matches: inner.matches(':focus-visible') };
       });
       assert.deepEqual([ring.style, ring.width, ring.matches], ['solid', '2px', true], `focus ring ${JSON.stringify(attrs)}`);
       assert.ok(close(parseColor(ring.color), expectedColor(source, 'semantic-color.color.focus-ring.default', assign)), `focus ring color ${ring.color} ${JSON.stringify(attrs)}`);
