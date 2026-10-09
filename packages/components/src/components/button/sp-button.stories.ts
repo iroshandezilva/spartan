@@ -45,6 +45,7 @@ const meta: Meta<Args> = {
     </sp-button>
   `,
   parameters: {
+    design: { type: 'figma', url: 'https://www.figma.com/design/PhcMPmdpkpgxH3N83SvpBY/Spartan-DS?node-id=21-27' },
     iconPicker: { targets: [{ arg: 'startIcon', label: 'Left icon' }, { arg: 'endIcon', label: 'Right icon' }] },
     docs: {
       description: {
