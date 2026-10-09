@@ -15,7 +15,7 @@ This repository is the Spartan Design System. Its Lit components, Storybook, tok
 - `main` only receives releases. Open every pull request against `dev`, the default branch; `validate` fails any pull request into `main` that does not come from `dev`.
 - Feature work: branch from `dev`, open a pull request into `dev`, squash merge after `validate` passes.
 - Release: open a pull request from `dev` into `main` and merge it with **rebase** so `main` keeps linear history without squashing a release into one commit.
-- Vercel builds only `main` (`ignoreCommand` in `vercel.json`); other branches and pull requests are not built.
+- Vercel builds only `main` (Production) and `dev` (Preview, with a stable branch alias); feature branches and pull requests are not built (`ignoreCommand` in `vercel.json`).
 
 ## Components
 
