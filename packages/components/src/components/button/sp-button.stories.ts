@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/web-components-vite';
 import { html } from 'lit';
-import { fn } from 'storybook/test';
+import { expect, fn, userEvent } from 'storybook/test';
 import { iconNode } from '../../../.storybook/icons.js';
 import './define.js';
 import type { ButtonShape, ButtonSize, ButtonType, ButtonVariant } from './sp-button.js';
@@ -59,7 +59,17 @@ const meta: Meta<Args> = {
 export default meta;
 type Story = StoryObj<Args>;
 
-export const Playground: Story = {};
+export const Playground: Story = {
+  // Interaction test: a real click reaches the onClick arg, then focusing the host (delegatesFocus) and pressing Enter activates it.
+  play: async ({ canvasElement, args }) => {
+    const host = canvasElement.querySelector('sp-button')!;
+    await userEvent.click(host);
+    await expect(args.onClick).toHaveBeenCalledTimes(1);
+    host.focus();
+    await userEvent.keyboard('{Enter}');
+    await expect(args.onClick).toHaveBeenCalledTimes(2);
+  },
+};
 
 export const Variants: Story = {
   render: ({ size, shape }) => html`<div style=${row}>${variants.map(v => html`<sp-button variant=${v} size=${size} shape=${shape}>${v}</sp-button>`)}</div>`,
@@ -89,6 +99,11 @@ export const WithIcons: Story = {
 };
 
 export const Disabled: Story = {
+  play: async ({ canvasElement, args }) => {
+    const host = canvasElement.querySelector('sp-button')!;
+    await userEvent.click(host);
+    await expect(args.onClick).not.toHaveBeenCalled();
+  },
   render: ({ size }) => html`<div style=${row}>${variants.map(v => html`<sp-button variant=${v} size=${size} disabled>${v}</sp-button>`)}</div>`,
 };
 
