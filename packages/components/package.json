@@ -46,7 +46,7 @@
   "scripts": {
     "build": "rm -rf dist && tsc -p tsconfig.build.json && cp ../../public/tokens.css dist/tokens.css",
     "typecheck": "pnpm icons:generate && tsc --noEmit",
-    "storybook": "pnpm icons:generate && storybook dev --port 6006 --host 127.0.0.1 --no-open",
+    "storybook": "pnpm icons:generate && storybook dev --port ${PORT:-6006} --host 127.0.0.1 --no-open",
     "build-storybook": "pnpm icons:generate && storybook build --output-dir storybook-static",
     "icons:generate": "node scripts/generate-story-icons.mjs",
     "test:stories": "pnpm icons:generate && vitest run --project storybook"
