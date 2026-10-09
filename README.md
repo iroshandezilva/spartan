@@ -40,8 +40,12 @@ Buttons take icons in the `start` (left) and `end` (right) slots, and any `<svg>
 - `pnpm storybook` and `pnpm storybook:build` run `icons:generate`, which writes git-ignored `packages/components/.storybook/generated/icons.json`. Nothing from the icon set is in `src`, `dist`, or git, and the license forbids redistributing it.
 - Without the package installed, stories fall back to a plain plus icon and the panel explains how to enable the library.
 
+## Branches
+
+`dev` is the default branch and the target for every pull request. `main` only receives releases from `dev`; see `AGENTS.md`. Both are protected by the `main and dev protection` ruleset and require the `validate` check.
+
 ## Publishing Storybook on Vercel
 
-`vercel.json` builds Storybook (`pnpm storybook:build`) and serves `packages/components/storybook-static`. Create a Vercel project from this repo with the repo root as its Root Directory; no other settings are needed. It is for the Storybook project only: the Next docs app would need its own project and config.
+`vercel.json` builds Storybook (`pnpm storybook:build`) and serves `packages/components/storybook-static`, but only for `main`: its `ignoreCommand` skips every other branch and pull request. Create a Vercel project from this repo with the repo root as its Root Directory; no other settings are needed. It is for the Storybook project only: the Next docs app would need its own project and config.
 
 Do not add `CENTRAL_LICENSE_KEY` to a public deployment. The Iconists license forbids sharing the icons publicly, so the published Storybook shows the plain fallback icon. Add the key only behind Vercel Deployment Protection.
