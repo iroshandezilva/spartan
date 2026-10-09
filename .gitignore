@@ -29,3 +29,7 @@ plugin/dist/
 .pnpm-store/
 .vercel
 .env*
+
+# Local work-order view and audit captures
+doc/task-order.html
+doc/audits/*.json
