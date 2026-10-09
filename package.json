@@ -6,7 +6,7 @@
     "dev": "next dev --hostname 127.0.0.1 --port 4310",
     "build": "pnpm tokens:build && pnpm plugin:build && pnpm components:build && next build --webpack",
     "start": "next start --hostname 127.0.0.1 --port 4310",
-    "typecheck": "tsc --noEmit && tsc -p plugin/tsconfig.json && pnpm --filter @spartant-lab/components typecheck",
+    "typecheck": "pnpm components:build && tsc --noEmit && tsc -p plugin/tsconfig.json && pnpm --filter @spartant-lab/components typecheck",
     "test": "pnpm components:build && node --import tsx --test tests/*.test.ts",
     "tokens:build": "pnpm tokens:import && node --import tsx scripts/build-tokens.ts",
     "plugin:build": "node scripts/build-plugin.mjs",
