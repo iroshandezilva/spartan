@@ -17,7 +17,7 @@ test('ordinary work has one status and component duplicates are rejected', () =>
   assert.throws(()=>upsert(board,{...task,figmaUrl:'javascript:alert(1)'}),/Links/);
 });
 test('task persistence survives reload and serializes stale concurrent writes', async () => {
-  const dir=await mkdtemp(path.join(tmpdir(),'spartant-tasks-'));const file=path.join(dir,'tasks.json');
+  const dir=await mkdtemp(path.join(tmpdir(),'spartan-tasks-'));const file=path.join(dir,'tasks.json');
   try {
     await writeFile(file,JSON.stringify({revision:0,tasks:[]}));
     const results=await Promise.allSettled([saveTask(task,0,file),saveTask({...task,development:'Done'},0,file)]);

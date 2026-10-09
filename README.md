@@ -1,4 +1,4 @@
-# Spartant Design System
+# Spartan Design System
 
 Code-owned design system using Lit, Storybook, and a custom Figma token plugin.
 
@@ -20,7 +20,7 @@ Local `/docs` routes redirect to the matching Linear documents. The old task API
 
 - `pnpm storybook`: Lit Storybook playground on http://127.0.0.1:6006
 - `pnpm storybook:build`: static Storybook build
-- `pnpm components:build`: build `packages/components` (`@spartant/components`)
+- `pnpm components:build`: build `packages/components` (`@spartan/components`)
 - `pnpm tokens:build`: Figma export to `tokens/source.json` to `public/tokens.css`; `pnpm tokens:check` fails when they are stale
 - `pnpm test:e2e`: builds Storybook and runs real-keyboard Chromium tests
 - `pnpm test`: builds the component package, then runs token, plugin, package-consumer, and historical local tracker checks

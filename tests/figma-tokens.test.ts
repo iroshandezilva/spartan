@@ -208,7 +208,7 @@ test('validation rejects hand-edited source files with the same explicit errors'
   assert.throws(edit(s => { token(s, 'component.button.height.sm').values.Value = { alias: 'density.missing' }; }), /Unresolved alias/);
   assert.throws(edit(s => { delete token(s, 'density.density.control.gap').values.Compact; }), /cover exactly the modes/);
   assert.throws(edit(s => { token(s, 'component.badge.gap').unit = 'percent'; token(s, 'component.badge.padding-x').values.Value = { alias: 'component.badge.gap' }; }), /unit mismatch/);
-  assert.throws(edit(s => { s.schema = 'spartant.tokens.v1' as never; }), /spartant\.tokens\.v2/);
+  assert.throws(edit(s => { s.schema = 'spartan.tokens.v1' as never; }), /spartan\.tokens\.v2/);
 });
 
 test('drift diff reports added, removed, renamed, changed variables and mode changes', () => {

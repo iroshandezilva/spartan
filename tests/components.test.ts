@@ -9,20 +9,20 @@ const source = () => importFigmaExport(JSON.parse(readFileSync('tokens/figma/spa
 const read = (p: string) => readFileSync(new URL(`../packages/components/src/components/${p}`, import.meta.url), 'utf8');
 
 test('package exports resolve to built JavaScript, types, and the generated token CSS', () => {
-  const pkg = JSON.parse(readFileSync(require.resolve('@spartant/components/package.json'), 'utf8'));
+  const pkg = JSON.parse(readFileSync(require.resolve('@spartan/components/package.json'), 'utf8'));
   for (const [entry, target] of Object.entries<any>(pkg.exports)) {
     if (typeof target === 'object') {
-      assert.ok(require.resolve(`@spartant/components${entry.slice(1)}`), entry);
+      assert.ok(require.resolve(`@spartan/components${entry.slice(1)}`), entry);
       readFileSync(new URL(target.types, new URL('../packages/components/', import.meta.url)));
     }
   }
-  assert.equal(readFileSync(require.resolve('@spartant/components/tokens.css'), 'utf8'), renderCSSV2(source()));
+  assert.equal(readFileSync(require.resolve('@spartan/components/tokens.css'), 'utf8'), renderCSSV2(source()));
 });
 
 test('consumer import registers both elements once and keeps their public properties', async () => {
-  const { SpButton, SpIconButton } = await import('@spartant/components');
-  await import('@spartant/components/button');
-  await import('@spartant/components/icon-button');
+  const { SpButton, SpIconButton } = await import('@spartan/components');
+  await import('@spartan/components/button');
+  await import('@spartan/components/icon-button');
   assert.equal(customElements.get('sp-button'), SpButton);
   assert.equal(customElements.get('sp-icon-button'), SpIconButton);
   assert.equal(SpButton.formAssociated, true);

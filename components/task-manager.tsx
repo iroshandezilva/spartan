@@ -35,7 +35,7 @@ export function TaskManager() {
   }
   function download() {
     const url = URL.createObjectURL(new Blob([JSON.stringify(board, null, 2)], { type: 'application/json' }));
-    const a = document.createElement('a'); a.href = url; a.download = 'spartant-tasks.json'; a.click(); URL.revokeObjectURL(url);
+    const a = document.createElement('a'); a.href = url; a.download = 'spartan-tasks.json'; a.click(); URL.revokeObjectURL(url);
   }
   const visible = board?.tasks.filter(t => (kind === 'All work' || t.kind === kind) && (state === 'All statuses' || overall(t) === state) && `${t.title} ${t.id} ${t.notes}`.toLowerCase().includes(search.toLowerCase())) ?? [];
   const completed = board?.tasks.filter(t => overall(t) === 'Done').length ?? 0;
