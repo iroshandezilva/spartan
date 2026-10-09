@@ -10,6 +10,13 @@ This repository is the Spartan Design System. Its Lit components, Storybook, tok
 - When you finish work on a Linear issue, set its status to **Agent Done** and add the evidence to the issue: what changed, the verification run, and the remaining gaps. Do this every time, including when only part of the issue is complete. Agent Done is separate from Done: the issue moves to Done only under the rules below.
 - Keep one issue per component. Update its `Dev: ...` and `Figma: ...` labels separately and mirror them in the issue description. A component is Done only when both tracks are Done. Track documentation, plugin, research, and infrastructure as separate issues.
 
+## Branches and releases
+
+- `main` only receives releases. Open every pull request against `dev`, the default branch; `validate` fails any pull request into `main` that does not come from `dev`.
+- Feature work: branch from `dev`, open a pull request into `dev`, squash merge after `validate` passes.
+- Release: open a pull request from `dev` into `main` and merge it with **rebase** so `main` keeps linear history without squashing a release into one commit.
+- Vercel builds only `main` (`ignoreCommand` in `vercel.json`); other branches and pull requests are not built.
+
 ## Components
 
 - In Figma, inspect the existing component and variables first. Reuse library components and token bindings. Preserve instance links, properties, slots, and relevant variants. Create only the component work requested. Follow [the Figma guide](.doc/figma.md).
